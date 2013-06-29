@@ -25,6 +25,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
     
     public void setContent(JPanel c)
     {
+        //This function erases the panel on the right and shows c instead of what was there.
         if(content != null)
         {
             content.setVisible(false);
