@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package ui;
 
-import gui.*;
+import ui.*;
 import javax.swing.JPanel;
 
 /**
@@ -25,6 +25,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
     
     public void setContent(JPanel c)
     {
+        //This function erases the panel on the right and shows c instead of what was there.
         if(content != null)
         {
             content.setVisible(false);
@@ -35,6 +36,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
         content = c;
         
         contentPanel.add(content);
+        content.setVisible(true);
     }
 
     /**

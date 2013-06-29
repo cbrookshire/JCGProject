@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package ui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
-import gui.*;
+import ui.*;
 
 /**
  *
@@ -19,6 +19,8 @@ public class BaseJFrame extends JFrame {
     
     public BaseJFrame()
     {
+        //Constructor.  I use the flow layout because there's 
+        //only one thing added to the frame anyway.
         FlowLayout layout = new FlowLayout();
         this.setLayout(layout);
         this.setSize(800, 600);
@@ -29,6 +31,7 @@ public class BaseJFrame extends JFrame {
     
     public void setContent(JPanel c, String title)
     {
+        //Change the content of the JFrame to c, and set the top title bar to title
         if(content != null)
         {
             content.setVisible(false);
@@ -46,6 +49,7 @@ public class BaseJFrame extends JFrame {
     
     public static BaseJFrame getInstance()
     {
+        //There should only be one BaseJFrame.  This ensures singleton method is used.
         if(instance == null)
             instance = new BaseJFrame();
         

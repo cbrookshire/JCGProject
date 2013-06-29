@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package ui;
 
-import gui.*;
+import ui.*;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 /**
@@ -21,10 +22,14 @@ public class FranchisorJPanel extends javax.swing.JPanel {
     
     public FranchisorJPanel() {
         initComponents();
+        setContent(new CreateFranchiseJPanel());
     }
     
     public void setContent(JPanel c)
     {
+        //This function erases the panel on the right and shows c instead of what was there.
+        FlowLayout layout = new FlowLayout();
+        contentPanel.setLayout(layout);
         if(content != null)
         {
             content.setVisible(false);
@@ -35,6 +40,7 @@ public class FranchisorJPanel extends javax.swing.JPanel {
         content = c;
         
         contentPanel.add(content);
+        content.setVisible(true);
     }
 
     /**

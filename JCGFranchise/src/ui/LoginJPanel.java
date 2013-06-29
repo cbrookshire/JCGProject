@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package ui;
 
-import gui.*;
+import ui.*;
 
 /**
  *
@@ -36,6 +36,8 @@ public class LoginJPanel extends javax.swing.JPanel {
     
     public void goToMainPage()
     {
+        //Brings you to the main user page.  If you are a franchisor, it changes the
+        //BaseJFrame to franchisor main, and so on.
         BaseJFrame base = BaseJFrame.getInstance();
         if(userType == TYPE_FRANCHISOR)
         {
