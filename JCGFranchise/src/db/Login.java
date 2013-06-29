@@ -1,5 +1,5 @@
 
-package Database;
+package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +14,7 @@ public class Login {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
+
     int code;
        
     public Login() {
