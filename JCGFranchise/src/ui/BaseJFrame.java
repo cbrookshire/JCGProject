@@ -23,7 +23,7 @@ public class BaseJFrame extends JFrame {
         //only one thing added to the frame anyway.
         FlowLayout layout = new FlowLayout();
         this.setLayout(layout);
-        this.setSize(800, 600);
+        this.setSize(1000, 800);
         setContent(new OpeningJPanel(), "Main Page");
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

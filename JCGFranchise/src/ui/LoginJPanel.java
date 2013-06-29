@@ -75,7 +75,6 @@ public class LoginJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Password");
 
-        btnLogin.setBackground(new java.awt.Color(0, 0, 0));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +86,6 @@ public class LoginJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("New User?");
 
-        btnRegister.setBackground(new java.awt.Color(0, 0, 0));
         btnRegister.setText("Register");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

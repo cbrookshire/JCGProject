@@ -44,7 +44,6 @@ public class OpeningJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("JCG Franchise Management System");
 
-        viewButton1.setBackground(new java.awt.Color(0, 0, 0));
         viewButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         viewButton1.setText("Member Login");
         viewButton1.addActionListener(new java.awt.event.ActionListener() {
