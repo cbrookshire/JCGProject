@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package ui;
 
 /**
  *
@@ -201,7 +201,16 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_newEmployeeAddressActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        //OMG CLEAR BUTTON SO MUCH FUN!  :O
+        newEmployeeName.setText("");
+        newEmployeeAddress.setText("");
+        newEmployeeCity.setText("");
+        newEmployeeState.setText("");
+        newEmployeeZip.setText("");
+        newEmployeePhone.setText("");
+        newEmployeeEmail.setText("");
+        newEmployeeType.setSelectedIndex(0);
+        newEmployeeNum.setSelectedIndex(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

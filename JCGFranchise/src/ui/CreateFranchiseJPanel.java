@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package ui;
 
 /**
  *
@@ -200,7 +200,14 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_newFranchiseAddressActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        //yay clear button!  This button resets the form
+        newFranchiseAddress.setText("");
+        newFranchiseCity.setText("");
+        newFranchiseState.setText("");
+        newFranchiseZip.setText("");
+        newFranchisePhone.setText("");
+        newFranchiseEmail.setText("");
+        newFranchiseAirport.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void newFranchiseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFranchiseButtonActionPerformed
