@@ -35,6 +35,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
         content = c;
         
         contentPanel.add(content);
+        content.setVisible(true);
     }
 
     /**
