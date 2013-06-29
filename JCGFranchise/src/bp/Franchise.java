@@ -122,7 +122,7 @@ public class Franchise {
    }//end SETS and GETS
    
    //UTILITIES
-  @Override
+   @Override
    public String toString(){
     
     return String.format("%s%s%s  %s%s/n%s%s %s, %s %s\n%s%s\n%s%s\n",
