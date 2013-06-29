@@ -35,14 +35,23 @@ public class Franchise {
        airport = "";   }
    
    //8 arg constructor
-   public Franchise (String fID, String addr, String cty, 
-           String ste, String zp, String ph, String em, String airpt){
+   public Franchise (String franchiseID, String address, String city, 
+     String state, String zip, String phone, String email, String airport){
+       
+       setFranchiseID(franchiseID);
+       setAddress(address);
+       setCity(city);
+       setState(state);
+       setZip(zip);
+       setPhone(phone);
+       setEmail(email);
+       setAirport(airport);       
    }
    
    //SETS AND GETS
    //attrib 1
-   public void setFranchiseID (String fID){       
-       franchiseID = fID;
+   public void setFranchiseID (String franchiseID){       
+       this.franchiseID = franchiseID;
    }
    
    public String getFranchiseID (){
@@ -50,8 +59,8 @@ public class Franchise {
    }
    
    //attrib 2
-   public void setAddress (String addr){       
-       address = addr;
+   public void setAddress (String address){       
+       this.address = address;
    }
    
    public String getAddress (){
@@ -59,8 +68,8 @@ public class Franchise {
    } 
    
    //attrib 3
-   public void setCity (String cty){       
-       city = cty;
+   public void setCity (String city){       
+       this.city = city;
    }
    
    public String getCity (){
@@ -68,8 +77,8 @@ public class Franchise {
    } 
    
    //attrib 4
-    public void setState (String ste){       
-       state = ste;
+    public void setState (String state){       
+       this.state = state;
    }
    
    public String getState (){
@@ -77,8 +86,8 @@ public class Franchise {
    } 
    
    //attrib 5
-    public void setZip (String zp){       
-       zip = zp;
+    public void setZip (String zip){       
+       this.zip = zip;
    }
    
    public String getZip (){
@@ -86,8 +95,8 @@ public class Franchise {
    } 
    
    //attrib 6
-    public void setPhone (String ph){       
-       phone = ph;
+    public void setPhone (String phone){       
+       this.phone = phone;
    }
    
    public String getPhone (){
@@ -95,8 +104,8 @@ public class Franchise {
    } 
    
    //attrib 7
-    public void setEmail (String em){       
-       email = em;
+    public void setEmail (String email){       
+       this.email = email;
    }
    
    public String getEmail (){
@@ -104,16 +113,16 @@ public class Franchise {
    } 
    
    //attrib 8
-    public void setAirport (String airpt){       
-       airport = airpt;
+    public void setAirport (String airport){       
+       this.airport = airport;
    }
    
    public String getAirport (){
        return airport;
-   }
+   }//end SETS and GETS
    
    //UTILITIES
-   @Override
+  @Override
    public String toString(){
     
     return String.format("%s%s%s  %s%s/n%s%s %s, %s %s\n%s%s\n%s%s\n",
@@ -123,6 +132,5 @@ public class Franchise {
         "         ", getState(), getZip(),
         "Phone: ", getPhone(), 
         "Email: ", getEmail());
-    }
-  
-}
+    }//end UTILS  
+}//end class Franchise
