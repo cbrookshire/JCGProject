@@ -14,11 +14,9 @@ public class Login {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    //Employee emp;
+
     int code;
-    String CurrentUsername;
-    String CurrentPassword;
-    
+       
     public Login() {
     
     }
@@ -29,8 +27,6 @@ public class Login {
         try
         {
             connection = DriverManager.getConnection(DATABASE_URL, username, password);
-            setUsername(username);
-            setPassword(password);
             code = getLoginStatus(username);
             if(code == 0)
                 return 55;
@@ -43,34 +39,10 @@ public class Login {
         }
         
     }
-    
-    private void setPassword(String password)
-    {
-        CurrentPassword = password;
-        
-    }
-    
-    String getPassword()
-    {
-        return CurrentPassword;
-    }
-    
-    private void setUsername(String username) {
-        CurrentUsername = username;
-        
-    }
-    
-    String getUsername() {
-        
        
-        return CurrentUsername;
-    }
-    
-    int getLoginStatus(String username)
+    private int getLoginStatus(String username)
     {
         try {
-             
-            
             statement = connection.createStatement();
             resultSet = statement.executeQuery(
                     "select * from Employee where Username = '" + username + "'");
@@ -125,15 +97,5 @@ public class Login {
             return sqlE.getErrorCode();
         }
     }
-    
-    public void logOff()
-    {
-        try {
-                CurrentUsername = null;
-                CurrentPassword = null;
-                connection.close();
-            }catch(Exception exception) {
-            }
-    }
-    
+           
 }
