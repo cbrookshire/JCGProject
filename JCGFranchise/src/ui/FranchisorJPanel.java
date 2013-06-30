@@ -79,7 +79,7 @@ public class FranchisorJPanel extends javax.swing.JPanel {
                     setContent(new CreateEmployeeJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
-                    //setContent(new EmployeeOverviewPanel());
+                    setContent(new EmployeeOverviewPanel());
                 }
           }
     }

@@ -8,7 +8,7 @@ package ui;
  *
  * @author Corey
  */
-public class FranchisorOverviewPanel extends javax.swing.JPanel {
+public class FranchisorOverviewPanel extends javax.swing.JPanel  {
 
     /**
      * Creates new form CreateFranchise
