@@ -86,7 +86,7 @@ public class FranchisorJPanel extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        btnReturn.setBackground(new java.awt.Color(102, 102, 102));
+        btnReturn.setBackground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("Logout");
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,13 +105,20 @@ public class FranchisorJPanel extends javax.swing.JPanel {
 
         list.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         list.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Add", "Delete", "Edit" };
+            String[] strings = { "Add", "Delete", "Edit", "Overview" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        list.setToolTipText("");
         list.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listMouseClicked(evt);
+            }
+        });
+        list.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(list);
@@ -139,8 +146,8 @@ public class FranchisorJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -174,7 +181,7 @@ public class FranchisorJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
                         .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
                 .addGap(8, 8, 8))
@@ -189,7 +196,30 @@ public class FranchisorJPanel extends javax.swing.JPanel {
 
     private void listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listMouseClicked
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_listMouseClicked
+
+    private void listValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listValueChanged
+        // TODO add your handling code here:
+        if (evt.getValueIsAdjusting() == false) {
+            if (list.getSelectedIndex() == -1) {
+                //no selection so display overview
+                setContent(new FranchisorOverviewPanel());
+            }
+            if (list.getSelectedIndex() == 0){
+                setContent(new CreateFranchiseJPanel(0));
+            }
+            if (list.getSelectedIndex() == 1){
+                setContent(new CreateFranchiseJPanel(1));
+            }
+            if (list.getSelectedIndex() == 2){
+                setContent(new CreateFranchiseJPanel(2));
+            }
+            if (list.getSelectedIndex() == 3){
+                setContent(new FranchisorOverviewPanel());
+            }
+        }
+    }//GEN-LAST:event_listValueChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReturn;
