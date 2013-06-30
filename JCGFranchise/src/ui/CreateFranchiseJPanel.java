@@ -13,9 +13,48 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateFranchiseJPanel
      */
-    public CreateFranchiseJPanel() {
+    private int mode;
+    
+    public CreateFranchiseJPanel(int m) {
+        mode = m;
         initComponents();
+        
+        if(mode == 0)  //Create mode
+        {
+            listSelection.setEnabled(false);
+        }
+        
+        if(mode == 1)  //Edit mode
+        {
+            getListSelection();
+            jLabel1.setText("Edit a Franchise");
+            listSelection.setEnabled(true);
+            newFranchiseButton.setText("Update");
+            btnClear.setEnabled(false);
+        }
+        
+        if(mode == 2)  //Delete mode
+        {
+            getListSelection();
+            jLabel1.setText("Delete a Franchise");
+            listSelection.setEnabled(true);
+            newFranchiseButton.setText("Delete");
+            btnClear.setEnabled(false);
+        }
     }
+
+    private void getListSelection()
+    {
+        //Gets a list of all the Employees (should display name)
+    }
+    
+    private void loadInfoFromList()
+    {
+        //Loads the information after an item from the combo box has been selected.
+        //The data is put into the text fields
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,8 +81,10 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         newFranchisePhone = new javax.swing.JTextField();
         newFranchiseEmail = new javax.swing.JTextField();
         newFranchiseAirport = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
         newFranchiseButton = new javax.swing.JButton();
+        listSelection = new javax.swing.JComboBox();
+        jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -79,10 +120,10 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Clear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
 
@@ -93,12 +134,24 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             }
         });
 
+        listSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel9.setText("Selection:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(newFranchiseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(103, 103, 103)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,25 +161,19 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel8)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(newFranchiseCity, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newFranchiseState, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newFranchiseZip, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newFranchiseAirport, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newFranchiseEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newFranchisePhone, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newFranchiseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(newFranchiseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(listSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(newFranchiseCity)
+                            .addComponent(newFranchiseState)
+                            .addComponent(newFranchiseZip)
+                            .addComponent(newFranchiseAirport)
+                            .addComponent(newFranchiseEmail)
+                            .addComponent(newFranchisePhone)
+                            .addComponent(newFranchiseAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -134,7 +181,11 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(listSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -167,7 +218,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
                         .addComponent(newFranchiseAirport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newFranchiseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40))
         );
@@ -188,7 +239,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_newFranchiseAddressActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         //yay clear button!  This button resets the form
         newFranchiseAddress.setText("");
         newFranchiseCity.setText("");
@@ -197,7 +248,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         newFranchisePhone.setText("");
         newFranchiseEmail.setText("");
         newFranchiseAirport.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnClearActionPerformed
 
     private void newFranchiseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFranchiseButtonActionPerformed
         // TODO add your handling code here:
@@ -208,7 +259,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_newFranchiseEmailActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnClear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -217,7 +268,9 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox listSelection;
     private javax.swing.JTextField newFranchiseAddress;
     private javax.swing.JTextField newFranchiseAirport;
     private javax.swing.JButton newFranchiseButton;
