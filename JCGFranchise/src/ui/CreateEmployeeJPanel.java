@@ -44,6 +44,20 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             listSelection.setEnabled(true);
             btnSave.setText("Delete");
             btnClear.setEnabled(false);
+            
+            //We're in delete mode, so here we disable all the text boxes and combo boxes.
+            //Don't worry, we can still use setText-- this only disables the user from editing it.
+            //In other words, the text boxes are only for display purposes.
+            btnClear.setEnabled(false);
+            newEmployeeName.setEnabled(false);
+            newEmployeeAddress.setEnabled(false);
+            newEmployeeCity.setEnabled(false);
+            newEmployeeState.setEnabled(false);
+            newEmployeeZip.setEnabled(false);
+            newEmployeePhone.setEnabled(false);
+            newEmployeeEmail.setEnabled(false);
+            newEmployeeType.setEnabled(false);
+            newEmployeeNum.setEnabled(false);
         }
     }
 

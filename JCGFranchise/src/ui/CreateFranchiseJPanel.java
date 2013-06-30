@@ -40,6 +40,19 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             listSelection.setEnabled(true);
             newFranchiseButton.setText("Delete");
             btnClear.setEnabled(false);
+            
+            //We're in delete mode, so here we disable all the text boxes and combo boxes.
+            //Don't worry, we can still use setText-- this only disables the user from editing it.
+            //In other words, the text boxes are only for display purposes.
+            btnClear.setEnabled(false);
+            newFranchiseAddress.setEnabled(false);
+            newFranchiseCity.setEnabled(false);
+            newFranchiseState.setEnabled(false);
+            newFranchiseZip.setEnabled(false);
+            newFranchisePhone.setEnabled(false);
+            newFranchiseEmail.setEnabled(false);
+            newFranchiseAirport.setEnabled(false);
+            
         }
     }
 

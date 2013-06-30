@@ -42,6 +42,47 @@ public class FranchisorJPanel extends javax.swing.JPanel {
         contentPanel.add(content);
         content.setVisible(true);
     }
+    
+    private void changeContent()
+    {
+        //Changes the content based on selection of jComboBox1 and list
+        
+            if(jComboBox1.getSelectedIndex() == 0)  //Franchies
+            {
+                if (list.getSelectedIndex() == -1) {
+                    //no selection so display overview
+                    setContent(new FranchisorOverviewPanel());
+                }
+                if (list.getSelectedIndex() == 0){
+                    setContent(new CreateFranchiseJPanel(0));
+                }
+                if (list.getSelectedIndex() == 1){
+                    setContent(new CreateFranchiseJPanel(1));
+                }
+                if (list.getSelectedIndex() == 2){
+                    setContent(new CreateFranchiseJPanel(2));
+                }
+                if (list.getSelectedIndex() == 3){
+                    setContent(new FranchisorOverviewPanel());
+                }
+          }
+          if(jComboBox1.getSelectedIndex() == 1)  //Employee
+            {
+
+                if (list.getSelectedIndex() == 0){
+                    setContent(new CreateEmployeeJPanel(0));
+                }
+                if (list.getSelectedIndex() == 1){
+                    setContent(new CreateEmployeeJPanel(1));
+                }
+                if (list.getSelectedIndex() == 2){
+                    setContent(new CreateEmployeeJPanel(2));
+                }
+                if (list.getSelectedIndex() == 3){
+                    //setContent(new EmployeeOverviewPanel());
+                }
+          }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,6 +143,11 @@ public class FranchisorJPanel extends javax.swing.JPanel {
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franchises", "Employees", "Other" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         list.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         list.setModel(new javax.swing.AbstractListModel() {
@@ -202,24 +248,14 @@ public class FranchisorJPanel extends javax.swing.JPanel {
     private void listValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listValueChanged
         // TODO add your handling code here:
         if (evt.getValueIsAdjusting() == false) {
-            if (list.getSelectedIndex() == -1) {
-                //no selection so display overview
-                setContent(new FranchisorOverviewPanel());
-            }
-            if (list.getSelectedIndex() == 0){
-                setContent(new CreateFranchiseJPanel(0));
-            }
-            if (list.getSelectedIndex() == 1){
-                setContent(new CreateFranchiseJPanel(1));
-            }
-            if (list.getSelectedIndex() == 2){
-                setContent(new CreateFranchiseJPanel(2));
-            }
-            if (list.getSelectedIndex() == 3){
-                setContent(new FranchisorOverviewPanel());
-            }
+            changeContent();
         }
     }//GEN-LAST:event_listValueChanged
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        changeContent();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReturn;
