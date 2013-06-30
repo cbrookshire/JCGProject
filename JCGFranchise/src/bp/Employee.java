@@ -2,7 +2,7 @@
  * CIST2391 Summer Session 2013 GTC
  * Author: #Mahmood
  * Name: Employee
- * Description: Describes a employee 
+ * Description: Describes an employee 
  */
 package bp;
 
