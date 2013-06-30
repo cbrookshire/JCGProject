@@ -1,6 +1,6 @@
 /* JCG Franchise Management System
  * CIST2391 Summer Session 2013 GTC
- * @author Maurice
+ * Author: #Maurice
  * Name: Reservation
  * Description: Describes a reservation 
  */
@@ -8,7 +8,7 @@ package bp;
 
 public class Reservation {
     
-    //reservation attributes - DB 
+    //attributes - DB 
     private String reservationNumber;
     private String franchiseNumber;
     private String vehicleID;
@@ -28,7 +28,7 @@ public class Reservation {
     private String altZip;
 
     //CONSTRUCTORS
-    //default constructor
+    //default
     public Reservation(){
     
         reservationNumber = "";
@@ -50,7 +50,7 @@ public class Reservation {
         altZip = "";     
     }
     
-    //17 arg constructor
+    //17 args 
     public Reservation(String reservationNumber, String franchiseNumber, 
             String vehicleID, String customerID, String price, 
             String status, String comment, String flightNumber, 
@@ -215,6 +215,9 @@ public class Reservation {
     public void setAltZip(String altZip) {
         this.altZip = altZip;
     }
+    
+    //UTILITIES
+    //Class Print Method
     
     
     

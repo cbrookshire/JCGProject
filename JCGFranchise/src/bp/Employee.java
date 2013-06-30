@@ -1,14 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* JCG Franchise Management System
+ * CIST2391 Summer Session 2013 GTC
+ * Author: #Mahmood
+ * Name: Employee
+ * Description: Describes a employee 
  */
 package bp;
 
-/**
- *
- * @author MdMahmoodur
- */
 public class Employee {
+    
+    private String franchiseNumber;
     private String userid;
     private String passWord;
     private String firstName;
@@ -20,11 +20,11 @@ public class Employee {
     private String phone;
     private String email;
     private String empType;
-    private String franchiseNumber;
+    
 
-  
-   //default constructors
-   public Employee(){
+    //CONSTRUCTORS
+    //default 
+    public Employee(){
     
 	userid = "";
 	passWord = "";
@@ -39,7 +39,7 @@ public class Employee {
 	empType = "";
 	franchiseNumber = "";   }
     
-    // twelve-argument constructor
+    //12 args
     public Employee ( String uid,String pword,String fName,String lName,
             String adrs,String ct,String st,String zp,String ph,
             String eml,String empTp,String fNumber )
@@ -55,165 +55,122 @@ public class Employee {
        phone = ph;
        email = eml;
        empType = empTp;
-       franchiseNumber = fNumber;
-              
-    } // end twelve-argument constructor
+       franchiseNumber = fNumber;              
+    } 
 
-    // attribute 1
-    // set userid
+    //SETS AND GETS
+    // attribute 1    
     public void setUserid( String uid)
-    {
-    userid = uid;
-    } // end method setUserid
+    {   userid = uid;
+    } 
     
-    // get userid
     public String getUserid( )
-    {
-    return userid;
-    } // end method getUserid
+    {   return userid;
+    }
 
-    // attribute 2
-    // set password
+    // attribute 2   
     public void setPassWord( String pword)
-    {
-    passWord = pword;
-    } // end method setPassWord
+    {   passWord = pword;
+    } 
     
-    // get userid
+    
     public String getPassWord( )
-    {
-    return passWord;
-    } // end method getPassWord
+    {   return passWord;
+    } 
 
-    // attribute 3
-    // set firstName
+    // attribute 3   
     public void setFirstName( String fName)
-    {
-    firstName = fName;
-    } // end method setfirstName
+    {   firstName = fName;
+    } 
     
-    // get firstName
+    
     public String getFirstName( )
-    {
-    return firstName;
-    } // end method getfirstName
+    {   return firstName;
+    } 
 
-    // attribute 4
-    // set lastName
+    // attribute 4    
     public void setLastName( String lName)
-    {
-    lastName = lName;
-    } // end method setlastName
+    {   lastName = lName;
+    } 
     
-    // get lastName
+    
     public String getLastName( )
-    {
-    return lastName;
-    } // end method getlastName
+    {   return lastName;
+    } 
 
-    // attribute 5
-    // set address
+    // attribute 5    
     public void setAddress( String adrs)
-    {
-    address = adrs;
-    } // end method setAddress
+    {   address = adrs;
+    } 
     
-    // get address
+   
     public String getAddress( )
-    {
-    return address;
-    } // end method getAddress
+    {   return address;
+    } 
 
-    // attribute 6
-    // set city
+    // attribute 6    
     public void setCity( String ct)
-    {
-    city = ct;
-    } // end method setCity
+    {   city = ct;
+    } 
     
-    // get address
+    
     public String getCity( )
-    {
-    return city;
-    } // end method getCity
+    {   return city;
+    } 
 
-    // attribute 7
-    // set state
+    // attribute 7    
     public void setState( String st)
-    {
-    state = st;
-    } // end method setState
-    
-    // get state
+    {   state = st;
+    } 
+       
     public String getState( )
-    {
-    return state;
-    } // end method getState
+    {   return state;
+    } 
 
-    // attribute 8
-    // set zip
+    // attribute 8    
     public void setZip( String zp)
-    {
-    zip = zp;
-    } // end method setZip
+    {   zip = zp;
+    } 
     
-    // get zip
     public String getZip( )
-    {
-    return zip;
-    } // end method getZip
+    {   return zip;
+    } 
 
-    // attribute 9
-    // set phone
+    // attribute 9    
     public void setPhone( String ph)
-    {
-    phone = ph;
-    } // end method setPhone
+    {   phone = ph;
+    } 
     
-    // get phone
     public String getPhone( )
-    {
-    return phone;
-    } // end method getPhone
+    {   return phone;
+    } 
 
-    // attribute 10
-    // set email
+    // attribute 10    
     public void setEmail( String eml)
-    {
-    email = eml;
-    } // end method setEmail
-    
-    // get email
+    {   email = eml;
+    } 
+        
     public String getEmail( )
-    {
-    return email;
-    } // end method getEmail
+    {   return email;
+    } 
 
-    // attribute 11
-    // set empType
+    // attribute 11    
     public void setEmpType( String empTp)
-    {
-    empType = empTp;
-    } // end method setEmpType
+    {   empType = empTp;
+    } 
     
-    // get empType
     public String getEmpType( )
-    {
-    return empType;
-    } // end method getEmpType
+    {   return empType;
+    } 
 
-    // attribute 12
-    // set franchiseNumber
+    // attribute 12    
     public void setFranchiseNumber( String fNumber)
-    {
-    franchiseNumber = fNumber;
-    } // end method setFranchiseNumber
+    {   franchiseNumber = fNumber;
+    } 
     
-    // get franchiseNumber
+   
     public String getFranchiseNumber( )
-    {
-    return franchiseNumber;
-    } // end method getFranchiseNumber
-    
+    {   return franchiseNumber;
+    }     
 } // end class Employee
 
