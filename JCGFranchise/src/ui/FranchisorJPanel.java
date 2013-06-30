@@ -22,7 +22,7 @@ public class FranchisorJPanel extends javax.swing.JPanel {
     
     public FranchisorJPanel() {
         initComponents();
-        setContent(new CreateFranchiseJPanel());
+        setContent(new FranchisorOverviewPanel());
     }
     
     public void setContent(JPanel c)
@@ -83,7 +83,7 @@ public class FranchisorJPanel extends javax.swing.JPanel {
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         btnReturn.setBackground(new java.awt.Color(102, 102, 102));
@@ -174,10 +174,10 @@ public class FranchisorJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
                         .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
+                .addGap(8, 8, 8))
         );
 
         contentPanel.getAccessibleContext().setAccessibleDescription("");
