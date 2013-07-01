@@ -71,13 +71,13 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new DriversOverviewPanel());
                 }
                 if (list.getSelectedIndex() == 0){
-                    setContent(new CreateEmployeeJPanel(0));
+                    //setContent(new CreateDriverJPanel(0));
                 }
                 if (list.getSelectedIndex() == 1){
-                    setContent(new CreateEmployeeJPanel(1));
+                    //setContent(new CreateDriverJPanel(1));
                 }
                 if (list.getSelectedIndex() == 2){
-                    setContent(new CreateEmployeeJPanel(2));
+                    //setContent(new CreateDriverJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
                     setContent(new DriversOverviewPanel());
@@ -90,13 +90,13 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new VehiclesOverviewPanel());
                 }
                 if (list.getSelectedIndex() == 0){
-                    setContent(new CreateEmployeeJPanel(0));
+                    //setContent(new CreateVehicleJPanel(0));
                 }
                 if (list.getSelectedIndex() == 1){
-                    setContent(new CreateEmployeeJPanel(1));
+                    //setContent(new CreateVehicleJPanel(1));
                 }
                 if (list.getSelectedIndex() == 2){
-                    setContent(new CreateEmployeeJPanel(2));
+                    //setContent(new CreateVehicleJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
                     setContent(new VehiclesOverviewPanel());
@@ -109,13 +109,13 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new CustomersOverviewPanel());
                 }
                 if (list.getSelectedIndex() == 0){
-                    setContent(new CreateEmployeeJPanel(0));
+                    setContent(new CreateCustomerJPanel(0));
                 }
                 if (list.getSelectedIndex() == 1){
-                    setContent(new CreateEmployeeJPanel(1));
+                    setContent(new CreateCustomerJPanel(1));
                 }
                 if (list.getSelectedIndex() == 2){
-                    setContent(new CreateEmployeeJPanel(2));
+                    setContent(new CreateCustomerJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
                     setContent(new CustomersOverviewPanel());
