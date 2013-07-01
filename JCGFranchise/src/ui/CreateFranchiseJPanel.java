@@ -255,6 +255,8 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         //yay clear button!  This button resets the form
+        if(listSelection.getItemCount() > 0)
+           listSelection.setSelectedIndex(0);
         newFranchiseAddress.setText("");
         newFranchiseCity.setText("");
         newFranchiseState.setText("");

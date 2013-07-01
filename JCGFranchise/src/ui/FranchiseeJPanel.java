@@ -52,13 +52,13 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new ReservationsOverviewPanel());
                 }
                 if (list.getSelectedIndex() == 0){
-                    //setContent(new CreateFranchiseJPanel(0));
+                    setContent(new CreateReservationsJPanel(0));
                 }
                 if (list.getSelectedIndex() == 1){
-                    //setContent(new CreateFranchiseJPanel(1));
+                    setContent(new CreateReservationsJPanel(1));
                 }
                 if (list.getSelectedIndex() == 2){
-                    //setContent(new CreateFranchiseJPanel(2));
+                    setContent(new CreateReservationsJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
                     setContent(new ReservationsOverviewPanel());
