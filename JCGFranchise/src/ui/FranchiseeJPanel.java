@@ -38,6 +38,87 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
         contentPanel.add(content);
         content.setVisible(true);
     }
+    private void changeContent()
+    {
+        //Changes the content based on selection of jComboBox1 and list
+        
+            if(jComboBox1.getSelectedIndex() == 0)  //Reservations
+            {
+                if (list.getSelectedIndex() == -1) {
+                    //no selection so display overview
+                    setContent(new ReservationsOverviewPanel());
+                }
+                if (list.getSelectedIndex() == 0){
+                    //setContent(new CreateFranchiseJPanel(0));
+                }
+                if (list.getSelectedIndex() == 1){
+                    //setContent(new CreateFranchiseJPanel(1));
+                }
+                if (list.getSelectedIndex() == 2){
+                    //setContent(new CreateFranchiseJPanel(2));
+                }
+                if (list.getSelectedIndex() == 3){
+                   // setContent(new FranchisorOverviewPanel());
+                }
+          }
+          if(jComboBox1.getSelectedIndex() == 1)  //Drivers
+            {
+                if (list.getSelectedIndex() == -1) {
+                    //no selection so display overview
+                    setContent(new DriversOverviewPanel());
+                }
+                if (list.getSelectedIndex() == 0){
+                    setContent(new CreateEmployeeJPanel(0));
+                }
+                if (list.getSelectedIndex() == 1){
+                    setContent(new CreateEmployeeJPanel(1));
+                }
+                if (list.getSelectedIndex() == 2){
+                    setContent(new CreateEmployeeJPanel(2));
+                }
+                if (list.getSelectedIndex() == 3){
+                    setContent(new EmployeeOverviewPanel());
+                }
+          }
+          if(jComboBox1.getSelectedIndex() == 1)  //Vehicles
+            {
+                if (list.getSelectedIndex() == -1) {
+                    //no selection so display overview
+                    setContent(new VehiclesOverviewPanel());
+                }
+                if (list.getSelectedIndex() == 0){
+                    setContent(new CreateEmployeeJPanel(0));
+                }
+                if (list.getSelectedIndex() == 1){
+                    setContent(new CreateEmployeeJPanel(1));
+                }
+                if (list.getSelectedIndex() == 2){
+                    setContent(new CreateEmployeeJPanel(2));
+                }
+                if (list.getSelectedIndex() == 3){
+                    setContent(new EmployeeOverviewPanel());
+                }
+          }
+          if(jComboBox1.getSelectedIndex() == 1)  //Customers
+            {
+                if (list.getSelectedIndex() == -1) {
+                    //no selection so display overview
+                    setContent(new CustomersOverviewPanel());
+                }
+                if (list.getSelectedIndex() == 0){
+                    setContent(new CreateEmployeeJPanel(0));
+                }
+                if (list.getSelectedIndex() == 1){
+                    setContent(new CreateEmployeeJPanel(1));
+                }
+                if (list.getSelectedIndex() == 2){
+                    setContent(new CreateEmployeeJPanel(2));
+                }
+                if (list.getSelectedIndex() == 3){
+                    setContent(new EmployeeOverviewPanel());
+                }
+          }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,13 +148,13 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
 
         contentPanel.setBackground(new java.awt.Color(153, 153, 153));
         contentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        contentPanel.setPreferredSize(new java.awt.Dimension(300, 280));
+        contentPanel.setPreferredSize(new java.awt.Dimension(550, 535));
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
+            .addGap(0, 543, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,14 +184,15 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Reservations", "Drivers", "Vehicles", "" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Reservations", "Drivers", "Vehicles", "Customers", "Promos" }));
 
         list.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         list.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Add", "Delete", "Edit" };
+            String[] strings = { "Add", "Edit", "Delete", "View" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(list);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -124,7 +206,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -136,8 +218,8 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -157,7 +239,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(81, 81, 81)
@@ -176,7 +258,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                         .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnReturn1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)

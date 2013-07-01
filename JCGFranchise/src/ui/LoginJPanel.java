@@ -30,7 +30,7 @@ public class LoginJPanel extends javax.swing.JPanel {
     {
         
         //Until we have DB code, we'll just assume the login was succesful
-        userType = TYPE_FRANCHISOR;
+        userType = TYPE_FRANCHISEE;
         return true;
     }
     
@@ -42,6 +42,10 @@ public class LoginJPanel extends javax.swing.JPanel {
         if(userType == TYPE_FRANCHISOR)
         {
             base.setContent(new FranchisorJPanel(), "Franchisor Main");
+        }
+        if(userType == TYPE_FRANCHISEE)
+        {
+            base.setContent(new FranchiseeJPanel(), "Franchisee Main");
         }
     }
     
