@@ -13,8 +13,64 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateFranchise
      */
-    public CreateEmployeeJPanel() {
+    private int mode;
+    /**
+     * Creates new form CreateFranchise
+     */
+    public CreateEmployeeJPanel(int m) {
+        mode = m;
         initComponents();
+        
+        
+        
+        if(mode == 0)  //Create mode
+        {
+            listSelection.setEnabled(false);
+        }
+        
+        if(mode == 1)  //Edit mode
+        {
+            getListSelection();
+            jLabel1.setText("Edit an Employee");
+            listSelection.setEnabled(true);
+            btnSave.setText("Update");
+            btnClear.setEnabled(false);
+        }
+        
+        if(mode == 2)  //Delete mode
+        {
+            getListSelection();
+            jLabel1.setText("Delete an Employee");
+            listSelection.setEnabled(true);
+            btnSave.setText("Delete");
+            btnClear.setEnabled(false);
+            
+            //We're in delete mode, so here we disable all the text boxes and combo boxes.
+            //Don't worry, we can still use setText-- this only disables the user from editing it.
+            //In other words, the text boxes are only for display purposes.
+            btnClear.setEnabled(false);
+            newEmployeeName.setEnabled(false);
+            newEmployeeAddress.setEnabled(false);
+            newEmployeeCity.setEnabled(false);
+            newEmployeeState.setEnabled(false);
+            newEmployeeZip.setEnabled(false);
+            newEmployeePhone.setEnabled(false);
+            newEmployeeEmail.setEnabled(false);
+            newEmployeeType.setEnabled(false);
+            newEmployeeNum.setEnabled(false);
+        }
+    }
+
+    private void getListSelection()
+    {
+        //Gets a list of all the Employees (should display name)
+    }
+    
+    private void loadInfoFromList()
+    {
+        //Loads the information after an item from the combo box has been selected.
+        //The data is put into the text fields
+        
     }
 
     /**
@@ -41,14 +97,16 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         newEmployeePhone = new javax.swing.JTextField();
         newEmployeeEmail = new javax.swing.JTextField();
         newEmployeeName = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         newEmployeeType = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         newEmployeeNum = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
+        listSelection = new javax.swing.JComboBox();
 
-        setPreferredSize(new java.awt.Dimension(540, 535));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setPreferredSize(new java.awt.Dimension(545, 500));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -74,17 +132,17 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Clear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Create");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Create");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -95,6 +153,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         newEmployeeNum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franchisor", "Franchisee", "Driver" }));
 
         jLabel10.setText("Franchise Number:");
+
+        listSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -115,14 +175,15 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel8))
                             .addGap(23, 23, 23)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(newEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(newEmployeeAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(newEmployeeCity, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(newEmployeeState, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(newEmployeeZip, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(newEmployeePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(newEmployeeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(newEmployeeName, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(newEmployeeAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(newEmployeeCity, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(newEmployeeState, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(newEmployeeZip, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(newEmployeePhone, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(newEmployeeEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addComponent(listSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(23, 23, 23)
@@ -132,20 +193,22 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(newEmployeeNum, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(listSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,8 +253,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -200,7 +263,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_newEmployeeAddressActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         //OMG CLEAR BUTTON SO MUCH FUN!  :O
         newEmployeeName.setText("");
         newEmployeeAddress.setText("");
@@ -211,15 +274,15 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         newEmployeeEmail.setText("");
         newEmployeeType.setSelectedIndex(0);
         newEmployeeNum.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnClearActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -230,6 +293,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JComboBox listSelection;
     private javax.swing.JTextField newEmployeeAddress;
     private javax.swing.JTextField newEmployeeCity;
     private javax.swing.JTextField newEmployeeEmail;

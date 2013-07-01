@@ -1,6 +1,6 @@
 /* JCG Franchise Management System
  * CIST2391 Summer Session 2013 GTC
- * @author Maurice
+ * Author: #Maurice
  * Name: Vehicle
  * Description: Describes a Vehicle 
  */
@@ -8,7 +8,7 @@ package bp;
 
 public class Vehicle {
     
-    //vehicle attributes - DB 
+    //attributes - DB 
     private String franchiseNumber;
     private String vehicleID; 
     private String vin;
@@ -38,7 +38,7 @@ public class Vehicle {
         rate = "";        
     }
 
-    //11 arg constructor
+    //11 args 
     public Vehicle(String franchiseNumber, String vehicleID,
         String vin, String make, String model, String year, 
         String mileage, String capacity, String condition, 
@@ -155,18 +155,18 @@ public class Vehicle {
 
     public void setRate(String rate) {
         this.rate = rate;
-    }//end SETS AND GETS
+    }
     
     //UTILITIES
     @Override
     public String toString(){
     
-        return String.format("%s%s\n%s%s  %s%s  %s%s/n%s%s  %s%s,  %s%s\n"
-            + "%s%s %s%s %s%s\n",
+        return String.format
+        ("%s%s\n%s%s  %s%s  %s%s/n%s%s  %s%s,  %s%s\n%s%s %s%s %s%s\n",
         "VIN Number: ", getVin(), 
         "Make: ", getMake(), "Model: ", getModel(), "Year: ", getYear(),
         "Mileage: ", getMileage(), "Capacity: ", getCapacity(), 
         "Condition: ", getCondition(), "Tablet", getTablet(), "Rate: ",
         getRate());
-    }//end UTILITIES  
+    }  
 }//end class Vehicle

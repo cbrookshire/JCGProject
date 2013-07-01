@@ -1,6 +1,6 @@
 /* JCG Franchise Management System
  * CIST2391 Summer Session 2013 GTC
- * @author Maurice
+ * Author: #Maurice
  * Name: Franchise
  * Description: Describes a franchise 
  */
@@ -9,7 +9,7 @@ package bp;
 
 public class Franchise {
     
-   //franchise attributes - DB 
+   //attributes - DB 
    private final String name = "JCG Franchise #";
    private String franchiseID;
    private String address;
@@ -34,7 +34,7 @@ public class Franchise {
        email = "";
        airport = "";   }
    
-   //8 arg constructor
+   //8 args 
    public Franchise (String franchiseID, String address, String city, 
      String state, String zip, String phone, String email, String airport){
        
@@ -119,18 +119,19 @@ public class Franchise {
    
    public String getAirport (){
        return airport;
-   }//end SETS and GETS
+   }
    
    //UTILITIES
+   //Class Print Method
    @Override
    public String toString(){
     
     return String.format("%s%s%s  %s%s/n%s%s %s, %s %s\n%s%s\n%s%s\n",
         "Franchise: ", name, getFranchiseID(), 
-        "Airport: ", getAirport(),
-        "Address: ", getAddress(), getCity(), 
-        "         ", getState(), getZip(),
-        "Phone: ", getPhone(), 
-        "Email: ", getEmail());
-    }//end UTILS  
+        "Airport:   ", getAirport(),
+        "Address:   ", getAddress(), getCity(), 
+        "           ", getState(), getZip(),
+        "Phone:     ", getPhone(), 
+        "Email:     ", getEmail());
+    } 
 }//end class Franchise

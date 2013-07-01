@@ -22,7 +22,7 @@ public class FranchisorJPanel extends javax.swing.JPanel {
     
     public FranchisorJPanel() {
         initComponents();
-        setContent(new CreateFranchiseJPanel());
+        setContent(new FranchisorOverviewPanel());
     }
     
     public void setContent(JPanel c)
@@ -41,6 +41,47 @@ public class FranchisorJPanel extends javax.swing.JPanel {
         
         contentPanel.add(content);
         content.setVisible(true);
+    }
+    
+    private void changeContent()
+    {
+        //Changes the content based on selection of jComboBox1 and list
+        
+            if(jComboBox1.getSelectedIndex() == 0)  //Franchies
+            {
+                if (list.getSelectedIndex() == -1) {
+                    //no selection so display overview
+                    setContent(new FranchisorOverviewPanel());
+                }
+                if (list.getSelectedIndex() == 0){
+                    setContent(new CreateFranchiseJPanel(0));
+                }
+                if (list.getSelectedIndex() == 1){
+                    setContent(new CreateFranchiseJPanel(1));
+                }
+                if (list.getSelectedIndex() == 2){
+                    setContent(new CreateFranchiseJPanel(2));
+                }
+                if (list.getSelectedIndex() == 3){
+                    setContent(new FranchisorOverviewPanel());
+                }
+          }
+          if(jComboBox1.getSelectedIndex() == 1)  //Employee
+            {
+
+                if (list.getSelectedIndex() == 0){
+                    setContent(new CreateEmployeeJPanel(0));
+                }
+                if (list.getSelectedIndex() == 1){
+                    setContent(new CreateEmployeeJPanel(1));
+                }
+                if (list.getSelectedIndex() == 2){
+                    setContent(new CreateEmployeeJPanel(2));
+                }
+                if (list.getSelectedIndex() == 3){
+                    setContent(new EmployeeOverviewPanel());
+                }
+          }
     }
 
     /**
@@ -83,10 +124,10 @@ public class FranchisorJPanel extends javax.swing.JPanel {
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        btnReturn.setBackground(new java.awt.Color(102, 102, 102));
+        btnReturn.setBackground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("Logout");
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,16 +143,28 @@ public class FranchisorJPanel extends javax.swing.JPanel {
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franchises", "Employees", "Other" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         list.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         list.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Add", "Delete", "Edit" };
+            String[] strings = { "Add", "Edit", "Delete", "Overview" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        list.setToolTipText("");
         list.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listMouseClicked(evt);
+            }
+        });
+        list.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(list);
@@ -139,8 +192,8 @@ public class FranchisorJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -174,10 +227,10 @@ public class FranchisorJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
                         .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
+                .addGap(8, 8, 8))
         );
 
         contentPanel.getAccessibleContext().setAccessibleDescription("");
@@ -189,7 +242,20 @@ public class FranchisorJPanel extends javax.swing.JPanel {
 
     private void listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listMouseClicked
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_listMouseClicked
+
+    private void listValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listValueChanged
+        // TODO add your handling code here:
+        if (evt.getValueIsAdjusting() == false) {
+            changeContent();
+        }
+    }//GEN-LAST:event_listValueChanged
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        changeContent();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReturn;

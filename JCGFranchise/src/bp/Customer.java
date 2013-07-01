@@ -1,16 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* JCG Franchise Management System
+ * CIST2391 Summer Session 2013 GTC
+ * Author: #Mahmoodur
+ * Name: Customer
+ * Description: Describes a customer 
  */
 package bp;
 
-/**
- *
- * @author MdMahmoodur
- */
 public class Customer {
 
-	private String customerID;
+	//attributes - DB
+        private String customerID;
 	private String userID;
 	private String password;
 	private String firstName;
@@ -26,7 +25,6 @@ public class Customer {
    
    
    //CONTRUCTORS
-   //default
    public Customer(){
     
 	customerID = "";
@@ -43,10 +41,11 @@ public class Customer {
 	reservationCount = "";
 	memberID = "";   }
    
-   //13 arg constructor
-   public Customer (String customerID, String userID, String password, String firstName, 
-		String lastName, String address, String city, String state, String zip, 
-		String phone, String email, String reservationCount, String memberID){
+   //13 args
+   public Customer (String customerID, String userID, String password, 
+           String firstName, String lastName, String address, String city, 
+           String state, String zip, String phone, String email, 
+           String reservationCount, String memberID){
        
 	setCustomerID(customerID);
 	setUserID(userID);
@@ -63,123 +62,121 @@ public class Customer {
      	setMemberID(memberID);       
    }
    
-   //SETS AND GETS
-   //attribute 1
-   public void setCustomerID (String customerID){       
+    //SETS AND GETS
+    //attribute 1
+    public void setCustomerID (String customerID){       
        this.customerID = customerID;
-   }
+    }
    
-   public String getCustomerID (){
+    public String getCustomerID (){
        return customerID;
-   }
+    }
 
-//attribute 2
-   public void setUserID (String userID){       
+    //attribute 2
+    public void setUserID (String userID){       
        this.userID = userID;
-   }
+    }
    
-   public String getUserID (){
+    public String getUserID (){
        return userID;
-   }
+    }
    
-//attribute 3
-   public void setPassword (String password){       
+    //attribute 3
+    public void setPassword (String password){       
        this.password = password;
-   }
+    }
    
-   public String getPassword (){
+    public String getPassword (){
        return password;
-   }
+    }
 
-//attribute 4
-   public void setFirstName (String firstName){       
+    //attribute 4
+    public void setFirstName (String firstName){       
        this.firstName = firstName;
-   }
+    }
    
-   public String getFirstName (){
+    public String getFirstName (){
        return firstName;
-   }
+    }
 
-//attribute 5
-   public void setLastName (String lastName){       
+    //attribute 5
+    public void setLastName (String lastName){       
        this.lastName = lastName;
-   }
+    }
    
-   public String getLastName (){
+    public String getLastName (){
        return lastName;
-   }
+    }
 
-   //attribute 6
-   public void setAddress (String address){       
+    //attribute 6
+    public void setAddress (String address){       
        this.address = address;
-   }
+    }
    
-   public String getAddress (){
+     public String getAddress (){
        return address;
-   } 
+    } 
    
-   //attribute 7
-   public void setCity (String city){       
+    //attribute 7
+    public void setCity (String city){       
        this.city = city;
-   }
+    }
    
-   public String getCity (){
+    public String getCity (){
        return city;
-   } 
+    } 
    
-   //attribute 8
+    //attribute 8
     public void setState (String state){       
        this.state = state;
-   }
+    }
    
-   public String getState (){
+    public String getState (){
        return state;
-   } 
+    } 
    
-   //attribute 9
+    //attribute 9
     public void setZip (String zip){       
        this.zip = zip;
-   }
+    }
    
-   public String getZip (){
+    public String getZip (){
        return zip;
    } 
    
  //attribute 10
     public void setPhone (String phone){       
        this.phone = phone;
-   }
+    }
    
-   public String getPhone (){
+    public String getPhone (){
        return phone;
-   } 
+    } 
    
- //attribute 11
+    //attribute 11
     public void setEmail (String email){       
        this.email = email;
-   }
+    }
    
-   public String getEmail (){
+    public String getEmail (){
        return email;
-   } 
+    } 
    
- //attribute 12
+    //attribute 12
     public void setReservationCount (String reservationCount){       
        this.reservationCount = reservationCount;
-   }
+    }
    
-   public String getReservationCount (){
+    public String getReservationCount (){
        return reservationCount;
-
-//attribute 13
-   public void setMemberID (String memberID){     
+    }
+    
+    //attribute 13
+    public void setMemberID (String memberID){     
        this.memberID = memberID;
-   }
+    }
    
-   public String getMemberID (){
+    public String getMemberID (){
        return memberID;
-
-   }//end SETS and GETS
-   
-   
+    }  
 }//end class Customer

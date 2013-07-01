@@ -8,12 +8,12 @@ package ui;
  *
  * @author Corey
  */
-public class FranchisorOverviewPanel extends javax.swing.JPanel  {
+public class EmployeeOverviewPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form CreateFranchise
      */
-    public FranchisorOverviewPanel() {
+    public EmployeeOverviewPanel() {
         initComponents();
     }
 
@@ -26,24 +26,24 @@ public class FranchisorOverviewPanel extends javax.swing.JPanel  {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jLabel1 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(545, 500));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Employee Overview");
+
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Franchise 1", "Franchise 2", "Franchise 3", "Franchise 4", "Franchise 5", "Franchise 6" };
+            String[] strings = { "Employee 1", "Employee 2", "Employee 3", "Employee 4", "Employee 5", "Employee 6" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Franchise Overview");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
