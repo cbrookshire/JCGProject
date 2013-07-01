@@ -6,12 +6,13 @@
  * between UI and DB 
  */
 package bp;
-import db.Login;
+import db.*;
+import java.sql.SQLException;
 
 public class DBController {
     
     private String dbAction;
-    private db.Login dbase;
+    private Login dbase;
     int DBReturnCode;
         
     
@@ -38,7 +39,10 @@ public class DBController {
     public int JCGDBController (String[] bpInput){
         
        dbAction = bpInput[bpInput.length-1];
-        
+      
+       
+       try{
+       
        switch(dbAction){
             case "LOGIN":   DBReturnCode = 
                             dbase.Login(bpInput[0], bpInput[1]);
@@ -48,6 +52,14 @@ public class DBController {
             
               
         }
+       
+       }
+       catch (SQLException e)
+       {
+           
+           
+       }
+       }
     }
     
     
