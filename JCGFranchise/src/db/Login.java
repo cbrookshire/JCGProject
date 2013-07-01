@@ -3,6 +3,7 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,38 +15,37 @@ public class Login {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-
-    int code;
-       
-    public Login() {
+    private PreparedStatement loginStatus = null;
+    private int code;
+    
+    public Login(String username, String password) throws SQLException {
+        try {
+            connection = DriverManager.getConnection(DATABASE_URL, username, password);            
+        }
+        catch(SQLException sqlE) {
+            throw(new SQLException());
+        }
+     
+        loginStatus = connection.prepareStatement(
+                "select * from Employee where Username = ?");
+        
     
     }
     
     public int Login(String username, String password)
     {
-        
-        try
-        {
-            connection = DriverManager.getConnection(DATABASE_URL, username, password);
-            code = getLoginStatus(username);
-            if(code == 0)
-                return 55;
-            code = getEmpType(username);
+        code = getLoginStatus(username);
+        if(code == 0)
+            return 55;
+        code = getEmpType(username);
             return code;
-        }
-        catch(SQLException sqlException)
-        {
-            return sqlException.getErrorCode();            
-        }
-        
     }
-       
-    private int getLoginStatus(String username)
+    
+    int getLoginStatus(String username)
     {
         try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(
-                    "select * from Employee where Username = '" + username + "'");
+            loginStatus.setString(1, username);
+            resultSet = loginStatus.executeQuery();
             while(resultSet.next())
             {
                 code = resultSet.getInt("FirstLog");
@@ -97,5 +97,13 @@ public class Login {
             return sqlE.getErrorCode();
         }
     }
-           
+    
+    public void logOff()
+    {
+        try {
+                connection.close();
+            }catch(Exception exception) {
+            }
+    }
+    
 }
