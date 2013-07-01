@@ -200,11 +200,22 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_newEmployeeAddressActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        //Clear button
+        newEmployeeName.setText("");
+        newEmployeeAddress.setText("");
+        newEmployeeCity.setText("");
+        newEmployeeState.setText("");
+        newEmployeeZip.setText("");
+        newEmployeePhone.setText("");
+        newEmployeeEmail.setText("");
+        if(newEmployeeType.getItemCount() > 0)
+            newEmployeeType.setSelectedIndex(0);
+        if(newEmployeeNum.getItemCount() > 0)
+            newEmployeeNum.setSelectedIndex(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        //Submit button
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
