@@ -9,8 +9,8 @@ package bp;
  * @author MdMahmoodur
  */
 public class Employee {
-    private String userid;
-    private String passWord;
+    private String userID;
+    private String password;
     private String firstName;
     private String lastName;
     private String address;
@@ -26,8 +26,8 @@ public class Employee {
    //default constructors
    public Employee(){
     
-	userid = "";
-	passWord = "";
+	userID = "";
+	password = "";
 	firstName = "";
 	lastName = "";
 	address = "";
@@ -40,180 +40,136 @@ public class Employee {
 	franchiseNumber = "";   }
     
     // twelve-argument constructor
-    public Employee ( String uid,String pword,String fName,String lName,
-            String adrs,String ct,String st,String zp,String ph,
-            String eml,String empTp,String fNumber )
+    public Employee ( String userID, String password,String firstName,String lastName,
+            String address,String cityt,String state,String zip,String phone,
+            String email,String empType,String franchiseNumber )
     {
-       userid = uid;
-       passWord = pword;
-       firstName = fName;
-       lastName = lName;
-       address = adrs;
-       city = ct;
-       state = st;
-       zip = zp;
-       phone = ph;
-       email = eml;
-       empType = empTp;
-       franchiseNumber = fNumber;
+       setUserid(userID);
+       setPassword(password);
+       setFirstName(firstName);
+       setLastName(lastName);
+       setAddress(address);
+       setCity(city);
+       setState(state);
+       setZip(zip);
+       setPhone(phone);
+       setEmail(email);
+       setEmpType(empType);
+       setFranchiseNumber(franchiseNumber);
               
     } // end twelve-argument constructor
+	
 
+//SETS AND GETS
     // attribute 1
-    // set userid
-    public void setUserid( String uid)
-    {
-    userid = uid;
-    } // end method setUserid
     
-    // get userid
-    public String getUserid( )
+    public void setUserid( String userID){
+    this.userID = userID;
+    } 
+    
+    public String getUserID( )
     {
-    return userid;
-    } // end method getUserid
+    return userID;
+    } 
 
-    // attribute 2
-    // set password
-    public void setPassWord( String pword)
-    {
-    passWord = pword;
-    } // end method setPassWord
-    
-    // get userid
-    public String getPassWord( )
-    {
-    return passWord;
-    } // end method getPassWord
+    //attribute 2
+   public void setPassword (String password){       
+       this.password = password;
+   }
+   
+   public String getPassword (){
+       return password;
+   }
 
-    // attribute 3
-    // set firstName
-    public void setFirstName( String fName)
-    {
-    firstName = fName;
-    } // end method setfirstName
-    
-    // get firstName
-    public String getFirstName( )
-    {
-    return firstName;
-    } // end method getfirstName
+    //attribute 3
+   public void setFirstName (String firstName){       
+       this.firstName = firstName;
+   }
+   
+   public String getFirstName (){
+       return firstName;
+   }
 
-    // attribute 4
-    // set lastName
-    public void setLastName( String lName)
-    {
-    lastName = lName;
-    } // end method setlastName
-    
-    // get lastName
-    public String getLastName( )
-    {
-    return lastName;
-    } // end method getlastName
+//attribute 4
+   public void setLastName (String lastName){       
+       this.lastName = lastName;
+   }
+   
+   public String getLastName (){
+       return lastName;
+   }
 
-    // attribute 5
-    // set address
-    public void setAddress( String adrs)
-    {
-    address = adrs;
-    } // end method setAddress
+    //attribute 5
+   public void setAddress (String address){       
+       this.address = address;
+   }
+   
+   public String getAddress (){
+       return address;
+   } 
+   
+   //attribute 6
+   public void setCity (String city){       
+       this.city = city;
+   }
+   
+   public String getCity (){
+       return city;
+   } 
+   
+   //attribute 7
+    public void setState (String state){       
+       this.state = state;
+   }
+   
+   public String getState (){
+       return state;
+   } 
+   
+   //attribute 8
+    public void setZip (String zip){       
+       this.zip = zip;
+   }
+   
+   public String getZip (){
+       return zip;
+   } 
+   
+ //attribute 9
+    public void setPhone (String phone){       
+       this.phone = phone;
+   }
+   
+   public String getPhone (){
+       return phone;
+   } 
+   
+ //attribute 10
+    public void setEmail (String email){       
+       this.email = email;
+   }
+   
+   public String getEmail (){
+       return email;
+   } 
     
-    // get address
-    public String getAddress( )
-    {
-    return address;
-    } // end method getAddress
-
-    // attribute 6
-    // set city
-    public void setCity( String ct)
-    {
-    city = ct;
-    } // end method setCity
+// attribute 11
+    public void setEmpType( String empType){
+    this.empType = empType;
+    } 
     
-    // get address
-    public String getCity( )
-    {
-    return city;
-    } // end method getCity
-
-    // attribute 7
-    // set state
-    public void setState( String st)
-    {
-    state = st;
-    } // end method setState
-    
-    // get state
-    public String getState( )
-    {
-    return state;
-    } // end method getState
-
-    // attribute 8
-    // set zip
-    public void setZip( String zp)
-    {
-    zip = zp;
-    } // end method setZip
-    
-    // get zip
-    public String getZip( )
-    {
-    return zip;
-    } // end method getZip
-
-    // attribute 9
-    // set phone
-    public void setPhone( String ph)
-    {
-    phone = ph;
-    } // end method setPhone
-    
-    // get phone
-    public String getPhone( )
-    {
-    return phone;
-    } // end method getPhone
-
-    // attribute 10
-    // set email
-    public void setEmail( String eml)
-    {
-    email = eml;
-    } // end method setEmail
-    
-    // get email
-    public String getEmail( )
-    {
-    return email;
-    } // end method getEmail
-
-    // attribute 11
-    // set empType
-    public void setEmpType( String empTp)
-    {
-    empType = empTp;
-    } // end method setEmpType
-    
-    // get empType
-    public String getEmpType( )
-    {
+     public String getEmpType( ){
     return empType;
-    } // end method getEmpType
+    } 
 
     // attribute 12
-    // set franchiseNumber
-    public void setFranchiseNumber( String fNumber)
-    {
-    franchiseNumber = fNumber;
-    } // end method setFranchiseNumber
+     public void setFranchiseNumber( String franchiseNumber){
+    this.franchiseNumber = franchiseNumber;
+    } 
     
-    // get franchiseNumber
-    public String getFranchiseNumber( )
-    {
+    public String getFranchiseNumber( ){
     return franchiseNumber;
-    } // end method getFranchiseNumber
+    } 
     
 } // end class Employee
 
