@@ -15,7 +15,11 @@ public class Login {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
+    
     private PreparedStatement loginStatus = null;
+    private PreparedStatement empType = null;
+    private PreparedStatement update_password = null;
+    private PreparedStatement update_status = null;
     private int code;
     
     public Login(String username, String password) throws SQLException {
@@ -27,12 +31,19 @@ public class Login {
         }
      
         loginStatus = connection.prepareStatement(
-                "select * from Employee where Username = ?");
+                "SELECT FirstLog from Employee where Username = ?");
         
+        empType = connection.prepareStatement(
+                "SELECT EmpType from Employee where Username = ?");
+        
+        update_password = connection.prepareStatement(
+                "SET PASSWORD FOR ?@'localhost' = PASSWORD(?)");
     
+        update_status = connection.prepareStatement(
+                "UPDATE Employee SET FIRSTLOG = 1 WHERE Username = ?");
     }
     
-    public int Login(String username, String password)
+    public int login2(String username, String password)
     {
         code = getLoginStatus(username);
         if(code == 0)
@@ -59,9 +70,8 @@ public class Login {
     
     int getEmpType(String username) {
         try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT EmpType from Employee"
-                + " where Username = '" + username + "'");
+            empType.setString(1, username);
+            resultSet = empType.executeQuery();
             while(resultSet.next())
             {
                 code = resultSet.getInt("EmpType");
@@ -76,7 +86,9 @@ public class Login {
     int updatePassword(String username, String password)
     {
         try {
-            statement.execute("SET PASSWORD FOR '" + username + "'@'localhost' = PASSWORD('" + password + "')");
+            update_password.setString(1, username);
+            update_password.setString(2, password);
+            update_password.execute();
             code = updateLogStatus(username);
             return code;
         }
@@ -88,8 +100,8 @@ public class Login {
     
     private int updateLogStatus(String username) {
         try {
-            statement.execute("UPDATE Employee SET FIRSTLOG = 1 "
-                    + "where Username = '" + username + "'");
+            update_status.setString(1, username);
+            update_status.execute();
             return 1;
         }
         catch(SQLException sqlE)
