@@ -5,6 +5,7 @@
 package ui;
 
 import ui.*;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 /**
@@ -26,6 +27,8 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
     public void setContent(JPanel c)
     {
         //This function erases the panel on the right and shows c instead of what was there.
+        FlowLayout layout = new FlowLayout();
+        contentPanel.setLayout(layout);
         if(content != null)
         {
             content.setVisible(false);
@@ -58,7 +61,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     //setContent(new CreateFranchiseJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
-                   // setContent(new FranchisorOverviewPanel());
+                    setContent(new ReservationsOverviewPanel());
                 }
           }
           if(jComboBox1.getSelectedIndex() == 1)  //Drivers
@@ -77,10 +80,10 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new CreateEmployeeJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
-                    setContent(new EmployeeOverviewPanel());
+                    setContent(new DriversOverviewPanel());
                 }
           }
-          if(jComboBox1.getSelectedIndex() == 1)  //Vehicles
+          if(jComboBox1.getSelectedIndex() == 2)  //Vehicles
             {
                 if (list.getSelectedIndex() == -1) {
                     //no selection so display overview
@@ -96,10 +99,10 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new CreateEmployeeJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
-                    setContent(new EmployeeOverviewPanel());
+                    setContent(new VehiclesOverviewPanel());
                 }
           }
-          if(jComboBox1.getSelectedIndex() == 1)  //Customers
+          if(jComboBox1.getSelectedIndex() == 3)  //Customers
             {
                 if (list.getSelectedIndex() == -1) {
                     //no selection so display overview
@@ -115,7 +118,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new CreateEmployeeJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
-                    setContent(new EmployeeOverviewPanel());
+                    setContent(new CustomersOverviewPanel());
                 }
           }
     }
@@ -185,6 +188,11 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Reservations", "Drivers", "Vehicles", "Customers", "Promos" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         list.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         list.setModel(new javax.swing.AbstractListModel() {
@@ -193,6 +201,11 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
             public Object getElementAt(int i) { return strings[i]; }
         });
         list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        list.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(list);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -273,6 +286,18 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
     private void btnReturn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturn1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReturn1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        changeContent();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void listValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listValueChanged
+        // TODO add your handling code here:
+        if (evt.getValueIsAdjusting() == false) {
+            changeContent();
+        }
+    }//GEN-LAST:event_listValueChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReturn;
