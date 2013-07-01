@@ -178,5 +178,24 @@ public class Customer {
    
     public String getMemberID (){
        return memberID;
-    }  
+    } 
+    
+    //UTILITIES
+  @Override
+   public String toString(){
+    
+    return String.format("%s%s  %s%s/n%s%s %s, %s %s %s\n %s %s%s %s %s\n%s%s\n%s%s\n",
+        "CustomerID: ", getCustomerID(), 
+        "UserID: ", getUserID(),
+	"Password: ", getPassword(),
+	"First Name: ", getFirstName(),
+	"Last Name: ", getLastName(),
+        "Address: ", getAddress(), getCity(), 
+        "         ", getState(), getZip(),
+        "Phone: ", getPhone(), 
+        "Email: ", getEmail(),
+	"Reservation Count: ", getReservationCount(),
+	"MemberID: ", getMemberID());
+	
+    }//end UTILS  
 }//end class Customer

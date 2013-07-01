@@ -173,5 +173,22 @@ public class Employee {
     public String getFranchiseNumber( ){
     return franchiseNumber;
     } 
+   
+    //UTILITIES
+  @Override
+   public String toString(){
     
+    return String.format("%s%s  %s%s/n%s%s %s, %s %s %s %s\n%s%s\n%s%s\n",
+        "UserID: ", getUserID(),
+	"Password: ", getPassword(),
+	"First Name: ", getFirstName(),
+	"Last Name: ", getLastName(),
+        "Address: ", getAddress(), getCity(), 
+        "         ", getState(), getZip(),
+        "Phone: ", getPhone(), 
+        "Email: ", getEmail(),
+	"Emp Type: ", getEmpType(),
+	"Franchise Number: ", getFranchiseNumber());
+	
+    }//end UTILS    
 } // end class Employee
