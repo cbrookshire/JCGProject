@@ -1,14 +1,17 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * JCG Franchise Management System
+ * CIST2391 Summer Session 2013 GTC
+ * Author: #Mahmoodur
+ * Name: Employee
+ * Description: Describes an employee 
  */
+ 
 package bp;
 
-/**
- *
- * @author MdMahmoodur
- */
+
 public class Employee {
+    
+    //attributes - DB
     private String userID;
     private String password;
     private String firstName;
