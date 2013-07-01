@@ -101,6 +101,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 204, 204));
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setPreferredSize(new java.awt.Dimension(545, 530));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -187,7 +188,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
                             .addComponent(newFranchiseEmail)
                             .addComponent(newFranchisePhone)
                             .addComponent(newFranchiseAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -151,7 +151,7 @@ public class FranchisorJPanel extends javax.swing.JPanel {
 
         list.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         list.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Add", "Delete", "Edit", "Overview" };
+            String[] strings = { "Add", "Edit", "Delete", "Overview" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
