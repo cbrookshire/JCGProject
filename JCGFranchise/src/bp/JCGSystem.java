@@ -8,4 +8,17 @@ package bp;
 
 public class JCGSystem {
     
+    private DBController dControl;
+    
+    public JCGSystem(){}
+    
+    
+    public void Authentication(String[] UIinput){
+        
+       dControl.JCGDBController(UIinput);
+    
+    }
+    
+    
+    
 }
