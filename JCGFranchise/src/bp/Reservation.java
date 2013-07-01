@@ -8,7 +8,11 @@ package bp;
 
 public class Reservation {
     
-    //attributes - DB 
+    
+    private Customer customer;
+    
+    //attributes - DB        
+    private final String name = "JCG Franchise #";
     private String reservationNumber;
     private String franchiseNumber;
     private String vehicleID;
@@ -218,7 +222,21 @@ public class Reservation {
     
     //UTILITIES
     //Class Print Method
+    @Override
+    public String toString(){
     
-    
-    
-}
+        return String.format("%s%s  %s%s\n%s%s  %s  %s/n%s%s  %s%s  %s%s  %s%s\n"
+                + "%s%s  %s%s\n%s%s, %s\n%s%s\n%s, %s %s\n%s%s\n%s, %s %s\n%s\n",
+        name, getFranchiseNumber(), "Date: ", getDate(), 
+        "Reservation ID: ", getReservationNumber(), "Customer ID: ", 
+        getCustomerID(), "Vehicle ID: ", getVehicleID(), "Airline: ", 
+        getAirline(), "Flight Time: ", getFlightTime(), "Pickup Time: ", 
+        getPickUpTime(), "Drop Off Time: ", getDropOffTime(), "Price: ",
+        getPrice(), "Status: ", getStatus(), "Customer Name", 
+        customer.getFirstName(), customer.getLastName(), 
+        "Address: ", customer.getAddress(), customer.getCity(),
+        customer.getState(), customer.getZip(), "Alt Address: ", 
+        getAltAddress(), getAltCity(), getAltState(), getAltZip(),
+        getComment());    
+    }   
+}//end Reservation class
