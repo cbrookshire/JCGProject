@@ -22,6 +22,7 @@ public class Login {
     private PreparedStatement update_status = null;
     private int code;
     
+    // Constructor test for connection and user/password
     public Login(String username, String password) throws SQLException {
         try {
             connection = DriverManager.getConnection(DATABASE_URL, username, password);            
@@ -43,8 +44,13 @@ public class Login {
                 "UPDATE Employee SET FIRSTLOG = 1 WHERE Username = ?");
     }
     
-    public int login2(String username, String password)
-    {
+/******************************************************************************
+ * Checks for new user, then gets the employee type
+ * @param username
+ * @param password
+ * @return integer for employee type or 55 for new password screen 
+ ******************************************************************************/
+    public int login2(String username, String password) {
         code = getLoginStatus(username);
         if(code == 0)
             return 55;
@@ -52,8 +58,13 @@ public class Login {
             return code;
     }
     
-    int getLoginStatus(String username)
-    {
+    
+/******************************************************************************
+ * Used by login2 to get check for new user
+ * @param username
+ * @returns returns 1 for success or SQL error code number
+ ******************************************************************************/ 
+    int getLoginStatus(String username) {
         try {
             loginStatus.setString(1, username);
             resultSet = loginStatus.executeQuery();
@@ -68,7 +79,13 @@ public class Login {
         }
     }
     
-    int getEmpType(String username) {
+    
+/******************************************************************************
+ * Used by login2 to get the employee type
+ * @param username
+ * @returns integer empType or SQL error code number 
+ ******************************************************************************/
+    private int getEmpType(String username) {
         try {
             empType.setString(1, username);
             resultSet = empType.executeQuery();
@@ -83,8 +100,14 @@ public class Login {
         }
     }
     
-    int updatePassword(String username, String password)
-    {
+    
+ /*****************************************************************************
+  * Used to update the password for a given user in the system.
+  * @param username
+  * @param password
+  * @returns 1 for success or SQL error code. 
+  *****************************************************************************/    
+    int updatePassword(String username, String password) {
         try {
             update_password.setString(1, username);
             update_password.setString(2, password);
@@ -98,6 +121,12 @@ public class Login {
         }
     }
     
+    
+ /*****************************************************************************
+  * Used to by updatePassword to set the user to non-new user.
+  * @param username
+  * @returns 1 for success or SQL error code. 
+  *****************************************************************************/
     private int updateLogStatus(String username) {
         try {
             update_status.setString(1, username);
@@ -110,12 +139,14 @@ public class Login {
         }
     }
     
-    public void logOff()
-    {
+    
+/******************************************************************************
+ * Closes the connection to the database for current user.
+ ******************************************************************************/
+    public void logOff() {
         try {
                 connection.close();
             }catch(Exception exception) {
             }
-    }
-    
-}
+    }    
+}//end Login
