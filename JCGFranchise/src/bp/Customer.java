@@ -62,7 +62,7 @@ public class Customer {
      	setMemberID(memberID);       
    }
    
-    //SETS AND GETS
+    //SETS AND GETS methods
     //attribute 1
     public void setCustomerID (String customerID){       
        this.customerID = customerID;
