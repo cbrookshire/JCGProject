@@ -180,10 +180,10 @@ public class BaseJFrame extends JFrame {
            
            //Error prompts
            case "900": //Unable to login
-               //setContent(new errorPanel("Unable to login.", "101"));  //call the error and return to login
+               setContent(new errorJPanel("Unable to login.", "101"), "Error!");  //call the error and return to login
                break;
            case "901": //Unable to login
-               //setContent(new errorPanel("Unable to create account.", "002"));  //call the error code and return to registration
+               setContent(new errorJPanel("Unable to create account.", "002"), "Error!");  //call the error code and return to registration
                break;
         }
     }
