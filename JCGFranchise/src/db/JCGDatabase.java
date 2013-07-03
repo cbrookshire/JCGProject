@@ -8,6 +8,7 @@ package db;
 import JCGExceptions.BadConnectionException;
 import JCGExceptions.InvalidUserException;
 import JCGExceptions.NewUserException;
+import bp.JCGlIO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,10 +32,11 @@ public class JCGDatabase {
     private int code;
     
     // Constructor test for connection and user/password
-    public JCGDatabase(String username, String password) 
+    public JCGDatabase(JCGlIO jcgLio) 
             throws InvalidUserException, BadConnectionException {
         try {
-            connection = DriverManager.getConnection(DATABASE_URL, username, password);            
+            connection = DriverManager.getConnection(DATABASE_URL,
+                    jcgLio.getU(), jcgLio.getP());            
              
             loginStatus = connection.prepareStatement(
                 "SELECT FirstLog from Employee where Username = ?");
