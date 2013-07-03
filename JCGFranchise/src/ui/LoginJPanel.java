@@ -30,7 +30,7 @@ public class LoginJPanel extends javax.swing.JPanel {
     {
         
         //Until we have DB code, we'll just assume the login was succesful
-        userType = TYPE_FRANCHISEE;
+        //userType = TYPE_FRANCHISEE;
         return true;
     }
     
