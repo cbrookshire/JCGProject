@@ -41,26 +41,18 @@ public class DBController {
        dbAction = bpInput[bpInput.length-1];
       
        
-       try{
-       
        switch(dbAction){
             case "LOGIN":   DBReturnCode = 
-                            dbase.Login(bpInput[0], bpInput[1]);
+                            dbase.login2(bpInput[0], bpInput[1]);
                             return DBReturnCode;         
                 
             default:        return 0;
             
               
-        }
        
        }
-       catch (SQLException e)
-       {
-           
-           
-       }
-       }
-    }
     
     
+    
+}
 }

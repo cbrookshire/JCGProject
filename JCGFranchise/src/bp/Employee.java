@@ -1,14 +1,17 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * JCG Franchise Management System
+ * CIST2391 Summer Session 2013 GTC
+ * Author: #Mahmoodur
+ * Name: Employee
+ * Description: Describes an employee 
  */
+ 
 package bp;
 
-/**
- *
- * @author MdMahmoodur
- */
+
 public class Employee {
+    
+    //attributes - DB
     private String userID;
     private String password;
     private String firstName;
@@ -170,5 +173,22 @@ public class Employee {
     public String getFranchiseNumber( ){
     return franchiseNumber;
     } 
+   
+    //UTILITIES
+  @Override
+   public String toString(){
     
+    return String.format("%s%s  %s%s/n%s%s %s, %s %s %s %s\n%s%s\n%s%s\n",
+        "UserID: ", getUserID(),
+	"Password: ", getPassword(),
+	"First Name: ", getFirstName(),
+	"Last Name: ", getLastName(),
+        "Address: ", getAddress(), getCity(), 
+        "         ", getState(), getZip(),
+        "Phone: ", getPhone(), 
+        "Email: ", getEmail(),
+	"Emp Type: ", getEmpType(),
+	"Franchise Number: ", getFranchiseNumber());
+	
+    }//end UTILS    
 } // end class Employee
