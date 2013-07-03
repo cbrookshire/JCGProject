@@ -25,26 +25,33 @@ public class DBController {
     public String dbRouter (Object sysObject, String action){
         
         int dbReturnCode;
+        
                 
         //DBSwitch
         switch(action){
-            case "LOGIN":   try {
-                                JCGlIO temp = (JCGlIO)sysObject;
-                                dbase = new JCGDatabase(temp);
-                                dbReturnCode = dbase.login(temp);
-                                String convert = Integer.toString(dbReturnCode);
-                                return convert;
-                                }
+            case "LOGIN":   try 
+                            {   JCGlIO temp = (JCGlIO)sysObject;
+                                dbase = new JCGDatabase(temp);                                
+                            }
                             catch(InvalidUserException e){
                                 return e.toString();
-                                }
+                            }
                             catch(BadConnectionException e){
                                 return e.toString();
                             }
-                            catch(NewUserException e){
-                                return e.toString();
+                                                  
+                            try 
+                            {   JCGlIO temp = (JCGlIO)sysObject;
+                                dbReturnCode = dbase.login(temp);
+                                String convert = Integer.toString(dbReturnCode);
+                                return convert;
                             }
-                                            
+                             catch(NewUserException e){
+                                return e.toString();
+                            }   
+                             catch(BadConnectionException e){
+                                return e.toString();
+                            }                
                      
             default:        return "0";
             

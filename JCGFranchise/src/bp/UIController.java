@@ -6,12 +6,14 @@
  * between UI and BP 
  */
 package bp;
+import ui.*;
 
 public class UIController {
     
    //attributes
     private JCGSystem jcgSys;
     private static UIController uicInstance;
+    private ui.FranchisorOverviewPanel uiScreen;
     
     //CONSTRUCTOR
     //default
@@ -25,6 +27,8 @@ public class UIController {
         //call appropriate BP method
         switch(action){
             case "LOGIN":   rCode = jcgSys.Authentication(UIObject, action);
+                            if (rCode.charAt(0) == 'P')
+                            {   new uiScreen();                           }
                             return rCode;
                 
             default:        return "-1";

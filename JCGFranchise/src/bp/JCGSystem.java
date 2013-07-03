@@ -15,10 +15,9 @@ public class JCGSystem {
     
     public String Authentication(Object sysObject, String action){
         
-        String dbCode;
-        dbCode = dControl.dbRouter(sysObject, action);
-        if (dbCode == "")
-        return dbCode;
+       String dbCode;
+       dbCode = dControl.dbRouter(sysObject, action);
+       return dbCode;
         
     
     }
