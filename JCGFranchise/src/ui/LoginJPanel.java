@@ -5,6 +5,8 @@
 package ui;
 
 import ui.*;
+import bp.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,9 +30,13 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     public boolean verifyLogin()
     {
+        /*
+        JOptionPane.showMessageDialog(BaseJFrame.getInstance(),
+            "I love having sex with you.  <3",
+            "Opps",
+            JOptionPane.WARNING_MESSAGE);
+        */
         
-        //Until we have DB code, we'll just assume the login was succesful
-        //userType = TYPE_FRANCHISEE;
         return true;
     }
     
@@ -64,7 +70,6 @@ public class LoginJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
-        btnForgetPassword = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
@@ -85,8 +90,6 @@ public class LoginJPanel extends javax.swing.JPanel {
                 btnLoginActionPerformed(evt);
             }
         });
-
-        btnForgetPassword.setText("Forgot Password?");
 
         jLabel3.setText("New User?");
 
@@ -111,7 +114,6 @@ public class LoginJPanel extends javax.swing.JPanel {
                                 .addComponent(txtLoginName)
                                 .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
                             .addComponent(btnLogin)
-                            .addComponent(btnForgetPassword)
                             .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(47, Short.MAX_VALUE))))
         );
@@ -128,9 +130,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnForgetPassword)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -175,7 +175,6 @@ public class LoginJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnForgetPassword;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
     private javax.swing.JLabel jLabel1;
