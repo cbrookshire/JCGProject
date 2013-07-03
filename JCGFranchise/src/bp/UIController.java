@@ -6,14 +6,13 @@
  * between UI and BP 
  */
 package bp;
-import ui.*;
 
 public class UIController {
     
    //attributes
     private JCGSystem jcgSys;
     private static UIController uicInstance;
-    private ui.FranchisorOverviewPanel uiScreen;
+  
     
     //CONSTRUCTOR
     //default
@@ -22,14 +21,28 @@ public class UIController {
     //UTILITIES
     public String UIRouter (Object UIObject, String action){
         
-        String rCode;
-        
+        String returnCode = "";
+                
         //call appropriate BP method
         switch(action){
-            case "LOGIN":   rCode = jcgSys.Authentication(UIObject, action);
-                            if (rCode.charAt(0) == 'P')
-                            {   new uiScreen();                           }
-                            return rCode;
+            case "LOGIN":   returnCode = jcgSys.Authentication(UIObject, action);
+                            if (returnCode == "UserNotFound")
+                            {    return "900";  /*error prompt*/            }        
+                            if (returnCode == "InvalidUserNamePassword")
+                            {    return "901";  /*error prompt*/            }
+                            if (returnCode == "BadConnection")
+                            {    return "902";    /*error prompt*/          }
+                
+            case "VIEWALL": 
+                
+            case "VIEWITEM":
+                
+            case "ADD":
+                
+            case "DELETE":
+                
+            case "EDIT":
+                
                 
             default:        return "-1";
         }
