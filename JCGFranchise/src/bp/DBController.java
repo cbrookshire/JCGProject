@@ -7,7 +7,6 @@
  */
 package bp;
 import db.*;
-import java.sql.SQLException;
 
 public class DBController {
     
@@ -36,14 +35,12 @@ public class DBController {
     }
     
     //UTILITIES
-    public int JCGDBController (String[] bpInput){
+    public int dbRouter (Object sysObject, String action){
         
-       dbAction = bpInput[bpInput.length-1];
       
-       
-       switch(dbAction){
+       switch(action){
             case "LOGIN":   DBReturnCode = 
-                            dbase.login2(bpInput[0], bpInput[1]);
+                            dbase.Login(sysObject);
                             return DBReturnCode;         
                 
             default:        return 0;

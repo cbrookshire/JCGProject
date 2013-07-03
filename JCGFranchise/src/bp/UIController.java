@@ -6,20 +6,21 @@
  * between UI and BP 
  */
 package bp;
-import ui.*;
 
 public class UIController {
     
     private String uiAction;
     private JCGSystem jcg;
-        
+    private static UIController uicInstance;
+
+    
+    
     
     //CONSTRUCTOR
     //default
     public UIController(){    
         uiAction="";
     }
-    
     
     //SETS AND GETS
     public void setUiAction(String uiAction){
@@ -33,19 +34,24 @@ public class UIController {
     }
     
     //UTILITIES
-    public int JCGUIController (String[]UIInput){
+    public int UIRouter (Object UIObject, String action){
         
-        //last member of array is ui action
-        uiAction = UIInput[UIInput.length-1];
-    
+        int dbrCode;
+        
         //call appropriate BP method
-        switch(uiAction){
-            case "LOGIN":   jcg.Authentication(UIInput);
+        switch(action){
+            case "LOGIN":   dbrCode = jcg.Authentication(UIObject, action);
+                            return dbrCode;
                 
-            default:        uiAction = "";
-                            return 0;
+            default:        return 0;
         }
 }
+    
+    public static UIController getInstance(){            
+        if(uicInstance == null)
+        {    uicInstance = new UIController();}
+        return uicInstance;
+       }
 }
     
     

@@ -13,9 +13,12 @@ public class JCGSystem {
     public JCGSystem(){}
     
     
-    public void Authentication(String[] UIinput){
+    public int Authentication(Object sysObject, String action){
         
-       dControl.JCGDBController(UIinput);
+        int dbCode;
+        dbCode = dControl.dbRouter(sysObject, action);
+        return dbCode;
+        
     
     }
     
