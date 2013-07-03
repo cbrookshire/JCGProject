@@ -24,24 +24,25 @@ public class DBController {
     //UTILITIES
     public String dbRouter (Object sysObject, String action){
         
-        String dbReturnCode;
-        
+        int dbReturnCode;
+                
         //DBSwitch
         switch(action){
-            case "LOGIN":  try{
-                            JCGlIO temp = (JCGlIO)sysObject;
-                            dbase = new JCGDatabase(temp);
-                            dbReturnCode = dbase.login(temp);
-                            return dbReturnCode;
-                            }
+            case "LOGIN":   try {
+                                JCGlIO temp = (JCGlIO)sysObject;
+                                dbase = new JCGDatabase(temp);
+                                dbReturnCode = dbase.login(temp);
+                                String convert = Integer.toString(dbReturnCode);
+                                return convert;
+                                }
                             catch(InvalidUserException e){
                                 return e.toString();
+                                }
+                            catch(BadConnectionException e){
+                                return e.toString();
                             }
-                            catch(BadConnectionException e)
-                            {   return e.toString();
-                            }
-                            catch(NewUserException e)
-                            {   return e.toString();
+                            catch(NewUserException e){
+                                return e.toString();
                             }
                                             
                      
