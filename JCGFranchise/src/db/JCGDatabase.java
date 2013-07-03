@@ -1,6 +1,12 @@
-
+/*
+ * Class JCGDatabase will be the connection class to the MySQL database
+ * and will also allow the user to change their password upon their 
+ * first login.
+ */
 package db;
 
+import JCGExceptions.BadConnectionException;
+import JCGExceptions.InvalidUserException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,10 +14,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-public class Login {
-    
-    static final String DATABASE_URL = "jdbc:mysql://localhost/tester";
+/**
+ * @author taylor
+ */
+public class JCGDatabase {
+  static final String DATABASE_URL = "jdbc:mysql://localhost/tester";
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -23,25 +30,29 @@ public class Login {
     private int code;
     
     // Constructor test for connection and user/password
-    public Login(String username, String password) throws SQLException {
+    public JCGDatabase(String username, String password) 
+            throws InvalidUserException, BadConnectionException {
         try {
             connection = DriverManager.getConnection(DATABASE_URL, username, password);            
-        }
-        catch(SQLException sqlE) {
-            throw(new SQLException());
-        }
-     
-        loginStatus = connection.prepareStatement(
+             
+            loginStatus = connection.prepareStatement(
                 "SELECT FirstLog from Employee where Username = ?");
         
-        empType = connection.prepareStatement(
+            empType = connection.prepareStatement(
                 "SELECT EmpType from Employee where Username = ?");
         
-        update_password = connection.prepareStatement(
+            update_password = connection.prepareStatement(
                 "SET PASSWORD FOR ?@'localhost' = PASSWORD(?)");
     
-        update_status = connection.prepareStatement(
+            update_status = connection.prepareStatement(
                 "UPDATE Employee SET FIRSTLOG = 1 WHERE Username = ?");
+            }
+        catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1044 || sqlE.getErrorCode() == 1045)
+                throw(new InvalidUserException("Invalid Username or Password"));
+            else
+                throw(new BadConnectionException("Connection Failed"));
+        }
     }
     
 /******************************************************************************
@@ -50,7 +61,7 @@ public class Login {
  * @param password
  * @return integer for employee type or 55 for new password screen 
  ******************************************************************************/
-    public int login2(String username, String password) {
+    public int login(String username, String password) {
         code = getLoginStatus(username);
         if(code == 0)
             return 55;
@@ -149,4 +160,4 @@ public class Login {
             }catch(Exception exception) {
             }
     }    
-}//end Login
+}//end JCGDatabase
