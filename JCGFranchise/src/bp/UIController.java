@@ -9,39 +9,23 @@ package bp;
 
 public class UIController {
     
-    private String uiAction;
-    private JCGSystem jcg;
+   //attributes
+    private JCGSystem jcgSys;
     private static UIController uicInstance;
-
-    
-    
     
     //CONSTRUCTOR
     //default
-    public UIController(){    
-        uiAction="";
-    }
-    
-    //SETS AND GETS
-    public void setUiAction(String uiAction){
-    
-        this.uiAction = uiAction;
-    }
-    
-    public String getUiAction(){
-    
-        return uiAction;
-    }
+    public UIController(){}
     
     //UTILITIES
     public int UIRouter (Object UIObject, String action){
         
-        int dbrCode;
+        int rCode = 0;
         
         //call appropriate BP method
         switch(action){
-            case "LOGIN":   dbrCode = jcg.Authentication(UIObject, action);
-                            return dbrCode;
+            case "LOGIN":   rCode = jcgSys.Authentication(UIObject, action);
+                            return rCode;
                 
             default:        return 0;
         }

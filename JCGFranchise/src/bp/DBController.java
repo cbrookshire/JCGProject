@@ -11,7 +11,7 @@ import db.*;
 public class DBController {
     
     private String dbAction;
-    private Login dbase;
+    private JCGDatabase dbase;
     int DBReturnCode;
         
     
@@ -40,7 +40,7 @@ public class DBController {
       
        switch(action){
             case "LOGIN":   DBReturnCode = 
-                            dbase.Login(sysObject);
+                            dbase.JCGDatabase(sysObject);
                             return DBReturnCode;         
                 
             default:        return 0;

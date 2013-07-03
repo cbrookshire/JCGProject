@@ -2,7 +2,7 @@
  * CIST2391 Summer Session 2013 GTC
  * Author: #Maurice
  * Name: JCGlIO
- * Description:
+ * Description: Login Object
  */
 package bp;
 
