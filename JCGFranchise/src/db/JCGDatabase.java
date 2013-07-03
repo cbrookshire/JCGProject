@@ -7,6 +7,7 @@ package db;
 
 import JCGExceptions.BadConnectionException;
 import JCGExceptions.InvalidUserException;
+import JCGExceptions.NewUserException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -58,24 +59,24 @@ public class JCGDatabase {
 /******************************************************************************
  * Checks for new user, then gets the employee type
  * @param username
- * @param password
- * @return integer for employee type or 55 for new password screen 
+  * @return integer for employee type or 55 for new password screen 
  ******************************************************************************/
-    public int login(String username, String password) {
-        code = getLoginStatus(username);
-        if(code == 0)
-            return 55;
-        code = getEmpType(username);
-            return code;
-    }
-    
-    
+    public int login(String username) 
+            throws NewUserException, BadConnectionException
+    {
+        if(getLoginStatus(username) == 0)
+            throw(new NewUserException("Please create new password"));
+        else if(getLoginStatus(username) != 1 || getLoginStatus(username) != 0)
+            throw(new BadConnectionException("Connection Failed"));
+        return getEmpType(username);    
+   }
+     
 /******************************************************************************
- * Used by login2 to get check for new user
+ * Used by login to get check for new user
  * @param username
  * @returns returns 1 for success or SQL error code number
  ******************************************************************************/ 
-    int getLoginStatus(String username) {
+    private int getLoginStatus(String username) {
         try {
             loginStatus.setString(1, username);
             resultSet = loginStatus.executeQuery();
@@ -118,7 +119,9 @@ public class JCGDatabase {
   * @param password
   * @returns 1 for success or SQL error code. 
   *****************************************************************************/    
-    int updatePassword(String username, String password) {
+    int updatePassword(String username, String password) 
+            throws InvalidUserException, BadConnectionException 
+    {
         try {
             update_password.setString(1, username);
             update_password.setString(2, password);
@@ -128,7 +131,10 @@ public class JCGDatabase {
         }
         catch(SQLException sqlE)
         {
-            return sqlE.getErrorCode();
+            if(sqlE.getErrorCode() == 1044 || sqlE.getErrorCode() == 1045)
+                throw(new InvalidUserException("Invalid Username or Password"));
+            else
+                throw(new BadConnectionException("Connection Failed"));
         }
     }
     

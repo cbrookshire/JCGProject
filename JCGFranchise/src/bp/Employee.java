@@ -12,8 +12,6 @@ package bp;
 public class Employee {
     
     //attributes - DB
-    private String userID;
-    private String password;
     private String firstName;
     private String lastName;
     private String address;
@@ -29,8 +27,6 @@ public class Employee {
    //default constructors
    public Employee(){
     
-	userID = "";
-	password = "";
 	firstName = "";
 	lastName = "";
 	address = "";
@@ -42,13 +38,11 @@ public class Employee {
 	empType = "";
 	franchiseNumber = "";   }
     
-    // twelve-argument constructor
-    public Employee ( String userID, String password,String firstName,String lastName,
+    // 10 argument constructor
+    public Employee ( String firstName,String lastName,
             String address,String cityt,String state,String zip,String phone,
             String email,String empType,String franchiseNumber )
     {
-       setUserid(userID);
-       setPassword(password);
        setFirstName(firstName);
        setLastName(lastName);
        setAddress(address);
@@ -66,26 +60,7 @@ public class Employee {
 //SETS AND GETS
     // attribute 1
     
-    public void setUserid( String userID){
-    this.userID = userID;
-    } 
-    
-    public String getUserID( )
-    {
-    return userID;
-    } 
-
-    //attribute 2
-   public void setPassword (String password){       
-       this.password = password;
-   }
-   
-   public String getPassword (){
-       return password;
-   }
-
-    //attribute 3
-   public void setFirstName (String firstName){       
+       public void setFirstName (String firstName){       
        this.firstName = firstName;
    }
    
@@ -93,7 +68,7 @@ public class Employee {
        return firstName;
    }
 
-//attribute 4
+//attribute 2
    public void setLastName (String lastName){       
        this.lastName = lastName;
    }
@@ -102,7 +77,7 @@ public class Employee {
        return lastName;
    }
 
-    //attribute 5
+    //attribute 3
    public void setAddress (String address){       
        this.address = address;
    }
@@ -111,7 +86,7 @@ public class Employee {
        return address;
    } 
    
-   //attribute 6
+   //attribute 4
    public void setCity (String city){       
        this.city = city;
    }
@@ -120,7 +95,7 @@ public class Employee {
        return city;
    } 
    
-   //attribute 7
+   //attribute 5
     public void setState (String state){       
        this.state = state;
    }
@@ -129,7 +104,7 @@ public class Employee {
        return state;
    } 
    
-   //attribute 8
+   //attribute 6
     public void setZip (String zip){       
        this.zip = zip;
    }
@@ -138,7 +113,7 @@ public class Employee {
        return zip;
    } 
    
- //attribute 9
+ //attribute 7
     public void setPhone (String phone){       
        this.phone = phone;
    }
@@ -147,7 +122,7 @@ public class Employee {
        return phone;
    } 
    
- //attribute 10
+ //attribute 8
     public void setEmail (String email){       
        this.email = email;
    }
@@ -156,7 +131,7 @@ public class Employee {
        return email;
    } 
     
-// attribute 11
+// attribute 9
     public void setEmpType( String empType){
     this.empType = empType;
     } 
@@ -165,7 +140,7 @@ public class Employee {
     return empType;
     } 
 
-    // attribute 12
+    // attribute 10
      public void setFranchiseNumber( String franchiseNumber){
     this.franchiseNumber = franchiseNumber;
     } 
@@ -178,10 +153,8 @@ public class Employee {
   @Override
    public String toString(){
     
-    return String.format("%s%s  %s%s/n%s%s %s, %s %s %s %s\n%s%s\n%s%s\n",
-        "UserID: ", getUserID(),
-	"Password: ", getPassword(),
-	"First Name: ", getFirstName(),
+    return String.format("%s%s  %s%s/n%s%s %s, %s %s\n%s%s\n%s%s\n",
+        "First Name: ", getFirstName(),
 	"Last Name: ", getLastName(),
         "Address: ", getAddress(), getCity(), 
         "         ", getState(), getZip(),

@@ -10,8 +10,6 @@ public class Customer {
 
 	//attributes - DB
         private String customerID;
-	private String userID;
-	private String password;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -28,8 +26,6 @@ public class Customer {
    public Customer(){
     
 	customerID = "";
-	userID = "";
-	password = "";
 	firstName = "";
 	lastName = "";
 	address = "";
@@ -41,15 +37,12 @@ public class Customer {
 	reservationCount = "";
 	memberID = "";   }
    
-   //13 args
-   public Customer (String customerID, String userID, String password, 
-           String firstName, String lastName, String address, String city, 
+   //11 args
+   public Customer (String customerID, String firstName, String lastName, String address, String city, 
            String state, String zip, String phone, String email, 
            String reservationCount, String memberID){
        
 	setCustomerID(customerID);
-	setUserID(userID);
-	setPassword(password);
 	setFirstName(firstName);
 	setLastName(lastName);
 	setAddress(address);
@@ -73,24 +66,6 @@ public class Customer {
     }
 
     //attribute 2
-    public void setUserID (String userID){       
-       this.userID = userID;
-    }
-   
-    public String getUserID (){
-       return userID;
-    }
-   
-    //attribute 3
-    public void setPassword (String password){       
-       this.password = password;
-    }
-   
-    public String getPassword (){
-       return password;
-    }
-
-    //attribute 4
     public void setFirstName (String firstName){       
        this.firstName = firstName;
     }
@@ -99,7 +74,7 @@ public class Customer {
        return firstName;
     }
 
-    //attribute 5
+    //attribute 3
     public void setLastName (String lastName){       
        this.lastName = lastName;
     }
@@ -108,7 +83,7 @@ public class Customer {
        return lastName;
     }
 
-    //attribute 6
+    //attribute 4
     public void setAddress (String address){       
        this.address = address;
     }
@@ -117,7 +92,7 @@ public class Customer {
        return address;
     } 
    
-    //attribute 7
+    //attribute 5
     public void setCity (String city){       
        this.city = city;
     }
@@ -126,7 +101,7 @@ public class Customer {
        return city;
     } 
    
-    //attribute 8
+    //attribute 6
     public void setState (String state){       
        this.state = state;
     }
@@ -135,7 +110,7 @@ public class Customer {
        return state;
     } 
    
-    //attribute 9
+    //attribute 7
     public void setZip (String zip){       
        this.zip = zip;
     }
@@ -144,7 +119,7 @@ public class Customer {
        return zip;
    } 
    
- //attribute 10
+ //attribute 8
     public void setPhone (String phone){       
        this.phone = phone;
     }
@@ -153,7 +128,7 @@ public class Customer {
        return phone;
     } 
    
-    //attribute 11
+    //attribute 9
     public void setEmail (String email){       
        this.email = email;
     }
@@ -162,7 +137,7 @@ public class Customer {
        return email;
     } 
    
-    //attribute 12
+    //attribute 10
     public void setReservationCount (String reservationCount){       
        this.reservationCount = reservationCount;
     }
@@ -171,7 +146,7 @@ public class Customer {
        return reservationCount;
     }
     
-    //attribute 13
+    //attribute 11
     public void setMemberID (String memberID){     
        this.memberID = memberID;
     }
@@ -184,11 +159,9 @@ public class Customer {
   @Override
    public String toString(){
     
-    return String.format("%s%s  %s%s/n%s%s %s, %s %s %s\n %s %s%s %s %s\n%s%s\n%s%s\n",
+    return String.format("%s%s  %s%s/n%s%s %s, %s\n %s %s%s %s %s\n%s%s\n%s%s\n",
         "CustomerID: ", getCustomerID(), 
-        "UserID: ", getUserID(),
-	"Password: ", getPassword(),
-	"First Name: ", getFirstName(),
+        "First Name: ", getFirstName(),
 	"Last Name: ", getLastName(),
         "Address: ", getAddress(), getCity(), 
         "         ", getState(), getZip(),
