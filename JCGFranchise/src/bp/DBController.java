@@ -29,8 +29,8 @@ public class DBController {
                 
         //DBSwitch
         switch(action){
-            case "LOGIN":   try 
-                            {   
+            
+            case "LOGIN":   try {   
                                 //Attempt connection with JCGlIO object
                                 JCGlIO temp = (JCGlIO)sysObject;
                                 dbase = new JCGDatabase(temp); 
@@ -48,9 +48,20 @@ public class DBController {
                             }
                             catch(NewUserException e){
                                 return e.toString();
-                            }   
-                         
-                     
+                            }  
+
+            case "UPDATE":             
+            
+                
+                
+                
+            case "LOGOUT":  try{
+                                dbase.logOff();                                
+                            }  
+                            catch (Exception e){
+                                return e.toString();
+                            }
+                
             default:        return "0";
             
               
