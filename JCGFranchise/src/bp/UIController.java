@@ -16,7 +16,7 @@ public class UIController {
     
     //CONSTRUCTOR
     //default
-    public UIController(){}
+    protected UIController(){}
     
     //UTILITIES
     public String UIRouter (Object UIObject, String action){
@@ -26,13 +26,21 @@ public class UIController {
         //call appropriate BP method
         switch(action){
             case "LOGIN":   returnCode = jcgSys.Authentication(UIObject, action);
-                            if (returnCode == "UserNotFound")
-                            {    return "900";  /*error prompt*/            }        
-                            if (returnCode == "InvalidUserNamePassword")
-                            {    return "901";  /*error prompt*/            }
-                            if (returnCode == "BadConnection")
-                            {    return "902";    /*error prompt*/          }
-                
+                            if (returnCode == "UserNotFound"){
+                                return "900";  /*error prompt*/           }        
+                            if (returnCode == "InvalidUserNamePassword"){
+                                return "901";  /*error prompt*/           }
+                            if (returnCode == "BadConnection"){
+                                return "901";  /*error prompt*/           }
+                            if (returnCode == "FRANCHISOR"){
+                                return "100";  /*Franchisor Main"*/       }        
+                            if (returnCode == "MANAGER"){
+                                return "200";  /*error prompt*/           }
+                            if (returnCode == "EMPLOYEE"){
+                                return "220";    /*error prompt*/         } 
+                            if (returnCode == "CUSTOMER"){
+                                return "300";    /*error prompt*/         }     
+            
             case "VIEWALL": 
                 
             case "VIEWITEM":

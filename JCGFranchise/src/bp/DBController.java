@@ -18,7 +18,7 @@ public class DBController {
     
     //CONSTRUCTOR
     //default
-    public DBController(){}
+    protected DBController(){}
     
     
     //UTILITIES
@@ -30,8 +30,15 @@ public class DBController {
         //DBSwitch
         switch(action){
             case "LOGIN":   try 
-                            {   JCGlIO temp = (JCGlIO)sysObject;
-                                dbase = new JCGDatabase(temp);                                
+                            {   
+                                //Attempt connection with JCGlIO object
+                                JCGlIO temp = (JCGlIO)sysObject;
+                                dbase = new JCGDatabase(temp); 
+                                //Attempt login 
+                                dbReturnCode = dbase.login(temp);
+                                String convert = Integer.toString(dbReturnCode);
+                                //Return user role
+                                return convert;                                
                             }
                             catch(InvalidUserException e){
                                 return e.toString();
@@ -39,19 +46,10 @@ public class DBController {
                             catch(BadConnectionException e){
                                 return e.toString();
                             }
-                                                  
-                            try 
-                            {   JCGlIO temp = (JCGlIO)sysObject;
-                                dbReturnCode = dbase.login(temp);
-                                String convert = Integer.toString(dbReturnCode);
-                                return convert;
-                            }
-                             catch(NewUserException e){
+                            catch(NewUserException e){
                                 return e.toString();
                             }   
-                             catch(BadConnectionException e){
-                                return e.toString();
-                            }                
+                         
                      
             default:        return "0";
             

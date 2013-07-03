@@ -21,7 +21,6 @@ public class JCGlIO {
         return u;
     }
 
-    
     public void setU(String u) {
         this.u = u;
     }
