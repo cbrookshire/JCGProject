@@ -17,6 +17,7 @@ public class JCGSystem {
         
        String dbCode;
        dbCode = dControl.dbRouter(sysObject, action);
+       
        return dbCode;
         
     
