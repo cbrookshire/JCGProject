@@ -13,9 +13,9 @@ public class JCGSystem {
     public JCGSystem(){}
     
     
-    public int Authentication(Object sysObject, String action){
+    public String Authentication(Object sysObject, String action){
         
-        int dbCode;
+        String dbCode;
         dbCode = dControl.dbRouter(sysObject, action);
         return dbCode;
         

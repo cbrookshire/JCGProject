@@ -18,19 +18,19 @@ public class UIController {
     public UIController(){}
     
     //UTILITIES
-    public int UIRouter (Object UIObject, String action){
+    public String UIRouter (Object UIObject, String action){
         
-        int rCode = 0;
+        String rCode;
         
         //call appropriate BP method
         switch(action){
             case "LOGIN":   rCode = jcgSys.Authentication(UIObject, action);
                             return rCode;
                 
-            default:        return 0;
+            default:        return "-1";
         }
 }
-    
+    //singleton method for UIController class
     public static UIController getInstance(){            
         if(uicInstance == null)
         {    uicInstance = new UIController();}

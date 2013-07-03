@@ -7,43 +7,45 @@
  */
 package bp;
 import db.*;
+import JCGExceptions.*;
 
 public class DBController {
     
-    private String dbAction;
+    //attributes
     private JCGDatabase dbase;
-    int DBReturnCode;
-        
+    private static DBController dbcInstance;
+         
     
     //CONSTRUCTOR
     //default
-    public DBController(){    
-        dbAction = "";
-       
-    }
+    public DBController(){}
     
-    
-    //SETS AND GETS
-    public void setUiAction(String dbAction){
-    
-        this.dbAction = dbAction;
-    }
-    
-    public String getdBAction(){
-    
-        return dbAction;
-    }
     
     //UTILITIES
-    public int dbRouter (Object sysObject, String action){
+    public String dbRouter (Object sysObject, String action){
         
-      
-       switch(action){
-            case "LOGIN":   DBReturnCode = 
-                            dbase.JCGDatabase(sysObject);
-                            return DBReturnCode;         
-                
-            default:        return 0;
+        String dbReturnCode;
+        
+        //DBSwitch
+        switch(action){
+            case "LOGIN":  try{
+                            JCGlIO temp = (JCGlIO)sysObject;
+                            dbase = new JCGDatabase(temp);
+                            dbReturnCode = dbase.login(temp);
+                            return dbReturnCode;
+                            }
+                            catch(InvalidUserException e){
+                                return e.toString();
+                            }
+                            catch(BadConnectionException e)
+                            {   return e.toString();
+                            }
+                            catch(NewUserException e)
+                            {   return e.toString();
+                            }
+                                            
+                     
+            default:        return "0";
             
               
        
@@ -52,4 +54,11 @@ public class DBController {
     
     
 }
+    
+    //singleton method for UIController class
+    public static DBController getInstance(){            
+        if(dbcInstance == null)
+        {    dbcInstance = new DBController();}
+        return dbcInstance;
+       }
 }
