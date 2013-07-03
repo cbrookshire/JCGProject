@@ -63,14 +63,14 @@ public class JCGDatabase {
  * @param username
   * @return integer for employee type or 55 for new password screen 
  ******************************************************************************/
-    public int login(String username) 
+    public int login(JCGlIO jcgLio) 
             throws NewUserException, BadConnectionException
     {
-        if(getLoginStatus(username) == 0)
+        if(getLoginStatus(jcgLio.getU()) == 0)
             throw(new NewUserException("Please create new password"));
-        else if(getLoginStatus(username) != 1 || getLoginStatus(username) != 0)
+        else if(getLoginStatus(jcgLio.getU()) != 1 || getLoginStatus(jcgLio.getU()) != 0)
             throw(new BadConnectionException("Connection Failed"));
-        return getEmpType(username);    
+        return getEmpType(jcgLio.getU());    
    }
      
 /******************************************************************************
