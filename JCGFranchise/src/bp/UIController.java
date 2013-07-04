@@ -56,11 +56,12 @@ public class UIController {
         }
 }
     //singleton method for UIController class
-    public static UIController getInstance(){            
+    public static UIController getInstance()
+    {            
         if(uicInstance == null)
-        {    uicInstance = new UIController();}
+            uicInstance = new UIController();
         return uicInstance;
-       }
+    }
 }
     
     

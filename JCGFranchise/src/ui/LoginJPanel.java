@@ -38,8 +38,8 @@ public class LoginJPanel extends javax.swing.JPanel {
         BaseJFrame.getInstance().setScreen(code);
         /*
         JOptionPane.showMessageDialog(BaseJFrame.getInstance(),
-            "I love having sex with you.  <3",
-            "Opps",
+            "Body",
+            "title",
             JOptionPane.WARNING_MESSAGE);
         */
         
