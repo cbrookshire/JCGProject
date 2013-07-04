@@ -30,10 +30,11 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     public void verifyLogin()
     {
-        JCGlIO r = new JCGlIO();
-        r.setU(txtLoginName.getText());
-        r.setP(txtPassword.getText());
-        String code = UIController.getInstance().UIRouter(r, "LOGIN");
+        
+        
+        String code = UIController.getInstance().UIRouter(
+                    new JCGlIO(txtLoginName.getText(), txtPassword.getText(), null, null), 
+                    "LOGIN");
         BaseJFrame.getInstance().setScreen(code);
         /*
         JOptionPane.showMessageDialog(BaseJFrame.getInstance(),
