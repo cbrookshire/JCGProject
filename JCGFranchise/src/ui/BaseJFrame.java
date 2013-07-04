@@ -24,7 +24,7 @@ public class BaseJFrame extends JFrame {
         FlowLayout layout = new FlowLayout();
         this.setLayout(layout);
         this.setSize(1000, 800);
-        setScreen("000");
+        //setScreen("000");
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -180,9 +180,9 @@ public class BaseJFrame extends JFrame {
            
            //Error prompts
            case "900": //Unable to login
-               setContent(new errorJPanel("Unable to login.", "101"), "Error!");  //call the error and return to login
+               setContent(new errorJPanel("Unable to login.", "001"), "Error!");  //call the error and return to login
                break;
-           case "901": //Unable to login
+           case "901": //Unable to register
                setContent(new errorJPanel("Unable to create account.", "002"), "Error!");  //call the error code and return to registration
                break;
         }
