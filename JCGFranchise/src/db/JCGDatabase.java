@@ -121,22 +121,22 @@ public class JCGDatabase {
   * @param password
   * @returns 1 for success or SQL error code. 
   *****************************************************************************/    
-    int updatePassword(String username, String password) 
+    int updatePassword(JCGlIO jcgLio) 
             throws InvalidUserException, BadConnectionException 
     {
         try {
-            update_password.setString(1, username);
-            update_password.setString(2, password);
+            update_password.setString(1, jcgLio.getU());
+            update_password.setString(2, jcgLio.getP());
             update_password.execute();
-            code = updateLogStatus(username);
+            code = updateLogStatus(jcgLio.getU());
             return code;
         }
         catch(SQLException sqlE)
         {
             if(sqlE.getErrorCode() == 1044 || sqlE.getErrorCode() == 1045)
-                throw(new InvalidUserException("Invalid Username or Password"));
+                throw(new InvalidUserException("InvalidUserNamePassword"));
             else
-                throw(new BadConnectionException("Connection Failed"));
+                throw(new BadConnectionException("BadConnection"));
         }
     }
     
