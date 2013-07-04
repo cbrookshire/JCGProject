@@ -21,7 +21,7 @@ public class FranchisorOwnerSession {
         employees = new ArrayList();
     }
     
-    //
+    //SETS and GETS
     
     
 }

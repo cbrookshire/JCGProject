@@ -41,13 +41,13 @@ public class DBController {
                                 return convert;                                
                             }
                             catch(InvalidUserException e){
-                                return e.toString();
+                                return e.getMessage();
                             }
                             catch(BadConnectionException e){
-                                return e.toString();
+                                return e.getMessage();
                             }
                             catch(NewUserException e){
-                                return e.toString();
+                                return e.getMessage();
                             }  
 
             case "UPDATE":             
@@ -59,7 +59,7 @@ public class DBController {
                                 dbase.logOff();                                
                             }  
                             catch (Exception e){
-                                return e.toString();
+                                return e.getMessage();
                             }
                 
             default:        return "0";
