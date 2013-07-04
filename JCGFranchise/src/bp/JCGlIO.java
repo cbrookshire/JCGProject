@@ -15,6 +15,15 @@ public class JCGlIO {
     private String fN;
     private String eN;
 
+    //CONSTRUCTOR
+    //4 arg
+    public JCGlIO(String u, String p, String fN, String eN) {
+        this.u = u;
+        this.p = p;
+        this.fN = fN;
+        this.eN = eN;
+    }
+    
     //SETS and GETS
     //attrib 1
     public String getU() {
