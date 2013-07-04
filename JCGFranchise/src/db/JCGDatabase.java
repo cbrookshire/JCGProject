@@ -52,9 +52,9 @@ public class JCGDatabase {
             }
         catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1044 || sqlE.getErrorCode() == 1045)
-                throw(new InvalidUserException("Invalid Username or Password"));
+                throw(new InvalidUserException("InvalidUserNamePassword"));
             else
-                throw(new BadConnectionException("Connection Failed"));
+                throw(new BadConnectionException("BadConnection"));
         }
     }
     
@@ -67,9 +67,9 @@ public class JCGDatabase {
             throws NewUserException, BadConnectionException
     {
         if(getLoginStatus(jcgLio.getU()) == 0)
-            throw(new NewUserException("Please create new password"));
+            throw(new NewUserException("UserNotFound"));
         else if(getLoginStatus(jcgLio.getU()) != 1 || getLoginStatus(jcgLio.getU()) != 0)
-            throw(new BadConnectionException("Connection Failed"));
+            throw(new BadConnectionException("BadConnection"));
         return getEmpType(jcgLio.getU());    
    }
      
