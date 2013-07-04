@@ -18,7 +18,7 @@ public class DBController {
     
     //CONSTRUCTOR
     //default
-    protected DBController(){}
+    protected DBController(){ }
     
     
     //UTILITIES
@@ -29,8 +29,9 @@ public class DBController {
         //DBSwitch
         switch(action){
             
-            case "LOGIN":   try {   
-                                //Attempt connection with JCGlIO object
+            case "LOGIN":   
+                        try {   
+                                //Cast object and attempt connection
                                 JCGlIO temp = (JCGlIO)sysObject;
                                 dbase = new JCGDatabase(temp); 
                                 //Attempt login 
@@ -49,10 +50,21 @@ public class DBController {
                                 return e.getMessage();
                             }  
 
-            case "UPDATE":             
-            
-                
-                
+            case "UPDATEPASSWORD":  
+                            try{
+                                //Cast object and attempt update
+                                JCGlIO temp = (JCGlIO)sysObject;
+                                dbReturnCode = dbase.updatePassword(temp);
+                                String convert = Integer.toString(dbReturnCode);
+                                //return status
+                                return convert;
+                            }
+                            catch(InvalidUserException e){
+                                return e.getMessage();
+                            }
+                            catch(BadConnectionException e){
+                                return e.getMessage();
+                            }                         
                 
             case "LOGOUT":  try{
                                 dbase.logOff();                                
@@ -61,15 +73,10 @@ public class DBController {
                                 return e.getMessage();
                             }
                 
-            default:        return "-2";
-            
-              
+            default:        return "-2";             
        
-       }
-    
-    
-    
-}
+       }//end DB Switch
+    }//end DBRouter method
     
     //singleton method for UIController class
     public static DBController getInstance(){            
