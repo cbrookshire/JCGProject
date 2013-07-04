@@ -18,7 +18,7 @@ public class DBController {
     
     //CONSTRUCTOR
     //default
-    public DBController(){}
+    protected DBController(){}
     
     
     //UTILITIES
@@ -29,9 +29,16 @@ public class DBController {
                 
         //DBSwitch
         switch(action){
-            case "LOGIN":   try 
-                            {   JCGlIO temp = (JCGlIO)sysObject;
-                                dbase = new JCGDatabase(temp);                                
+            
+            case "LOGIN":   try {   
+                                //Attempt connection with JCGlIO object
+                                JCGlIO temp = (JCGlIO)sysObject;
+                                dbase = new JCGDatabase(temp); 
+                                //Attempt login 
+                                dbReturnCode = dbase.login(temp);
+                                String convert = Integer.toString(dbReturnCode);
+                                //Return user role
+                                return convert;                                
                             }
                             catch(InvalidUserException e){
                                 return e.toString();
@@ -39,20 +46,22 @@ public class DBController {
                             catch(BadConnectionException e){
                                 return e.toString();
                             }
-                                                  
-                            try 
-                            {   JCGlIO temp = (JCGlIO)sysObject;
-                                dbReturnCode = dbase.login(temp);
-                                String convert = Integer.toString(dbReturnCode);
-                                return convert;
+                            catch(NewUserException e){
+                                return e.toString();
+                            }  
+
+            case "UPDATE":             
+            
+                
+                
+                
+            case "LOGOUT":  try{
+                                dbase.logOff();                                
+                            }  
+                            catch (Exception e){
+                                return e.toString();
                             }
-                             catch(NewUserException e){
-                                return e.toString();
-                            }   
-                             catch(BadConnectionException e){
-                                return e.toString();
-                            }                
-                     
+                
             default:        return "0";
             
               
