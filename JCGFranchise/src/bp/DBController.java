@@ -24,9 +24,8 @@ public class DBController {
     //UTILITIES
     public String dbRouter (Object sysObject, String action){
         
-        int dbReturnCode;
-        
-                
+        int dbReturnCode;        
+         
         //DBSwitch
         switch(action){
             
@@ -62,7 +61,7 @@ public class DBController {
                                 return e.getMessage();
                             }
                 
-            default:        return "0";
+            default:        return "-2";
             
               
        

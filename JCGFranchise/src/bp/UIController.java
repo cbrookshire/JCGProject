@@ -29,20 +29,20 @@ public class UIController {
         //call appropriate BP method
         switch(action){
             case "LOGIN":   returnCode = jcgSys.Authentication(UIObject, action);
-                            if (returnCode == "UserNotFound"){
+                            if ("UserNotFound".equals(returnCode)){
                                 return "900";  /*error prompt*/           }        
-                            if (returnCode == "InvalidUserNamePassword"){
+                            if ("InvalidUserNamePassword".equals(returnCode)){
                                 return "901";  /*error prompt*/           }
-                            if (returnCode == "BadConnection"){
+                            if ("BadConnection".equals(returnCode)){
                                 return "901";  /*error prompt*/           }
-                            if (returnCode == "FRANCHISOR"){
-                                return "100";  /*Franchisor Main"*/       }        
-                            if (returnCode == "MANAGER"){
-                                return "200";  /*error prompt*/           }
-                            if (returnCode == "EMPLOYEE"){
-                                return "220";    /*error prompt*/         } 
-                            if (returnCode == "CUSTOMER"){
-                                return "300";    /*error prompt*/         }     
+                            if ("FRANCHISOR".equals(returnCode)){
+                                return "100";  /*Franchisor Main*/        }        
+                            if ("MANAGER".equals(returnCode)){
+                                return "200";  /*Manager Main*/           }
+                            if ("EMPLOYEE".equals(returnCode)){
+                                return "220";   /*Employee Main*/         } 
+                            if ("CUSTOMER".equals(returnCode)){
+                                return "300";   /*Customer Main*/         }     
             
             case "VIEWALL": 
                 
