@@ -28,8 +28,13 @@ public class LoginJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public boolean verifyLogin()
+    public void verifyLogin()
     {
+        JCGlIO r = new JCGlIO();
+        r.setU(txtLoginName.getText());
+        r.setP(txtPassword.getText());
+        String code = UIController.getInstance().UIRouter(r, "LOGIN");
+        BaseJFrame.getInstance().setScreen(code);
         /*
         JOptionPane.showMessageDialog(BaseJFrame.getInstance(),
             "I love having sex with you.  <3",
@@ -37,7 +42,7 @@ public class LoginJPanel extends javax.swing.JPanel {
             JOptionPane.WARNING_MESSAGE);
         */
         
-        return true;
+        
     }
     
     public void goToMainPage()
@@ -168,10 +173,7 @@ public class LoginJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if(verifyLogin() == true)
-        {
-            goToMainPage();
-        }
+        verifyLogin();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
