@@ -33,8 +33,9 @@ public class LoginJPanel extends javax.swing.JPanel {
         
         
         String code = UIController.getInstance().UIRouter(
-                    new JCGlIO(txtLoginName.getText(), txtPassword.getText(), null, null), 
+                    new JCGlIO(txtLoginName.getText(), txtPassword.getPassword().toString(), "", ""), 
                     "LOGIN");
+        System.out.println(code);
         BaseJFrame.getInstance().setScreen(code);
         /*
         JOptionPane.showMessageDialog(BaseJFrame.getInstance(),

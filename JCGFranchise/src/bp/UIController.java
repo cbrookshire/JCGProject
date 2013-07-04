@@ -16,7 +16,10 @@ public class UIController {
     
     //CONSTRUCTOR
     //default
-    protected UIController(){}
+    public UIController()
+    {
+        jcgSys = new JCGSystem();
+    }
     
     //UTILITIES
     public String UIRouter (Object UIObject, String action){

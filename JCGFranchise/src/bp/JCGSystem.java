@@ -17,7 +17,7 @@ public class JCGSystem {
     
     
     public JCGSystem(){
-        uControl = UIController.getInstance();
+        //uControl = UIController.getInstance();
         dControl = DBController.getInstance();
     }
     
