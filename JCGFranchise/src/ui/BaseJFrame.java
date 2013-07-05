@@ -24,7 +24,7 @@ public class BaseJFrame extends JFrame {
         FlowLayout layout = new FlowLayout();
         this.setLayout(layout);
         this.setSize(1000, 800);
-        //setScreen("000");
+        setScreen("000");
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -79,6 +79,7 @@ public class BaseJFrame extends JFrame {
             //Franchisor
             case "100":  //Franchisor main page
                 setContent(pane1, "Franchisor Main");
+                pane1.setContent(new FranchisorOverviewPanel());
                 break;
             case "101":    //Overview page
                 setContent(pane1, "Franchisor Main");
@@ -100,7 +101,7 @@ public class BaseJFrame extends JFrame {
            //Franchisee
            case "200": //Franchisee Main page
                 setContent(pane2, "Franchisee Main");
-                //pane2.setContent(new CreateFranchiseJPanel(0));
+                pane2.setContent(new CreateFranchiseJPanel(0));
                 break;
            case "201": //Reservation overview
                 setContent(pane2, "Franchisee Main");
