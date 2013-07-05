@@ -30,4 +30,17 @@ final class QStrings {
     // Maintenance
     public String insert_maintenance = "INSERT INTO Maintenance(ServiceNumber, "
             + "VehicleID, ServiceType, ServiceCost) VALUES(?,?,?,?)";
+    
+    // Employee
+    public String insert_employee = "INSERT INTO Employee(Fname, Surname,"
+            + " Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, "
+            + "Username) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+    
+    public String create_user = "CREATE USER ?@'localhost' IDENTIFIED BY ?";
+    
+    public String grant_temp = "grant all privileges on *.* to "
+            + "?@'localhost' with grant option";
+    
+    public String revoke_temp = "REVOKE ALL PRIVILEGES, GRANT OPTION"
+                    + "FROM ?@localhost'";
 }
