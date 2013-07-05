@@ -6,22 +6,63 @@
  */
 package bp;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FranchisorOwnerSession {
    
-    //create collection of objects
-    private ArrayList <Franchise> franchises;
-    private ArrayList <Employee> employees;
+    //local vars
+    private DBController dControl;
+    private UIController uControl;
     
     //CONSTRUCTOR
     public FranchisorOwnerSession(){        
-        //initialize ArrayList
-        franchises = new ArrayList();
-        employees = new ArrayList();
+        dControl = DBController.getInstance();
     }
     
-    //SETS and GETS
+    //UTILITIES
+    /*public List <Object> getItem(Object uiObject, String action){
+        
+        //local container
+        List <Object> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.dbSessionRouter(uiObject, action);
+        return result;
+    }//end GetItem method*/
+    
+    public String AddItem(Object uiObject, String action){
+        
+        //local vars
+        String dbCode;
+        String sysCode;
+        
+        //send to dbSystemRouter      
+        dbCode = dControl.dbSystemRouter(uiObject, action);
+        return dbCode;
+    }//end AddItem method
+     
+    public String DeleteItem(Object uiObject, String action){
+        
+        //local vars
+        String dbCode;
+        String sysCode;
+        
+        //send to dbSystemRouter      
+        dbCode = dControl.dbSystemRouter(uiObject, action);
+        return dbCode;
+    }//end DeleteItem method
+     
+    public String EditItem(Object uiObject, String action){
+        
+        //local vars
+        String dbCode;
+        String sysCode;
+        
+        //send to dbSystemRouter      
+        dbCode = dControl.dbSystemRouter(uiObject, action);
+        return dbCode;
+    }//end EditItem method
+}//end FranchiseOwnerSession class
     
     
-}
+

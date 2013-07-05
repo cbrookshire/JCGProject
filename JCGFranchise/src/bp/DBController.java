@@ -6,8 +6,10 @@
  * between UI and DB 
  */
 package bp;
-import db.*;
+
 import JCGExceptions.*;
+import db.*;
+import java.util.List;
 
 public class DBController {
     
@@ -22,8 +24,9 @@ public class DBController {
     
     
     //UTILITIES
-    public String dbRouter (Object sysObject, String action){
+    public String dbSystemRouter (Object sysObject, String action){
         
+        //local var
         int dbReturnCode;        
          
         //DBSwitch
@@ -72,12 +75,38 @@ public class DBController {
                             catch (Exception e){
                                 return e.getMessage();
                             }
+            
+            case "ADD":
                 
-            default:        return "-2";             
+            case "DELETE":
+                
+            case "EDIT":
+                          
+            default:        
+                            //default test String
+                            return "-2";             
        
        }//end DB Switch
     }//end DBRouter method
     
+    /*public List <Object> dbSessionRouter (Object sysObject, String action){
+    
+        //local container
+        List <Object> temp;
+        
+        //DB object switch
+        switch(action){
+            
+            case "VIEWALL":
+                
+            case "VIEWITEM":
+                
+            default:      return temp;
+                           
+                       
+        }//end switch    
+    }//end dbSessionRouter*/
+       
     //singleton method for UIController class
     public static DBController getInstance(){            
         if(dbcInstance == null)

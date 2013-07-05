@@ -18,7 +18,7 @@ public class UIController {
     //CONSTRUCTOR
     //default
     public UIController()    {
-        jcgSys = new JCGSystem();
+        jcgSys = JCGSystem.getInstance();
     }
     
     //UTILITIES
@@ -35,7 +35,7 @@ public class UIController {
                             if ("InvalidUserNamePassword".equals(returnCode)){
                                 return "901";  /*error prompt*/           }
                             if ("BadConnection".equals(returnCode)){
-                                return "902";  /*error prompt*/           }
+                                return "901";  /*error prompt*/           }
                             if ("FRANCHISOR".equals(returnCode)){
                                 return "100";  /*Franchisor Main*/        }        
                             if ("MANAGER".equals(returnCode)){
@@ -50,7 +50,7 @@ public class UIController {
                             if ("InvalidUserNamePassword".equals(returnCode)){
                                 return "901";  /*error prompt*/           }
                             if ("BadConnection".equals(returnCode)){
-                                return "902";  /*error prompt*/           }
+                                return "901";  /*error prompt*/           }
                             if ("OK".equals(returnCode)) {
                                 return "001";                             }                           
                      

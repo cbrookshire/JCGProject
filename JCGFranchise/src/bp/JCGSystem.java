@@ -28,7 +28,7 @@ public class JCGSystem {
        String dbCode;
        String sysCode;
        
-       dbCode = dControl.dbRouter(sysObject, action);
+       dbCode = dControl.dbSystemRouter(sysObject, action);
        
        switch (dbCode){
                         //Create session
@@ -56,7 +56,7 @@ public class JCGSystem {
        String sysCode;
        
        //send to DB Controller
-       dbCode = dControl.dbRouter(sysObject, action);
+       dbCode = dControl.dbSystemRouter(sysObject, action);
        if ("1".equals(dbCode)){
            sysCode = "OK";
            return sysCode;    }
