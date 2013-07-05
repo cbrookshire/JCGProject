@@ -5,6 +5,7 @@ package db;
 
 import JCGExceptions.BadConnectionException;
 import JCGExceptions.UnauthorizedUserException;
+import bp.Employee;
 import bp.Franchise;
 import bp.Vehicle;
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author taylor
+ * @authors Taylor Reighard and Miles Leavens-Russell
  */
 public class Queries {
     
@@ -139,7 +140,96 @@ public class Queries {
  *          All Queries for the Employee table                                *
  *          includes Create and Grant Queries                                 *
  ******************************************************************************/
+    /* 
+     
+     public void insertEmployee(Employee emp)
+            throws UnauthorizedUserException, BadConnectionException
+     {
+        String username;
+        username = generateEmpUsername(emp.getFirstName(), emp.getLastName(),emp.getPhone());
+        
+         try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.insert_employee);
+            pStmnt.setString(1, emp.getFirstName());
+            pStmnt.setString(2, emp.getLastName());
+            pStmnt.setString(3, emp.getAddress());
+            pStmnt.setString(4, emp.getCity());
+            pStmnt.setString(5, emp.getState());
+            pStmnt.setInt(6, emp.getZip());
+            pStmnt.setString(7, emp.getPhone());
+            pStmnt.setString(8, emp.getEmail());
+            pStmnt.setInt(9, emp.getEmpType());
+            pStmnt.setInt(10, emp.getFranchiseNumber());
+            pStmnt.setString(11, username);
+            pStmnt.executeUpdate();
+            
+            int code = createUser(username, username);
+            //if(type == 2 && < 100)
+            //    code = grantManagerRole(username);
+            //else if(type == 3 && < 100)
+            //    code = grantDriverRole(username);
+            
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+    }
+     */
     
+    private int createUser(String userID, String password) {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.create_user);
+            pStmnt.setString(1, userID);
+            pStmnt.setString(2, password);
+            pStmnt.execute();
+            return 1;
+        }
+        catch(SQLException sqlE) {
+            return sqlE.getErrorCode();
+        }
+    }
+     
+    private String generateEmpUsername(
+                String f_name, String l_name, String phone) {
+        return new StringBuilder()
+                   .append(f_name.charAt(0))
+                   .append(l_name.charAt(0))
+                   .append(phone.substring(phone.length()-4))
+                   .toString();       
+    }
+    
+    
+     
+    // Grants
+    
+    private int grantTempRole(String username) {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.grant_temp);
+            pStmnt.setString(1, username);
+            pStmnt.executeQuery();                    
+            return 1;
+        }
+        catch(SQLException sqlE) {
+            return sqlE.getErrorCode();
+        }
+    }
+    
+    private int revokeTempRole(String username) {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.revoke_temp);
+            pStmnt.setString(1, username);
+            pStmnt.executeQuery();
+            return 1;
+        }
+        catch(SQLException sqlE) {
+            return sqlE.getErrorCode();
+        }
+    }
+    
+    
+     
     
 /******************************************************************************
  *          All Queries for the Maintenance table                             *
