@@ -11,24 +11,25 @@ public class UIController {
     
    //attributes
     private JCGSystem jcgSys;
+    private FranchisorOwnerSession foSession;
     private static UIController uicInstance;
   
     
     //CONSTRUCTOR
     //default
-    public UIController()
-    {
-        jcgSys = new JCGSystem();
+    public UIController()    {
+        jcgSys = JCGSystem.getInstance();
     }
     
     //UTILITIES
     public String UIRouter (Object UIObject, String action){
         
-        String returnCode = "";
+        String returnCode;
                 
         //call appropriate BP method
         switch(action){
-            case "LOGIN":   returnCode = jcgSys.Authentication(UIObject, action);
+            case "LOGIN":   
+                            returnCode = jcgSys.Authentication(UIObject, action);
                             if ("UserNotFound".equals(returnCode)){
                                 return "900";  /*error prompt*/           }        
                             if ("InvalidUserNamePassword".equals(returnCode)){
@@ -44,6 +45,15 @@ public class UIController {
                             if ("CUSTOMER".equals(returnCode)){
                                 return "300";   /*Customer Main*/         }     
             
+            case "UPDATEPASSWORD": 
+                            returnCode = jcgSys.UpdatePassword(UIObject, action);
+                            if ("InvalidUserNamePassword".equals(returnCode)){
+                                return "901";  /*error prompt*/           }
+                            if ("BadConnection".equals(returnCode)){
+                                return "901";  /*error prompt*/           }
+                            if ("OK".equals(returnCode)) {
+                                return "001";                             }                           
+                     
             case "VIEWALL": 
                 
             case "VIEWITEM":
@@ -61,8 +71,9 @@ public class UIController {
     //singleton method for UIController class
     public static UIController getInstance()
     {            
-        if(uicInstance == null)
+        if(uicInstance == null) {
             uicInstance = new UIController();
+        }
         return uicInstance;
     }
 }

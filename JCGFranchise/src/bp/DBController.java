@@ -6,8 +6,10 @@
  * between UI and DB 
  */
 package bp;
-import db.*;
+
 import JCGExceptions.*;
+import db.*;
+import java.util.List;
 
 public class DBController {
     
@@ -18,19 +20,21 @@ public class DBController {
     
     //CONSTRUCTOR
     //default
-    protected DBController(){}
+    protected DBController(){ }
     
     
     //UTILITIES
-    public String dbRouter (Object sysObject, String action){
+    public String dbSystemRouter (Object sysObject, String action){
         
+        //local var
         int dbReturnCode;        
          
         //DBSwitch
         switch(action){
             
-            case "LOGIN":   try {   
-                                //Attempt connection with JCGlIO object
+            case "LOGIN":   
+                        try {   
+                                //Cast object and attempt connection
                                 JCGlIO temp = (JCGlIO)sysObject;
                                 dbase = new JCGDatabase(temp); 
                                 //Attempt login 
@@ -49,10 +53,21 @@ public class DBController {
                                 return e.getMessage();
                             }  
 
-            case "UPDATE":             
-            
-                
-                
+            case "UPDATEPASSWORD":  
+                            try{
+                                //Cast object and attempt update
+                                JCGlIO temp = (JCGlIO)sysObject;
+                                dbReturnCode = dbase.updatePassword(temp);
+                                String convert = Integer.toString(dbReturnCode);
+                                //return status
+                                return convert;
+                            }
+                            catch(InvalidUserException e){
+                                return e.getMessage();
+                            }
+                            catch(BadConnectionException e){
+                                return e.getMessage();
+                            }                         
                 
             case "LOGOUT":  try{
                                 dbase.logOff();                                
@@ -60,17 +75,38 @@ public class DBController {
                             catch (Exception e){
                                 return e.getMessage();
                             }
-                
-            default:        return "-2";
             
-              
+            case "ADD":
+                
+            case "DELETE":
+                
+            case "EDIT":
+                          
+            default:        
+                            //default test String
+                            return "-2";             
        
-       }
+       }//end DB Switch
+    }//end DBRouter method
     
+    /*public List <Object> dbSessionRouter (Object sysObject, String action){
     
-    
-}
-    
+        //local container
+        List <Object> temp;
+        
+        //DB object switch
+        switch(action){
+            
+            case "VIEWALL":
+                
+            case "VIEWITEM":
+                
+            default:      return temp;
+                           
+                       
+        }//end switch    
+    }//end dbSessionRouter*/
+       
     //singleton method for UIController class
     public static DBController getInstance(){            
         if(dbcInstance == null)
