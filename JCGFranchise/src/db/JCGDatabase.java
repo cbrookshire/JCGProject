@@ -121,7 +121,7 @@ public class JCGDatabase {
   * @param password
   * @returns 1 for success or SQL error code. 
   *****************************************************************************/    
-    int updatePassword(JCGlIO jcgLio) 
+    public int updatePassword(JCGlIO jcgLio) 
             throws InvalidUserException, BadConnectionException 
     {
         try {
