@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
+/**a
  *
  * @authors Taylor Reighard and Miles Leavens-Russell
  */
@@ -297,19 +297,30 @@ public class Queries {
         }
     }
     
-    private int grantDriverRole(String userID) {
+    private int grantDriverRole(String username) {
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.grant_driver);
-            pStmnt.setString(1, userID);
+            pStmnt.setString(1, username);
             pStmnt.executeQuery();
             return 1;
         }catch(SQLException sqlE) {
             return sqlE.getErrorCode();
         }
-        
     }
-    */
-     
+    
+    private int grantOwnerRole(String username) {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.grant_owner);
+            for(int i = 1; i <= 4; i++) {
+                pStmnt.setString(i, username);
+            }
+            pStmnt.executeQuery();
+            return 1;
+        }catch(SQLException sqlE) {
+            return sqlE.getErrorCode();
+        }
+    }
+    */ 
     
 /******************************************************************************
  *          All Queries for the Maintenance table                             *
@@ -350,6 +361,53 @@ public class Queries {
            pStmnt.executeQuery();
         }
         catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+    }
+    */
+/******************************************************************************
+ *          All Queries for the Airport table                                 *
+ ******************************************************************************/
+    /*
+    public int insertAirport(Airport air) throws UnauthorizedUserException,
+            DoubleEntryException, BadConnectionException {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.insert_airport);
+            pStmnt.setString(1, air.getAirportName);
+            pStmnt.setString(2, air.getAddress);
+            pStmnt.setString(3, air.getCity);
+            pStmnt.setString(4, air.getState);
+            pStmnt.setInt(5, air.getZip);
+            pStmnt.executeQuery();
+            return 1;
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+    }
+    
+    public int updateAirport(Airport air) throws UnauthorizedUserException,
+            DoubleEntryException, BadConnectionException {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.update_airport);
+            pStmnt.setString(1, air.getAirportName);
+            pStmnt.setString(2, air.getAddress);
+            pStmnt.setString(3, air.getCity);
+            pStmnt.setString(4, air.getState);
+            pStmnt.setInt(5, air.getZip);
+            pStmnt.setInt(6, air.getAirportID);
+            pStmnt.executeQuery();
+            return 1;
+        }catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1142)
                 throw(new UnauthorizedUserException("AccessDenied"));
             else if(sqlE.getErrorCode() == 1062)
