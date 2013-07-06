@@ -63,9 +63,20 @@ final class QStrings {
     public String grant_driver = "GRANT SELECT ON JCGroup.Customer to ?@'localhost'";
                                  //add in grant for reservation
     
+    public String grant_owner = "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Airport TO ?@'localhost' "
+                              + "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Franchise TO ?@'localhost' "
+                              + "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Employee TO ?@'localhost' "
+                              + "GRANT SELECT, UPDATE ON JCGroup.Membership TO ?@'localhost'";
+    
     public String get_username = "SELECT Username FROM Employee "
                     + "WHERE Employee.EmpType = ?";
     
     public String update_membership = "UPDATE Membership SET Discount = ? "
             + "WHERE MemberID = ?";
+    
+    public String insert_airport = "INSERT INTO Airport(AirportName, Address, City, State, Zip) "
+            + "VALUES (?, ?, ?, ?, ?)";
+    
+    public String update_airport = "UPDATE Airport SET AirportName = ?, Address = ?, "
+            + "City = ?, State = ? Zip = ? WHERE AirportID = ?";
 }
