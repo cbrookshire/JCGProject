@@ -31,6 +31,9 @@ final class QStrings {
     public String insert_maintenance = "INSERT INTO Maintenance(ServiceNumber, "
             + "VehicleID, ServiceType, ServiceCost) VALUES(?,?,?,?)";
     
+    public String update_maintenance = "UPDATE Maintenance SET VehicleID = ?, "
+            + "ServiceType = ?, ServiceCost = ? WHERE ServiceNumber = ?";
+    
     // Employee
     public String insert_employee = "INSERT INTO Employee(Fname, Surname,"
             + " Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, "
@@ -43,4 +46,26 @@ final class QStrings {
     
     public String revoke_temp = "REVOKE ALL PRIVILEGES, GRANT OPTION"
                     + "FROM ?@localhost'";
+    
+    public String grant_manager = "GRANT SELECT ON JCGroup.Airport to ?@'localhost' " +
+                              "GRANT SELECT ON JCGroup.Franchise TO ?@'localhost' " +
+                              "GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Vehicle TO ?@'localhost' " +
+                              "GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Maintanence TO ?@'localhost' " +
+                              "GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Employee TO ?@'localhost'" +
+                              "GRANT SELECT, UPDATE, DELETE ON JCGroup.Customer TO ?@'localhost' " +
+                              "GRANT SELECT ON JCGroup.Customer TO ?@'localhost' WITH GRANT OPTION " +
+                              "GRANT SELECT ON JCGroup.Membership TO ?@'localhost' " +
+                              //"GRANT SELECT, UPDATE ON JCGroup.Reservation TO ?@'localhost' WITH GRANT OPTION " +
+                              //"GRANT INSERT, UPDATE ON JCGroup.Reservation TO ?@'localhost' " +
+                              "GRANT CREATE USER ON *.* to ?@'localhost' WITH GRANT OPTION " +
+                              "FLUSH PRIVILEGES";
+    
+    public String grant_driver = "GRANT SELECT ON JCGroup.Customer to ?@'localhost'";
+                                 //add in grant for reservation
+    
+    public String get_username = "SELECT Username FROM Employee "
+                    + "WHERE Employee.EmpType = ?";
+    
+    public String update_membership = "UPDATE Membership SET Discount = ? "
+            + "WHERE MemberID = ?";
 }
