@@ -12,7 +12,10 @@ import bp.Vehicle;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**a
  *
@@ -89,6 +92,152 @@ public class Queries {
         }
     }
     */
+    
+    /*
+     //GET: List All Franchises
+    public static List<Franchise> GetAllFranchises()
+    {
+        /* Variable Section Start */
+            /* Database and Query Bullshit * /
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM franchise";
+
+            /* Return Parameter * /
+            List<Franchise> BPList = new ArrayList<Franchise>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START * /
+            
+            try
+            {
+            /* Preparing Statment Section Start * /                
+                statment = con.prepareStatement(statString);
+                //statment.setString();
+            /* Preparing Statment Section Stop * /
+            /* Query Section Start * /
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start * /
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start * /
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Franchise temp = new Franchise();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setAddress(results.getString("Address"));
+                    temp.setAirport(results.getString("AirportID"));
+                    temp.setCity(results.getString("City"));
+                    temp.setEmail(results.getString("Email"));
+                    temp.setFranchiseID(results.getString("FranchiseNumber"));
+                    temp.setPhone(results.getString("Phone"));
+                    temp.setState(results.getString("State"));
+                    temp.setZip(results.getString("Zip"));
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop * /
+            }
+            catch(SQLException e)
+            {
+                e.printStackTrace();
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start * / 
+            return BPList;
+        /* Return to Buisness Section Start * /
+
+    }
+    
+    //GET: List One Franchise
+    public static List<Franchise> GetOneFranchise(int FranID)
+    {
+        /* Variable Section Start */
+            /* Database and Query Bullshit * /
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `franchise` WHERE 'FranchiseNumber' = ?";
+
+            /* Return Parameter * /
+            List<Franchise> BPList = new ArrayList<Franchise>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START * /
+            
+            try
+            {
+            /* Preparing Statment Section Start * /                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, FranID);
+            /* Preparing Statment Section Stop * /
+            /* Query Section Start * /
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start* /
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start * /
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Franchise temp = new Franchise();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setAddress(results.getString("Address"));
+                    temp.setAirport(results.getString("AirportID"));
+                    temp.setCity(results.getString("City"));
+                    temp.setEmail(results.getString("Email"));
+                    temp.setFranchiseID(results.getString("FranchiseNumber"));
+                    temp.setPhone(results.getString("Phone"));
+                    temp.setState(results.getString("State"));
+                    temp.setZip(results.getString("Zip"));
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop * /
+            }
+            catch(SQLException e)
+            {
+                e.printStackTrace();
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start * / 
+            return BPList;
+        /* Return to Buisness Section Start * /
+
+    }
+     */
 /******************************************************************************
  *          All Queries for the Membership table                             *
  ******************************************************************************/
