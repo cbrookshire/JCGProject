@@ -69,14 +69,15 @@ public class FranchisorJPanel extends javax.swing.JPanel {
           if(jComboBox1.getSelectedIndex() == 1)  //Employee
             {
 
+              //False for is not a driver
                 if (list.getSelectedIndex() == 0){
-                    setContent(new CreateEmployeeJPanel(0));
+                    setContent(new CreateEmployeeJPanel(0, false));  
                 }
                 if (list.getSelectedIndex() == 1){
-                    setContent(new CreateEmployeeJPanel(1));
+                    setContent(new CreateEmployeeJPanel(1, false));
                 }
                 if (list.getSelectedIndex() == 2){
-                    setContent(new CreateEmployeeJPanel(2));
+                    setContent(new CreateEmployeeJPanel(2, false));
                 }
                 if (list.getSelectedIndex() == 3){
                     setContent(new EmployeeOverviewPanel());

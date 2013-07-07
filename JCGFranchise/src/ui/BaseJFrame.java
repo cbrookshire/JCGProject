@@ -138,15 +138,15 @@ public class BaseJFrame extends JFrame {
                 break;
            case "221": //Driver add
                 setContent(pane2, "Franchisee Main");
-                //pane2.setContent(new CreateDriversJPanel(0));
+                pane2.setContent(new CreateEmployeeJPanel(0, true));
                 break;
            case "222": //Driver edit
                 setContent(pane2, "Franchisee Main");
-                //pane2.setContent(new CreateDriversJPanel(1));
+                pane2.setContent(new CreateEmployeeJPanel(1, true));
                 break;
            case "223": //Driver delete
                 setContent(pane2, "Franchisee Main");
-                //pane2.setContent(new CreateDriversJPanel(2));
+                pane2.setContent(new CreateEmployeeJPanel(2, true));
                 break;
            case "230": //Vehicles Main
                 setContent(pane2, "Franchisee Main");
@@ -184,7 +184,7 @@ public class BaseJFrame extends JFrame {
                setContent(new errorJPanel("Unable to login.", "001"), "Error!");  //call the error and return to login
                break;
            case "901": //Unable to register
-               setContent(new errorJPanel("Unable to create account.", "002"), "Error!");  //call the error code and return to registration
+               setContent(new errorJPanel("Unable to create account.", "001"), "Error!");  //call the error code and return to registration
                break;
         }
     }

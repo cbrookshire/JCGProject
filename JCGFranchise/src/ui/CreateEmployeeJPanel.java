@@ -14,12 +14,15 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
      * Creates new form CreateFranchise
      */
     private int mode;
+    private boolean isDriver;
     
-    public CreateEmployeeJPanel(int m) {
+    
+    public CreateEmployeeJPanel(int m, boolean isDriver) {
         mode = m;
+        this.isDriver = isDriver;
         initComponents();
         
-        if (mode ==0)
+        if (mode ==0) //Add mode
         {   
             listSelection.setEnabled(false);
         }
@@ -53,6 +56,11 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             newEmployeeType.setEnabled(false);
             newEmployeeNum.setEnabled(false);
             
+        }
+        
+        if(isDriver)
+        {
+            //change code here
         }
     }
 
