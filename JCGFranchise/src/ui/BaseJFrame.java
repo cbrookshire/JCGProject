@@ -186,6 +186,21 @@ public class BaseJFrame extends JFrame {
            case "901": //Unable to register
                setContent(new errorJPanel("Unable to create account.", "001"), "Error!");  //call the error code and return to registration
                break;
+           case "902": //Unable to connect
+               setContent(new errorJPanel("Bad connection.  Check your internet connection and try again.", "001"), "Error!");  //call the error code and return to registration
+               break;
+           case "903": //Access denied (Franchisee)
+               setContent(new errorJPanel("Access Denied.", "200"), "Error!");  
+               break;
+           case "904": //Access denied (Franchisor)
+               setContent(new errorJPanel("Access Denied.", "100"), "Error!");  
+               break;
+           case "905": //Access denied (Customer)
+               setContent(new errorJPanel("Access Denied.", "300"), "Error!");  
+               break;
+           case "906": //Access denied (Login)
+               setContent(new errorJPanel("Access Denied.", "001"), "Error!");  
+               break;
         }
     }
 }
