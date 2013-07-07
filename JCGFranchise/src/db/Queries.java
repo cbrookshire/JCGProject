@@ -4,22 +4,26 @@
 package db;
 
 import JCGExceptions.BadConnectionException;
+import JCGExceptions.DoubleEntryException;
 import JCGExceptions.UnauthorizedUserException;
 import bp.Employee;
 import bp.Franchise;
 import bp.Vehicle;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
+/**a
  *
  * @authors Taylor Reighard and Miles Leavens-Russell
  */
 public class Queries {
     
     private Connection con = null;
+    private ResultSet resultSet = null;
     private QStrings qs;
+    private int code;
     
     public Queries(Connection con) {
         
@@ -37,8 +41,8 @@ public class Queries {
  *          Selects, Deletes authored by Miles                                *
  ******************************************************************************/
     /*
-    public void updateFranchise(Franchise fran) 
-            throws UnauthorizedUserException, BadConnectionException {
+    public void updateFranchise(Franchise fran) throws UnauthorizedUserException,
+            BadConnectionException, DoubleEntryException {
         try
         {
             PreparedStatement pStmnt = con.prepareStatement(qs.update_fran);
@@ -55,13 +59,15 @@ public class Queries {
         catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1142)
                 throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
     }
     
-    public void insertFranchise(Franchise fran) 
-            throws UnauthorizedUserException, BadConnectionException {
+    public void insertFranchise(Franchise fran) throws UnauthorizedUserException,
+            BadConnectionException, DoubleEntryException {
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.insert_fran);
             pStmnt.setString(1, fran.getAddress());
@@ -76,6 +82,8 @@ public class Queries {
         } catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1142)
                 throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
@@ -84,14 +92,32 @@ public class Queries {
 /******************************************************************************
  *          All Queries for the Membership table                             *
  ******************************************************************************/
-    //public void updateMemeberShip()
+    
+    /*
+    public void updateMemeberShip(Membership mem) throws UnauthorizedUserException,
+            BadConnectionException, DoubleEntryException {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.update_membership);
+            pStmnt.setDouble(1, mem.getDiscount());
+            pStmnt.setString(1, mem.getMemberID());
+            pStmnt.executeUpdate();
+        } catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+    }
+    */
     
 /******************************************************************************
  *          All Queries for the Vehicle table                                 *
  ******************************************************************************/
     /*
-    public void insertVehicle(Vehicle car) 
-            throws UnauthorizedUserException, BadConnectionException {
+    public void insertVehicle(Vehicle car) throws UnauthorizedUserException,
+            BadConnectionException, DoubleEntryException {
         try
         {
             PreparedStatement pStmnt = con.prepareStatement(qs.insert_vehicle);
@@ -111,13 +137,15 @@ public class Queries {
         catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1142)
                 throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
     }
     
     public void updateVehicle(Vehicle car) 
-            throws UnauthorizedUserException, BadConnectionException {
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException {
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.update_vehicle);
             pStmnt.setInt(1, car.getMileage());
@@ -131,6 +159,8 @@ public class Queries {
         } catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1142)
                 throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
@@ -140,13 +170,12 @@ public class Queries {
  *          All Queries for the Employee table                                *
  *          includes Create and Grant Queries                                 *
  ******************************************************************************/
-    /* 
-     
-     public void insertEmployee(Employee emp)
-            throws UnauthorizedUserException, BadConnectionException
-     {
+    
+     /*
+     public void insertEmployee(Employee emp) throws UnauthorizedUserException,
+             BadConnectionException, DoubleEntryException {
         String username;
-        username = generateEmpUsername(emp.getFirstName(), emp.getLastName(),emp.getPhone());
+        username = generateEmpUsername(emp.getFirstName(), emp.getLastName(), emp.getPhone());
         
          try {
             PreparedStatement pStmnt = con.prepareStatement(qs.insert_employee);
@@ -163,21 +192,22 @@ public class Queries {
             pStmnt.setString(11, username);
             pStmnt.executeUpdate();
             
-            int code = createUser(username, username);
-            //if(type == 2 && < 100)
-            //    code = grantManagerRole(username);
-            //else if(type == 3 && < 100)
-            //    code = grantDriverRole(username);
-            
+            code = createUser(username, username);
+            if(emp.getEmpType() == 2 && emp.getEmpType() < 100) {
+                code = grantManagerRole(username);
+            }else if(emp.getEmpType() == 3 && emp.getEmpType() < 100) {
+                code = grantDriverRole(username);
+            }    
         }catch(SQLException sqlE) {
-            if(sqlE.getErrorCode() == 1142)
+            if(sqlE.getErrorCode() == 1142 || code == 1142)
                 throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
     }
-     */
-    
+       
     private int createUser(String userID, String password) {
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.create_user);
@@ -191,8 +221,7 @@ public class Queries {
         }
     }
      
-    private String generateEmpUsername(
-                String f_name, String l_name, String phone) {
+    private String generateEmpUsername(String f_name, String l_name, String phone) {
         return new StringBuilder()
                    .append(f_name.charAt(0))
                    .append(l_name.charAt(0))
@@ -200,10 +229,32 @@ public class Queries {
                    .toString();       
     }
     
-    
+    private String getEmpUsername(int type) throws SQLException{
+        try {
+            String temp = "";
+            PreparedStatement pStmnt = con.prepareStatement(qs.get_username);
+            pStmnt.setInt(1, type);
+            resultSet = pStmnt.executeQuery();
+            while(resultSet.next())
+            {
+                temp = resultSet.getString("Username");
+            }
+            return temp;
+        }
+        catch(SQLException sqlE) {
+            throw(new SQLException());
+        }
+        finally {
+            try {
+                resultSet.close();
+            }
+            catch(Exception E) {
+                
+            }
+        }
+    }
      
-    // Grants
-    
+    // Grants    
     private int grantTempRole(String username) {
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.grant_temp);
@@ -228,15 +279,55 @@ public class Queries {
         }
     }
     
+    private int grantManagerRole(String username) {
+        try
+        {
+            if(grantTempRole(getEmpUsername(1)) == 1) {
+                PreparedStatement pStmnt = con.prepareStatement(qs.grant_manager);
+                for(int i = 1; i <= 9; i++) {
+                    pStmnt.setString(i, username);
+                }
+                pStmnt.executeQuery();
+            
+                revokeTempRole(getEmpUsername(1));                
+            }
+            return 1;
+        }catch(SQLException sqlE) {
+            return sqlE.getErrorCode();
+        }
+    }
     
-     
+    private int grantDriverRole(String username) {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.grant_driver);
+            pStmnt.setString(1, username);
+            pStmnt.executeQuery();
+            return 1;
+        }catch(SQLException sqlE) {
+            return sqlE.getErrorCode();
+        }
+    }
+    
+    private int grantOwnerRole(String username) {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.grant_owner);
+            for(int i = 1; i <= 4; i++) {
+                pStmnt.setString(i, username);
+            }
+            pStmnt.executeQuery();
+            return 1;
+        }catch(SQLException sqlE) {
+            return sqlE.getErrorCode();
+        }
+    }
+    */ 
     
 /******************************************************************************
  *          All Queries for the Maintenance table                             *
  ******************************************************************************/
     /*
-    public void insertMaintenance(Maintenance fixit) 
-            throws UnauthorizedUserException, BadConnectionException {
+    public void insertMaintenance(Maintenance fixit) throws UnauthorizedUserException,
+            BadConnectionException, DoubleEntryException {
     
         try {
            PreparedStatement pStmnt = 
@@ -250,10 +341,80 @@ public class Queries {
         catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1142)
                 throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+    }
+    
+    public void updateMaintenance(Maintenance fixit) throws UnauthorizedUserException,
+            BadConnectionException, DoubleEntryException {
+    
+        try {
+           PreparedStatement pStmnt = 
+                   con.prepareStatement(qs.insert_maintenance);
+           pStmnt.setInt(1, fixit.getVehicleID());
+           pStmnt.setString(2, fixit.getServiceType());
+           pStmnt.setDouble(3, fixit.getServiceCost());
+           pStmnt.setString(4, fixit.getServiceNumber());
+           pStmnt.executeQuery();
+        }
+        catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
     }
     */
+/******************************************************************************
+ *          All Queries for the Airport table                                 *
+ ******************************************************************************/
+    /*
+    public int insertAirport(Airport air) throws UnauthorizedUserException,
+            DoubleEntryException, BadConnectionException {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.insert_airport);
+            pStmnt.setString(1, air.getAirportName);
+            pStmnt.setString(2, air.getAddress);
+            pStmnt.setString(3, air.getCity);
+            pStmnt.setString(4, air.getState);
+            pStmnt.setInt(5, air.getZip);
+            pStmnt.executeQuery();
+            return 1;
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+    }
     
-}
+    public int updateAirport(Airport air) throws UnauthorizedUserException,
+            DoubleEntryException, BadConnectionException {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.update_airport);
+            pStmnt.setString(1, air.getAirportName);
+            pStmnt.setString(2, air.getAddress);
+            pStmnt.setString(3, air.getCity);
+            pStmnt.setString(4, air.getState);
+            pStmnt.setInt(5, air.getZip);
+            pStmnt.setInt(6, air.getAirportID);
+            pStmnt.executeQuery();
+            return 1;
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+    }
+    */
+}// End Class Queries
