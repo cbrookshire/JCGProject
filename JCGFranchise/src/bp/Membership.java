@@ -1,8 +1,8 @@
 /* JCG Franchise Management System
- * CIST2391 Summer Session 2013 GTC
+ * CIST 2931 Summer Session 2013 GTC
  * Author: #Mahmoodur
- * Name: Customer
- * Description: Describes a customer 
+ * Name: Membership
+ * Description: Describes a membership 
  */
 package bp;
 
@@ -22,7 +22,7 @@ public class Membership {
 	minAmount = "";
    }
     
-   //3 args
+   //3 arguments
    public Membership (String memberID, String discount, String minAmount){
        
 	setMemberID(memberID);
