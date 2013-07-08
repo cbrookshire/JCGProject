@@ -15,6 +15,7 @@ public class DBController {
     
     //attributes
     private JCGDatabase dbase;
+    private Queries queryDB;
     private static DBController dbcInstance;
          
     
@@ -54,8 +55,8 @@ public class DBController {
                             }  
 
             case "UPDATEPASSWORD":  
-                            try{
-                                //Cast object and attempt update
+                            try
+                            {   //Cast object and attempt update
                                 JCGlIO temp = (JCGlIO)sysObject;
                                 dbReturnCode = dbase.updatePassword(temp);
                                 String convert = Integer.toString(dbReturnCode);
@@ -76,7 +77,17 @@ public class DBController {
                                 return e.getMessage();
                             }
             
-            case "ADD":
+            case "ADD":     /*try{
+                                if (sysObject instanceof Franchise)
+                                    queryDB.insertFranchise((Franchise)sysObject);
+                            }
+                             catch(UnauthorizedUserException e){
+                                return e.getMessage();
+                            }  
+                             catch(BadConnectionException e){
+                                return e.getMessage();
+                            }*/
+                
                 
             case "DELETE":
                 

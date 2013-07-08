@@ -54,8 +54,14 @@ public class Franchise {
        this.franchiseID = franchiseID;
    }
    
-   public String getFranchiseID (){
-       return franchiseID;
+   //overloaded set for DB - converts int to string and sets
+   public void setFranchiseID (int franchiseID){
+   
+       this.franchiseID = String.valueOf(franchiseID);
+   }
+   
+   public int getFranchiseID (){
+       return Integer.parseInt(franchiseID);
    }
    
    //attrib 2
@@ -86,12 +92,17 @@ public class Franchise {
    } 
    
    //attrib 5
-    public void setZip (String zip){       
+   public void setZip (String zip){       
        this.zip = zip;
    }
    
-   public String getZip (){
-       return zip;
+   //overloaded set for DB - converts int to string and sets 
+   public void setZip (int zip){       
+       this.zip = String.valueOf(zip);
+   }
+   
+   public int getZip (){
+       return Integer.parseInt(zip);
    } 
    
    //attrib 6

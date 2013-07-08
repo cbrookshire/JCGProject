@@ -83,46 +83,75 @@ public class Reservation {
         
     //SETS AND GETS
     //attrib 1
-    public String getReservationNumber() {
-        return reservationNumber;
-    }
-
     public void setReservationNumber(String reservationNumber) {
         this.reservationNumber = reservationNumber;
     }
     
-    //attrib 2
-    public String getFranchiseNumber() {
-        return franchiseNumber;
+    //overloaded set for DB - converts int to string and sets
+    public void setReservationNumber(int reservationNumber) {
+        this.reservationNumber = String.valueOf(reservationNumber);
+    }
+    
+    public String getReservationNumber() {
+        return reservationNumber;
     }
 
+    //attrib 2
     public void setFranchiseNumber(String franchiseNumber) {
         this.franchiseNumber = franchiseNumber;
     }
-    //attrib 3
-    public String getVehicleID() {
-        return vehicleID;
+   
+    //overloaded set for DB - converts int to string and sets
+    public void setFranchiseNumber(int franchiseNumber) {
+        this.franchiseNumber = String.valueOf(franchiseNumber);
+    }
+    
+    public int getFranchiseNumber() {
+        return Integer.parseInt(franchiseNumber);
     }
 
+    //attrib 3
     public void setVehicleID(String vehicleID) {
         this.vehicleID = vehicleID;
     }
-    //attrib 4
-    public String getCustomerID() {
-        return customerID;
+   
+    //overloaded set for DB - converts int to string and sets
+    public void setVehicleID(int vehicleID) {
+        this.vehicleID = String.valueOf(vehicleID);
     }
-
+    
+    public int getVehicleID() {
+        return Integer.parseInt(vehicleID);
+    }
+   
+    //attrib 4
     public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
-    //attrib 5
-    public String getPrice() {
-        return price;
+    
+    //overloaded set for DB - converts int to string and sets
+    public void setCustomerID(int customerID) {
+        this.customerID = String.valueOf(customerID);
     }
-   
+    
+    public int getCustomerID() {
+        return Integer.parseInt(customerID);
+    }
+
+    //attrib 5
     public void setPrice(String price) {
         this.price = price;
     }
+    
+    //overloaded set for DB - converts double to string and sets
+    public void setPrice(double price) {
+        this.price = String.valueOf(price);
+    }
+    
+    public double getPrice() {
+        return Double.parseDouble(price);
+    }  
+    
     //attrib 6
     public String getStatus() {
         return status;
@@ -140,13 +169,19 @@ public class Reservation {
         this.comment = comment;
     }
     //attrib 8
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
     public void setFlightNumber(String flightNumber) {
         this.flightNumber = flightNumber;
     }
+   
+    //overloaded set for DB - converts int to string and sets
+    public void setFlightNumber(int flightNumber) {
+        this.flightNumber = String.valueOf(flightNumber);
+    }
+    
+    public int getFlightNumber() {
+        return Integer.parseInt(flightNumber);
+    }    
+    
     //attrib 9
     public String getAirline() {
         return airline;
@@ -156,29 +191,47 @@ public class Reservation {
         this.airline = airline;
     }
     //attrib 10
-    public String getFlightTime() {
-        return flightTime;
-    }
-
     public void setFlightTime(String flightTime) {
         this.flightTime = flightTime;
     }
-    //attrib 11
-    public String getPickUpTime() {
-        return pickUpTime;
+    
+     //overloaded set for DB - converts int to string and sets
+    public void setFlightTime(double flightTime) {
+        this.flightTime = String.valueOf(flightTime);
+    }
+        
+    public double getFlightTime() {
+        return Double.parseDouble(flightTime);
     }
 
+    //attrib 11
     public void setPickUpTime(String pickUpTime) {
         this.pickUpTime = pickUpTime;
     }
-    //attrib 12
-    public String getDropOffTime() {
-        return dropOffTime;
+    
+    //overloaded set for DB - converts double to string and sets
+    public void setPickUpTime(double pickUpTime) {
+        this.pickUpTime = String.valueOf(pickUpTime);
     }
-
+    
+    public double getPickUpTime() {
+        return Double.parseDouble(pickUpTime);
+    }    
+    
+    //attrib 12
     public void setDropOffTime(String dropOffTime) {
         this.dropOffTime = dropOffTime;
     }
+    
+    //overloaded set for DB - converts double to string and sets
+    public void setDropOffTime(double dropOffTime) {
+        this.dropOffTime = String.valueOf(dropOffTime);
+    }
+    
+    public double getDropOffTime() {
+        return Double.parseDouble(dropOffTime);
+    }    
+    
     //attrib 13
     public String getDate() {
         return date;

@@ -20,11 +20,12 @@ public class Vehicle {
     private String condition;
     private String tablet;
     private String rate;
+    private String vIndex;
     
     //CONTRUCTORS
     //default
     public Vehicle(){
-    
+        vIndex = "";    
         franchiseNumber = "";
         vehicleID = "";
         vin = "";
@@ -42,7 +43,7 @@ public class Vehicle {
     public Vehicle(String franchiseNumber, String vehicleID,
         String vin, String make, String model, String year, 
         String mileage, String capacity, String condition, 
-        String tablet, String rate){
+        String tablet, String rate, String vIndex){
         
         setFranchiseNumber(franchiseNumber);
         setVehicleID(vehicleID);
@@ -54,7 +55,8 @@ public class Vehicle {
         setCapacity(capacity);
         setCondition(condition);
         setTablet(tablet);
-        setRate(rate);        
+        setRate(rate);  
+        setvIndex(vIndex);
     }
     
     //SETS AND GETS
@@ -72,8 +74,13 @@ public class Vehicle {
        this.vehicleID = vehicleID;
     }
     
-    public String getVehicleID(){
-        return vehicleID;
+    //overloaded set for DB - converts int to string and sets
+    public void setVehicleID(int vehicleID){
+       this.vehicleID = String.valueOf(vehicleID);
+    }
+    
+    public int getVehicleID(){
+        return Integer.parseInt(vehicleID);
     }
     
     //attrib 3
@@ -108,28 +115,42 @@ public class Vehicle {
        this.year = year;
     }
     
+    public void setYear(int year){
+       this.year = String.valueOf(year);
+    }
+    
     public String getYear(){
         return year;
     }
     
     //attrib 7
-    public String getMileage() {
-        return mileage;
-    }
-
     public void setMileage(String mileage) {
         this.mileage = mileage;
     }
     
-    //attrib 8
-    public String getCapacity() {
-        return capacity;
+    //overloaded set for DB - converts int to string and sets
+    public void setMileage(int mileage) {
+        this.mileage = String.valueOf(mileage);
     }
-
+    
+    public int getMileage() {
+        return Integer.parseInt(mileage);
+    }
+    
+    //attrib 8
     public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
     
+    //overloaded set for DB - converts int to string and sets
+    public void setCapacity(int capacity) {
+        this.capacity = String.valueOf(capacity);
+    }
+    
+    public int getCapacity() {
+        return Integer.parseInt(capacity);
+    }
+
     //attrib 9
     public String getCondition() {
         return condition;
@@ -140,22 +161,46 @@ public class Vehicle {
     }
     
     //attrib 10
-    public String getTablet() {
-        return tablet;
-    }
-
     public void setTablet(String tablet) {
         this.tablet = tablet;
     }
     
-    //attrib 11
-    public String getRate() {
-        return rate;
+    //overloaded set for DB - converts int to string and sets
+    public void setTablet(int tablet) {
+        this.tablet = String.valueOf(tablet);
+    }
+    public String getTablet() {
+        return tablet;
     }
 
+    //attrib 11
     public void setRate(String rate) {
         this.rate = rate;
     }
+    
+    //overloaded set for DB - converts int to string and sets
+    public void setRate(double rate) {
+        this.rate = String.valueOf(rate);
+    }
+    
+    public double getRate() {
+        return Double.parseDouble(rate);
+    }
+    
+    //attrib 12
+    public void setvIndex(String vIndex) {
+        this.vIndex = vIndex;
+    }
+    
+    //overloaded set for DB - converts int to string and sets
+    public void setvIndex(int vIndex) {
+        this.vIndex = String.valueOf(vIndex);
+    }
+    
+     public int getvIndex() {
+        return Integer.parseInt(vIndex);
+    }
+    
     
     //UTILITIES
     @Override
