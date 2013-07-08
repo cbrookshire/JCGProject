@@ -9,6 +9,7 @@ import JCGExceptions.UnauthorizedUserException;
 import bp.Customer;
 import bp.Employee;
 import bp.Franchise;
+import bp.Membership;
 import bp.Vehicle;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -335,7 +336,7 @@ public class Queries
  *          includes Create and Grant Queries                                 *
  ******************************************************************************/
     
-     /*
+     
      public void insertEmployee(Employee emp) throws UnauthorizedUserException,
              BadConnectionException, DoubleEntryException {
         String username;
@@ -484,7 +485,7 @@ public class Queries
             return sqlE.getErrorCode();
         }
     }
-    */ 
+     
     
          //GET: Get All Managers
     public ArrayList<Employee> AllManagers()
