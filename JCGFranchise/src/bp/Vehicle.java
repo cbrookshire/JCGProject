@@ -1,5 +1,5 @@
 /* JCG Franchise Management System
- * CIST2391 Summer Session 2013 GTC
+ * CIST2931 Summer Session 2013 GTC
  * Author: #Maurice
  * Name: Vehicle
  * Description: Describes a Vehicle 

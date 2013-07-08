@@ -6,6 +6,7 @@ package db;
 import JCGExceptions.BadConnectionException;
 import JCGExceptions.DoubleEntryException;
 import JCGExceptions.UnauthorizedUserException;
+import bp.Customer;
 import bp.Employee;
 import bp.Franchise;
 import bp.Vehicle;
@@ -21,20 +22,23 @@ import java.util.List;
  *
  * @authors Taylor Reighard and Miles Leavens-Russell
  */
-public class Queries {
+public class Queries
+{
     
     private Connection con = null;
     private ResultSet resultSet = null;
     private QStrings qs;
     private int code;
     
-    public Queries(Connection con) {
+    public Queries(Connection con)
+    {
         
         setConnection(con);
         
     }
     
-    private void setConnection(Connection con) {
+    private void setConnection(Connection con)
+    {
         this.con = con;
     }
       
@@ -93,30 +97,30 @@ public class Queries {
     }
     */
     
-    /*
-     //GET: List All Franchises
-    public static ArrayList<Franchise> GetAllFranchises()
+      //GET: List All Franchises
+    public ArrayList<Franchise> GetAllFranchises()
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
-            /* Database and Query Bullshit * /
+            /* Database and Query Bullshit */
             PreparedStatement statment = null;
             ResultSet results = null;
             String statString = "SELECT * FROM franchise";
 
-            /* Return Parameter * /
+            /* Return Parameter */
             ArrayList<Franchise> BPList = new ArrayList<Franchise>();
         /* Variable Section Stop */
         
         
-        /* TRY BLOCK START * /
+        /* TRY BLOCK START */
             
             try
             {
-            /* Preparing Statment Section Start * /                
+            /* Preparing Statment Section Start */                
                 statment = con.prepareStatement(statString);
                 //statment.setString();
-            /* Preparing Statment Section Stop * /
-            /* Query Section Start * /
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
                 results = statment.executeQuery();
                 
                 if(statment != null)
@@ -124,13 +128,13 @@ public class Queries {
                 
             /* Query Section Stop */
             
-            /* Metadata Section Start * /
+            /* Metadata Section Start */
                 ResultSetMetaData metaData = results.getMetaData();
                 int columns = metaData.getColumnCount();
                 int rows = results.getRow(); 
             /* Metadata Section Start*/
                 
-            /* List Prepare Section Start * /
+            /* List Prepare Section Start */
                 
                 
                 results.beforeFirst();
@@ -151,44 +155,50 @@ public class Queries {
                     
                     BPList.add(temp);
                 }
-            /* List Prepare Section Stop * /
+            /* List Prepare Section Stop */
             }
-            catch(SQLException e)
+            catch(SQLException sqlE)
             {
-                e.printStackTrace();
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
             }
         /* TRY BLOCK STOP*/
         
             
-        /* Return to Buisness Section Start * / 
+        /* Return to Buisness Section Start */ 
             return BPList;
-        /* Return to Buisness Section Start * /
+        /* Return to Buisness Section Start */
 
     }
     
     //GET: List One Franchise
-    public static ArrayList<Franchise> GetOneFranchise(int FranID)
+    public ArrayList<Franchise> GetOneFranchise(int FranID)
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
-            /* Database and Query Bullshit * /
+            /* Database and Query Bullshit */
             PreparedStatement statment = null;
             ResultSet results = null;
             String statString = "SELECT * FROM `franchise` WHERE 'FranchiseNumber' = ?";
 
-            /* Return Parameter * /
+            /* Return Parameter */
             ArrayList<Franchise> BPList = new ArrayList<Franchise>();
         /* Variable Section Stop */
         
         
-        /* TRY BLOCK START * /
+        /* TRY BLOCK START */
             
             try
             {
-            /* Preparing Statment Section Start * /                
+            /* Preparing Statment Section Start */                
                 statment = con.prepareStatement(statString);
                 statment.setInt(1, FranID);
-            /* Preparing Statment Section Stop * /
-            /* Query Section Start * /
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
                 results = statment.executeQuery();
                 
                 if(statment != null)
@@ -196,13 +206,13 @@ public class Queries {
                 
             /* Query Section Stop */
             
-            /* Metadata Section Start* /
+            /* Metadata Section Start */
                 ResultSetMetaData metaData = results.getMetaData();
                 int columns = metaData.getColumnCount();
                 int rows = results.getRow(); 
             /* Metadata Section Start*/
                 
-            /* List Prepare Section Start * /
+            /* List Prepare Section Start */
                 
                 
                 results.beforeFirst();
@@ -223,21 +233,26 @@ public class Queries {
                     
                     BPList.add(temp);
                 }
-            /* List Prepare Section Stop * /
+            /* List Prepare Section Stop */
             }
-            catch(SQLException e)
+            catch(SQLException sqlE)
             {
-                e.printStackTrace();
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
             }
         /* TRY BLOCK STOP*/
         
             
-        /* Return to Buisness Section Start * / 
+        /* Return to Buisness Section Start */ 
             return BPList;
-        /* Return to Buisness Section Start * /
+        /* Return to Buisness Section Start */
 
     }
-     */
+  
 /******************************************************************************
  *          All Queries for the Membership table                             *
  ******************************************************************************/
@@ -471,6 +486,88 @@ public class Queries {
     }
     */ 
     
+         //GET: Get All Managers
+    public ArrayList<Employee> AllManagers()
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Bullshit */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = 2";
+
+            /* Return Parameter */
+            ArrayList<Employee> BPList = new ArrayList<Employee>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                //statment.setInt(1, 2);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Employee temp = new Employee();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setAddress(results.getString("Address"));
+                    temp.setCity(results.getString("City"));
+                    temp.setEmail(results.getString("Email"));
+                    temp.setEmpType(results.getString("EmpType"));
+                    temp.setFirstName(results.getString("Fname"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setLastName(results.getString("Surname"));
+                    //temp.setPassword(results.getString("Address"));
+                    temp.setPhone(results.getString("Phone"));
+                    temp.setState(results.getString("State"));
+                    //temp.setUserid(results.getString("EmployeeID"));
+                    temp.setZip(results.getString("Address"));
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+            return BPList;
+        /* Return to Buisness Section Start */
+ 
+    }
+    
 /******************************************************************************
  *          All Queries for the Maintenance table                             *
  ******************************************************************************/
@@ -566,4 +663,5 @@ public class Queries {
         }
     }
     */
+    
 }// End Class Queries

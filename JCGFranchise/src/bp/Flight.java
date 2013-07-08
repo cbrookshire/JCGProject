@@ -1,8 +1,8 @@
 /* JCG Franchise Management System
- * CIST2391 Summer Session 2013 GTC
+ * CIST 2931 Summer Session 2013 GTC
  * Author: #Mahmoodur
- * Name: Customer
- * Description: Describes a customer 
+ * Name: Flight
+ * Description: Describes a flight 
  */
 package bp;
 
