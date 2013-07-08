@@ -6,7 +6,7 @@
  */
 package bp;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class FranchisorOwnerSession {
    
@@ -20,15 +20,27 @@ public class FranchisorOwnerSession {
     }
     
     //UTILITIES
-    /*public List <Object> getItem(Object uiObject, String action){
+    public ArrayList <Object> getItem(Object uiObject, String action){
         
         //local container
-        List <Object> result;
+        ArrayList <Object> result;
         
         //send to dbSessionRouter      
         result = dControl.dbSessionRouter(uiObject, action);
         return result;
-    }//end GetItem method*/
+    }//end GetItem method
+    
+    
+    //overloaded getItem 
+    public ArrayList <Object> getItem(String uiObject, String action){
+        
+        //local container
+        ArrayList <Object> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.dbSessionRouter(uiObject, action);
+        return result;
+    }//end GetItem method
     
     public String AddItem(Object uiObject, String action){
         

@@ -13,15 +13,15 @@ public class JCGlIO {
     private String u;
     private String p;
     private String fN;
-    private String eN;
+    private String eT;
 
     //CONSTRUCTOR
     //4 arg
-    public JCGlIO(String u, String p, String fN, String eN) {
+    public JCGlIO(String u, String p, String fN, String eT) {
         this.u = u;
         this.p = p;
         this.fN = fN;
-        this.eN = eN;
+        this.eT = eT;
     }
     
     //SETS and GETS
@@ -42,6 +42,7 @@ public class JCGlIO {
     public void setP(String p) {
         this.p = p;
     }
+    
     //attrib 3
     public String getfN() {
         return fN;
@@ -50,13 +51,14 @@ public class JCGlIO {
     public void setfN(String fN) {
         this.fN = fN;
     }
+    
     //attrib 4
-    public String geteN() {
-        return eN;
+    public String geteT() {
+        return eT;
     }
 
-    public void seteN(String eN) {
-        this.eN = eN;
+    public void seteT(String eT) {
+        this.eT = eT;
     }    
 }//end class JCGlIO
     
