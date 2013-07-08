@@ -107,10 +107,14 @@ public class Employee {
    //attribute 6
     public void setZip (String zip){       
        this.zip = zip;
-   }
+    }
+    
+   public void setZip (int zip){       
+       this.zip = String.valueOf(zip);
+    }
    
-   public String getZip (){
-       return zip;
+    public int getZip (){
+       return Integer.parseInt(zip);
    } 
    
  //attribute 7
@@ -136,8 +140,12 @@ public class Employee {
     this.empType = empType;
     } 
     
-     public String getEmpType( ){
-    return empType;
+    public void setEmpType( int empType){
+    this.empType = String.valueOf(empType);
+    } 
+    
+     public int getEmpType( ){
+    return Integer.parseInt(empType);
     } 
 
     // attribute 10
@@ -145,8 +153,12 @@ public class Employee {
     this.franchiseNumber = franchiseNumber;
     } 
     
-    public String getFranchiseNumber( ){
-    return franchiseNumber;
+     public void setFranchiseNumber( int franchiseNumber){
+    this.franchiseNumber = String.valueOf(franchiseNumber);
+    } 
+     
+    public int getFranchiseNumber( ){
+    return Integer.parseInt(franchiseNumber);
     } 
    
     //UTILITIES

@@ -60,11 +60,13 @@ public class Customer {
     public void setCustomerID (String customerID){       
        this.customerID = customerID;
     }
-   
-    public String getCustomerID (){
-       return customerID;
+   public void setCustomerID (int customerID){       
+       this.customerID = String.valueOf(customerID);
+   }
+       
+    public int getCustomerID (){
+       return Integer.parseInt(customerID);
     }
-
     //attribute 2
     public void setFirstName (String firstName){       
        this.firstName = firstName;
@@ -114,9 +116,13 @@ public class Customer {
     public void setZip (String zip){       
        this.zip = zip;
     }
+    
+   public void setZip (int zip){       
+       this.zip = String.valueOf(zip);
+    }
    
-    public String getZip (){
-       return zip;
+    public int getZip (){
+       return Integer.parseInt(zip);
    } 
    
  //attribute 8
@@ -142,8 +148,12 @@ public class Customer {
        this.reservationCount = reservationCount;
     }
    
-    public String getReservationCount (){
-       return reservationCount;
+        public void setReservationCount (int reservationCount){       
+       this.reservationCount = String.valueOf(reservationCount);
+    }
+        
+    public int getReservationCount (){
+       return Integer.parseInt(reservationCount);
     }
     
     //attribute 11
