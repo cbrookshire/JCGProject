@@ -61,14 +61,7 @@
         <Component class="javax.swing.JList" name="jList1">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="Reservation 1"/>
-                <StringItem index="1" value="Reservation 2"/>
-                <StringItem index="2" value="Reservation 3"/>
-                <StringItem index="3" value="Reservation 4"/>
-                <StringItem index="4" value="Reservation 5"/>
-                <StringItem index="5" value="Reservation 6"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
             <Property name="selectionMode" type="int" value="0"/>
           </Properties>

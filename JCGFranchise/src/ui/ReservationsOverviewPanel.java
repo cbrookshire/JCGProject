@@ -4,6 +4,9 @@
  */
 package ui;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
 /**
  *
  * @author Corey
@@ -15,6 +18,23 @@ public class ReservationsOverviewPanel extends javax.swing.JPanel  {
      */
     public ReservationsOverviewPanel() {
         initComponents();
+    }
+    
+    public void setList()
+    {
+        
+        ArrayList<String> list = new ArrayList<String>();
+        //obtain list list lol
+        
+        if(list.size() > 0)
+        {
+            Vector<String> data = new Vector<String>();
+            for(int i = 0; i < list.size(); i++)
+            {
+                data.add(list.get(i));
+            }
+            jList1.setListData(data);
+        }
     }
 
     /**
@@ -33,11 +53,6 @@ public class ReservationsOverviewPanel extends javax.swing.JPanel  {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(545, 500));
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Reservation 1", "Reservation 2", "Reservation 3", "Reservation 4", "Reservation 5", "Reservation 6" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
