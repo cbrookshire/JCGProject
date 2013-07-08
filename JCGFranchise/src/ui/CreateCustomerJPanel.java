@@ -4,6 +4,8 @@
  */
 package ui;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Corey
@@ -14,10 +16,12 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
      * Creates new form CreateFranchise
      */
     private int mode;
+    //private ArrayList<Customer> list;
     /**
      * Creates new form CreateFranchise
      */
     public CreateCustomerJPanel(int m) {
+        //list = new ArrayList<Customer>();
         mode = m;
         initComponents();
         
@@ -283,7 +287,15 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
+        if(mode == 0)  //Create one
+        {
+            //send new Customer to DB
+        }
+        
+        if(mode == 1)  //Update one
+        {
+            //Send list.get(listSelection.getSelectedIndex()) to DB for update
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void newCustomerEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerEmailActionPerformed

@@ -4,6 +4,8 @@
  */
 package ui;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Corey
@@ -15,9 +17,11 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
      */
     private int mode;
     private boolean isDriver;
+    //private ArrayList<Employee> list;
     
     
     public CreateEmployeeJPanel(int m, boolean isDriver) {
+        //list = new ArrayList<Employee>();
         mode = m;
         this.isDriver = isDriver;
         initComponents();
@@ -282,6 +286,15 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //Submit button
+        if(mode == 0)  //Create one
+        {
+            //send new Employee to DB
+        }
+        
+        if(mode == 1)  //Update one
+        {
+            //Send list.get(listSelection.getSelectedIndex()) to DB for update
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

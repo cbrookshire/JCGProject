@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package ui;
+import java.util.ArrayList;
 
 /**
  *
@@ -11,11 +12,14 @@ package ui;
 public class CreateReservationsJPanel extends javax.swing.JPanel {
 
     private int mode;
+    //private ArrayList<Reservation> list;
+    
     /**
      * Creates new form CreateReservationsJPanel
      */
     public CreateReservationsJPanel(int m) {
         initComponents();
+        //list = new ArrayList<Reservation>();
         
         mode = m;
         if(mode == 0)  //Create mode
@@ -171,6 +175,11 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         });
 
         btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         txtPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
         txtPrice.setText("$0.00");
@@ -312,6 +321,18 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         txtPickupTime.setText("12:00 AM");
         txtDropoffTime.setText("12:00 AM");
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        if(mode == 0)  //Create one
+        {
+            //send new Franchise to DB
+        }
+        
+        if(mode == 1)  //Update one
+        {
+            //Send list.get(listSelection.getSelectedIndex()) to DB for update
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
