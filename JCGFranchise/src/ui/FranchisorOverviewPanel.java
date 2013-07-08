@@ -4,6 +4,8 @@
  */
 package ui;
 
+import java.util.*;
+
 /**
  *
  * @author Corey
@@ -17,6 +19,23 @@ public class FranchisorOverviewPanel extends javax.swing.JPanel  {
         initComponents();
     }
 
+    public void setList()
+    {
+        
+        ArrayList<String> list = new ArrayList<String>();
+        //obtain list list lol
+        
+        if(list.size() > 0)
+        {
+            Vector<String> data = new Vector<String>();
+            for(int i = 0; i < list.size(); i++)
+            {
+                data.add(list.get(i));
+            }
+            jList1.setListData(data);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,11 +52,6 @@ public class FranchisorOverviewPanel extends javax.swing.JPanel  {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(545, 500));
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Franchise 1", "Franchise 2", "Franchise 3", "Franchise 4", "Franchise 5", "Franchise 6" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
