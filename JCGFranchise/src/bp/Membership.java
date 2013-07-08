@@ -45,9 +45,11 @@ public class Membership {
     public void setDiscount (String discount){       
        this.discount = discount;
     }
-   
-    public String getDiscount (){
-       return discount;
+   public void setDiscount (double discount){       
+       this.discount = String.valueOf(discount);
+   }
+    public double getDiscount (){
+       return Double.parseDouble(discount);
     }
 
     //attribute 3
