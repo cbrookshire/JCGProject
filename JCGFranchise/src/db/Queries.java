@@ -95,7 +95,7 @@ public class Queries {
     
     /*
      //GET: List All Franchises
-    public static List<Franchise> GetAllFranchises()
+    public static ArrayList<Franchise> GetAllFranchises()
     {
         /* Variable Section Start */
             /* Database and Query Bullshit * /
@@ -104,7 +104,7 @@ public class Queries {
             String statString = "SELECT * FROM franchise";
 
             /* Return Parameter * /
-            List<Franchise> BPList = new ArrayList<Franchise>();
+            ArrayList<Franchise> BPList = new ArrayList<Franchise>();
         /* Variable Section Stop */
         
         
@@ -167,7 +167,7 @@ public class Queries {
     }
     
     //GET: List One Franchise
-    public static List<Franchise> GetOneFranchise(int FranID)
+    public static ArrayList<Franchise> GetOneFranchise(int FranID)
     {
         /* Variable Section Start */
             /* Database and Query Bullshit * /
@@ -176,7 +176,7 @@ public class Queries {
             String statString = "SELECT * FROM `franchise` WHERE 'FranchiseNumber' = ?";
 
             /* Return Parameter * /
-            List<Franchise> BPList = new ArrayList<Franchise>();
+            ArrayList<Franchise> BPList = new ArrayList<Franchise>();
         /* Variable Section Stop */
         
         
