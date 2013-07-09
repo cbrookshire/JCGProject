@@ -101,13 +101,33 @@ public class DBController {
     public ArrayList <Object> dbSessionRouter (String sysObject, String action){
     
         //local container
-        ArrayList <Object> temp;
+        ArrayList <Object> temp = new ArrayList();
         
         //DB object switch
         switch(action){
             
-            case "VIEWALL":     
-                                    
+        case "VIEWALL": try{
+                             if ("FRANCHISE".equals(sysObject)) {
+                                    ArrayList <Franchise> temp2 = queryDB.GetAllFranchises();
+                                    return temp;}
+                        }
+                        catch(UnauthorizedUserException e){
+                            Object m = e.getMessage();
+                            temp.add(m);
+                            return (ArrayList<Object>) m; 
+                        }
+                        catch(BadConnectionException e){
+                             Object m = e.getMessage();
+                             temp = new ArrayList();
+                             temp.add(m);
+                             return (ArrayList<Object>) m;
+                        }          
+                        catch(DoubleEntryException e){
+                             Object m = e.getMessage();
+                             temp = new ArrayList();
+                             temp.add(m);
+                             return (ArrayList<Object>) m;
+                        }
                              
             default:        temp = new ArrayList();
                             return temp;
@@ -124,7 +144,7 @@ public class DBController {
         //DB object switch
         switch(action){
             
-            case "VIEWITEM":
+            case "VIEWITEM":    
                 
             default:        temp = new ArrayList();
                             return temp;
@@ -132,6 +152,12 @@ public class DBController {
                        
         }//end switch    
     }//end dbSessionRouter   
+    
+    /*public static ArrayList <Class <T>> convertObjectInArrayList{
+    
+    
+    }*/
+    
     //singleton method for UIController class
     public static DBController getInstance(){            
         if(dbcInstance == null)

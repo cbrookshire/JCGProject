@@ -19,8 +19,9 @@ public class Franchise {
    private String phone;
    private String email; 
    private String airport;
-   
-   
+   private String airportID;
+
+      
    //CONTRUCTORS
    //default
    public Franchise(){
@@ -32,11 +33,14 @@ public class Franchise {
        zip = "";
        phone = "";
        email = "";
-       airport = "";   }
+       airport = "";  
+       airportID = "";
+   }
    
    //8 args 
    public Franchise (String franchiseID, String address, String city, 
-     String state, String zip, String phone, String email, String airport){
+     String state, String zip, String phone, String email, String airport,
+     String airportID){
        
        setFranchiseID(franchiseID);
        setAddress(address);
@@ -45,7 +49,8 @@ public class Franchise {
        setZip(zip);
        setPhone(phone);
        setEmail(email);
-       setAirport(airport);       
+       setAirport(airport); 
+       setAirportID(airportID);
    }
    
    //SETS AND GETS
@@ -124,13 +129,28 @@ public class Franchise {
    } 
    
    //attrib 8
-    public void setAirport (String airport){       
+   public void setAirport (String airport){       
        this.airport = airport;
    }
    
    public String getAirport (){
        return airport;
    }
+   
+   
+   //attrib 9
+   public void setAirportID(String airportID) {
+        this.airportID = airportID;
+    }
+  
+   //overloaded set for DB - converts int to string and sets 
+   public void setAirportID(int airportID) {
+        this.airportID = String.valueOf(airportID);
+    }
+    
+   public int getAirportID() {
+        return Integer.parseInt(airportID);
+    }
    
    //UTILITIES
    //Class Print Method
