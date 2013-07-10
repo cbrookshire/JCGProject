@@ -11,13 +11,19 @@ import bp.Employee;
 import bp.Franchise;
 import bp.Membership;
 import bp.Vehicle;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**a
  *
@@ -668,6 +674,53 @@ public class Queries
  *          Administrative Section                                                     *  
  ******************************************************************************/
     
+    public int resetDatabase() 
+            throws FileNotFoundException, BadConnectionException {
+        
+        // drop all employees then customers
+        code = dropEmployees();
+        if(code > 1)
+            throw(new BadConnectionException("BadConnection"));
+        
+        code = dropCustomers();
+        if(code > 1)
+            throw(new  BadConnectionException("BadConnection"));
+       
+        // set up to read in file
+        Scanner s;
+        s = new Scanner(new File("src\\SQL\\JCGroup.sql"));
+        s.useDelimiter(";(\r)?\n|(--\n)");
+        Statement st = null;
+               
+        try {
+            st = con.createStatement();
+            while(s.hasNext()) {
+                String line = s.next();
+                if(line.startsWith("/*!") && line.endsWith("*/"))                    
+                {
+                    int i = line.indexOf(' ');
+                    line = line.substring(i + 1, line.length() - " */".length());
+                }
+                if(line.trim().length() > 0) {
+                    st.execute(line);
+                }               
+            }//end while
+        }catch(SQLException sqlE) {
+            throw(new BadConnectionException("BadConnection"));
+        }catch(Exception e) {
+            throw(new FileNotFoundException("FileNotFound"));
+        }finally {
+            if(st != null)
+                try {
+                st.close();
+            } catch (SQLException ex) {
+                
+            }
+        }
+        
+        return 1;    
+    }
+    
     private int dropEmployees() {
         List<String> results = null;
         PreparedStatement pStmnt = null;
@@ -712,10 +765,12 @@ public class Queries
             resultSet = pStmnt.executeQuery();
             results = new ArrayList< String >();
             
+            //get each user
             while(resultSet.next()) {
                 results.add(resultSet.getString("Username"));
             }
             
+            //drop each user
             for(int i = 0; i < results.size(); i++) {
                 pStmnt = con.prepareStatement(qs.drop_user);
                 pStmnt.setString(1, results.get(i));
@@ -723,8 +778,7 @@ public class Queries
             }
         
         }catch(SQLException sqlE) {
-            System.out.print(sqlE.getErrorCode() + "\t");
-            System.out.println(sqlE.getMessage());
+            return sqlE.getErrorCode();
         } finally {
             try {
                 if(!results.isEmpty()) {
@@ -732,7 +786,7 @@ public class Queries
                 }
                 resultSet.close();
             } catch(Exception e) {
-                e.printStackTrace();
+                
             }
            return 1;        
         }
