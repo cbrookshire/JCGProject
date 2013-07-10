@@ -79,4 +79,8 @@ final class QStrings {
     
     public String update_airport = "UPDATE Airport SET AirportName = ?, Address = ?, "
             + "City = ?, State = ? Zip = ? WHERE AirportID = ?";
+    
+    public String get_emp_username = "SELECT Username FROM Employee";
+    public String get_cust_username = "SELECT Username FROM Customer";
+    public String drop_user = "DROP USER ?@'localhost'";
 }
