@@ -677,48 +677,50 @@ public class Queries
     public int resetDatabase() 
             throws FileNotFoundException, BadConnectionException {
         
-        // drop all employees then customers
-        code = dropEmployees();
-        if(code > 1)
-            throw(new BadConnectionException("BadConnection"));
-        
+        // drop all customers
         code = dropCustomers();
-        if(code > 1)
+        if(code != 1)
             throw(new  BadConnectionException("BadConnection"));
-       
-        // set up to read in file
-        Scanner s;
-        s = new Scanner(new File("src\\SQL\\JCGroup.sql"));
-        s.useDelimiter(";(\r)?\n|(--\n)");
-        Statement st = null;
-               
-        try {
-            st = con.createStatement();
-            while(s.hasNext()) {
-                String line = s.next();
-                if(line.startsWith("/*!") && line.endsWith("*/"))                    
-                {
-                    int i = line.indexOf(' ');
-                    line = line.substring(i + 1, line.length() - " */".length());
-                }
-                if(line.trim().length() > 0) {
-                    st.execute(line);
-                }               
-            }//end while
-        }catch(SQLException sqlE) {
-            throw(new BadConnectionException("BadConnection"));
-        }catch(Exception e) {
-            throw(new FileNotFoundException("FileNotFound"));
-        }finally {
-            if(st != null)
-                try {
-                st.close();
-            } catch (SQLException ex) {
-                
-            }
-        }
         
-        return 1;    
+        // drop all employees
+        code = dropEmployees();
+        if(code == 1) {
+            Scanner s;
+            s = new Scanner(new File("src\\SQL\\JCGroup.sql"));
+            s.useDelimiter(";(\r)?\n|(--\n)");
+            Statement st = null;
+
+            try {
+                st = con.createStatement();
+                while(s.hasNext()) {
+                    String line = s.next();
+                    if(line.startsWith("/*!") && line.endsWith("*/"))                    
+                    {
+                        int i = line.indexOf(' ');
+                        line = line.substring(i + 1, line.length() - " */".length());
+                    }
+                    if(line.trim().length() > 0) {
+                        System.out.println(line);
+                        st.execute(line);
+                    }               
+                }//end while
+            }catch(SQLException sqlE) {
+                throw(new BadConnectionException(sqlE.getMessage()));
+            }catch(Exception e) {
+                throw(new FileNotFoundException("FileNotFound"));
+            }finally {
+                if(st != null)
+                    try {
+                    st.close();
+                } catch (SQLException ex) {
+
+                }
+            }
+            return 1;
+        }
+        else
+            throw(new BadConnectionException("BadConnection"));
+                  
     }
     
     private int dropEmployees() {
@@ -741,8 +743,7 @@ public class Queries
             }
         
         }catch(SQLException sqlE) {
-            System.out.print(sqlE.getErrorCode() + "\t");
-            System.out.println(sqlE.getMessage());
+            return sqlE.getErrorCode();
         } finally {
             try {
                 if(!results.isEmpty()) {
