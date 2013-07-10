@@ -7,6 +7,8 @@
  */
 package bp;
 
+import java.util.ArrayList;
+
 public class UIController {
     
    //attributes
@@ -58,33 +60,29 @@ public class UIController {
                         if ("OK".equals(returnCode)) {
                             return "001";                             }                           
                      
-            case "VIEWALL": 
-                
-            case "VIEWITEM":
-                
             case "ADD":     
-                        //determine object passed and call method
-                        //in the appropriate session class
-                        //FRANCHISOR
+                        //determine object passed and call method in the 
+                        //appropriate session class
+                        //Franchisor 
                         if ((UIObject instanceof Franchise || 
                               UIObject instanceof Employee)&&
-                                "1".equals(role.geteN())) {
+                                "1".equals(role.geteT())) {
                             foSession.AddItem(UIObject, action);      }
-                        //FRANCHISE                        
+                        //Franchise                        
                         if ((UIObject instanceof Employee || 
                              UIObject instanceof Vehicle ||
                              UIObject instanceof Reservation ||
                              UIObject instanceof Customer)&&
-                                "2".equals(role.geteN())) {
+                                "2".equals(role.geteT())) {
                             fmSession.AddItem(UIObject, action);      }
-                        /*//EMPLOYEE
+                        /*//Employee
                         if (UIObject instanceof Reservation &&
-                                "3".equals(role.geteN())) {
+                                "3".equals(role.geteT())) {
                             empSession.AddItem(UIObject, action);     }
                         //CUSTOMER
                         if ((UIObject instanceof Customer ||
                              UIObject instanceof Reservation)&&
-                                "4".equals(role.geteN())) {
+                                "4".equals(role.geteT())) {
                             custSession.AddItem(UIObject, action);     } */             
                 
             case "DELETE":
@@ -95,6 +93,42 @@ public class UIController {
             default:        return "000";
         }
 }
+    public ArrayList <Object> UIRouter (String object, String action){
+        
+        //holds list of objects received 
+        //from session classes
+        ArrayList <Object> temp;
+        
+        
+        switch(action){
+            
+            case "VIEWALL":     if ("1".equals(role.geteT())){
+                                    temp = foSession.getItem(object, action);
+                                    return temp;                        }
+                                /*if ("2".equals(role.geteN())){
+                                    temp = fmSession.getItem(object, action);
+                                    return temp;                        }
+                                if ("3".equals(role.geteN())){
+                                    temp = empSession.getItem(object, action);
+                                    return temp;                        }        
+                                if ("4".equals(role.geteN())){
+                                    temp = custSession.getItem(object, action);
+                                    return temp;                        }*/    
+                
+                
+                
+            case "VIEWITEM":    
+            
+            default:            temp = new ArrayList();
+                                return temp;
+            
+        }
+        
+            }
+    
+    
+    
+    
     //singleton method for UIController class
     public static UIController getInstance()
     {            
@@ -103,7 +137,11 @@ public class UIController {
         }
         return uicInstance;
     }
+    
+    
 }
+
+
     
     
     

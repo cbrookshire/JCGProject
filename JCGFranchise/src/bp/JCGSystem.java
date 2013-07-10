@@ -9,10 +9,11 @@ package bp;
 public class JCGSystem {
     
     private static JCGSystem jcgSysInstance;
+    private JCGlIO lIO;
+    private CustomerSession cSession;
     private FranchisorOwnerSession foSession;
     private FranchiseManagerSession fmSession;
     private FranchiseEmployeeSession feSession;
-    private CustomerSession cSession;
     private DBController dControl;
     private UIController uControl;
     
@@ -30,28 +31,33 @@ public class JCGSystem {
        
        dbCode = dControl.dbSystemRouter(sysObject, action);
        
+       
        switch (dbCode){
                         //Create session
-           case "1":    foSession = new FranchisorOwnerSession();
+           case "1":    lIO.seteT(dbCode);
+                        foSession = new FranchisorOwnerSession();
                         sysCode = "FRANCHISOR";
                         return sysCode;               
-           case "2":    fmSession = new FranchiseManagerSession();
+           case "2":    lIO.seteT(dbCode);
+                        fmSession = new FranchiseManagerSession();
                         sysCode = "OWNER";
                         return sysCode;
-           case "3":    feSession = new FranchiseEmployeeSession();
+           case "3":    lIO.seteT(dbCode);
+                        feSession = new FranchiseEmployeeSession();
                         sysCode = "EMPLOYEE";
                         return sysCode;
-           case "4":    cSession = new CustomerSession();
+           case "4":    lIO.seteT(dbCode);
+                        cSession = new CustomerSession();
                         sysCode = "CUSTOMER";
                         return sysCode;
            default:     return dbCode;
-       }      
+       }//end switch      
     }//end Authentication method
     
     
     public String UpdatePassword (Object sysObject, String action){
     
-        //local vars
+       //local vars
        String dbCode;
        String sysCode;
        

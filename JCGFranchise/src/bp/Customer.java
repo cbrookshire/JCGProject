@@ -60,13 +60,15 @@ public class Customer {
     public void setCustomerID (String customerID){       
        this.customerID = customerID;
     }
-   public void setCustomerID (int customerID){       
+    
+    public void setCustomerID (int customerID){       
        this.customerID = String.valueOf(customerID);
-   }
+    }
        
     public int getCustomerID (){
        return Integer.parseInt(customerID);
     }
+    
     //attribute 2
     public void setFirstName (String firstName){       
        this.firstName = firstName;
@@ -117,7 +119,7 @@ public class Customer {
        this.zip = zip;
     }
     
-   public void setZip (int zip){       
+    public void setZip (int zip){       
        this.zip = String.valueOf(zip);
     }
    
@@ -148,7 +150,7 @@ public class Customer {
        this.reservationCount = reservationCount;
     }
    
-        public void setReservationCount (int reservationCount){       
+    public void setReservationCount (int reservationCount){       
        this.reservationCount = String.valueOf(reservationCount);
     }
         

@@ -20,7 +20,7 @@ public class FranchiseManagerSession {
     }
     
     //UTILITIES
-    /*public List <Object> getItem(Object uiObject, String action){
+    public List <Object> getItem(Object uiObject, String action){
         
         //local container
         List <Object> result;
@@ -28,7 +28,7 @@ public class FranchiseManagerSession {
         //send to dbSessionRouter      
         result = dControl.dbSessionRouter(uiObject, action);
         return result;
-    }//end GetItem method*/
+    }//end GetItem method
     
     public String AddItem(Object uiObject, String action){
         

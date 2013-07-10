@@ -9,7 +9,8 @@ package bp;
 
 import JCGExceptions.*;
 import db.*;
-import java.util.List;
+import java.util.ArrayList;
+
 
 public class DBController {
     
@@ -33,8 +34,7 @@ public class DBController {
         //DBSwitch
         switch(action){
             
-            case "LOGIN":   
-                        try {   
+        case "LOGIN":   try{   
                                 //Cast object and attempt connection
                                 JCGlIO temp = (JCGlIO)sysObject;
                                 dbase = new JCGDatabase(temp); 
@@ -54,14 +54,12 @@ public class DBController {
                                 return e.getMessage();
                             }  
 
-            case "UPDATEPASSWORD":  
-                            try
-                            {   //Cast object and attempt update
-                                JCGlIO temp = (JCGlIO)sysObject;
-                                dbReturnCode = dbase.updatePassword(temp);
-                                String convert = Integer.toString(dbReturnCode);
-                                //return status
-                                return convert;
+        case "PASSWORD":try{   //Cast object and attempt update
+                            JCGlIO temp = (JCGlIO)sysObject;
+                            dbReturnCode = dbase.updatePassword(temp);
+                            String convert = Integer.toString(dbReturnCode);
+                            //return status
+                            return convert;
                             }
                             catch(InvalidUserException e){
                                 return e.getMessage();
@@ -70,7 +68,7 @@ public class DBController {
                                 return e.getMessage();
                             }                         
                 
-            case "LOGOUT":  try{
+        case "LOGOUT":  try{
                                 dbase.logOff();                                
                             }  
                             catch (Exception e){
@@ -100,24 +98,66 @@ public class DBController {
        }//end DB Switch
     }//end DBRouter method
     
-    /*public List <Object> dbSessionRouter (Object sysObject, String action){
+    public ArrayList <Object> dbSessionRouter (String sysObject, String action){
     
         //local container
-        List <Object> temp;
+        ArrayList <Object> temp = new ArrayList();
         
         //DB object switch
         switch(action){
             
-            case "VIEWALL":
-                
-            case "VIEWITEM":
-                
-            default:      return temp;
+        case "VIEWALL": try{
+                             if ("FRANCHISE".equals(sysObject)) {
+                                    ArrayList <Franchise> temp2 = queryDB.GetAllFranchises();
+                                    return temp;}
+                        }
+                        catch(UnauthorizedUserException e){
+                            Object m = e.getMessage();
+                            temp.add(m);
+                            return (ArrayList<Object>) m; 
+                        }
+                        catch(BadConnectionException e){
+                             Object m = e.getMessage();
+                             temp = new ArrayList();
+                             temp.add(m);
+                             return (ArrayList<Object>) m;
+                        }          
+                        catch(DoubleEntryException e){
+                             Object m = e.getMessage();
+                             temp = new ArrayList();
+                             temp.add(m);
+                             return (ArrayList<Object>) m;
+                        }
+                             
+            default:        temp = new ArrayList();
+                            return temp;
                            
                        
         }//end switch    
-    }//end dbSessionRouter*/
-       
+    }//end dbSessionRouter
+    
+    public ArrayList <Object> dbSessionRouter (Object sysObject, String action){
+    
+        //local container
+        ArrayList <Object> temp;
+        
+        //DB object switch
+        switch(action){
+            
+            case "VIEWITEM":    
+                
+            default:        temp = new ArrayList();
+                            return temp;
+                           
+                       
+        }//end switch    
+    }//end dbSessionRouter   
+    
+    /*public static ArrayList <Class <T>> convertObjectInArrayList{
+    
+    
+    }*/
+    
     //singleton method for UIController class
     public static DBController getInstance(){            
         if(dbcInstance == null)
