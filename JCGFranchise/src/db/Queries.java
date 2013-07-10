@@ -664,5 +664,43 @@ public class Queries
         }
     }
     */
+/******************************************************************************
+ *          Administrative Section                                                     *  
+ ******************************************************************************/
+    
+    private int dropEmployees() {
+        List<String> results = null;
+        PreparedStatement pStmnt = null;
+        
+        try {
+            pStmnt = con.prepareStatement(qs.get_emp_username);
+            resultSet = pStmnt.executeQuery();
+            results = new ArrayList< String >();
+            
+            while(resultSet.next()) {
+                results.add(resultSet.getString("Username"));
+            }
+            
+            for(int i = 0; i < results.size(); i++) {
+                pStmnt = con.prepareStatement(qs.drop_user);
+                pStmnt.setString(1, results.get(i));
+                pStmnt.execute();
+            }
+        
+        }catch(SQLException sqlE) {
+            System.out.print(sqlE.getErrorCode() + "\t");
+            System.out.println(sqlE.getMessage());
+        } finally {
+            try {
+                if(!results.isEmpty()) {
+                    results.clear();
+                }
+                resultSet.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+           return 1;        
+        }
+    }
     
 }// End Class Queries
