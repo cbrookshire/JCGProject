@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * @author taylor
+ * @author Taylor Reighard
  */
 public class JCGDatabase {
   static final String DATABASE_URL = "jdbc:mysql://localhost/tester";
