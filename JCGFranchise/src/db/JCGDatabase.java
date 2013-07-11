@@ -30,7 +30,10 @@ public class JCGDatabase {
     private PreparedStatement update_password = null;
     private PreparedStatement update_status = null;
     private PreparedStatement cust_loginStatus = null;
+    private PreparedStatement custType = null;
+    private PreparedStatement update_cust_status = null;
     private int code;
+    private String status;
     
     // Constructor test for connection and user/password
     public JCGDatabase(JCGlIO jcgLio) 
@@ -47,12 +50,18 @@ public class JCGDatabase {
         
             empType = connection.prepareStatement(
                 "SELECT EmpType from Employee where Username = ?");
+            
+            custType = connection.prepareStatement(
+                    "SELECT CType from Customer where Username = ?");
         
             update_password = connection.prepareStatement(
                 "SET PASSWORD FOR ?@'localhost' = PASSWORD(?)");
     
             update_status = connection.prepareStatement(
-                "UPDATE Employee SET FIRSTLOG = 1 WHERE Username = ?");
+                "UPDATE Employee SET FIRSTLOG = 'N' WHERE Username = ?");
+            
+            update_cust_status = connection.prepareStatement(
+                "UPDATE Customer SET FIRSTLOG = 'N' WHERE Username = ?");
             }
         catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1044 || sqlE.getErrorCode() == 1045)
@@ -88,21 +97,29 @@ public class JCGDatabase {
             resultSet = loginStatus.executeQuery();
             while(resultSet.next())
             {
-                code = resultSet.getInt("FirstLog");
+                status = resultSet.getString("FirstLog");
             }
-            if(code == 0) {                                         // Not an Employee
+            if("Y".equals(status)) {                                // First log in for an Employee
+                return 0;
+            }else if("N".equals(status)) {                          // Not First login for an Employee
+                return 1;
+            }else {                                                 // Not an Employee    
                 try {                                               // Check for customer
                     cust_loginStatus.setString(1, username);
                     resultSet = cust_loginStatus.executeQuery();
                     while(resultSet.next())
                     {
-                        code = resultSet.getInt("FirstLog");
-                    }            
+                        status = resultSet.getString("FirstLog");
+                    }
+                    if("Y".equals(status)) {                                
+                        return 0;                                   // First login for a Customer
+                    }else {                          
+                        return 1;                                   // Not first login for a Customer
+                    }
                 }catch(SQLException sqlE) {
                     return sqlE.getErrorCode();
                 }
             }
-            return code;
         }catch(SQLException sqlE) {
             return sqlE.getErrorCode();
         }finally {
@@ -122,18 +139,30 @@ public class JCGDatabase {
  * @returns integer empType or SQL error code number 
  ******************************************************************************/
     private int getEmpType(String username) {
-        try {
+        try {                                               // First check for Employee
             empType.setString(1, username);
             resultSet = empType.executeQuery();
             while(resultSet.next())
             {
                 code = resultSet.getInt("EmpType");
             }
-            return code;
+            if(code == 0) {                                 // Not an Employee
+                try {                                       // Check for Customer
+                    custType.setString(1, username);
+                    resultSet = custType.executeQuery();
+                    while(resultSet.next())
+                    {
+                        code = resultSet.getInt("CType");
+                    }            
+                }catch(SQLException sqlE) {
+                    return sqlE.getErrorCode();
+                }
+            }
         }
         catch(SQLException sqlE) {
             return sqlE.getErrorCode();
         }
+        return code;
     }
     
     
@@ -150,7 +179,12 @@ public class JCGDatabase {
             update_password.setString(1, jcgLio.getU());
             update_password.setString(2, jcgLio.getP());
             update_password.execute();
-            code = updateLogStatus(jcgLio.getU());
+            
+            if(getEmpType(jcgLio.getU()) == 99) {
+                code = updateCustLogStatus(jcgLio.getU());
+            }else {
+                code = updateLogStatus(jcgLio.getU());
+            }
             return code;
         }
         catch(SQLException sqlE)
@@ -172,6 +206,18 @@ public class JCGDatabase {
         try {
             update_status.setString(1, username);
             update_status.execute();
+            return 1;
+        }
+        catch(SQLException sqlE)
+        {
+            return sqlE.getErrorCode();
+        }
+    }
+    
+    private int updateCustLogStatus(String username) {
+        try {
+            update_cust_status.setString(1, username);
+            update_cust_status.execute();
             return 1;
         }
         catch(SQLException sqlE)
