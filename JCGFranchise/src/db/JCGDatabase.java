@@ -20,7 +20,7 @@ import java.sql.Statement;
  * @author Taylor Reighard
  */
 public class JCGDatabase {
-  static final String DATABASE_URL = "jdbc:mysql://localhost/tester";
+  static final String DATABASE_URL = "jdbc:mysql://localhost/JCGroup";
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -29,6 +29,7 @@ public class JCGDatabase {
     private PreparedStatement empType = null;
     private PreparedStatement update_password = null;
     private PreparedStatement update_status = null;
+    private PreparedStatement cust_loginStatus = null;
     private int code;
     
     // Constructor test for connection and user/password
@@ -40,6 +41,9 @@ public class JCGDatabase {
              
             loginStatus = connection.prepareStatement(
                 "SELECT FirstLog from Employee where Username = ?");
+            
+            cust_loginStatus = connection.prepareStatement(
+                    "SELECT FirstLog from Customer where Username = ?");
         
             empType = connection.prepareStatement(
                 "SELECT EmpType from Employee where Username = ?");
@@ -79,17 +83,35 @@ public class JCGDatabase {
  * @returns returns 1 for success or SQL error code number
  ******************************************************************************/ 
     private int getLoginStatus(String username) {
-        try {
+        try {                                                       // Fisrt test is for Employee
             loginStatus.setString(1, username);
             resultSet = loginStatus.executeQuery();
             while(resultSet.next())
             {
                 code = resultSet.getInt("FirstLog");
             }
+            if(code == 0) {                                         // Not an Employee
+                try {                                               // Check for customer
+                    cust_loginStatus.setString(1, username);
+                    resultSet = cust_loginStatus.executeQuery();
+                    while(resultSet.next())
+                    {
+                        code = resultSet.getInt("FirstLog");
+                    }            
+                }catch(SQLException sqlE) {
+                    return sqlE.getErrorCode();
+                }
+            }
             return code;
-        }
-        catch(SQLException sqlE) {
+        }catch(SQLException sqlE) {
             return sqlE.getErrorCode();
+        }finally {
+            try{
+                if(resultSet != null)
+                    resultSet.close();
+            }catch(Exception e) {
+                
+            }
         }
     }
     
