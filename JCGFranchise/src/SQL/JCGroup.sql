@@ -51,7 +51,8 @@ CREATE TABLE IF NOT EXISTS Employee
 ) Auto_Increment = 9000;
 
 CREATE TABLE IF NOT EXISTS Vehicle
-( VehicleID int,
+( VIndex int AUTO_INCREMENT,
+  VehicleID int,
   VIN varchar(20) UNIQUE NOT NULL,
   Make varchar(16) Not Null,
   Model varchar(30) Not Null,
@@ -100,6 +101,29 @@ CREATE TABLE IF NOT EXISTS Customer
   PRIMARY KEY (CustomerID),
   FOREIGN KEY (MemberID)
     REFERENCES Membership (MemberID) ) Auto_Increment = 1000;
+
+CREATE TABLE IF NOT EXISTS Reservation
+( ReservationNumber int AUTO_INCREMENT,
+  FranchiseNumber int,
+  VehicleID int,
+  CustomerID int,
+  Price double(4, 2),
+  Statuse ENUM('Open', 'Closed') DEFAULT 'Open',
+  Comment varchar(300),
+  FlightNumber int NOT NULL,
+  Airline varchar(20),
+  FlightTime double(4, 2),
+  PickUpTime double(4, 2),
+  DropOffTime double(4, 2),
+  `Date` varchar(11),
+  AltAddress varchar(40),
+  AltCity varchar(40),
+  AltState varchar(15),
+  AltZip int,
+  PRIMARY KEY (ReservationNumber),
+  FOREIGN KEY (VehicleID) REFERENCES Vehicle (VehicleID),
+  FOREIGN KEY (FranchiseNumber) REFERENCES Franchise(FranchiseNumber),
+  FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID))Auto_Increment = 1000;
 	
 INSERT INTO Airport (AirportName, Address, City, State, Zip)
  VALUES ('Hartsfield-Jackson', '6000 North Terminal Parkway', 'Atlanta', 'Georgia', 30320 );
