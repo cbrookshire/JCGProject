@@ -1494,7 +1494,7 @@ public class Queries
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `employee` WHERE 'FranchiseNumber' = ?";
+            String statString = "SELECT * FROM `employee` WHERE 'EmpType' = 3 AND 'FranchiseNumber' = ?";
 
             /* Return Parameter */
             ArrayList<Employee> BPList = new ArrayList<Employee>();
