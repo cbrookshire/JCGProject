@@ -1654,7 +1654,7 @@ public class Queries
         username = cust.getEmail().substring(0, cust.getEmail().indexOf("@"));
         
          try {
-            PreparedStatement pStmnt = con.prepareStatement(qs.insert_employee);
+            PreparedStatement pStmnt = con.prepareStatement(qs.insert_customer);
             pStmnt.setString(1, cust.getFirstName());
             pStmnt.setString(2, cust.getLastName());
             pStmnt.setString(3, cust.getAddress());
