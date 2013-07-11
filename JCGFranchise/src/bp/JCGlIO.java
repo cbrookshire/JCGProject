@@ -6,7 +6,6 @@
  */
 package bp;
 
-
 public class JCGlIO {
     
     //attributes

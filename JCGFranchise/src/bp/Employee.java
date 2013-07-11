@@ -11,19 +11,20 @@ package bp;
 
 public class Employee {
     
-    //attributes - DB
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String state;
-    private String zip;
-    private String phone;
-    private String email;
-    private String empType;
-    private String franchiseNumber;
+   //attributes - DB
+   private String firstName;
+   private String lastName;
+   private String address;
+   private String city;
+   private String state;
+   private String zip;
+   private String phone;
+   private String email;
+   private String empType;
+   private String franchiseNumber;
+   private String employeeID;
 
-  
+      
    //default constructors
    public Employee(){
     
@@ -36,12 +37,13 @@ public class Employee {
 	phone = "";
 	email = "";
 	empType = "";
-	franchiseNumber = "";   }
+	franchiseNumber = "";
+        employeeID = "";}
     
-    // 10 argument constructor
+    //11 argument constructor
     public Employee ( String firstName,String lastName,
             String address,String city,String state,String zip,String phone,
-            String email,String empType,String franchiseNumber )
+            String email,String empType,String franchiseNumber, String employeeID)
     {
        setFirstName(firstName);
        setLastName(lastName);
@@ -53,13 +55,13 @@ public class Employee {
        setEmail(email);
        setEmpType(empType);
        setFranchiseNumber(franchiseNumber);
+       setEmployeeID(employeeID);
               
-    } // end twelve-argument constructor
+    } //end eleven-argument constructor
 	
 
     //SETS AND GETS
     // attribute 1
-    
     public void setFirstName (String firstName){       
        this.firstName = firstName;
     }
@@ -160,7 +162,21 @@ public class Employee {
     public int getFranchiseNumber( ){
         return Integer.parseInt(franchiseNumber);
     } 
-   
+
+    //attribute 11
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
+    }
+    
+    //overloaded set for DB - converts int to string and sets
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = String.valueOf(employeeID);
+    }
+    
+    public int getEmployeeID() {
+        return Integer.parseInt(employeeID);
+    }   
+    
     //UTILITIES
     @Override
     public String toString(){
