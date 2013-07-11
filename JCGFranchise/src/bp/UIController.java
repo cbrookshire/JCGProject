@@ -8,6 +8,7 @@
 package bp;
 
 import java.util.ArrayList;
+import ui.BaseJFrame;
 
 public class UIController {
     
@@ -23,11 +24,31 @@ public class UIController {
     
     //CONSTRUCTOR
     //default
-    public UIController()    {
+    private UIController()    {
         jcgSys = JCGSystem.getInstance();
     }
     
     //UTILITIES
+    //Used by JCGSystem to start UI 
+    public void StartUI(){    
+        BaseJFrame inst = BaseJFrame.getInstance();
+        inst.setVisible(true);
+    }
+    
+    /*public ArrayList <Franchise> UIfranchisorRouter (String object, String action){
+        
+       
+          
+        
+    }*/
+   
+    
+    
+    
+    
+    
+    
+    
     public String UIRouter (Object UIObject, String action){
         
         String returnCode;
@@ -41,7 +62,7 @@ public class UIController {
                         if ("InvalidUserNamePassword".equals(returnCode)){
                             return "901";  /*error prompt*/           }
                         if ("BadConnection".equals(returnCode)){
-                            return "901";  /*error prompt*/           }
+                            return "902";  /*error prompt*/           }
                         if ("FRANCHISOR".equals(returnCode)){
                             return "100";  /*Franchisor Main*/        }        
                         if ("MANAGER".equals(returnCode)){
@@ -56,7 +77,7 @@ public class UIController {
                         if ("InvalidUserNamePassword".equals(returnCode)){
                             return "901";  /*error prompt*/           }
                         if ("BadConnection".equals(returnCode)){
-                            return "901";  /*error prompt*/           }
+                            return "902";  /*error prompt*/           }
                         if ("OK".equals(returnCode)) {
                             return "001";                             }                           
                      
@@ -93,44 +114,14 @@ public class UIController {
             default:        return "000";
         }
 }
-    public ArrayList <Object> UIRouter (String object, String action){
-        
-        //holds list of objects received 
-        //from session classes
-        ArrayList <Object> temp;
-        
-        
-        switch(action){
-            
-            case "VIEWALL":     if ("1".equals(role.geteT())){
-                                    temp = foSession.getItem(object, action);
-                                    return temp;                        }
-                                /*if ("2".equals(role.geteN())){
-                                    temp = fmSession.getItem(object, action);
-                                    return temp;                        }
-                                if ("3".equals(role.geteN())){
-                                    temp = empSession.getItem(object, action);
-                                    return temp;                        }        
-                                if ("4".equals(role.geteN())){
-                                    temp = custSession.getItem(object, action);
-                                    return temp;                        }*/    
-                
-                
-                
-            case "VIEWITEM":    
-            
-            default:            temp = new ArrayList();
-                                return temp;
-            
-        }
-        
-            }
+
     
     
-    
-    
-    //singleton method for UIController class
-    public static UIController getInstance()
+ /******************************************************
+ * Singleton method for UIController class + Object 
+ * clone override 
+ ******************************************************/
+    public static synchronized UIController getInstance()
     {            
         if(uicInstance == null) {
             uicInstance = new UIController();
@@ -138,8 +129,11 @@ public class UIController {
         return uicInstance;
     }
     
-    
-}
+    @Override
+    public Object clone() throws CloneNotSupportedException{    
+        throw new CloneNotSupportedException();    
+    }   
+}//end class UIController
 
 
     

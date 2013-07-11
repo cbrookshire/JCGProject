@@ -6,6 +6,7 @@
  */
 package bp;
 
+
 public class JCGSystem {
     
     private static JCGSystem jcgSysInstance;
@@ -17,52 +18,58 @@ public class JCGSystem {
     private DBController dControl;
     private UIController uControl;
     
-    
-    public JCGSystem(){
+    //default constructor private singleton
+    private JCGSystem(){
         //uControl = UIController.getInstance();
         dControl = DBController.getInstance();
     }
+    
+    //used to start UI
+    public void startSystem(){    
+        uControl.StartUI();
+    }
         
+    //passes JCGlIO object to DBController for processing
     public String Authentication(Object sysObject, String action){
         
-       //local vars
-       String dbCode;
-       String sysCode;
+       String dbCode;   //holds database return code
+       String sysCode;  //holds JCGSystem code
        
+       //call to DBController method
        dbCode = dControl.dbSystemRouter(sysObject, action);
        
-       
+       //determine action based on database return code
        switch (dbCode){
-                        //Create session
+                        //Create sessions
            case "1":    lIO.seteT(dbCode);
                         foSession = new FranchisorOwnerSession();
-                        sysCode = "FRANCHISOR";
+                        sysCode = "FRANCHISOR"; //session name
                         return sysCode;               
            case "2":    lIO.seteT(dbCode);
                         fmSession = new FranchiseManagerSession();
-                        sysCode = "OWNER";
+                        sysCode = "OWNER";      //session name
                         return sysCode;
            case "3":    lIO.seteT(dbCode);
                         feSession = new FranchiseEmployeeSession();
-                        sysCode = "EMPLOYEE";
+                        sysCode = "EMPLOYEE";   //session name
                         return sysCode;
            case "4":    lIO.seteT(dbCode);
                         cSession = new CustomerSession();
-                        sysCode = "CUSTOMER";
+                        sysCode = "CUSTOMER";   //session name
                         return sysCode;
-           default:     return dbCode;
+           default:     return dbCode;          //no session return dbCode
        }//end switch      
     }//end Authentication method
     
-    
+    //Passes JCGlIO object to DBController for processing
     public String UpdatePassword (Object sysObject, String action){
     
-       //local vars
-       String dbCode;
-       String sysCode;
+       String dbCode;   //holds database return code
+       String sysCode;  //holds JCGSystem code
        
-       //send to DB Controller
+       //call to DBController method
        dbCode = dControl.dbSystemRouter(sysObject, action);
+        //determine action based on database return code
        if ("1".equals(dbCode)){
            sysCode = "OK";
            return sysCode;    }
@@ -70,14 +77,21 @@ public class JCGSystem {
             return dbCode;    }     
     }//end UpdatePassword method
     
-    
-    //singleton method for UIController class
-    public static JCGSystem getInstance()
+           
+/******************************************************
+ * Singleton method for JCGSystem class + Object 
+ * clone override 
+ ******************************************************/
+    public static synchronized JCGSystem getInstance()
     {            
         if(jcgSysInstance == null) {
             jcgSysInstance = new JCGSystem();
         }
         return jcgSysInstance;
-    }//end singleton method   
+    } 
     
+    @Override
+    public Object clone()throws CloneNotSupportedException{    
+        throw new CloneNotSupportedException();    
+    }
 }//end class JCGSystem 

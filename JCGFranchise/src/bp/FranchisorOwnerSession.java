@@ -20,27 +20,63 @@ public class FranchisorOwnerSession {
     }
     
     //UTILITIES
-    public ArrayList <Object> getItem(Object uiObject, String action){
+    //HACK#1 the following is Maurice's hack until he discovers how to 
+    //convert an array of Franchise, Vehicle, Employee, Customer 
+    //into a generic object
+    public ArrayList <Franchise> getFranchise(Object uiObject, String action){
         
         //local container
-        ArrayList <Object> result;
+        ArrayList <Franchise> result;
         
         //send to dbSessionRouter      
-        result = dControl.dbSessionRouter(uiObject, action);
-        return result;
-    }//end GetItem method
+        result = dControl.DBfranchisorRouter(uiObject, action);
+        return result;       
+    }//end getFranchise method
     
-    
-    //overloaded getItem 
-    public ArrayList <Object> getItem(String uiObject, String action){
+    //HACK#2
+    public ArrayList <Vehicle> getVehicle(Object uiObject, String action){
         
         //local container
-        ArrayList <Object> result;
+        ArrayList <Vehicle> result;
         
         //send to dbSessionRouter      
-        result = dControl.dbSessionRouter(uiObject, action);
-        return result;
-    }//end GetItem method
+        result = dControl.DBvehicleRouter(uiObject, action);
+        return result;       
+    }//end getVehicle method
+    
+    //HACK#3
+    public ArrayList <Employee> getEmployee(Object uiObject, String action){
+        
+        //local container
+        ArrayList <Employee> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.DBemployeeRouter(uiObject, action);
+        return result;       
+    }//end getVehicle method
+   
+    //HACK#4
+    public ArrayList <Reservation> getReservation(Object uiObject, String action){
+        
+        //local container
+        ArrayList <Reservation> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.DBreservationRouter(uiObject, action);
+        return result;       
+    }//end getVehicle method
+    
+    //HACK#5
+    public ArrayList <Customer> getCustomer(Object uiObject, String action){
+        
+        //local container
+        ArrayList <Customer> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.DBcustomerRouter(uiObject, action);
+        return result;       
+    }//end getVehicle method
+    
     
     public String AddItem(Object uiObject, String action){
         

@@ -65,8 +65,12 @@ public class Vehicle {
        this.franchiseNumber = franchiseNumber;
     }
     
-    public String getFranchiseNumber(){
-        return franchiseNumber;
+     public void setFranchiseNumber(int franchiseNumber){
+       this.franchiseNumber = String.valueOf(franchiseNumber);
+    }
+    
+    public int getFranchiseNumber(){
+        return Integer.parseInt(franchiseNumber);
     }
     
     //attrib 2
