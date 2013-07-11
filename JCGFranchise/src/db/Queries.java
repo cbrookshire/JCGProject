@@ -306,10 +306,27 @@ public class Queries
         Statement query = null;
         ResultSet results = null;
         int success = -1;
+        
+        ArrayList<Integer> EmployeeIDs = new ArrayList<Integer>();
+        
         /* Variable Section Stop */
         
         /* Preparing Statment Section Start */
         String MyQuery = "DELETE * FROM `franchise` WHERE 'FranchiseNumber' = ?";
+        //String to get All EmpIDs
+        
+        
+        
+        /* Delete Employee Section Start */
+        
+        EmployeeIDs = AllEmpIDInFranchise(ID);
+        
+        for(int c = 0; c < EmployeeIDs.size(); c++)
+        {
+            RemoveEmployee(EmployeeIDs.get(c));
+        }
+        
+        /* Delete Employee Section Stop */
         
             /* TRY BLOCK START */
 
@@ -739,7 +756,7 @@ public class Queries
     
     
     //DELETE: Limo
-    public static boolean RemoveLimo(Connection con, int ID)
+    public boolean RemoveLimo(int ID)
              throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
@@ -1129,7 +1146,7 @@ public class Queries
                     //temp.setPassword(results.getString("Address"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    //temp.setUserid(results.getString("EmployeeID"));
+                    temp.setEmployeeID(results.getString("EmployeeID"));
                     temp.setZip(results.getString("Address"));
                     
                     BPList.add(temp);
@@ -1229,7 +1246,7 @@ public class Queries
                     //temp.setPassword(results.getString("Address"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    //temp.setUserid(results.getString("Username"));
+                    temp.setEmployeeID(results.getString("EmployeeID"));
                     temp.setZip(results.getString("Address"));
                     
                     BPList.add(temp);
@@ -1334,7 +1351,7 @@ public class Queries
                     //temp.setPassword(results.getString("Address"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    //temp.setUserid(results.getString("EmployeeID"));
+                    temp.setEmployeeID(results.getString("EmployeeID"));
                     temp.setZip(results.getString("Address"));
                     
                     BPList.add(temp);
@@ -1376,6 +1393,97 @@ public class Queries
         /* Return to Buisness Section Start */
  
     }
+    
+    //GET: Get EmployeeIDs
+    public ArrayList<Integer> AllEmpIDInFranchise(int FranID)
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = ?";
+
+            /* Return Parameter */
+            ArrayList<Integer> BPList = new ArrayList<Integer>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, FranID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    int temp = 0;
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    
+                    temp = results.getInt("EmployeeID");
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+            return BPList;
+        /* Return to Buisness Section Start */
+ 
+    }
+    
     
      //GET: List Drivers in a Franchise
     public ArrayList<Employee> DriversInAFranchise(int FranID)
@@ -1434,7 +1542,7 @@ public class Queries
                     //temp.setPassword(results.getString("Address"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    //temp.setUserid(results.getString("EmployeeID"));
+                    temp.setEmployeeID(results.getString("EmployeeID"));
                     temp.setZip(results.getString("Address"));
                     
                     BPList.add(temp);
