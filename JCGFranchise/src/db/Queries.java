@@ -1643,6 +1643,53 @@ public class Queries
         }
     }
     */
+    
+/******************************************************************************
+ *          ALl Queries for the Customer table
+ ******************************************************************************/
+    
+    public void insertCustomer(Customer cust) throws UnauthorizedUserException,
+             BadConnectionException, DoubleEntryException {
+        String username;
+        username = cust.getEmail().substring(0, cust.getEmail().indexOf("@"));
+        
+         try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.insert_employee);
+            pStmnt.setString(1, cust.getFirstName());
+            pStmnt.setString(2, cust.getLastName());
+            pStmnt.setString(3, cust.getAddress());
+            pStmnt.setString(4, cust.getCity());
+            pStmnt.setString(5, cust.getState());
+            pStmnt.setInt(6, cust.getZip());
+            pStmnt.setString(7, cust.getPhone());
+            pStmnt.setString(8, cust.getEmail());
+            pStmnt.setString(9, username);
+            pStmnt.executeUpdate();
+            
+            code = createUser(username, username);
+            code = grantCustomerRole(username);
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142 || code == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+    }
+    
+    private int grantCustomerRole(String username) {
+        try {
+            PreparedStatement pStmnt = con.prepareStatement(qs.grant_customer);
+            pStmnt.setString(1, username);
+            pStmnt.setString(2, username);
+            pStmnt.executeQuery();
+            return 1;
+        }catch(SQLException sqlE) {
+            return sqlE.getErrorCode();
+        }
+        
+    }
 /******************************************************************************
  *          All Queries for the Airport table                                 *
  ******************************************************************************/
