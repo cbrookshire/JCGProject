@@ -458,7 +458,7 @@ public class Queries
         /* Return to Buisness Section Start */
 
     }
-    
+ 
 /******************************************************************************
  *          All Queries for the Membership table                             *
  ******************************************************************************/
@@ -634,7 +634,7 @@ public class Queries
     */
     
     //GET: List Vehicles in a Franchise
-    public  List<Vehicle> VehiclesForFranchise( int FranID)
+    public  ArrayList<Vehicle> VehiclesForFranchise( int FranID)
              throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
@@ -644,7 +644,7 @@ public class Queries
             String statString = "SELECT * FROM vehicle WHERE FranchiseNumber = ?";
 
             /* Return Parameter */
-            List<Vehicle> BPList = new ArrayList<Vehicle>();
+            ArrayList<Vehicle> BPList = new ArrayList<Vehicle>();
         /* Variable Section Stop */
         
         
@@ -812,14 +812,14 @@ public class Queries
     } 
     
      //GET: Show Cars in a Franchise
-    public  ArrayList<Vehicle> LimosForFranchise(int FranID)
+    public  ArrayList<Vehicle> GetOneVehicle(int VID)
              throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM 'Vehicle' WHERE 'FranchiseNUmber' = ?";
+            String statString = "SELECT * FROM 'Vehicle' WHERE 'VehicleID' = ?";
 
             /* Return Parameter */
             ArrayList<Vehicle> BPList = new ArrayList<Vehicle>();
@@ -832,7 +832,7 @@ public class Queries
             {
             /* Preparing Statment Section Start */                
                 statment = con.prepareStatement(statString);
-                statment.setInt(1, FranID);
+                statment.setInt(1, VID);
             /* Preparing Statment Section Stop */
             /* Query Section Start */
                 results = statment.executeQuery();
@@ -915,7 +915,7 @@ public class Queries
         
     }
     
-    
+ 
 /******************************************************************************
  *          All Queries for the Employee table                                *
  *          includes Create and Grant Queries                                 *
@@ -1173,7 +1173,7 @@ public class Queries
     }
     
     //GET: Show One Employee's Data
-    public  List<Employee> SingleEmployeeData( int EmpID)
+    public ArrayList<Employee> SingleEmployeeData( int EmpID)
              throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
@@ -1183,7 +1183,7 @@ public class Queries
             String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = ?";
 
             /* Return Parameter */
-            List<Employee> BPList = new ArrayList<Employee>();
+            ArrayList<Employee> BPList = new ArrayList<Employee>();
         /* Variable Section Stop */
         
         
@@ -1690,6 +1690,114 @@ public class Queries
         }
         
     }
+    
+    
+    //GET: Show One Customer's Data
+    public  ArrayList<Customer> SingleCustomerData(int CustID)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `customer` WHERE 'CustomerID' = ?";
+
+            /* Return Parameter */
+            ArrayList<Customer> BPArrayList = new ArrayList<Customer>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, CustID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* ArrayList Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Customer temp = new Customer();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setAddress(results.getString("Address"));
+                    temp.setCity(results.getString("City"));
+                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setEmail(results.getString("Email"));
+                    temp.setFirstName(results.getString("Fname"));
+                    temp.setLastName(results.getString("Surname"));
+                    temp.setMemberID(results.getString("MemberID"));
+                    //temp.setPassword(statString);
+                    temp.setPhone(results.getString("Phone"));
+                    temp.setReservationCount(results.getString("ReservationCount"));
+                    temp.setState(results.getString("State"));
+                    //temp.setUserID(results.getString("Address"));
+                    temp.setZip(results.getString("Zip"));
+                    
+                    BPArrayList.add(temp);
+                }
+            /* ArrayList Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+           
+            
+            
+            return BPArrayList;
+        /* Return to Buisness Section Start */
+        
+        
+        
+    }
+    
 /******************************************************************************
  *          All Queries for the Airport table                                 *
  ******************************************************************************/
@@ -1737,6 +1845,328 @@ public class Queries
         }
     }
     */
+    
+/******************************************************************************
+ *          All Queries for the Reservation table                                 *
+ ******************************************************************************/
+    //GET: Show Reservations by Customer in all Franchises
+    public  ArrayList<Reservation> ReservationsOneCustomerAllFranchises(int CustID)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `reservations` WHERE 'CustomerID' = ?";
+
+            /* Return Parameter */
+            ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, CustID);
+                //statment.setInt(2, CustID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* ArrayList Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Reservation temp = new Reservation();
+                    
+                    //results.getBigDecimal("AMOUNT")
+                    
+                    
+                    temp.setAirline(results.getString("Airline"));
+                    temp.setComment(results.getString("Comment"));
+                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setDate(results.getString("Date"));
+                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setFlightNumber(results.getString("FlightNumber"));
+                    temp.setFlightTime(results.getString("FlightTime"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setPickUpTime(results.getString("PickUpTime"));
+                    temp.setPrice(results.getString("Price"));
+                    temp.setReservationNumber(results.getString("ReservationNumber"));
+                    temp.setStatus(results.getString("Status"));
+                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setAltAddress(results.getString("AltAddress"));
+                    temp.setAltCity(results.getString("AltCity"));
+                    temp.setAltState(results.getString("AltState"));
+                    temp.setAltZip(results.getString("AltZip"));
+                    
+                    BPArrayList.add(temp);
+                }
+            /* ArrayList Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+            return BPArrayList;
+        /* Return to Buisness Section Start */
+    }
+    
+    //GET: Show Reservations by Customer in one Franchise
+    public  ArrayList<Reservation> ReservationsByCustomerForFranchise( int FranID, int CustID)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `reservations` WHERE 'FranchiseNumber' = ? AND 'CustomerID' = ?";
+
+            /* Return Parameter */
+            ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, FranID);
+                statment.setInt(2, CustID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* ArrayList Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Reservation temp = new Reservation();
+                    
+                    //results.getBigDecimal("AMOUNT")
+                    
+                    
+                    temp.setAirline(results.getString("Airline"));
+                    temp.setComment(results.getString("Comment"));
+                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setDate(results.getString("Date"));
+                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setFlightNumber(results.getString("FlightNumber"));
+                    temp.setFlightTime(results.getString("FlightTime"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setPickUpTime(results.getString("PickUpTime"));
+                    temp.setPrice(results.getString("Price"));
+                    temp.setReservationNumber(results.getString("ReservationNumber"));
+                    temp.setStatus(results.getString("Status"));
+                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setAltAddress(results.getString("AltAddress"));
+                    temp.setAltCity(results.getString("AltCity"));
+                    temp.setAltState(results.getString("AltState"));
+                    temp.setAltZip(results.getString("AltZip"));
+                    
+                    BPArrayList.add(temp);
+                }
+            /* ArrayList Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+            return BPArrayList;
+        /* Return to Buisness Section Start */
+    }
+    
+     //GET: List Reservations in a Franchise
+    public  ArrayList<Reservation> ReservationsForFranchise(int FranID)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `reservations` WHERE 'FranchiseNumber' = ?";
+
+            /* Return Parameter */
+            ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, FranID);
+                //statment.setInt(2, CustID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* ArrayList Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Reservation temp = new Reservation();
+                    
+                    //results.getBigDecimal("AMOUNT")
+                    
+                    
+                    temp.setAirline(results.getString("Airline"));
+                    temp.setComment(results.getString("Comment"));
+                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setDate(results.getString("Date"));
+                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setFlightNumber(results.getString("FlightNumber"));
+                    temp.setFlightTime(results.getString("FlightTime"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setPickUpTime(results.getString("PickUpTime"));
+                    temp.setPrice(results.getString("Price"));
+                    temp.setReservationNumber(results.getString("ReservationNumber"));
+                    temp.setStatus(results.getString("Status"));
+                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setAltAddress(results.getString("AltAddress"));
+                    temp.setAltCity(results.getString("AltCity"));
+                    temp.setAltState(results.getString("AltState"));
+                    temp.setAltZip(results.getString("AltZip"));
+                    
+                    BPArrayList.add(temp);
+                }
+            /* ArrayList Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+            return BPArrayList;
+        /* Return to Buisness Section Start */
+    }
+    
 /******************************************************************************
  *          Administrative Section                                                     *  
  ******************************************************************************/
