@@ -10,6 +10,7 @@ import bp.Customer;
 import bp.Employee;
 import bp.Franchise;
 import bp.Membership;
+import bp.Reservation;
 import bp.Vehicle;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -104,12 +105,12 @@ public class Queries
     }
     */
     
-      //GET: List All Franchises
+       //GET: List All Franchises
     public ArrayList<Franchise> GetAllFranchises()
             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
-            /* Database and Query Bullshit */
+            /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
             String statString = "SELECT * FROM franchise";
@@ -152,7 +153,8 @@ public class Queries
                     //rs.getBigDecimal("AMOUNT")
                     
                     temp.setAddress(results.getString("Address"));
-                    temp.setAirport(results.getString("AirportID"));
+                    temp.setAirportID(results.getString("AirportID"));
+                    temp.setAirport(getFranchiseAirportName(results.getInt("AirportID")));
                     temp.setCity(results.getString("City"));
                     temp.setEmail(results.getString("Email"));
                     temp.setFranchiseID(results.getString("FranchiseNumber"));
@@ -173,6 +175,24 @@ public class Queries
                 else 
                     throw(new BadConnectionException("BadConnection"));
             }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
         /* TRY BLOCK STOP*/
         
             
@@ -187,7 +207,7 @@ public class Queries
             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
-            /* Database and Query Bullshit */
+            /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
             String statString = "SELECT * FROM `franchise` WHERE 'FranchiseNumber' = ?";
@@ -230,7 +250,8 @@ public class Queries
                     //rs.getBigDecimal("AMOUNT")
                     
                     temp.setAddress(results.getString("Address"));
-                    temp.setAirport(results.getString("AirportID"));
+                    temp.setAirportID(results.getString("AirportID"));
+                    temp.setAirport(getFranchiseAirportName(results.getInt("AirportID")));
                     temp.setCity(results.getString("City"));
                     temp.setEmail(results.getString("Email"));
                     temp.setFranchiseID(results.getString("FranchiseNumber"));
@@ -251,6 +272,24 @@ public class Queries
                 else 
                     throw(new BadConnectionException("BadConnection"));
             }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
         /* TRY BLOCK STOP*/
         
             
@@ -260,6 +299,166 @@ public class Queries
 
     }
   
+    public boolean RemoveFranchise(int ID)
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+        Statement query = null;
+        ResultSet results = null;
+        int success = -1;
+        /* Variable Section Stop */
+        
+        /* Preparing Statment Section Start */
+        String MyQuery = "DELETE * FROM `franchise` WHERE 'FranchiseNumber' = ?";
+        
+            /* TRY BLOCK START */
+
+            try
+            {
+
+                PreparedStatement statement = con.prepareStatement(MyQuery);
+
+                statement.setInt(1, ID);
+            
+            
+            /* Preparing Statment Section Stop */
+  
+            /* Query Section Start */
+                success = statement.executeUpdate();
+            /* Query Section Stop* /
+
+            /* Return to Buisness Section Start */
+                if(success == 1)
+                    return true;     
+                
+                if(success == 0 || success == -1)
+                    return false;     
+            /* Return to Buisness Section Start */
+                    
+                   
+                     
+                    
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (query != null) query.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+           /* TRY BLOCK STOP */
+            
+            return false;
+    }
+    
+    public String getFranchiseAirportName(int ID)
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `airport` WHERE 'AirportID' = ?";
+
+            /* Return Parameter */
+            String AirName = null;
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, ID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start */
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    //Franchise temp = new Franchise();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    AirName = (results.getString("AirportName"));
+                  
+
+                }
+            /* List Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+            return AirName;
+        /* Return to Buisness Section Start */
+
+    }
+    
 /******************************************************************************
  *          All Queries for the Membership table                             *
  ******************************************************************************/
@@ -282,6 +481,102 @@ public class Queries
         }
     }
     */
+    
+     //GET: Membership/Promotions Data
+    public  ArrayList<Membership> GetPromotionsData()
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `membership`";
+
+            /* Return Parameter */
+            ArrayList<Membership> BPList = new ArrayList<Membership>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                //statment.setInt(1, FranID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Membership temp = new Membership();
+                    
+                    //results.getBigDecimal("AMOUNT")
+                    
+                    temp.setDiscount(results.getString("Discount"));
+                    temp.setMemberID(results.getString("MemberID"));
+                    temp.setMinAmount(results.getString("MinAmount"));
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+           
+            
+            
+            return BPList;
+        /* Return to Buisness Section Start */
+        
+        
+        
+    }
     
 /******************************************************************************
  *          All Queries for the Vehicle table                                 *
@@ -337,6 +632,290 @@ public class Queries
         }
     }
     */
+    
+    //GET: List Vehicles in a Franchise
+    public  List<Vehicle> VehiclesForFranchise( int FranID)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM vehicle WHERE FranchiseNumber = ?";
+
+            /* Return Parameter */
+            List<Vehicle> BPList = new ArrayList<Vehicle>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, FranID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Vehicle temp = new Vehicle();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setCapacity(results.getString("Capacity"));
+                    temp.setCondition(results.getString("VCondition"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setMake(results.getString("Make"));
+                    temp.setMileage(results.getString("Milage"));
+                    temp.setModel(results.getString("Model"));
+                    temp.setRate(results.getString("RentalPrice"));
+                    temp.setTablet(results.getString("Tablet"));
+                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVin(results.getString("VIN"));
+                    temp.setYear(results.getString("MakeYear"));
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+           
+            
+            
+            return BPList;
+        /* Return to Buisness Section Start */
+        
+        
+        
+    }
+    
+    
+    //DELETE: Limo
+    public static boolean RemoveLimo(Connection con, int ID)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+        Statement query = null;
+        ResultSet results = null;
+        int success = -1;
+        /* Variable Section Stop */
+        
+        /* Preparing Statment Section Start */
+        String MyQuery = "DELETE * FROM `employee` WHERE 'VehicleID' = ?";
+        
+            /* TRY BLOCK START */
+
+            try
+            {
+
+                PreparedStatement statement = con.prepareStatement(MyQuery);
+
+                statement.setInt(1, ID);
+            
+            
+            /* Preparing Statment Section Stop */
+  
+            /* Query Section Start */
+                success = statement.executeUpdate();
+            /* Query Section Stop* /
+
+            /* Return to Buisness Section Start */
+                if(success == 1)
+                    return true;     
+                
+                if(success == 0 || success == -1)
+                    return false;     
+            /* Return to Buisness Section Start */
+                    
+                   
+                     
+                    
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (query != null) query.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+           /* TRY BLOCK STOP */
+            
+            return false;
+    } 
+    
+     //GET: Show Cars in a Franchise
+    public  ArrayList<Vehicle> LimosForFranchise(int FranID)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM 'Vehicle' WHERE 'FranchiseNUmber' = ?";
+
+            /* Return Parameter */
+            ArrayList<Vehicle> BPList = new ArrayList<Vehicle>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, FranID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Vehicle temp = new Vehicle();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setCapacity(results.getString("Capacity")); 
+                    temp.setCondition(results.getString("VCondition")); 
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setMake(results.getString("Make")); 
+                    temp.setMileage(results.getString("Millage")); 
+                    temp.setModel(results.getString("Model")); 
+                    temp.setRate(results.getString("RentalPrice")); 
+                    temp.setTablet(results.getString("Tablet"));
+                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVin(results.getString("VIN"));
+                    temp.setYear(results.getString("MakeYear"));
+                    temp.setvIndex(results.getString("VIndex"));
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        
+            
+        /* Return to Buisness Section Start */ 
+           
+            
+            
+            return BPList;
+        /* Return to Buisness Section Start */
+        
+        
+        
+    }
+    
+    
 /******************************************************************************
  *          All Queries for the Employee table                                *
  *          includes Create and Grant Queries                                 *
@@ -498,7 +1077,7 @@ public class Queries
             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
-            /* Database and Query Bullshit */
+            /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
             String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = 2";
@@ -566,6 +1145,24 @@ public class Queries
                 else 
                     throw(new BadConnectionException("BadConnection"));
             }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
         /* TRY BLOCK STOP*/
         
             
@@ -574,6 +1171,429 @@ public class Queries
         /* Return to Buisness Section Start */
  
     }
+    
+    //GET: Show One Employee's Data
+    public  List<Employee> SingleEmployeeData( int EmpID)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = ?";
+
+            /* Return Parameter */
+            List<Employee> BPList = new ArrayList<Employee>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, EmpID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Employee temp = new Employee();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setAddress(results.getString("Address"));
+                    temp.setCity(results.getString("City"));
+                    temp.setEmail(results.getString("Email"));
+                    temp.setEmpType(results.getString("EmpType"));
+                    temp.setFirstName(results.getString("Fname"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setLastName(results.getString("Surname"));
+                    //temp.setPassword(results.getString("Address"));
+                    temp.setPhone(results.getString("Phone"));
+                    temp.setState(results.getString("State"));
+                    //temp.setUserid(results.getString("Username"));
+                    temp.setZip(results.getString("Address"));
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+           
+            
+            
+            return BPList;
+        /* Return to Buisness Section Start */
+        
+        
+        
+    }
+    
+             //GET: Get All Employees in a Franchise
+    public ArrayList<Employee> AllEmployeesInFranchise(int FranID)
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = ?";
+
+            /* Return Parameter */
+            ArrayList<Employee> BPList = new ArrayList<Employee>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, FranID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Employee temp = new Employee();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setAddress(results.getString("Address"));
+                    temp.setCity(results.getString("City"));
+                    temp.setEmail(results.getString("Email"));
+                    temp.setEmpType(results.getString("EmpType"));
+                    temp.setFirstName(results.getString("Fname"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setLastName(results.getString("Surname"));
+                    //temp.setPassword(results.getString("Address"));
+                    temp.setPhone(results.getString("Phone"));
+                    temp.setState(results.getString("State"));
+                    //temp.setUserid(results.getString("EmployeeID"));
+                    temp.setZip(results.getString("Address"));
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+            return BPList;
+        /* Return to Buisness Section Start */
+ 
+    }
+    
+     //GET: List Drivers in a Franchise
+    public ArrayList<Employee> DriversInAFranchise(int FranID)
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `employee` WHERE 'FranchiseNumber' = ?";
+
+            /* Return Parameter */
+            ArrayList<Employee> BPList = new ArrayList<Employee>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setInt(1, FranID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* List Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Employee temp = new Employee();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setAddress(results.getString("Address"));
+                    temp.setCity(results.getString("City"));
+                    temp.setEmail(results.getString("Email"));
+                    temp.setEmpType(results.getString("EmpType"));
+                    temp.setFirstName(results.getString("Fname"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setLastName(results.getString("Surname"));
+                    //temp.setPassword(results.getString("Address"));
+                    temp.setPhone(results.getString("Phone"));
+                    temp.setState(results.getString("State"));
+                    //temp.setUserid(results.getString("EmployeeID"));
+                    temp.setZip(results.getString("Address"));
+                    
+                    BPList.add(temp);
+                }
+            /* List Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+           
+            
+            
+            return BPList;
+        /* Return to Buisness Section Start */
+        
+        
+        
+    }
+    
+     //DELETE: Employee
+    public boolean RemoveEmployee(int ID)
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+        Statement query = null;
+        PreparedStatement statement = null;
+        ResultSet results = null;
+        int success = -1;
+        String Username = null;
+        /* Variable Section Stop */
+        
+        /* Preparing Statment Section Start */
+        String MyQuery = "DELETE * FROM `employee` WHERE 'EmployeeID' = ?";
+        String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = ?";
+        String DropUser = "DROP USER ?@'localhost'";
+
+        /* Preparing Statment  Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statement = con.prepareStatement(statString);
+                statement.setInt(1, ID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statement.executeQuery();
+                
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* Drop Use Preperation Section Start*/
+                Username = results.getString("Username");
+                
+                statement = con.prepareStatement(DropUser);
+                statement.setString(1, Username);
+            /* Drop Use Preperation Section Start*/
+                
+        
+            /* MySQL User Drop Section Start*/
+                success = statement.executeUpdate(); //This is where we attempt to drop the user.
+                
+                if(success == 1)
+                {
+                    /* Delete Employee Preperation Section Start*/
+                    
+                    statement = con.prepareStatement(MyQuery);
+                    
+                    statement.setInt(1, ID);
+                    
+                    
+                    /* Query Section Start */
+                    success = statement.executeUpdate();
+                    /* Query Section Stop* /
+
+                    
+                    /* Delete Employee Preperation Section Stop*/
+                    
+                    /* Return to Buisness Section Start */
+                    if(success == 1)
+                        return true;
+                    
+                    if(success == 0 || success == -1)
+                        return false; 
+                    /* Return to Buisness Section Start */
+                    //return true;
+                }
+                
+                if(success == 0 || success == -1)
+                    return false;     
+            /* MySQL User Drop Section Stop*/    
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (query != null) query.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+           /* TRY BLOCK STOP */
+            
+            return false;
+    } 
     
 /******************************************************************************
  *          All Queries for the Maintenance table                             *
