@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS Employee
   EmpType int NOT NULL,
   FranchiseNumber int,
   Username varchar(8),
-  FirstLog int DEFAULT 0,
+  FirstLog ENUM('N', 'Y') DEFAULT 'Y',
   PRIMARY KEY (EmployeeID),
    FOREIGN KEY (FranchiseNumber)
     REFERENCES Franchise (FranchiseNumber)
@@ -92,9 +92,11 @@ CREATE TABLE IF NOT EXISTS Customer
   Zip int,
   Phone varchar(12) UNIQUE NOT NULL,
   Email varchar(40) UNIQUE NOT NULL,
-  ReservationCount int,
-  MemberID varchar(10),
-  UserName varchar(20),    
+  ReservationCount int DEFAULT 0,
+  MemberID varchar(10) DEFAULT 'Bronze',
+  UserName varchar(30),
+  CType int DEFAULT 99,
+  FirstLog ENUM('N', 'Y') DEFAULT 'Y',
   PRIMARY KEY (CustomerID),
   FOREIGN KEY (MemberID)
     REFERENCES Membership (MemberID) ) Auto_Increment = 1000;
