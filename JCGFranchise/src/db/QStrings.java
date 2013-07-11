@@ -39,6 +39,10 @@ final class QStrings {
             + " Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, "
             + "Username) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     
+    public String insert_customer = "INSERT INTO Customer(Fname, Surname,"
+            + " Address, City, State, Zip, Phone, Email, Username "
+            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
     public String create_user = "CREATE USER ?@'localhost' IDENTIFIED BY ?";
     
     public String grant_temp = "grant all privileges on *.* to "
@@ -67,6 +71,9 @@ final class QStrings {
                               + "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Franchise TO ?@'localhost' "
                               + "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Employee TO ?@'localhost' "
                               + "GRANT SELECT, UPDATE ON JCGroup.Membership TO ?@'localhost'";
+    
+    public String grant_customer = "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Customer TO ?@'localhost' "
+                                 + "GRANT SELECT ON JCGroup.Vehicle TO ?@'localhost'";
     
     public String get_username = "SELECT Username FROM Employee "
                     + "WHERE Employee.EmpType = ?";
