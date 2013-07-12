@@ -57,7 +57,7 @@ public class Queries
  *          Selects, Deletes authored by Miles                                *
  ******************************************************************************/
     
-    public void updateFranchise(Franchise fran) throws UnauthorizedUserException,
+    public int updateFranchise(Franchise fran) throws UnauthorizedUserException,
             BadConnectionException, DoubleEntryException {
         try
         {
@@ -80,9 +80,10 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1;
     }
     
-    public void insertFranchise(Franchise fran) throws UnauthorizedUserException,
+    public int insertFranchise(Franchise fran) throws UnauthorizedUserException,
             BadConnectionException, DoubleEntryException {
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.insert_fran);
@@ -103,6 +104,7 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1;
     }
       
        //GET: List All Franchises
@@ -481,7 +483,7 @@ public class Queries
  ******************************************************************************/
     
     
-    public void updateMemeberShip(Membership mem) throws UnauthorizedUserException,
+    public int updateMemeberShip(Membership mem) throws UnauthorizedUserException,
             BadConnectionException, DoubleEntryException {
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.update_membership);
@@ -496,6 +498,7 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1;
     }
         
      //GET: Membership/Promotions Data
@@ -598,7 +601,7 @@ public class Queries
  *          All Queries for the Vehicle table                                 *
  ******************************************************************************/
     
-    public void insertVehicle(Vehicle car) throws UnauthorizedUserException,
+    public int insertVehicle(Vehicle car) throws UnauthorizedUserException,
             BadConnectionException, DoubleEntryException {
         try
         {
@@ -624,9 +627,10 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1;
     }
     
-    public void updateVehicle(Vehicle car) 
+    public int updateVehicle(Vehicle car) 
             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException {
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.update_vehicle);
@@ -652,6 +656,7 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1;
     }
        
     //GET: List Vehicles in a Franchise
@@ -757,8 +762,7 @@ public class Queries
         
         
     }
-    
-    
+        
     //DELETE: Limo
     public boolean RemoveLimo(int ID)
              throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
@@ -943,12 +947,12 @@ public class Queries
  ******************************************************************************/
     
      
-     public void insertEmployee(Employee emp) throws UnauthorizedUserException,
+    public int insertEmployee(Employee emp) throws UnauthorizedUserException,
              BadConnectionException, DoubleEntryException {
         String username;
         username = generateEmpUsername(emp.getFirstName(), emp.getLastName(), emp.getPhone());
         
-         try {
+        try {
             PreparedStatement pStmnt = con.prepareStatement(qs.insert_employee);
             pStmnt.setString(1, emp.getFirstName());
             pStmnt.setString(2, emp.getLastName());
@@ -977,9 +981,10 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1; 
     }
      
-    public void updateEmployee(Employee emp) throws UnauthorizedUserException,
+    public int updateEmployee(Employee emp) throws UnauthorizedUserException,
              BadConnectionException, DoubleEntryException {
         
         try {
@@ -1003,6 +1008,7 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1;
     }
        
     private int createUser(String userID, String password) throws SQLException {
@@ -1737,7 +1743,7 @@ public class Queries
  *          All Queries for the Maintenance table                             *
  ******************************************************************************/
     /*
-    public void insertMaintenance(Maintenance fixit) throws UnauthorizedUserException,
+    public int insertMaintenance(Maintenance fixit) throws UnauthorizedUserException,
             BadConnectionException, DoubleEntryException {
     
         try {
@@ -1757,6 +1763,7 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1;
     }
     
     public void updateMaintenance(Maintenance fixit) throws UnauthorizedUserException,
@@ -1787,7 +1794,7 @@ public class Queries
  *          ALl Queries for the Customer table
  ******************************************************************************/
     
-    public void insertCustomer(Customer cust) throws UnauthorizedUserException,
+    public int insertCustomer(Customer cust) throws UnauthorizedUserException,
              BadConnectionException, DoubleEntryException {
         String username;
         username = cust.getEmail().substring(0, cust.getEmail().indexOf("@"));
@@ -1815,9 +1822,10 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1;
     }
     
-    public void updateCustomer(Customer cust) throws UnauthorizedUserException,
+    public int updateCustomer(Customer cust) throws UnauthorizedUserException,
              BadConnectionException, DoubleEntryException {
                
          try {
@@ -1841,6 +1849,7 @@ public class Queries
             else 
                 throw(new BadConnectionException("BadConnection"));
         }
+        return 1;
     }
     
     private int grantCustomerRole(String username) throws SQLException {
