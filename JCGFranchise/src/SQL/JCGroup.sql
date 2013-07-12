@@ -68,7 +68,8 @@ CREATE TABLE IF NOT EXISTS Vehicle
     REFERENCES Franchise (FranchiseNumber) );
 
 CREATE TABLE IF NOT EXISTS Maintanence
-( ServiceNumber varchar(10) UNIQUE,
+( MaintIndex int AUTO_INCREMENT,
+  ServiceNumber varchar(10) UNIQUE,
   VehicleID int,
   ServiceType varchar(20),
   ServiceCost double(4,2),
