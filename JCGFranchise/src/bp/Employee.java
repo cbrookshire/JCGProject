@@ -8,7 +8,6 @@
  
 package bp;
 
-
 public class Employee {
     
    //attributes - DB
@@ -55,9 +54,8 @@ public class Employee {
        setEmail(email);
        setEmpType(empType);
        setFranchiseNumber(franchiseNumber);
-       setEmployeeID(employeeID);
-              
-    } //end eleven-argument constructor
+       setEmployeeID(employeeID);              
+    }//end eleven-argument constructor
 	
 
     //SETS AND GETS
@@ -189,7 +187,6 @@ public class Employee {
         "Phone: ", getPhone(), 
         "Email: ", getEmail(),
 	"Emp Type: ", getEmpType(),
-	"Franchise Number: ", getFranchiseNumber());
-	
+	"Franchise Number: ", getFranchiseNumber());	
     }//end UTILS    
 } // end class Employee

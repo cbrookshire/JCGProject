@@ -10,69 +10,70 @@ package bp;
 public class Membership {
     
     //attributes - DB
-        private String memberID;
-	private String discount;
-	private String minAmount;
+    private String memberID;
+    private String discount;
+    private String minAmount;
         
-        //CONTRUCTORS
-   public Membership(){
-    
+    //CONTRUCTORS
+    //default
+    public Membership(){    
 	memberID = "";
 	discount = "";
 	minAmount = "";
-   }
+    }
     
-   //3 arguments
-   public Membership (String memberID, String discount, String minAmount){
-       
+    //3 arguments
+    public Membership (String memberID, String discount, String minAmount){       
 	setMemberID(memberID);
 	setDiscount(discount);
-	setMinAmount(minAmount);
-	      
+	setMinAmount(minAmount);	      
+   }//end constructors
+   
+    
+   //SETS AND GETS methods
+   //attribute 1
+   public void setMemberID (String memberID){       
+       this.memberID = memberID;
    }
    
-    //SETS AND GETS methods
-    //attribute 1
-    public void setMemberID (String memberID){       
-       this.memberID = memberID;
-    }
-   
-    public String getMemberID (){
+   public String getMemberID (){
        return memberID;
-    }
+   }
     
-    //attribute 2
-    public void setDiscount (String discount){       
+   //attribute 2
+   public void setDiscount (String discount){       
        this.discount = discount;
-    }
+   }
+   
    public void setDiscount (double discount){       
        this.discount = String.valueOf(discount);
    }
-    public double getDiscount (){
-       return Double.parseDouble(discount);
-    }
-
-    //attribute 3
    
-     public void setMinAmount (String minAmount){       
+   public double getDiscount (){
+       return Double.parseDouble(discount);
+   }
+
+   //attribute 3
+   public void setMinAmount (String minAmount){       
        this.minAmount = minAmount;
-    }
+   }
+   
    public void setMinAmount (int minAmount){       
        this.minAmount = String.valueOf(minAmount);
    }
        
-    public int getMinAmount (){
+   public int getMinAmount (){
        return Integer.parseInt(minAmount);
-    }
-//UTILITIES
-  @Override
+   }
+
+   //UTILITIES
+   @Override
    public String toString(){
-    
-    return String.format("%s%s  %s%s/n %s%s\n",
+        
+       return String.format("%s%s  %s%s\n %s%s\n",
         "MemberID: ", getMemberID(), 
         "Discount: ", getDiscount(),
-	"Min Amount: ", getMinAmount() );
+	"Min Amount: ", getMinAmount());
 	
-    }//end UTILS  
-  
+   }//end UTILS  
 } // end class Membership

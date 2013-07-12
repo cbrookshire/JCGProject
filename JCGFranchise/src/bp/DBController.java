@@ -33,9 +33,10 @@ public class DBController {
     public ArrayList <Franchise> DBfranchisorRouter (Object sysObject, 
              String action){
     
-         ArrayList <Franchise> temp;
+        //local container 
+        ArrayList <Franchise> temp;
          
-         try{            
+        try{            
                 if ("VIEWALL".equals(action)){   
                     temp = queryDB.GetAllFranchises();
                     return temp;
@@ -67,23 +68,25 @@ public class DBController {
                 return temp;             
         }
         return null;
-     }//end DBfranchisorRouter method
+    }//end DBfranchisorRouter method
+    
         
     //HACK #2 
     public ArrayList <Vehicle> DBvehicleRouter (Object sysObject, 
              String action){
-    
-         ArrayList <Vehicle> temp;
+        
+        //local container
+        ArrayList <Vehicle> temp;
          
-         try{
-                if ("VIEWALL".equals(action)){   
-                    temp = queryDB.VehiclesForFranchise(((Vehicle)sysObject).getFranchiseNumber());
-                    return temp;
-                }
-                if (sysObject instanceof Vehicle){    
-                    temp = queryDB.GetOneVehicle(((Vehicle)sysObject).getVehicleID());
-                    return temp;
-                }               
+        try{
+            if ("VIEWALL".equals(action)){   
+                temp = queryDB.VehiclesForFranchise(((Vehicle)sysObject).getFranchiseNumber());
+                return temp;
+            }
+            if (sysObject instanceof Vehicle){    
+                temp = queryDB.GetOneVehicle(((Vehicle)sysObject).getVehicleID());
+                return temp;
+            }               
         }
         catch(UnauthorizedUserException e){
                 Vehicle error = new Vehicle("", e.getMessage(), 
@@ -155,41 +158,42 @@ public class DBController {
     //HACK #4 routes customer views
     public ArrayList <Customer> DBcustomerRouter (Object sysObject, 
              String action){
-    
-         ArrayList <Customer> temp;
+        
+        //local container
+        ArrayList <Customer> temp;
          
-         try{
-                if ("VIEWALL".equals(action)){   
-                    temp = queryDB.SingleCustomerData
-                            (((Customer)sysObject).getCustomerID());
-                    return temp;
-                }
-                else{    
-                    temp = queryDB.SingleCustomerData
-                            (((Customer)sysObject).getCustomerID());
-                    return temp;
-                }               
+        try{
+            if ("VIEWALL".equals(action)){   
+                temp = queryDB.SingleCustomerData
+                        (((Customer)sysObject).getCustomerID());
+                return temp;
+            }
+            else{    
+                temp = queryDB.SingleCustomerData
+                        (((Customer)sysObject).getCustomerID());
+                return temp;
+            }               
         }
         catch(UnauthorizedUserException e){
-                Customer error = new Customer(e.getMessage(), 
-                        "", "", "", "", "", "", "", "", "","");
-                temp = new ArrayList();
-                temp.add(error);
-                return temp; 
+            Customer error = new Customer(e.getMessage(), 
+                    "", "", "", "", "", "", "", "", "","");
+            temp = new ArrayList();
+            temp.add(error);
+            return temp; 
         }
         catch(BadConnectionException e){
-                Customer error = new Customer(e.getMessage(), 
-                        "", "", "", "", "", "", "", "", "","");
-                temp = new ArrayList();
-                temp.add(error);
-                return temp;
+            Customer error = new Customer(e.getMessage(), 
+                    "", "", "", "", "", "", "", "", "","");
+            temp = new ArrayList();
+            temp.add(error);
+            return temp;
         }          
         catch(DoubleEntryException e){
-                Customer error = new Customer(e.getMessage(), 
-                        "", "", "", "", "", "", "", "", "","");
-                temp = new ArrayList();
-                temp.add(error);
-                return temp;             
+            Customer error = new Customer(e.getMessage(), 
+                    "", "", "", "", "", "", "", "", "","");
+            temp = new ArrayList();
+            temp.add(error);
+            return temp;             
         }          
     }//end DBcustomerRouter method   
     
@@ -197,44 +201,45 @@ public class DBController {
     public ArrayList <Reservation> DBreservationRouter (Object sysObject, 
              String action){
     
-         ArrayList <Reservation> temp;
+        //local container
+        ArrayList <Reservation> temp;
          
-         try{
-                if ("VIEWALL".equals(action)){   
-                    temp = queryDB.ReservationsForFranchise
-                            (((Reservation)sysObject).getFranchiseNumber());
-                    return temp;
-                }
-                else{    
-                    temp = queryDB.ReservationsByCustomerForFranchise
-                            (((Reservation)sysObject).getFranchiseNumber(), 
-                            ((Reservation)sysObject).getCustomerID());
-                    return temp;
-                }               
+        try{
+            if ("VIEWALL".equals(action)){   
+                temp = queryDB.ReservationsForFranchise
+                        (((Reservation)sysObject).getFranchiseNumber());
+                return temp;
+            }
+            else{    
+                temp = queryDB.ReservationsByCustomerForFranchise
+                        (((Reservation)sysObject).getFranchiseNumber(), 
+                        ((Reservation)sysObject).getCustomerID());
+                return temp;
+            }               
         }
         catch(UnauthorizedUserException e){
-                Reservation error = new Reservation(e.getMessage(), 
-                        "", "", "", "", "", "", "", "", "", "",
-                        "", "", "", "", "", "");
-                temp = new ArrayList();
-                temp.add(error);
-                return temp; 
+            Reservation error = new Reservation(e.getMessage(), 
+                    "", "", "", "", "", "", "", "", "", "",
+                    "", "", "", "", "", "");
+            temp = new ArrayList();
+            temp.add(error);
+            return temp; 
         }
         catch(BadConnectionException e){
-                Reservation error = new Reservation(e.getMessage(), 
-                        "", "", "", "", "", "", "", "", "", "",
-                        "", "", "", "", "", "");
-                temp = new ArrayList();
-                temp.add(error);
-                return temp;
+            Reservation error = new Reservation(e.getMessage(), 
+                    "", "", "", "", "", "", "", "", "", "",
+                    "", "", "", "", "", "");
+            temp = new ArrayList();
+            temp.add(error);
+            return temp;
         }          
         catch(DoubleEntryException e){
-                Reservation error = new Reservation(e.getMessage(), 
-                        "", "", "", "", "", "", "", "", "", "",
-                        "", "", "", "", "", "");
-                temp = new ArrayList();
-                temp.add(error);
-                return temp;             
+            Reservation error = new Reservation(e.getMessage(), 
+                    "", "", "", "", "", "", "", "", "", "",
+                    "", "", "", "", "", "");
+            temp = new ArrayList();
+            temp.add(error);
+            return temp;             
         }
     }//end DBreservationRouter method  
     
@@ -250,159 +255,180 @@ public class DBController {
         switch(action){
             
         case "LOGIN":   
-                        try{   
-                                //Cast object and attempt connection
-                                JCGlIO temp = (JCGlIO)sysObject;
-                                dbase = new JCGDatabase(temp); 
-                                //Attempt login 
-                                dbReturnCode = dbase.login(temp);
-                                String convert = Integer.toString(dbReturnCode);
-                                //Return user role
-                                return convert;                                
-                        }
-                        catch(InvalidUserException e){
-                            return e.getMessage();
-                        }
-                        catch(BadConnectionException e){
-                            return e.getMessage();
-                        }
-                        catch(NewUserException e){
-                            return e.getMessage();
-                        }  
+            try{   
+                     //Cast object and attempt connection
+                     JCGlIO temp = (JCGlIO)sysObject;
+                     dbase = new JCGDatabase(temp); 
+                     //Attempt login 
+                     dbReturnCode = dbase.login(temp);
+                     String convert = Integer.toString(dbReturnCode);
+                     //Return user role
+                     return convert;                                
+             }
+             catch(InvalidUserException e){
+                 return e.getMessage();
+             }
+             catch(BadConnectionException e){
+                 return e.getMessage();
+             }
+             catch(NewUserException e){
+                 return e.getMessage();
+             }  
 
         case "UPDATEPASSWORD":
-                        try{ 
-                            //Cast object and attempt update
-                            JCGlIO temp = (JCGlIO)sysObject;
-                            dbReturnCode = dbase.updatePassword(temp);
-                            String convert = Integer.toString(dbReturnCode);
-                            //return status
-                            return convert;
-                            }
-                        catch(InvalidUserException e){
-                            return e.getMessage();
-                        }
-                        catch(BadConnectionException e){
-                            return e.getMessage();
-                        }                         
-                
-        case "LOGOUT":  try{
-                                dbase.logOff();                                
-                            }  
-                            catch (Exception e){
-                                return e.getMessage();
-                            }
             
-        case "ADD":     //determines object type and calls corresponding 
-                        //insert methods   
-                        /*try{
-                            if (sysObject instanceof Franchise)
-                                dbReturnCode = 
-                                queryDB.insertFranchise((Franchise)sysObject);
-                            if (sysObject instanceof Vehicle)
-                                dbReturnCode =
-                                queryDB.insertVehicle((Vehicle)sysObject); 
-                            if (sysObject instanceof Employee)
-                                dbReturnCode =
-                                queryDB.insertEmployee((Employee)sysObject);
-                            if (sysObject instanceof Reservation)
-                                dbReturnCode =
-                                queryDB.insertReservation((Reservation)sysObject);
-                            if (sysObject instanceof Customer)
-                                dbReturnCode =
-                                queryDB.insertCustomer((Customer)sysObject);                               
-                        }
-                        catch(UnauthorizedUserException e){
-                            return e.getMessage();
-                        }  
-                        catch(BadConnectionException e){
-                            return e.getMessage();
-                        }*/
+            try{ 
+                //Cast object and attempt update
+                JCGlIO temp = (JCGlIO)sysObject;
+                dbReturnCode = dbase.updatePassword(temp);
+                String convert = Integer.toString(dbReturnCode);
+                //return status
+                return convert;
+                }
+            catch(InvalidUserException e){
+                return e.getMessage();
+            }
+            catch(BadConnectionException e){
+                return e.getMessage();
+            }                         
+                
+        case "LOGOUT":  
+            
+            try{
+                    dbase.logOff();                                
+                }  
+            catch (Exception e){
+                return e.getMessage();
+            }
+            
+        case "ADD": 
+            
+            //determines object type and calls corresponding 
+            //insert methods   
+            try{
+                if (sysObject instanceof Franchise) {
+                    dbReturnCode = queryDB.insertFranchise((Franchise)sysObject);
+                    return String.valueOf(dbReturnCode);
+                }
+                if (sysObject instanceof Vehicle) {
+                    dbReturnCode = queryDB.insertVehicle((Vehicle)sysObject);
+                    return String.valueOf(dbReturnCode);
+                } 
+                if (sysObject instanceof Employee) {
+                    dbReturnCode = queryDB.insertEmployee((Employee)sysObject);
+                    return String.valueOf(dbReturnCode);
+                }
+                /*if (sysObject instanceof Reservation) {
+                    dbReturnCode = queryDB.insertReservation((Reservation)sysObject);
+                    return String.valueOf(dbReturnCode);
+                }*/
+                if (sysObject instanceof Customer) {
+                    dbReturnCode = queryDB.insertCustomer((Customer)sysObject);
+                    return String.valueOf(dbReturnCode);
+                }                               
+            }
+            catch(UnauthorizedUserException e){
+                return e.getMessage();
+            }  
+            catch(BadConnectionException e){
+                return e.getMessage();
+            }
+            catch(DoubleEntryException e){
+                return e.getMessage();
+            }
+                
+        case "DELETE":  
+                    
+            //determines object type and calls corresponding 
+            //insert methods   
+            /*try
+            {
+                if (sysObject instanceof Franchise){
+                    milesReturnCode = 
+                    queryDB.RemoveFranchise(((Franchise)sysObject).getFranchiseID());
+                    if (milesReturnCode == true) 
+                        return "1";
+                    else
+                        return "0";                                                                                      
+                }
+                else if (sysObject instanceof Vehicle){
+                    milesReturnCode =
+                    queryDB.RemoveLimo(((Vehicle)sysObject).getVehicleID());
+                    if (milesReturnCode == true) 
+                        return "1";                             
+                    else
+                        return "0";                                                        
+                }
+                else if (sysObject instanceof Employee){
+                    milesReturnCode =
+                    queryDB.RemoveEmployee(((Employee)sysObject).getEmployeeID());
+                    if (milesReturnCode == true) 
+                        return "1";
+                    else
+                        return "0";
+                }
+                if (sysObject instanceof Reservation){
+                    milesReturnCode = 
+                    queryDB.RemoveReservation(((Reservation)sysObject).getReservationNumber());
+                    if (milesReturnCode == true) 
+                        return "1";                             
+                    else
+                        return "0";
+                }
+                if (sysObject instanceof Customer){
+                    milesReturnCode =
+                    queryDB.RemoveCustomer(((Customer)sysObject).getCustomerID()); 
+                     if (milesReturnCode == true) 
+                        return "1";                             
+                    else
+                        return "0";
+                }                               
+            }
+            catch(UnauthorizedUserException e){
+                return e.getMessage();
+            }  
+            catch(BadConnectionException e){
+                return e.getMessage();
+            }*/
                 
                 
-            case "DELETE":  
-                        //determines object type and calls corresponding 
-                        //insert methods   
-                        /*try
-                        {
-                            if (sysObject instanceof Franchise){
-                                milesReturnCode = 
-                                queryDB.RemoveFranchise(((Franchise)sysObject).getFranchiseID());
-                                if (milesReturnCode == true) 
-                                    return "1";
-                                else
-                                    return "0";                                                                                      
-                            }
-                            else if (sysObject instanceof Vehicle){
-                                milesReturnCode =
-                                queryDB.RemoveLimo(((Vehicle)sysObject).getVehicleID());
-                                if (milesReturnCode == true) 
-                                    return "1";                             
-                                else
-                                    return "0";                                                        
-                            }
-                            else if (sysObject instanceof Employee){
-                                milesReturnCode =
-                                queryDB.RemoveEmployee(((Employee)sysObject).getEmployeeID());
-                                if (milesReturnCode == true) 
-                                    return "1";
-                                else
-                                    return "0";
-                            }
-                            if (sysObject instanceof Reservation){
-                                milesReturnCode = 
-                                queryDB.RemoveReservation(((Reservation)sysObject).getReservationNumber());
-                                if (milesReturnCode == true) 
-                                    return "1";                             
-                                else
-                                    return "0";
-                            }
-                            if (sysObject instanceof Customer){
-                                milesReturnCode =
-                                queryDB.RemoveCustomer(((Customer)sysObject).getCustomerID()); 
-                                 if (milesReturnCode == true) 
-                                    return "1";                             
-                                else
-                                    return "0";
-                            }                               
-                        }
-                        catch(UnauthorizedUserException e){
-                            return e.getMessage();
-                        }  
-                        catch(BadConnectionException e){
-                            return e.getMessage();
-                        }*/
+        case "EDIT":
+
+            //determines object type and calls corresponding 
+            //insert methods   
+            try{
+                if (sysObject instanceof Franchise) {
+                    dbReturnCode = queryDB.updateFranchise((Franchise)sysObject);
+                    return String.valueOf(dbReturnCode);
+                }
+                if (sysObject instanceof Vehicle) {
+                    dbReturnCode = queryDB.updateVehicle((Vehicle)sysObject);
+                    return String.valueOf(dbReturnCode);
+                } 
+                if (sysObject instanceof Employee) {
+                    dbReturnCode = queryDB.updateEmployee((Employee)sysObject);
+                    return String.valueOf(dbReturnCode);
+                }
+                /*if (sysObject instanceof Reservation) {
+                    dbReturnCode = queryDB.updateReservation((Reservation)sysObject);
+                    return String.valueOf(dbReturnCode);
+                }*/
+                if (sysObject instanceof Customer) {
+                    dbReturnCode = queryDB.updateCustomer((Customer)sysObject);
+                    return String.valueOf(dbReturnCode);
+                }                               
+            }
+            catch(UnauthorizedUserException e){
+                return e.getMessage();
+            }  
+            catch(BadConnectionException e){
+                return e.getMessage();
+            }
+            catch(DoubleEntryException e){
+                return e.getMessage();
+            } 
                 
-                
-            case "EDIT":
-                        //determines object type and calls corresponding 
-                        //insert methods   
-                        /*try{
-                            if (sysObject instanceof Franchise)
-                                dbReturnCode = 
-                                queryDB.updateFranchise((Franchise)sysObject);
-                            if (sysObject instanceof Vehicle)
-                                dbReturnCode =
-                                queryDB.updateVehicle((Vehicle)sysObject); 
-                            if (sysObject instanceof Employee)
-                                dbReturnCode =
-                                queryDB.updateEmployee((Employee)sysObject);
-                            if (sysObject instanceof Reservation)
-                                dbReturnCode =
-                                queryDB.updateReservation((Reservation)sysObject);
-                            if (sysObject instanceof Customer)
-                                dbReturnCode =
-                                queryDB.updateCustomer((Customer)sysObject);                               
-                        }
-                        catch(UnauthorizedUserException e){
-                            return e.getMessage();
-                        }  
-                        catch(BadConnectionException e){
-                            return e.getMessage();
-                        }*/
-                          
-            default:    //default test String
-                        return null;      
+        default:    return null;      
        }//end DB Switch
     }//end DBRouter method
     
