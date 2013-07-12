@@ -6,8 +6,27 @@
  */
 package bp;
 
+import java.util.ArrayList;
+
 public class FranchiseEmployeeSession {
     
-    public FranchiseEmployeeSession(){}
+    //local vars
+    private DBController dControl;
+    
+    //default constructor
+    public FranchiseEmployeeSession(){    
+        dControl = DBController.getInstance();    
+    }
+    
+    //HACK#4
+    public ArrayList <Reservation> getReservation(Object uiObject, String action){
+        
+        //local container
+        ArrayList <Reservation> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.DBreservationRouter(uiObject, action);
+        return result;       
+    }//end getVehicle method  
     
 }

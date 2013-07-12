@@ -6,7 +6,7 @@
  */
 package bp;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class FranchiseManagerSession {
     
@@ -19,16 +19,50 @@ public class FranchiseManagerSession {
         dControl = DBController.getInstance();
     }
     
-    //UTILITIES
-    /*public List <Object> getItem(Object uiObject, String action){
+    //HACK#2
+    public ArrayList <Vehicle> getVehicle(Object uiObject, String action){
         
         //local container
-        List <Object> result;
+        ArrayList <Vehicle> result;
         
         //send to dbSessionRouter      
-        result = dControl.dbSessionRouter(uiObject, action);
-        return result;
-    }//end GetItem method*/
+        result = dControl.DBvehicleRouter(uiObject, action);
+        return result;       
+    }//end getVehicle method
+    
+    //HACK#3
+    public ArrayList <Employee> getEmployee(Object uiObject, String action){
+        
+        //local container
+        ArrayList <Employee> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.DBemployeeRouter(uiObject, action);
+        return result;       
+    }//end getVehicle method
+    
+    //HACK#4
+    public ArrayList <Reservation> getReservation(Object uiObject, String action){
+        
+        //local container
+        ArrayList <Reservation> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.DBreservationRouter(uiObject, action);
+        return result;       
+    }//end getVehicle method   
+    
+    //HACK#5
+    public ArrayList <Customer> getCustomer(Object uiObject, String action){
+        
+        //local container
+        ArrayList <Customer> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.DBcustomerRouter(uiObject, action);
+        return result;       
+    }//end getVehicle method
+    
     
     public String AddItem(Object uiObject, String action){
         
