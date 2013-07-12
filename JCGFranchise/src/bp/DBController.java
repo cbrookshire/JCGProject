@@ -27,9 +27,9 @@ public class DBController {
     
     
     //UTILITIES
-    //HACK#1 the following is Maurice's hack until he discovers how to 
+    //HACK#1 the following is Maurice's hack until he figures out how to 
     //convert an array of Franchise, Vehicle, Employee, Customer 
-    //into a generic object
+    //into a generic array of object
     public ArrayList <Franchise> DBfranchisorRouter (Object sysObject, 
              String action){
     
@@ -67,7 +67,7 @@ public class DBController {
                 return temp;             
         }
         return null;
-     }//end fovDBRouter method
+     }//end DBfranchisorRouter method
         
     //HACK #2 
     public ArrayList <Vehicle> DBvehicleRouter (Object sysObject, 
@@ -107,7 +107,7 @@ public class DBController {
                 return temp;             
         }         
         return null;
-     }//end fovDBRouter method   
+     }//end DBvehicleRouter method   
                
     //HACK #3
     public ArrayList <Employee> DBemployeeRouter (Object sysObject, 
@@ -193,8 +193,6 @@ public class DBController {
         }          
     }//end DBcustomerRouter method   
     
-    
-   
     //HACK #4 routes reservation views      
     public ArrayList <Reservation> DBreservationRouter (Object sysObject, 
              String action){
@@ -238,7 +236,7 @@ public class DBController {
                 temp.add(error);
                 return temp;             
         }
-     }//end DBreservationRouter method */  
+    }//end DBreservationRouter method  
     
     
     
@@ -273,7 +271,8 @@ public class DBController {
                         }  
 
         case "UPDATEPASSWORD":
-                        try{   //Cast object and attempt update
+                        try{ 
+                            //Cast object and attempt update
                             JCGlIO temp = (JCGlIO)sysObject;
                             dbReturnCode = dbase.updatePassword(temp);
                             String convert = Integer.toString(dbReturnCode);
@@ -321,8 +320,9 @@ public class DBController {
                         }*/
                 
                 
-            case "DELETE":  //determines object type and calls corresponding 
-                            //insert methods   
+            case "DELETE":  
+                        //determines object type and calls corresponding 
+                        //insert methods   
                         /*try
                         {
                             if (sysObject instanceof Franchise){
@@ -375,16 +375,39 @@ public class DBController {
                 
                 
             case "EDIT":
+                        //determines object type and calls corresponding 
+                        //insert methods   
+                        /*try{
+                            if (sysObject instanceof Franchise)
+                                dbReturnCode = 
+                                queryDB.updateFranchise((Franchise)sysObject);
+                            if (sysObject instanceof Vehicle)
+                                dbReturnCode =
+                                queryDB.updateVehicle((Vehicle)sysObject); 
+                            if (sysObject instanceof Employee)
+                                dbReturnCode =
+                                queryDB.updateEmployee((Employee)sysObject);
+                            if (sysObject instanceof Reservation)
+                                dbReturnCode =
+                                queryDB.updateReservation((Reservation)sysObject);
+                            if (sysObject instanceof Customer)
+                                dbReturnCode =
+                                queryDB.updateCustomer((Customer)sysObject);                               
+                        }
+                        catch(UnauthorizedUserException e){
+                            return e.getMessage();
+                        }  
+                        catch(BadConnectionException e){
+                            return e.getMessage();
+                        }*/
                           
-            default:        
-                            //default test String
-                            return "-2";             
-       
+            default:    //default test String
+                        return null;      
        }//end DB Switch
     }//end DBRouter method
     
    
-    public static <T> ArrayList convertToGeneric (ArrayList <T> list){
+   /* public static <T> ArrayList convertToGenericList (ArrayList <T> list){
     
         //local container
         ArrayList <Object> temp = new ArrayList();
@@ -394,12 +417,9 @@ public class DBController {
             temp.add(iterator);
         }
         return temp;
-    }//end dbSessionRouter   
-    
-    /*public static ArrayList <Class <T>> convertObjectInArrayList{
+    }//end dbSessionRouter */  
     
     
-    }*/
     
  /******************************************************
  * Singleton method for JCGSystem class + Object 

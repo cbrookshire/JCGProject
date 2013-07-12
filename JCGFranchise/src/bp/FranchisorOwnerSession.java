@@ -12,7 +12,7 @@ public class FranchisorOwnerSession {
    
     //local vars
     private DBController dControl;
-    private UIController uControl;
+    
     
     //CONSTRUCTOR
     public FranchisorOwnerSession(){        
@@ -21,8 +21,8 @@ public class FranchisorOwnerSession {
     
     //UTILITIES
     //HACK#1 the following is Maurice's hack until he discovers how to 
-    //convert an array of Franchise, Vehicle, Employee, Customer 
-    //into a generic object
+    //convert or return an array of Franchise, Vehicle, Employee, Customer 
+    //generic object
     public ArrayList <Franchise> getFranchise(Object uiObject, String action){
         
         //local container
@@ -82,8 +82,7 @@ public class FranchisorOwnerSession {
         
         //local vars
         String dbCode;
-        String sysCode;
-        
+        String sysCode;        
         
         //send to dbSystemRouter      
         dbCode = dControl.dbSystemRouter(uiObject, action);
