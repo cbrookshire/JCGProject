@@ -115,7 +115,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
-                    "Last name is invalid.  Type something in there...",
+                    "City name is invalid.  Type something in there...",
                     "Error!",
                     JOptionPane.ERROR_MESSAGE);
             }
@@ -127,7 +127,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
-                    "Last name is invalid.  Type something in there...",
+                    "State is invalid.  Type something in there...",
                     "Error!",
                     JOptionPane.ERROR_MESSAGE);
             }
@@ -378,6 +378,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //Submit button
+        if(checkFields() == false)
+            return;
         if(mode == 0)  //Create one
         {
             //send new Employee to DB

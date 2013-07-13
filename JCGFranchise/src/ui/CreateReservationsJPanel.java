@@ -72,7 +72,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         
         if(txtFlightNum.isEnabled())
         {
-            if(txtFlightNum.getText().matches("[0-9]+"))
+            if(!txtFlightNum.getText().matches("[0-9]+"))
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
@@ -96,7 +96,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         
         if(txtDate.isEnabled())
         {
-            if(txtDate.getText().matches("[0-9]{1,2}/[0-9]{1,2}/[0-9]{1,2}"))
+            if(!txtDate.getText().matches("[0-9]{1,2}/[0-9]{1,2}/[0-9]{1,2}"))
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
@@ -108,7 +108,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         
         if(txtFlightTime.isEnabled())
         {
-            if(txtFlightTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
+            if(!txtFlightTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
@@ -120,7 +120,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         
         if(txtPickupTime.isEnabled())
         {
-            if(txtPickupTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
+            if(!txtPickupTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
@@ -132,7 +132,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         
         if(txtDropoffTime.isEnabled())
         {
-            if(txtDropoffTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
+            if(!txtDropoffTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
