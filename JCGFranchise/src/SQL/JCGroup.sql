@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS Vehicle
   Capacity int Not Null,
   VCondition varchar(15) Not NUll,
   Tablet varchar(20) Not Null,
-  RentalPrice decimal(3, 2) Not null,
+  RentalPrice decimal(5, 2) Not null,
   FranchiseNumber int,
   PRIMARY KEY (VehicleID, VIndex),
   KEY (VIndex),
@@ -156,10 +156,10 @@ INSERT INTO Franchise (Address, City, State, Zip, Phone, Email, AirportID)
 INSERT INTO Franchise (Address, City, State, Zip, Phone, Email, AirportID)
   VALUES ('934 Windy St', 'Dolton', 'Illinois', 45003, '302-454-8232', 'jcgDolton@gmail.com', 3 );
 
-INSERT INTO Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
- VALUES ('James', 'Cheeves', '139 Flatbush Ave', 'Brooklyn', 'New York', 11217, '718-230-7703', 'JCheeves@gmail.com', 1, 1, 'JC7703' );
+INSERT INTO Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username, FirstLog)
+ VALUES ('James', 'Cheeves', '139 Flatbush Ave', 'Brooklyn', 'New York', 11217, '718-230-7703', 'JCheeves@gmail.com', 1, 1, 'JC7703', 'N');
  
-CREATE USER 'JC7703'@'localhost' IDENTIFIED BY 'JC7703';
+CREATE USER 'JC7703'@'localhost' IDENTIFIED BY 'password';
 GRANT CREATE USER ON *.* TO 'JC7703'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON JCGroup.Franchise TO 'JC7703'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON JCGroup.Employee TO 'JC7703'@'localhost';
@@ -168,12 +168,12 @@ GRANT SELECT, UPDATE, DELETE, INSERT ON JCGroup.Airport TO 'JC7703'@'localhost';
 FLUSH PRIVILEGES;
 
 INSERT INTO Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username, FirstLog)
- VALUES ('Elwyn', 'Nick', '1622 Bedford Avenue', 'Brooklyn', 'New York', 11225, '347-770-8853', 'ElwynN@gmail.com', 98, 1, 'JCGAdmin', 1);
+ VALUES ('Elwyn', 'Nick', '1622 Bedford Avenue', 'Brooklyn', 'New York', 11225, '347-770-8853', 'ElwynN@gmail.com', 98, 1, 'JCGAdmin', 'N');
 
-INSERT INTO Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
- VALUES('Henry', 'Henderson', '599 Sibly Blvd.', 'Dolton', 'Illinois', 60419, '708-841-7336', 'HenryH@gmail.com', 2, 6, 'HH7336' );
+INSERT INTO Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username, FirstLog)
+ VALUES('Henry', 'Henderson', '599 Sibly Blvd.', 'Dolton', 'Illinois', 60419, '708-841-7336', 'HenryH@gmail.com', 2, 6, 'HH7336', 'N' );
  
-CREATE USER 'HH7336'@'localhost' IDENTIFIED BY 'HH7336';
+CREATE USER 'HH7336'@'localhost' IDENTIFIED BY 'hulkhogan';
 grant select on JCGroup.Airport to 'HH7336'@'localhost';
 grant select on JCGroup.Franchise to 'HH7336'@'localhost';
 grant select, insert, update, delete on JCGroup.Maintanence to 'HH7336'@'localhost';
@@ -327,3 +327,67 @@ flush privileges;
 
 insert into Membership(MemberID, Discount, MinAmount)
 values('Diamond', 000.85, 50), ('Gold', 000.90, 35), ('Silver', 000.95, 20), ('Bronze' , 1.00, 0);
+
+INSERT INTO Customer(Fname, Surname, Address, City, State, Zip, Phone, Email, ReservationCount, MemberID, Username, FirstLog)
+  VALUES ('Edur', 'Arkaitz', '750 Vine St', 'Los Angelas', 'California', 90038, '323-465-1025', 'EArkaitz@aol.com', 30, 'Silver', 'EArkaitz', 'N');
+ 
+ CREATE USER 'EArkaitz'@'localhost' IDENTIFIED BY 'born2bwild';
+ GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Customer TO 'EArkaitz'@'localhost';
+ GRANT SELECT ON JCGroup.Vehicle TO 'EArkaitz'@'localhost';
+ FLUSH PRIVILEGES;
+
+INSERT INTO Customer(Fname, Surname, Address, City, State, Zip, Phone, Email, ReservationCount, MemberID, Username, FirstLog)
+  VALUES ('Noga', 'Daniel', '7079 Sunset Blvd', 'Hollywood', 'California', 90028, '323-469-2587', 'NogaD@hotmail.com', 3, 'Bronze', 'NogaD', 'N');
+ 
+ CREATE USER 'NogaD'@'localhost' IDENTIFIED BY 'lonewolf';
+ GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Customer TO 'NogaD'@'localhost';
+ GRANT SELECT ON JCGroup.Vehicle TO 'NogaD'@'localhost';
+ FLUSH PRIVILEGES;
+
+INSERT INTO Customer(Fname, Surname, Address, City, State, Zip, Phone, Email, ReservationCount, MemberID, Username, FirstLog)
+  VALUES ('Jean', 'Baudouin', '199 Northside Drive', 'Atlanta', 'Georgia', 30313, '404-523-3100', 'JeanB@yahoo.com', 55, 'Gold', 'JeanB', 'N');
+ 
+CREATE USER 'JeanB'@'localhost' IDENTIFIED BY 'firefly';
+GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Customer TO 'JeanB'@'localhost';
+GRANT SELECT ON JCGroup.Vehicle TO 'JeanB'@'localhost';
+FLUSH PRIVILEGES;
+ 
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+ VALUES (2001, '1GNGS18Z4D0212001', 'Lincoln', 'Town Car', 2013, 13203, 3, 'Exellent', 'CDQE34PDZDWET', 040.00, 2),
+        (7301, '1MWAW18Z3D4117301', 'Mercedes Benz', 'S550', 2013, 12003, 3, 'Exellent', 'FETL3PF3PSJEO', 055.00, 2),
+        (4321, '1FEDS12F5C6344321', 'Chevy', 'Suburban', 2012, 34023, 6, 'Great', 'HSOEN3PE0PFJ7', 075.00, 2),
+        (1002, '1COAC12F3B5121002', 'Cadillac', 'Escalade ESV', 2011, 45023, 6, 'Exellent', 'JDOWJEOS98PSL', 085.00, 2),
+        (3203, '1GNGT34E4A0013203', 'Lincoln', 'Stretch Limousine', 2010, 53002, 10, 'Great', 'JDOWJ349IEWOS', 115.00, 2),
+        (5203, '1MWAW58S6C0005203', 'Mercedes', 'Sprinter Executive Van', 2012, 8302, 13, 'Exellent', 'SLKEOS03LDJW9', 130.00, 2);
+        
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+ VALUES (2341, '1GNGS18Z4D0212341', 'Lincoln', 'Town Car', 2013, 17203, 3, 'Exellent', 'CDSLEO30SLW9S', 040.00, 3),
+        (7341, '1MWAW18Z3D4117341', 'Mercedes Benz', 'S550', 2013, 22003, 3, 'Exellent', 'FETL40SJ30ND3', 055.00, 3),
+        (4781, '1FEDS12F5C6344781', 'Chevy', 'Suburban', 2012, 36023, 6, 'Great', 'HSOENK302KSIS', 075.00, 3),
+        (1212, '1COAC12F3B5121212', 'Cadillac', 'Escalade ESV', 2011, 42023, 6, 'Exellent', 'JDNSNWNAOW93J', 085.00, 3),
+        (3003, '1GNGT34E4A0013003', 'Lincoln', 'Stretch Limousine', 2010, 57002, 10, 'Great', 'JDOWKSOW03SJW', 115.00, 3),
+        (5213, '1MWAW58S6C0005213', 'Mercedes', 'Sprinter Executive Van', 2012, 8532, 13, 'Exellent', 'SLLLSOWNFSW93', 130.00, 3);
+
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+ VALUES (2022, '1GNGS18Z4D0212022', 'Lincoln', 'Town Car', 2013, 13203, 3, 'Exellent', 'PEGI94SOE2ISW', 040.00, 4),
+        (7001, '1MWAW18Z3D4117001', 'Mercedes Benz', 'S550', 2013, 12003, 3, 'Exellent', 'QPSLXI40SOE3R', 055.00, 4),
+        (4902, '1FEDS12F5C6344902', 'Chevy', 'Suburban', 2012, 34023, 6, 'Great', 'LSOEND3IS08AW4', 075.00, 4),
+        (1086, '1COAC12F3B5121086', 'Cadillac', 'Escalade ESV', 2011, 45023, 6, 'Exellent', 'ZLAOW9DSIW2U2', 085.00, 4),
+        (3703, '1GNGT34E4A0013703', 'Lincoln', 'Stretch Limousine', 2010, 53002, 10, 'Great', 'FHREE04IID0D9', 115.00, 4),
+        (5273, '1MWAW58S6C0005273', 'Mercedes', 'Sprinter Executive Van', 2012, 8302, 13, 'Exellent', 'LSKWE30LSJEO0', 130.00, 4);
+
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+ VALUES (2932, '1GNGS18Z4D0212932', 'Lincoln', 'Town Car', 2013, 13203, 3, 'Exellent', 'OPWD30PSIWEWO', 40.00, 5),
+        (7022, '1MWAW18Z3D4117022', 'Mercedes Benz', 'S550', 2013, 12003, 3, 'Exellent', 'MSN2IQWAGTUE9', 55.00, 5),
+        (4823, '1FEDS12F5C6344823', 'Chevy', 'Suburban', 2012, 34023, 6, 'Great', 'JSKWIF839JSHW', 75.00, 5),
+        (1593, '1COAC12F3B5121593', 'Cadillac', 'Escalade ESV', 2011, 45023, 6, 'Exellent', 'NSKWOCPPQLXMJ', 85.00, 5),
+        (3590, '1GNGT34E4A0013590', 'Lincoln', 'Stretch Limousine', 2010, 53002, 10, 'Great', 'SDKJWISJDHEND', 115.00, 5),
+        (5310, '1MWAW58S6C0005310', 'Mercedes', 'Sprinter Executive Van', 2012, 8302, 13, 'Exellent', 'LSSIOWID09SIO', 130.00, 5);
+        
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+ VALUES (2734, '1GNGS18Z4D0212734', 'Lincoln', 'Town Car', 2013, 13203, 3, 'Exellent', 'TRIU39UIWJSOP', 40.00, 6),
+        (7596, '1MWAW18Z3D4117596', 'Mercedes Benz', 'S550', 2013, 12003, 3, 'Exellent', 'HUE93OW0WOQUW', 55.00, 6),
+        (4814, '1FEDS12F5C6344814', 'Chevy', 'Suburban', 2012, 34023, 6, 'Great', 'IO09IOSJOXZQQ', 75.00, 6),
+        (1306, '1COAC12F3B5121306', 'Cadillac', 'Escalade ESV', 2011, 45023, 6, 'Exellent', 'NNSW23SWQAIOP', 85.00, 6),
+        (3412, '1GNGT34E4A0013412', 'Lincoln', 'Stretch Limousine', 2010, 53002, 10, 'Great', 'SSUIOWPQ09OSJ', 115.00, 6),
+        (5001, '1MWAW58S6C0005001', 'Mercedes', 'Sprinter Executive Van', 2012, 8302, 13, 'Exellent', 'LSUIW92SIWMWI', 130.00, 6);

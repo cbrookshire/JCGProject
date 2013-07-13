@@ -100,6 +100,16 @@ final class QStrings {
     public String update_airport = "UPDATE Airport SET AirportName = ?, Address = ?, "
             + "City = ?, State = ? Zip = ? WHERE AirportID = ?";
     
+    //reservation
+    public String get_rental_price = "SELECT RentalPrice FROM Vehicle WHERE VehicleID = ?";
+    
+    public String get_discount = "SELECT Discount FROM Membership m, Customer c " +
+               "WHERE m.MemberID = c.MemberID && c.CustomerID = ?";
+    
+    public String insert_res = "insert into Reservation(FranchiseNumber, VehicleID, CustomerID, "
+            + "Price, FlightNumber, Airline, FlightTime, PickUpTime, DropOffTime,  Date, "
+            + "AltAddress, AltCity, AltState, AltZip) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
     
 // Admin
     public String get_emp_username = "SELECT Username FROM Employee WHERE EmpType != 98";
