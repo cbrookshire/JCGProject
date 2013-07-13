@@ -39,8 +39,12 @@ public class JCGDatabase {
     public JCGDatabase(JCGlIO jcgLio) 
             throws InvalidUserException, BadConnectionException {
         try {
+            
+            
             connection = DriverManager.getConnection(DATABASE_URL,
-                    jcgLio.getU(), jcgLio.getP());            
+                    jcgLio.getU(), jcgLio.getP());
+            
+            System.out.println(jcgLio.getU() + "\t" + jcgLio.getP());
              
             loginStatus = connection.prepareStatement(
                 "SELECT FirstLog from Employee where Username = ?");
@@ -64,10 +68,15 @@ public class JCGDatabase {
                 "UPDATE Customer SET FIRSTLOG = 'N' WHERE Username = ?");
             }
         catch(SQLException sqlE) {
-            if(sqlE.getErrorCode() == 1044 || sqlE.getErrorCode() == 1045)
+            
+            if(sqlE.getErrorCode() == 1044 || sqlE.getErrorCode() == 1045) {
+                System.out.println("constructor invalid user");
                 throw(new InvalidUserException("InvalidUserNamePassword"));
-            else
+            }else {
+                System.out.println("constructor bad user");
                 throw(new BadConnectionException("BadConnection"));
+            }
+                
         }
     }
     
@@ -79,12 +88,66 @@ public class JCGDatabase {
     public int login(JCGlIO jcgLio) 
             throws NewUserException, BadConnectionException
     {
-        if(getLoginStatus(jcgLio.getU()) == 0)
-            throw(new NewUserException("UserNotFound"));
-        else if(getLoginStatus(jcgLio.getU()) != 1 || getLoginStatus(jcgLio.getU()) != 0)
+        code = 999;
+        // check to see if the login is an employee
+        try {
+            loginStatus.setString(1, jcgLio.getU());
+            resultSet = loginStatus.executeQuery();
+            while(resultSet.next())
+            {
+                status = resultSet.getString("FirstLog");                
+            }
+            if("Y".equals(status))      // First log in for a Employee
+            {
+                throw(new NewUserException("Please enter new password"));
+            }
+            else if("N".equals(status)) // Employee has logged in before
+            {
+                System.out.println(status);
+                empType.setString(1, jcgLio.getU());
+                resultSet = empType.executeQuery();
+                while(resultSet.next())
+                {
+                    code = resultSet.getInt("EmpType");
+                }                
+            }
+            else                                                               // Not an Employee, Check for customer               
+            {
+                cust_loginStatus.setString(1, jcgLio.getU());
+                resultSet = cust_loginStatus.executeQuery();
+                while(resultSet.next())
+                {
+                    status = resultSet.getString("FirstLog");
+                }
+                if("Y".equals(status))
+                {                                
+                    throw(new NewUserException("Please enter new password")); // First login for a Customer
+                }
+                else if ("N".equals(status))  {                               // Not first login for a Customer
+                    custType.setString(1, jcgLio.getU());                     // Will double check to make sure 
+                    resultSet = custType.executeQuery();                      // for customer in system.
+                    while(resultSet.next())
+                    {
+                        code = resultSet.getInt("CType");
+                    }                                   
+                }
+                else                                                          // invalid user accessing system
+                {
+                    throw(new BadConnectionException("BadConnection"));
+                }
+            }
+        }catch(SQLException sqlE) {
             throw(new BadConnectionException("BadConnection"));
-        return getEmpType(jcgLio.getU());    
-   }
+        }finally {
+            try{
+                if(resultSet != null)
+                    resultSet.close();
+            }catch(Exception e) {
+                
+            }
+        }
+        return code;
+    }
      
 /******************************************************************************
  * Used by login to get check for new user
@@ -99,26 +162,25 @@ public class JCGDatabase {
             {
                 status = resultSet.getString("FirstLog");
             }
-            if("Y".equals(status)) {                                // First log in for an Employee
+            if("Y".equals(status)) {
+                System.out.println("three");
                 return 0;
-            }else if("N".equals(status)) {                          // Not First login for an Employee
+            }else if("N".equals(status)) {
+                System.out.println("four");
                 return 1;
             }else {                                                 // Not an Employee    
-                try {                                               // Check for customer
-                    cust_loginStatus.setString(1, username);
-                    resultSet = cust_loginStatus.executeQuery();
-                    while(resultSet.next())
-                    {
-                        status = resultSet.getString("FirstLog");
-                    }
-                    if("Y".equals(status)) {                                
-                        return 0;                                   // First login for a Customer
-                    }else {                          
-                        return 1;                                   // Not first login for a Customer
-                    }
-                }catch(SQLException sqlE) {
-                    return sqlE.getErrorCode();
+                cust_loginStatus.setString(1, username);
+                resultSet = cust_loginStatus.executeQuery();
+                while(resultSet.next())
+                {
+                    status = resultSet.getString("FirstLog");
                 }
+                if("Y".equals(status)) {                                
+                    return 0;                                   // First login for a Customer
+                }else {                          
+                    return 1;                                   // Not first login for a Customer
+                }
+                
             }
         }catch(SQLException sqlE) {
             return sqlE.getErrorCode();
@@ -138,7 +200,7 @@ public class JCGDatabase {
  * @param username
  * @returns integer empType or SQL error code number 
  ******************************************************************************/
-    private int getEmpType(String username) {
+    private int getEmpType(String username) throws SQLException {
         try {                                               // First check for Employee
             empType.setString(1, username);
             resultSet = empType.executeQuery();
@@ -155,37 +217,40 @@ public class JCGDatabase {
                         code = resultSet.getInt("CType");
                     }            
                 }catch(SQLException sqlE) {
-                    return sqlE.getErrorCode();
+                    throw(new SQLException());
                 }
             }
         }
         catch(SQLException sqlE) {
-            return sqlE.getErrorCode();
+            throw(new SQLException());
         }
         return code;
     }
-    
-    
+        
  /*****************************************************************************
   * Used to update the password for a given user in the system.
   * @param username
   * @param password
-  * @returns 1 for success or SQL error code. 
+  * @returns 1 for success or throw errors 
   *****************************************************************************/    
     public int updatePassword(JCGlIO jcgLio) 
             throws InvalidUserException, BadConnectionException 
     {
         try {
-            update_password.setString(1, jcgLio.getU());
-            update_password.setString(2, jcgLio.getP());
+            update_password.setString(1, jcgLio.getU());   // This will throw exception
+            update_password.setString(2, jcgLio.getP());   // before testing for employee or customer
             update_password.execute();
             
             if(getEmpType(jcgLio.getU()) == 99) {
-                code = updateCustLogStatus(jcgLio.getU());
-            }else {
-                code = updateLogStatus(jcgLio.getU());
+                update_cust_status.setString(1, jcgLio.getU());
+                update_cust_status.execute();
             }
-            return code;
+            else
+            {
+                update_status.setString(1, jcgLio.getU());  // update log status for Employee
+                update_status.execute();
+            }
+            return 1; // successful update
         }
         catch(SQLException sqlE)
         {
@@ -195,38 +260,7 @@ public class JCGDatabase {
                 throw(new BadConnectionException("BadConnection"));
         }
     }
-    
-    
- /*****************************************************************************
-  * Used to by updatePassword to set the user to non-new user.
-  * @param username
-  * @returns 1 for success or SQL error code. 
-  *****************************************************************************/
-    private int updateLogStatus(String username) {
-        try {
-            update_status.setString(1, username);
-            update_status.execute();
-            return 1;
-        }
-        catch(SQLException sqlE)
-        {
-            return sqlE.getErrorCode();
-        }
-    }
-    
-    private int updateCustLogStatus(String username) {
-        try {
-            update_cust_status.setString(1, username);
-            update_cust_status.execute();
-            return 1;
-        }
-        catch(SQLException sqlE)
-        {
-            return sqlE.getErrorCode();
-        }
-    }
-    
-    
+      
 /******************************************************************************
  * Closes the connection to the database for current user.
  ******************************************************************************/
