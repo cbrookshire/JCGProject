@@ -39,7 +39,6 @@ public class LoginJPanel extends javax.swing.JPanel {
         lIO.setU(txtLoginName.getText());
         lIO.setP(txtPassword.getText());
         String code = uic.UIRouter(lIO, "LOGIN");
-        System.out.println("Pass: " + txtPassword.getText());
         System.out.println(code);
         BaseJFrame.getInstance().setScreen(code);
         /*
@@ -106,6 +105,11 @@ public class LoginJPanel extends javax.swing.JPanel {
         jLabel3.setText("New User?");
 
         btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -182,6 +186,10 @@ public class LoginJPanel extends javax.swing.JPanel {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         verifyLogin();
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        BaseJFrame.getInstance().setScreen("002");  //Go to registration screen
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
