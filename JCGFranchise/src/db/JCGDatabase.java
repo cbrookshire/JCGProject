@@ -44,7 +44,7 @@ public class JCGDatabase {
             connection = DriverManager.getConnection(DATABASE_URL,
                     jcgLio.getU(), jcgLio.getP());
             
-            //System.out.println(jcgLio.getU() + "\t" + jcgLio.getP());
+            
              
             loginStatus = connection.prepareStatement(
                 "SELECT FirstLog from Employee where Username = ?");
