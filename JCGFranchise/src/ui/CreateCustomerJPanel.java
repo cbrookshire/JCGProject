@@ -5,7 +5,7 @@
 package ui;
 
 import java.util.ArrayList;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author Corey
@@ -63,6 +63,97 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             resCount.setEnabled(false);
             memberID.setEnabled(false);
         }
+    }
+    
+    private boolean checkFields()
+    {
+        boolean success = true;
+        
+        if(newCustomerName.isEnabled())
+        {
+            if(newCustomerName.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Customer name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerAddress.isEnabled())
+        {
+            if(!newCustomerAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Address is invalid.  Example: 123 Dragon drive",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerCity.isEnabled())
+        {
+            if(newCustomerCity.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "City name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerState.isEnabled())
+        {
+            if(newCustomerState.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "State name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerZip.isEnabled())
+        {
+            if(!newCustomerZip.getText().matches("[1-9]{1}[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Zip code is invalid (example: 30047)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerPhone.isEnabled())
+        {
+            if(!newCustomerPhone.getText().matches("[0-9]{3}-[0-9]{3}-[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Phone number is invalid (example: 770-666-1234)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerEmail.isEnabled())
+        {
+            if(!newCustomerEmail.getText().matches("\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Email is invalid.  (Example: someuser@website.com)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        return success;
     }
 
     private void getListSelection()
@@ -287,6 +378,8 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if(checkFields() == false)
+            return;
         if(mode == 0)  //Create one
         {
             //send new Customer to DB

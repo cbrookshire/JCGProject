@@ -5,6 +5,7 @@
 package ui;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,6 +59,109 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             newFranchiseAirport.setEnabled(false);
             
         }
+    }
+    
+    private boolean checkFields()
+    {
+        boolean success = true;
+        
+        if(newFranchiseCity.isEnabled())
+        {
+            if(newFranchiseCity.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "City name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseAddress.isEnabled())
+        {
+            if(!newFranchiseAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Address is invalid.  Example: 123 Dragon drive",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseCity.isEnabled())
+        {
+            if(newFranchiseCity.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "City name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseState.isEnabled())
+        {
+            if(newFranchiseState.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "City name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseZip.isEnabled())
+        {
+            if(!newFranchiseZip.getText().matches("[1-9]{1}[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Zip code is invalid (example: 30047)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchisePhone.isEnabled())
+        {
+            if(!newFranchisePhone.getText().matches("[0-9]{3}-[0-9]{3}-[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Phone number is invalid (example: 770-666-1234)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseEmail.isEnabled())
+        {
+            if(!newFranchiseEmail.getText().matches("\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Email is invalid.  (Example: someuser@website.com)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseAirport.isEnabled())
+        {
+            if(newFranchiseAirport.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Airport name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        return success;
     }
 
     private void getListSelection()
@@ -271,6 +375,8 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void newFranchiseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFranchiseButtonActionPerformed
+        if(!checkFields())
+            return;
         if(mode == 0)  //Create one
         {
             //send new Franchise to DB

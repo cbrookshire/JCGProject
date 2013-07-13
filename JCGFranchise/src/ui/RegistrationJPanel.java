@@ -268,7 +268,7 @@ public class RegistrationJPanel extends javax.swing.JPanel {
                     JOptionPane.ERROR_MESSAGE);
         }
         
-        if(!txtAddress.getText().matches("[0-9]{1,5} \\w{1,}"))
+        if(!txtAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
         {
             success = false;
             JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 

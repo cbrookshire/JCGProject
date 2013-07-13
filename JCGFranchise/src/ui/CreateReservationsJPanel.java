@@ -4,6 +4,7 @@
  */
 package ui;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,6 +64,85 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
             
         }
         
+    }
+    
+    private boolean checkFields()
+    {
+        boolean success = true;
+        
+        if(txtFlightNum.isEnabled())
+        {
+            if(txtFlightNum.getText().matches("[0-9]+"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Flight number is invalid.  Numbers only",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtAirline.isEnabled())
+        {
+            if(txtAirline.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Airline name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtDate.isEnabled())
+        {
+            if(txtDate.getText().matches("[0-9]{1,2}/[0-9]{1,2}/[0-9]{1,2}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Invalid date.  Example (1/1/10)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtFlightTime.isEnabled())
+        {
+            if(txtFlightTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Invalid flight time.  Example (1:15 AM)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtPickupTime.isEnabled())
+        {
+            if(txtPickupTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Invalid pickup time.  Example (1:15 AM)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtDropoffTime.isEnabled())
+        {
+            if(txtDropoffTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Invalid pickup time.  Example (1:15 AM)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        return success;
     }
     
     private void getListSelection()
@@ -161,7 +241,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         jLabel14.setText("Pickup time");
 
         txtFlightTime.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        txtFlightTime.setText("12:00 am");
+        txtFlightTime.setText("12:00 AM");
 
         jLabel15.setText("Dropoff Time");
 
@@ -323,6 +403,8 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        if(!checkFields())
+            return;
         if(mode == 0)  //Create one
         {
             //send new Franchise to DB
