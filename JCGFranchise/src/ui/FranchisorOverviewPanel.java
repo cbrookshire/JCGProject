@@ -5,6 +5,7 @@
 package ui;
 
 import java.util.*;
+import bp.*;
 
 /**
  *
@@ -17,20 +18,21 @@ public class FranchisorOverviewPanel extends javax.swing.JPanel  {
      */
     public FranchisorOverviewPanel() {
         initComponents();
+        setList();
     }
 
     public void setList()
     {
         
-        ArrayList<String> list = new ArrayList<String>();
-        //obtain list list lol
+        ArrayList<Franchise> list = new ArrayList<Franchise>();
         
+        list = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISOR"), "VIEWALL");
         if(list.size() > 0)
         {
             Vector<String> data = new Vector<String>();
             for(int i = 0; i < list.size(); i++)
             {
-                data.add(list.get(i));
+                data.add(list.get(i).getAirport());
             }
             jList1.setListData(data);
         }

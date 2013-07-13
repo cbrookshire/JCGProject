@@ -22,7 +22,7 @@ public class FranchisorJPanel extends javax.swing.JPanel {
     
     public FranchisorJPanel() {
         initComponents();
-        setContent(new FranchisorOverviewPanel());
+        //setContent(new FranchisorOverviewPanel());
     }
     
     public void setContent(JPanel c)
