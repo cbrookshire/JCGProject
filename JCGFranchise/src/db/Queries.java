@@ -1104,6 +1104,7 @@ public class Queries
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.grant_driver);
             pStmnt.setString(1, username);
+            pStmnt.setString(2, username);
             pStmnt.executeQuery();
             return 1;
         }catch(SQLException sqlE) {
