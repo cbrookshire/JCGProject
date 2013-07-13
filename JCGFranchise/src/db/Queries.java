@@ -2962,6 +2962,113 @@ public class Queries
         /* Return to Buisness Section Start */
     }
     
+        //GET: List Reservations on a Specific Date (Format should be same as stored in MySQL (MM/DD/YYYY))
+      public  ArrayList<Reservation> ReservationsForDate(String date)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            String statString = "SELECT * FROM `reservations` WHERE 'Date' = ?";
+
+            /* Return Parameter */
+            ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
+        /* Variable Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                statment.setString(1, date);
+                //statment.setInt(2, CustID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* ArrayList Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Reservation temp = new Reservation();
+                    
+                    //results.getBigDecimal("AMOUNT")
+                    
+                    
+                    temp.setAirline(results.getString("Airline"));
+                    temp.setComment(results.getString("Comment"));
+                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setDate(results.getString("Date"));
+                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setFlightNumber(results.getString("FlightNumber"));
+                    temp.setFlightTime(results.getString("FlightTime"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setPickUpTime(results.getString("PickUpTime"));
+                    temp.setPrice(results.getString("Price"));
+                    temp.setReservationNumber(results.getString("ReservationNumber"));
+                    temp.setStatus(results.getString("Status"));
+                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setAltAddress(results.getString("AltAddress"));
+                    temp.setAltCity(results.getString("AltCity"));
+                    temp.setAltState(results.getString("AltState"));
+                    temp.setAltZip(results.getString("AltZip"));
+                    
+                    BPArrayList.add(temp);
+                }
+            /* ArrayList Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+        /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+            return BPArrayList;
+        /* Return to Buisness Section Start */
+    }
+    
+    
         //DELETE: Reservation
     public boolean RemoveReservation(int ID)
              throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
