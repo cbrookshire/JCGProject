@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS JCGroup;
 USE JCGroup;
 
+DROP TABLE IF EXISTS Reservation;
 DROP TABLE IF EXISTS Maintanence;
 DROP TABLE IF EXISTS Vehicle;
 DROP TABLE IF EXISTS Employee;
@@ -63,7 +64,8 @@ CREATE TABLE IF NOT EXISTS Vehicle
   Tablet varchar(20) Not Null,
   RentalPrice decimal(3, 2) Not null,
   FranchiseNumber int,
-  PRIMARY KEY (VehicleID),
+  PRIMARY KEY (VehicleID, VIndex),
+  KEY (VIndex),
   FOREIGN KEY (FranchiseNumber)
     REFERENCES Franchise (FranchiseNumber) );
 
@@ -74,6 +76,7 @@ CREATE TABLE IF NOT EXISTS Maintanence
   ServiceType varchar(20),
   ServiceCost double(4,2),
   PRIMARY KEY (ServiceNumber),
+  KEY (MaintIndex),
   FOREIGN KEY (VehicleID)
     REFERENCES Vehicle (VehicleID) );
 
@@ -247,6 +250,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
  
 CREATE USER 'EO2336'@'localhost' IDENTIFIED BY 'EO2336';
 GRANT SELECT ON JCGroup.Customer TO 'EO2336'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'EO2336'@'localhost';
 flush privileges;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -254,6 +258,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
  
 CREATE USER 'BA8286'@'localhost' IDENTIFIED BY 'BA8286';
 GRANT SELECT ON JCGroup.Customer TO 'BA8286'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'BA8286'@'localhost';
 flush privileges;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -261,6 +266,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
 
 CREATE USER 'KK1625'@'localhost' IDENTIFIED BY 'KK1625';
 GRANT SELECT ON JCGroup.Customer TO 'KK1625'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'KK1625'@'localhost';
 flush privileges;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -268,6 +274,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
  
 CREATE USER 'PL2246'@'localhost' IDENTIFIED BY 'PL2246';
 GRANT SELECT ON JCGroup.Customer TO 'PL2246'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'PL2246'@'localhost';
 flush privileges;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -275,6 +282,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
 
 CREATE USER 'AV9480'@'localhost' IDENTIFIED BY 'AV9480';
 GRANT SELECT ON JCGroup.Customer TO 'AV9480'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'AV9480'@'localhost';
 flush privileges;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -282,6 +290,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
 
 CREATE USER 'MG1090'@'localhost' IDENTIFIED BY 'MG1090';
 GRANT SELECT ON JCGroup.Customer TO 'MG1090'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'MG1090'@'localhost';
 flush privileges;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -289,6 +298,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
 
 CREATE USER 'DV5501'@'localhost' IDENTIFIED BY 'DV5501';
 GRANT SELECT ON JCGroup.Customer TO 'DV5501'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'DV5501'@'localhost';
 flush privileges;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -296,6 +306,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
 
 CREATE USER 'SH0990'@'localhost' IDENTIFIED BY 'SH0990';
 GRANT SELECT ON JCGroup.Customer TO 'SH0990'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'SH0990'@'localhost';
 flush privileges;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -303,6 +314,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
 
 CREATE USER 'KR4356'@'localhost' IDENTIFIED BY 'KR4356';
 GRANT SELECT ON JCGroup.Customer TO 'KR4356'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'KR4356'@'localhost';
 flush privileges;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -310,6 +322,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
 
 CREATE USER 'VA0283'@'localhost' IDENTIFIED BY 'VA0283';
 GRANT SELECT ON JCGroup.Customer TO 'VA0283'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'VA0283'@'localhost';
 flush privileges;
 
 insert into Membership(MemberID, Discount, MinAmount)
