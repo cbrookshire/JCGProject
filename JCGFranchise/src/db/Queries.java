@@ -3033,7 +3033,72 @@ public class Queries
            /* TRY BLOCK STOP */
             
             return false;
-    } 
+    }
+    
+    public int insertReservation(Reservation res) throws UnauthorizedUserException, DoubleEntryException, BadConnectionException {
+        
+        PreparedStatement pStmnt = null;
+        double rPrice = 0.00;
+        double dRate = 0.00;
+        // get the rental price
+        try {
+            // get the rental price
+            pStmnt = con.prepareStatement(qs.get_rental_price);
+            pStmnt.setInt(1, res.getVehicleID());
+            resultSet = pStmnt.executeQuery();
+            
+            while(resultSet.next()) {
+                rPrice = resultSet.getDouble("RentalPrice");
+            }
+            
+            // get the discount rate
+            pStmnt = con.prepareStatement(qs.get_discount);
+            pStmnt.setInt(1, res.getCustomerID());
+            resultSet = pStmnt.executeQuery();
+            
+            while(resultSet.next()) {
+                dRate = resultSet.getDouble("Discount");
+            }
+            
+            // multiple them together
+            rPrice = rPrice * dRate;
+            
+            // insert data into the db
+            pStmnt = con.prepareStatement(qs.insert_res);
+            pStmnt.setInt(1, res.getFranchiseNumber());
+            pStmnt.setInt(2, res.getVehicleID());
+            pStmnt.setInt(3, res.getCustomerID());
+            pStmnt.setDouble(4, rPrice);
+            pStmnt.setInt(5, res.getFlightNumber());
+            pStmnt.setString(6, res.getAirline());
+            pStmnt.setDouble(7, res.getFlightTime());
+            pStmnt.setDouble(8, (res.getFlightTime() - 1.00));
+            pStmnt.setDouble(9, (res.getFlightTime() + 1.00));
+            pStmnt.setString(10, res.getDate());
+            pStmnt.setString(11, res.getAltAddress());
+            pStmnt.setString(12, res.getAltCity());
+            pStmnt.setString(13, res.getAltState());
+ //           pStmnt.setInt(14, res.getAltZip());                       
+            pStmnt.executeQuery();
+            
+            
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));            
+        }finally {
+            try {
+                if(pStmnt != null) pStmnt.close();
+                if(resultSet != null) resultSet.close();
+            }catch(Exception e) {
+                
+            }           
+        }        
+        return 1;
+    }
     
     
 /******************************************************************************
