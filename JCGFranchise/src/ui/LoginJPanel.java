@@ -22,19 +22,23 @@ public class LoginJPanel extends javax.swing.JPanel {
     private final int TYPE_FRANCHISOR = 0;
     private final int TYPE_FRANCHISEE = 1;
     private final int TYPE_CUSTOMER = 2;
+    private JCGlIO lIO;
+    private UIController uic;
     
     public LoginJPanel() {
         userType = 0;
         initComponents();
+        lIO = JCGlIO.getInstance();
+        uic = UIController.getInstance();
     }
 
     public void verifyLogin()
     {
         
-        
-        String code = UIController.getInstance().UIRouter(
-                    new JCGlIO(txtLoginName.getText(), txtPassword.getText(), "", ""), 
-                    "LOGIN");
+       
+        lIO.setU(txtLoginName.getText());
+        lIO.setP(txtPassword.getText());
+        String code = uic.UIRouter(lIO, "LOGIN");
         System.out.println("Pass: " + txtPassword.getText());
         System.out.println(code);
         BaseJFrame.getInstance().setScreen(code);

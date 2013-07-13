@@ -13,7 +13,10 @@ public class JCGlIO {
     private String p;
     private String fN;
     private String eT;
+    private static JCGlIO lIO;
 
+    private JCGlIO(){}
+        
     //CONSTRUCTOR
     //4 arg
     public JCGlIO(String u, String p, String fN, String eT) {
@@ -60,7 +63,20 @@ public class JCGlIO {
         this.eT = eT;
     }   
     
+ /******************************************************
+ * Singleton method for JCGSystem class + Object 
+ * clone override 
+ ******************************************************/
+    public static synchronized JCGlIO getInstance(){            
+        if(lIO == null)
+        {    lIO = new JCGlIO();}
+        return lIO;
+    }
     
+    @Override
+    public Object clone() throws CloneNotSupportedException{    
+        throw new CloneNotSupportedException();
+    }
     
 }//end class JCGlIO
     

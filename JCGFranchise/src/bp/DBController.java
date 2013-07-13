@@ -265,7 +265,8 @@ public class DBController {
             try{   
                      //Cast object and attempt connection
                      JCGlIO temp = (JCGlIO)sysObject;
-                     dbase = new JCGDatabase(temp); 
+                     dbase = new JCGDatabase(temp);
+                     //System.out.println(temp.getU() + temp.getP());
                      //Attempt login 
                      dbReturnCode = dbase.login(temp);
                      String convert = Integer.toString(dbReturnCode);
@@ -358,7 +359,7 @@ public class DBController {
                     
             //determines object type and calls corresponding 
             //insert methods   
-            /*try
+            try
             {
                 if (sysObject instanceof Franchise){
                     milesReturnCode = 
@@ -384,7 +385,7 @@ public class DBController {
                     else
                         return "0";
                 }
-                if (sysObject instanceof Reservation){
+                /*if (sysObject instanceof Reservation){
                     milesReturnCode = 
                     queryDB.RemoveReservation(((Reservation)sysObject).getReservationNumber());
                     if (milesReturnCode == true) 
@@ -399,15 +400,17 @@ public class DBController {
                         return "1";                             
                     else
                         return "0";
-                }                               
+                }*/                               
             }
             catch(UnauthorizedUserException e){
                 return e.getMessage();
             }  
             catch(BadConnectionException e){
                 return e.getMessage();
-            }*/
-                
+            }
+             catch(DoubleEntryException e){
+                return e.getMessage();
+            }   
                 
         case "EDIT":
 

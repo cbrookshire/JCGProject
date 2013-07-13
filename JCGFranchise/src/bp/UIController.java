@@ -33,6 +33,7 @@ public class UIController {
     //default
     private UIController()    {
         jcgSys = JCGSystem.getInstance();
+        role = JCGlIO.getInstance();
     }
     
     //UTILITIES
