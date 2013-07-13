@@ -2207,6 +2207,119 @@ public class Queries
         /* Return to Buisness Section Start */
     }
     
+     //DELETE: Customer
+    public boolean RemoveCustomer(int ID)
+            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+        Statement query = null;
+        PreparedStatement statement = null;
+        ResultSet results = null;
+        int success = -1;
+        String Username = null;
+        /* Variable Section Stop */
+        
+        /* Preparing Statment Section Start */
+        String MyQuery = "DELETE * FROM `customer` WHERE 'CustomerID' = ?";
+        String statString = "SELECT * FROM `customer` WHERE 'CustomerID' = ?";
+        String DropUser = "DROP USER ?@'localhost'";
+
+        /* Preparing Statment  Section Stop */
+        
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statement = con.prepareStatement(statString);
+                statement.setInt(1, ID);
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statement.executeQuery();
+                
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* Drop Use Preperation Section Start*/
+                Username = results.getString("Username");
+                
+                statement = con.prepareStatement(DropUser);
+                statement.setString(1, Username);
+            /* Drop Use Preperation Section Start*/
+                
+        
+            /* MySQL User Drop Section Start*/
+                success = statement.executeUpdate(); //This is where we attempt to drop the user.
+                
+                if(success == 1)
+                {
+                    /* Delete Employee Preperation Section Start*/
+                    
+                    statement = con.prepareStatement(MyQuery);
+                    
+                    statement.setInt(1, ID);
+                    
+                    
+                    /* Query Section Start */
+                    success = statement.executeUpdate();
+                    /* Query Section Stop* /
+
+                    
+                    /* Delete Employee Preperation Section Stop*/
+                    
+                    /* Return to Buisness Section Start */
+                    if(success == 1)
+                        return true;
+                    
+                    if(success == 0 || success == -1)
+                        return false; 
+                    /* Return to Buisness Section Start */
+                    //return true;
+                }
+                
+                if(success == 0 || success == -1)
+                    return false;     
+            /* MySQL User Drop Section Stop*/    
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (query != null) query.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+           /* TRY BLOCK STOP */
+            
+            return false;
+    } 
+    
     
 /******************************************************************************
  *          All Queries for the Airport table                                 *
@@ -2576,6 +2689,80 @@ public class Queries
             return BPArrayList;
         /* Return to Buisness Section Start */
     }
+    
+        //DELETE: Reservation
+    public boolean RemoveReservation(int ID)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+        Statement query = null;
+        ResultSet results = null;
+        int success = -1;
+        /* Variable Section Stop */
+        
+        /* Preparing Statment Section Start */
+        String MyQuery = "DELETE * FROM `reservations` WHERE 'ReservationNumber' = ?";
+        
+            /* TRY BLOCK START */
+
+            try
+            {
+
+                PreparedStatement statement = con.prepareStatement(MyQuery);
+
+                statement.setInt(1, ID);
+            
+            
+            /* Preparing Statment Section Stop */
+  
+            /* Query Section Start */
+                success = statement.executeUpdate();
+            /* Query Section Stop* /
+
+            /* Return to Buisness Section Start */
+                if(success == 1)
+                    return true;     
+                
+                if(success == 0 || success == -1)
+                    return false;     
+            /* Return to Buisness Section Start */
+                    
+                   
+                     
+                    
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (query != null) query.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+           /* TRY BLOCK STOP */
+            
+            return false;
+    } 
+    
     
 /******************************************************************************
  *          Administrative Section                                                     *  
