@@ -65,7 +65,8 @@ final class QStrings {
                               "GRANT CREATE USER ON *.* to ?@'localhost' WITH GRANT OPTION " +
                               "FLUSH PRIVILEGES";
     
-    public String grant_driver = "GRANT SELECT ON JCGroup.Customer to ?@'localhost'";
+    public String grant_driver = "GRANT SELECT ON JCGroup.Customer to ?@'localhost' "
+                               + "GRANT SELECT, UPDATE ON JCGROUP.Employee to ?@'localhost'";
                                  //add in grant for reservation
     
     public String grant_owner = "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Airport TO ?@'localhost' "
@@ -101,7 +102,7 @@ final class QStrings {
     
     
 // Admin
-    public String get_emp_username = "SELECT Username FROM Employee WHERE EmpType <=> 98";
+    public String get_emp_username = "SELECT Username FROM Employee WHERE EmpType != 98";
     public String get_cust_username = "SELECT Username FROM Customer";
     public String drop_user = "DROP USER ?@'localhost'";
 }
