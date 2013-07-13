@@ -20,9 +20,10 @@ public class FranchisorOwnerSession {
     }
     
     //UTILITIES
-    //HACK#1 the following is Maurice's hack until he discovers how to 
-    //convert or return an array of Franchise, Vehicle, Employee, Customer 
-    //generic object
+    //VIEW ALL - VIEW ITEM METHODS
+    //HACK#1 the following is Maurice's hack until he figures out how to 
+    //convert an array of Franchise, Vehicle, Employee, Customer into an  
+    //an array of generic objects safely
     public ArrayList <Franchise> getFranchise(Object uiObject, String action){
         
         //local container
@@ -76,14 +77,14 @@ public class FranchisorOwnerSession {
         result = dControl.DBcustomerRouter(uiObject, action);
         return result;       
     }//end getVehicle method
+    //END VIEW ALL - VIEW ITEM METHODS
     
-    
+    //ADD, DELETE, EDIT METHODS
     public String AddItem(Object uiObject, String action){
         
         //local vars
         String dbCode;
-        String sysCode;        
-        
+               
         //send to dbSystemRouter      
         dbCode = dControl.dbSystemRouter(uiObject, action);
         return dbCode;
@@ -93,8 +94,7 @@ public class FranchisorOwnerSession {
         
         //local vars
         String dbCode;
-        String sysCode;
-        
+                
         //send to dbSystemRouter      
         dbCode = dControl.dbSystemRouter(uiObject, action);
         return dbCode;
@@ -104,12 +104,12 @@ public class FranchisorOwnerSession {
         
         //local vars
         String dbCode;
-        String sysCode;
-        
+                
         //send to dbSystemRouter      
         dbCode = dControl.dbSystemRouter(uiObject, action);
         return dbCode;
     }//end EditItem method
+    //END ADD, DELETE, EDIT METHODS
 }//end FranchiseOwnerSession class
     
     

@@ -21,7 +21,13 @@ public class UIController {
     private CustomerSession custSession;
     private JCGlIO role;
     private static UIController uicInstance;
-  
+    private final String OWNER = "1";
+    private final String MANAGER = "2";
+    private final String EMPLOYEE = "3";
+    private final String CUSTOMER = "99";
+    private final String SYSADMIN = "98";
+    
+    
     
     //CONSTRUCTOR
     //default
@@ -36,10 +42,12 @@ public class UIController {
         inst.setVisible(true);
     }
     
+    //VIEW ALL - VIEW ITEMS CONTROLLER METHODS
     //HACK#1: consider throwing an UnauthorizedUserException
     public ArrayList <Franchise> UIfranchisorRouter (Object uiObject, 
             String action){
     
+        //local container
         ArrayList<Franchise> temp;
         
         //only franchisor allowed to see franchises
@@ -51,21 +59,24 @@ public class UIController {
     //HACK#2: consider throwing an UnauthorizedUserException
     public ArrayList <Vehicle> UIvehicleRouter (Object uiObject, 
             String action){
-       
-        ArrayList<Vehicle> temp;
+       //local container
+       ArrayList<Vehicle> temp;
         
-        //if employee type is manager call BP appropriate method
-        if ("2".equals(io.geteT())) {
+       //managers and customers can see vehicles
+       //if type is manager call to appropriate session
+       if (MANAGER.equals(io.geteT())) {
             temp = fmSession.getVehicle(uiObject, action);
             return temp;
-        }
-        if ("99".equals(io.geteT())) {
+       }
+       //if type is customer make call to appropriate session
+       if (CUSTOMER.equals(io.geteT())) {
             temp = custSession.getVehicle(uiObject, action);
             return temp;          
-        }
-        return null;
-   }
+       }
+       return null;
+   }//end UIvehicleRouter
     
+   
    //HACK#3: consider throwing an UnauthorizedUserException
    public ArrayList <Employee> UIemployeeRouter (Object object, 
             String action){
@@ -73,38 +84,43 @@ public class UIController {
         //local container
         ArrayList<Employee> temp;
         
-        //if employee type is franchisor call BP appropriate method
-        if ("1".equals(io.geteT())) {
+        //owners and managers can see employees
+        //if type is owner make call to appropriate session
+        if (OWNER.equals(io.geteT())) {
             temp = foSession.getEmployee(object, action);
             return temp;
         }            
-        //if employee type is manager call BP appropriate method
-        if ("99".equals(io.geteT())) {
+        //if type is manager make call to appropriate session
+        if (MANAGER.equals(io.geteT())) {
             temp = fmSession.getEmployee(object, action);
             return temp;
         }
         return null;
-   }
+   }//end UIemployeeRouter
     
+   
    //HACK#4: consider throwing an UnauthorizedUserException
    public ArrayList <Customer> UIcustomerRouter (Object object, 
             String action){
+       
        //local container
        ArrayList<Customer> temp;
-              
-       //if employee type is manager call BP appropriate method
-       if ("2".equals(io.geteT())) {
+       
+       //managers and customers can see customers
+       //if type is manager make call to appropriate session
+       if (MANAGER.equals(io.geteT())) {
             temp = fmSession.getCustomer(object, action);
             return temp;
        }            
-       //if employee type is customer call BP appropriate method
-       if ("99".equals(io.geteT())) {
+       //if type is customer make call to appropriate session
+       if (CUSTOMER.equals(io.geteT())) {
             temp = custSession.getCustomer(object, action);
             return temp;
        }
        return null;
-   } 
+   }//end UIcustomerRouter 
     
+   
    //HACK#5: consider throwing an UnauthorizedUserException
    public ArrayList <Reservation> UIreservationRouter (Object object, 
             String action){
@@ -112,135 +128,143 @@ public class UIController {
        //local container
        ArrayList<Reservation> temp;
         
-       //if employee type is manager call appropriate session
-       if ("2".equals(io.geteT())) {
+       //managers, employees, and customers can see reservations
+       //if type is manager make call to appropriate session
+       if (MANAGER.equals(io.geteT())) {
             temp = fmSession.getReservation(object, action);
             return temp;
        }            
-       //if employee type is driver call appropriate session
-       if ("3".equals(io.geteT())) {
+       //if type is employee make call to appropriate session
+       if (EMPLOYEE.equals(io.geteT())) {
             temp = empSession.getReservation(object, action);
             return temp;
        }
-       //if employee type is customer call appropriate session
-       if ("99".equals(io.geteT())) {
+       //if type is customer make call to appropriate session
+       if (CUSTOMER.equals(io.geteT())) {
             temp = custSession.getReservation(object, action);
             return temp;
        }       
        return null;
    }//end UIreservationRouter method
+   //END VIEW ALL - VIEW ITEM ROUTER METHODS
    
    
+   //LOGIN, UPDATE, LOGOUT, ADD, DELETE, and EDIT CONTROLLER
    public String UIRouter (Object UIObject, String action){
-        
-        String returnCode = null;
+                            
+       //local var 
+       String returnCode = null;
                 
-        //call appropriate BP method
-        switch(action){
-            case "LOGIN":   
-                
-                //call JCGSystem authentication method
+       //call appropriate BP method
+       switch(action){
+        case "LOGIN":   
+                    
+                //make call to JCGSystem authentication method, check
+                //returnCode and if error return appropriate error 
+                //screen prompt or open appropriate start screen
                 returnCode = jcgSys.Authentication(UIObject, action);
-                //check returnCode and return appropriate error prompt
-                //session start screen
                 if ("UserNotFound".equals(returnCode)){
-                    return "900";                             }        
+                    return "900";                                   }        
                 if ("InvalidUserNamePassword".equals(returnCode)){
-                    return "901";  /*error prompt*/           }
+                    return "900";                                   }
                 if ("BadConnection".equals(returnCode)){
-                    return "902";  /*error prompt*/           }
-                if ("FRANCHISOR".equals(returnCode)){
-                    return "100";  /*Franchisor Main*/        }        
+                    return "902";                                   }
+                if ("OWNER".equals(returnCode)){
+                    return "100";  /*Franchisor Main Menu*/         }        
                 if ("MANAGER".equals(returnCode)){
-                    return "200";  /*Manager Main*/           }
+                    return "200";  /*Manager Main Menu*/            }
                 if ("EMPLOYEE".equals(returnCode)){
-                    return "220";   /*Employee Main*/         } 
+                    return "220";   /*Employee Main Menu*/          } 
                 if ("CUSTOMER".equals(returnCode)){
-                    return "300";   /*Customer Main*/         }     
+                    return "300";   /*Customer Main Menu*/          }     
             
-            case "UPDATEPASSWORD": 
+        case "UPDATEPASSWORD": 
                 
-                //call JCGSystem updatePassword method                
-                returnCode = jcgSys.UpdatePassword(UIObject, action);
-                //check returnCode and return appropriate error prompt
-                //session start screen
+                //make call to JCGSystem authentication method, check                
+                //returnCode and if error return appropriate error 
+                //screen prompt or open appropriate start screen
+                returnCode = jcgSys.UpdatePassword(UIObject, action);                
                 if ("InvalidUserNamePassword".equals(returnCode)){
-                    return "901";  /*error prompt*/           }
+                    return "901";                                   }
                 if ("BadConnection".equals(returnCode)){
-                    return "902";  /*error prompt*/           }
-                if ("OK".equals(returnCode)) {
-                    return "001";                             }                           
-                     
-            case "ADD":     
+                    return "902";                                   }
+                if ("0".equals(returnCode)) {
+                    return "902";                                   }
+                if ("1".equals(returnCode)) {
+                    return "001";   /*LogInScreen*/                 }
+            
+        case "RESET": 
                 
-                //determine object / session, all method in 
-                //the appropriate session  
-                //Franchisor Session
-                if ((UIObject instanceof Franchise || 
-                     UIObject instanceof Employee)&&
-                        "1".equals(role.geteT())) {
+                returnCode = jcgSys.ResetDatabase(UIObject, action);
+                if ("BadConnection".equals(returnCode)){
+                    return "902";                                   }
+                if ("FileNotFoundException".equals(returnCode)){
+                    return "902";                                   }           
+                                     
+        case "LOGOUT":
+            
+                jcgSys.Logout(UIObject, action);
+                        
+        
+        case "ADD":     
+                
+                //determine session, make call to appropriate session 
+                //only owners, managers, and customers can ADD
+                //Franchise Owner Session
+                if ("1".equals(role.geteT())) {
                     returnCode = foSession.AddItem(UIObject, action);                    
                 }
-                //Franchise Manager Session                       
-                if ((UIObject instanceof Employee || 
-                     UIObject instanceof Vehicle ||
-                     UIObject instanceof Reservation ||
-                     UIObject instanceof Customer)&&
-                        "2".equals(role.geteT())) {
+                 //Franchise Manager Session                      
+                if ("2".equals(role.geteT())) {
                     returnCode = fmSession.AddItem(UIObject, action);
                 }
                 //Customer Session
-                if ((UIObject instanceof Customer ||
-                     UIObject instanceof Reservation)&&
-                        "99".equals(role.geteT())) {
+                if ("99".equals(role.geteT())) {
                     returnCode = custSession.AddItem(UIObject, action);                    
                 } 
                 
-                //if returnCode not null, determine results
-                if (returnCode != null){
+                               
+                //check returnCode and if error return appropriate error 
+                //screen prompt or notify UI action success "1" or action
+                //failed "0"
+                if (returnCode != null){ //check if returnCode still null
                     
                     if ("1".equals(returnCode) || "0".equals(returnCode)){
-                        return returnCode;                          }  
+                        return returnCode;                                  }  
                     if ("BadConnection".equals(returnCode)){
-                        return "902";                               }
+                        return "902";                                       }
                     if ("UnauthorizedUserException".equals(returnCode)){
-                        return "902";                               }
+                        return "902";                                       }
                     if ("DoubleEntryException".equals(returnCode)){
-                        return "902";  /*error prompt*/             }
-                    
+                        return "902";                                       }                    
                 }
                 else                 
-                {   returnCode = "Unauthorized Class Access";
+                {   //add and return local error code
+                    returnCode = "Missing user type or session not found";
                     return returnCode;
                 }
                 
-            case "DELETE":
+        case "DELETE":
                 
-                //determine object / session, call method in 
-                //the appropriate session  
+                //determine session, make call to appropriate session 
+                //only owners, managers, and customers can DELETE
                 //Franchisor Session
-                if ((UIObject instanceof Franchise || 
-                     UIObject instanceof Employee)&&
-                        "1".equals(role.geteT())) {
+                if (OWNER.equals(role.geteT())) {
                     returnCode = foSession.DeleteItem(UIObject, action);                    
                 }
                 //Franchise Manager Session                       
-                if ((UIObject instanceof Employee || 
-                     UIObject instanceof Vehicle ||
-                     UIObject instanceof Reservation ||
-                     UIObject instanceof Customer)&&
-                        "2".equals(role.geteT())) {
+                if (MANAGER.equals(role.geteT())) {
                     returnCode = fmSession.DeleteItem(UIObject, action);
                 }
                 //Customer Session
-                if ((UIObject instanceof Customer ||
-                     UIObject instanceof Reservation)&&
-                        "99".equals(role.geteT())) {
+                if (CUSTOMER.equals(role.geteT())) {
                     returnCode = custSession.DeleteItem(UIObject, action);                    
                 } 
                 
-                //if returnCode not null, determine results
-                if (returnCode != null){
+                //if returnCode not null, determine results. if error 
+                //return appropriate error screen prompt or notify UI 
+                //action success "1" or action failed "0"
+                if (returnCode != null){ //check if returnCode still null
                     
                     if ("1".equals(returnCode) || "0".equals(returnCode)){
                         return returnCode;                          }  
@@ -249,40 +273,33 @@ public class UIController {
                     if ("UnauthorizedUserException".equals(returnCode)){
                         return "902";                               }
                     if ("DoubleEntryException".equals(returnCode)){
-                        return "902";  /*error prompt*/             }
-                    
+                        return "902";                               }                    
                 }
                 else                 
-                {   returnCode = "Unauthorized Class Access";
+                {   //send back error local prompt 
+                    returnCode = "Missing user type or session not found";
                     return returnCode;
                 }
-            case "EDIT":
+            
+            
+        case "EDIT":
                 
-                //determine object / session, call method in 
-                //the appropriate session  
+                //determine session, make call to appropriate session 
+                //owners, managers, employees and customers can EDIT
                 //Franchisor Session
-                if ((UIObject instanceof Franchise || 
-                     UIObject instanceof Employee)&&
-                        "1".equals(role.geteT())) {
+                if (OWNER.equals(role.geteT())) {
                     returnCode = foSession.EditItem(UIObject, action);                    
                 }
                 //Franchise Manager Session                       
-                if ((UIObject instanceof Employee || 
-                     UIObject instanceof Vehicle ||
-                     UIObject instanceof Reservation ||
-                     UIObject instanceof Customer)&&
-                        "2".equals(role.geteT())) {
+                if (MANAGER.equals(role.geteT())) {
                     returnCode = fmSession.EditItem(UIObject, action);
                 }
                 //Employee Session
-                if (UIObject instanceof Reservation&&
-                        "3".equals(role.geteT())) {
+                if (EMPLOYEE.equals(role.geteT())) {
                     returnCode = custSession.EditItem(UIObject, action);                    
                 } 
                 //Customer Session
-                if ((UIObject instanceof Customer ||
-                     UIObject instanceof Reservation)&&
-                        "99".equals(role.geteT())) {
+                if (CUSTOMER.equals(role.geteT())) {
                     returnCode = custSession.EditItem(UIObject, action);                    
                 } 
                 
@@ -300,16 +317,17 @@ public class UIController {
                     
                 }
                 else                 
-                {   returnCode = "Unauthorized Class Access";
+                {   returnCode = "Missing user type or session not found";
                     return returnCode;
                 }
                 
-            default:        return null;
-        }
-}
+            default:        if(returnCode == null){
+                                return "000";}                           
+       }//end switch
+       return returnCode;
+}//end LOGIN, UPDATE, LOGOUT, ADD, DELETE, and EDIT CONTROLLER
 
-    
-    
+   
  /******************************************************
  * Singleton method for UIController class + Object 
  * clone override 

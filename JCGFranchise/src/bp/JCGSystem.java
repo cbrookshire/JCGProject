@@ -40,20 +40,20 @@ public class JCGSystem {
        
        //determine action based on database return code
        switch (dbCode){
-                        //Create sessions
+                        //set employee type in JCGlIO and create sessions
            case "1":    lIO.seteT(dbCode);
                         foSession = new FranchisorOwnerSession();
-                        sysCode = "FRANCHISOR"; //session name
+                        sysCode = "OWNER"; //session name
                         return sysCode;               
            case "2":    lIO.seteT(dbCode);
                         fmSession = new FranchiseManagerSession();
-                        sysCode = "OWNER";      //session name
+                        sysCode = "MANAGER";      //session name
                         return sysCode;
            case "3":    lIO.seteT(dbCode);
                         feSession = new FranchiseEmployeeSession();
                         sysCode = "EMPLOYEE";   //session name
                         return sysCode;
-           case "4":    lIO.seteT(dbCode);
+           case "99":    lIO.seteT(dbCode);
                         cSession = new CustomerSession();
                         sysCode = "CUSTOMER";   //session name
                         return sysCode;
@@ -65,17 +65,27 @@ public class JCGSystem {
     public String UpdatePassword (Object sysObject, String action){
     
        String dbCode;   //holds database return code
-       String sysCode;  //holds JCGSystem code
-       
+              
        //call to DBController method
        dbCode = dControl.dbSystemRouter(sysObject, action);
-        //determine action based on database return code
-       if ("1".equals(dbCode)){
-           sysCode = "OK";
-           return sysCode;    }
-       else {
-            return dbCode;    }     
+       return dbCode;         
     }//end UpdatePassword method
+    
+    
+    public String ResetDatabase (Object sysObject, String action){
+        
+        String dbCode;
+        
+        dbCode = dControl.dbSystemRouter(sysObject, action);
+        return dbCode;          
+    }
+    
+    public void Logout (Object sysObject, String action){    
+        
+        dControl.dbSystemRouter(sysObject, action);             
+    }
+    
+    
     
            
 /******************************************************

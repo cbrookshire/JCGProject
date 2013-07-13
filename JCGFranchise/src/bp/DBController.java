@@ -9,6 +9,7 @@ package bp;
 
 import JCGExceptions.*;
 import db.*;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,8 +29,8 @@ public class DBController {
     
     //UTILITIES
     //HACK#1 the following is Maurice's hack until he figures out how to 
-    //convert an array of Franchise, Vehicle, Employee, Customer 
-    //into a generic array of object
+    //convert an array of Franchise, Vehicle, Employee, Customer into an  
+    //an array of generic objects safely
     public ArrayList <Franchise> DBfranchisorRouter (Object sysObject, 
              String action){
     
@@ -37,11 +38,11 @@ public class DBController {
         ArrayList <Franchise> temp;
          
         try{            
-                if ("VIEWALL".equals(action)){   
+                if (sysObject instanceof String && "VIEWALL".equals(action)){   
                     temp = queryDB.GetAllFranchises();
                     return temp;
                 }
-                if (sysObject instanceof Franchise){    
+                if (sysObject instanceof Franchise && "VIEWITEM".equals(action)){    
                     temp = queryDB.GetOneFranchise(((Franchise)sysObject).getFranchiseID());
                     return temp;
                 }                
@@ -79,12 +80,14 @@ public class DBController {
         ArrayList <Vehicle> temp;
          
         try{
-            if ("VIEWALL".equals(action)){   
-                temp = queryDB.VehiclesForFranchise(((Vehicle)sysObject).getFranchiseNumber());
+            if (sysObject instanceof String && "VIEWALL".equals(action)){   
+                temp = queryDB.VehiclesForFranchise
+                        (((Vehicle)sysObject).getFranchiseNumber());
                 return temp;
             }
-            if (sysObject instanceof Vehicle){    
-                temp = queryDB.GetOneVehicle(((Vehicle)sysObject).getVehicleID());
+            if (sysObject instanceof Vehicle && "VIEWITEM".equals(action)){    
+                temp = queryDB.GetOneVehicle
+                        (((Vehicle)sysObject).getVehicleID());
                 return temp;
             }               
         }
@@ -116,19 +119,20 @@ public class DBController {
     public ArrayList <Employee> DBemployeeRouter (Object sysObject, 
              String action){
     
-         ArrayList <Employee> temp;
+        //local container 
+        ArrayList <Employee> temp;
          
          try{
-                if ("VIEWALL".equals(action)){   
+                if (sysObject instanceof String && "VIEWALL".equals(action)){   
                     temp = queryDB.AllEmployeesInFranchise
                             (((Employee)sysObject).getFranchiseNumber());
                     return temp;
                 }
-                else{    
+                if (sysObject instanceof Employee && "VIEWITEM".equals(action)){    
                     temp = queryDB.SingleEmployeeData
                             (((Employee)sysObject).getEmployeeID());
                     return temp;
-                }               
+            }               
         }
         catch(UnauthorizedUserException e){
                 Employee error = new Employee(e.getMessage(), 
@@ -151,7 +155,7 @@ public class DBController {
                 temp.add(error);
                 return temp;             
         }         
-       
+        return null;
      }//end DBemployeeRouter method    
         
     
@@ -163,12 +167,12 @@ public class DBController {
         ArrayList <Customer> temp;
          
         try{
-            if ("VIEWALL".equals(action)){   
+            if (sysObject instanceof String && "VIEWALL".equals(action)){   
                 temp = queryDB.SingleCustomerData
                         (((Customer)sysObject).getCustomerID());
                 return temp;
             }
-            else{    
+            if (sysObject instanceof Customer && "VIEWITEM".equals(action)){    
                 temp = queryDB.SingleCustomerData
                         (((Customer)sysObject).getCustomerID());
                 return temp;
@@ -194,8 +198,10 @@ public class DBController {
             temp = new ArrayList();
             temp.add(error);
             return temp;             
-        }          
+        } 
+        return null;
     }//end DBcustomerRouter method   
+    
     
     //HACK #4 routes reservation views      
     public ArrayList <Reservation> DBreservationRouter (Object sysObject, 
@@ -205,15 +211,15 @@ public class DBController {
         ArrayList <Reservation> temp;
          
         try{
-            if ("VIEWALL".equals(action)){   
+            if (sysObject instanceof String && "VIEWALL".equals(action)){   
                 temp = queryDB.ReservationsForFranchise
                         (((Reservation)sysObject).getFranchiseNumber());
                 return temp;
             }
-            else{    
+            if (sysObject instanceof Reservation && "VIEWITEM".equals(action)) {    
                 temp = queryDB.ReservationsByCustomerForFranchise
                         (((Reservation)sysObject).getFranchiseNumber(), 
-                        ((Reservation)sysObject).getCustomerID());
+                        (((Reservation)sysObject)).getCustomerID());
                 return temp;
             }               
         }
@@ -241,6 +247,7 @@ public class DBController {
             temp.add(error);
             return temp;             
         }
+        return null;
     }//end DBreservationRouter method  
     
     
@@ -284,7 +291,7 @@ public class DBController {
                 String convert = Integer.toString(dbReturnCode);
                 //return status
                 return convert;
-                }
+            }
             catch(InvalidUserException e){
                 return e.getMessage();
             }
@@ -292,14 +299,24 @@ public class DBController {
                 return e.getMessage();
             }                         
                 
-        case "LOGOUT":  
+        case "RESET": 
             
             try{
-                    dbase.logOff();                                
-                }  
-            catch (Exception e){
+                    dbReturnCode = queryDB.resetDatabase();
+                    String convert = Integer.toString(dbReturnCode);
+            }
+            catch(FileNotFoundException e){
                 return e.getMessage();
             }
+            catch(BadConnectionException e){
+                return e.getMessage();
+            }        
+        
+        
+        case "LOGOUT":  
+            
+            dbase.logOff();                                
+                
             
         case "ADD": 
             
@@ -307,15 +324,15 @@ public class DBController {
             //insert methods   
             try{
                 if (sysObject instanceof Franchise) {
-                    dbReturnCode = queryDB.insertFranchise((Franchise)sysObject);
+                    dbReturnCode = queryDB.insertFranchise(((Franchise)sysObject));
                     return String.valueOf(dbReturnCode);
                 }
                 if (sysObject instanceof Vehicle) {
-                    dbReturnCode = queryDB.insertVehicle((Vehicle)sysObject);
+                    dbReturnCode = queryDB.insertVehicle(((Vehicle)sysObject));
                     return String.valueOf(dbReturnCode);
                 } 
                 if (sysObject instanceof Employee) {
-                    dbReturnCode = queryDB.insertEmployee((Employee)sysObject);
+                    dbReturnCode = queryDB.insertEmployee(((Employee)sysObject));
                     return String.valueOf(dbReturnCode);
                 }
                 /*if (sysObject instanceof Reservation) {
@@ -323,7 +340,7 @@ public class DBController {
                     return String.valueOf(dbReturnCode);
                 }*/
                 if (sysObject instanceof Customer) {
-                    dbReturnCode = queryDB.insertCustomer((Customer)sysObject);
+                    dbReturnCode = queryDB.insertCustomer(((Customer)sysObject));
                     return String.valueOf(dbReturnCode);
                 }                               
             }

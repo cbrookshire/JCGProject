@@ -58,7 +58,10 @@ public class JCGlIO {
 
     public void seteT(String eT) {
         this.eT = eT;
-    }    
+    }   
+    
+    
+    
 }//end class JCGlIO
     
     
