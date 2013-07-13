@@ -22,6 +22,7 @@ public class JCGSystem {
     private JCGSystem(){
         //uControl = UIController.getInstance();
         dControl = DBController.getInstance();
+        lIO = JCGlIO.getInstance();
     }
     
     //used to start UI

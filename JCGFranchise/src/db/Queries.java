@@ -940,6 +940,278 @@ public class Queries
         
     }
     
+    //GET: Show Cars Available for a Reservation (NYI) 
+    public  ArrayList<Vehicle> LimosAvailableAtTime(double time)
+             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+    {
+        /* Variable Section Start */
+            /* Database and Query Preperation */
+            PreparedStatement statment = null;
+            ResultSet results = null;
+            
+            /* Query-Strings */
+            String statString = "SELECT * FROM reservation"; //This is going to be to get all Reservations _Period_
+            String vehicleSearch = "SELECT * FROM vehicle";
+            //This is going to get Reservations at Pickup Times + 4 Hour Earlier
+            //This is going to get Reservations at Dropoff Times + 1 Hour
+            
+            /* Storage */
+            
+            ArrayList<Reservation> AllReservations = new ArrayList<Reservation>();
+            Set<Integer> BlockedLimoIDs = null; //This set is for holding the Limo Numbers that are Blocked Out
+
+            /* Return Parameter */
+            ArrayList<Vehicle> BPArrayList = new ArrayList<Vehicle>();
+        /* Variable Section Stop */
+        
+            //Okay so this is going to be a doozy.
+            //Times are Stored in... Reservations. Not Cars. 
+            
+                    /* So our Logic is going to have to go like this: */
+            
+            //Check Reservations for All times == Our Time.
+                //Store the Limo Numbers within a Set
+            //Check Reservations for All Pickup Times + 4 Hour Earlier == Our Time
+                //Store the Limo Numbers within a Set
+            //Check Reservations for All Dropoff Times + 1 Hour == Our Time
+                //Store the Limo Numbers within a Set
+            //Store this Set into an Array
+            //Get All Vehicle ID. Store this Into an ArrayList
+                //Check the Values of All Vehicle IDs against the ones that are going to be busy during the time window we need.
+                //Remove any Duplicates
+            //Return Pruned Array List
+            //For All Vehicles Available at time Within Franchise, we do the same thing, only as a final step we do this:
+            //Check each Vehicle in the List off of the FranID we've gotten. Remove any that don't match.
+            //Return Double-Pruned Array List.
+        
+        /* TRY BLOCK START */
+            
+            try
+            {
+            /* Preparing Statment Section Start */                
+                statment = con.prepareStatement(statString);
+                //statment.setString();
+            /* Preparing Statment Section Stop */
+            /* Query Section Start */
+                results = statment.executeQuery();
+                
+                if(statment != null)
+                    statment.close();
+                
+            /* Query Section Stop */
+            
+            /* Metadata Section Start*/
+                ResultSetMetaData metaData = results.getMetaData();
+                int columns = metaData.getColumnCount();
+                int rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* ArrayList Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                    Reservation temp = new Reservation();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setAirline(results.getString("Airline"));
+                    temp.setComment(results.getString("Comment"));
+                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setDate(results.getString("Date"));
+                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setFlightNumber(results.getString("FlightNumber"));
+                    temp.setFlightTime(results.getString("FlightTime"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setPickUpTime(results.getString("PickUpTime"));
+                    temp.setPrice(results.getString("Price"));
+                    temp.setReservationNumber(results.getString("ReservationNumber"));
+                    temp.setStatus(results.getString("Status"));
+                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setAltAddress(results.getString("AltAddress"));
+                    temp.setAltCity(results.getString("AltCity"));
+                    temp.setAltState(results.getString("AltState"));
+                    temp.setAltZip(results.getString("AltZip"));
+                    
+                    AllReservations.add(temp);
+                }
+                
+                //Convert ArrayList to Array here:
+                
+                //Reservation[] AllReservationsArray = AllReservations.toArray(new Reservation[AllReservations.size()]);
+                
+                //Check Reservations for All times == Our Time.
+                //Store the Limo Numbers within a Set
+            //Check Reservations for All Pickup Times + 4 Hour Earlier == Our Time
+                
+                for(int c = 0; c < AllReservations.size(); c++) //Now We're going to 
+                {       
+                    Reservation temp = new Reservation();
+                    
+                    temp = AllReservations.get(c);
+                    
+                    if(temp.getPickUpTime() == time)
+                    {
+                        BlockedLimoIDs.add(temp.getVehicleID());
+                    }
+                    
+                    double DropoffSpacer = temp.getPickUpTime();
+                    
+                    for(int b = 0; b < 4; b++)
+                    {
+                        if( DropoffSpacer < 1)
+                            DropoffSpacer = DropoffSpacer + 24;
+                        else
+                            DropoffSpacer = DropoffSpacer - 1;
+                        
+                        if( DropoffSpacer == time)
+                        {
+                            BlockedLimoIDs.add(temp.getVehicleID());
+                        }
+                    }
+                    
+                    DropoffSpacer = 0;
+                    
+                    
+                    
+                    DropoffSpacer = 1 + temp.getDropOffTime(); //And now Drop-off time + 1 Hour
+                    
+                    if(DropoffSpacer > 24)
+                    {
+                        DropoffSpacer = DropoffSpacer - 24;
+                    }
+                    
+                    if(DropoffSpacer == time)
+                    {
+                        BlockedLimoIDs.add((temp.getVehicleID()));
+                    }
+                        
+                    if(temp.getDropOffTime() == time)
+                    {
+                        BlockedLimoIDs.add(temp.getVehicleID());
+                    }
+                    
+                }
+                
+                //Store the Limo Numbers within a Set
+           
+            //Store this Set into an Array
+                
+                
+                int[] BlockedIDs = new int[BlockedLimoIDs.size()];
+
+                int index = 0;
+
+                for( Integer a : BlockedLimoIDs )
+                {
+                    BlockedIDs[index++] = a;
+                }
+                
+                
+                //Now we get all Vehicle IDs
+                
+                statment = con.prepareStatement(statString);
+                
+                
+                results = statment.executeQuery();
+                
+                
+                 /* Metadata Section Start*/
+                metaData = results.getMetaData();
+                columns = metaData.getColumnCount();
+                rows = results.getRow(); 
+            /* Metadata Section Start*/
+                
+            /* ArrayList Prepare Section Start */
+                
+                
+                results.beforeFirst();
+                while (results.next() && rows > 0)
+                {
+                     Vehicle temp = new Vehicle();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setCapacity(results.getString("Capacity"));
+                    temp.setCondition(results.getString("VCondition"));
+                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setMake(results.getString("Make"));
+                    temp.setMileage(results.getString("Milage"));
+                    temp.setModel(results.getString("Model"));
+                    temp.setRate(results.getString("RentalPrice"));
+                    temp.setTablet(results.getString("Tablet"));
+                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVin(results.getString("VIN"));
+                    temp.setYear(results.getString("MakeYear"));
+                    
+                    BPArrayList.add(temp);
+                }
+
+            //Get All Vehicle ID. Store this Into an ArrayList
+                
+                
+                for(int x = 0; x < BlockedIDs.length; x++)
+                {
+                    for(int y = 0; y < BPArrayList.size(); y++)
+                    {
+                        Vehicle temp = BPArrayList.get(y);
+                        
+                        if(BlockedIDs[x] == temp.getVehicleID())
+                            BPArrayList.remove(y);
+                    }
+                }
+                //Check the Values of All Vehicle IDs against the ones that are going to be busy during the time window we need.
+                //Remove any Duplicates
+            //Return Pruned Array List
+            //For All Vehicles Available at time Within Franchise, we do the same thing, only as a final step we do this:
+            //Check each Vehicle in the List off of the FranID we've gotten. Remove any that don't match.
+            //Return Double-Pruned Array List.
+                
+                
+            /* ArrayList Prepare Section Stop */
+            }
+            catch(SQLException sqlE)
+            {
+                if(sqlE.getErrorCode() == 1142)
+                    throw(new UnauthorizedUserException("AccessDenied"));
+                else if(sqlE.getErrorCode() == 1062)
+                    throw(new DoubleEntryException("DoubleEntry"));
+                else 
+                    throw(new BadConnectionException("BadConnection"));
+            }
+            finally
+            {
+                try
+                {
+                    if (results != null) results.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (statment != null) statment.close();
+                }
+                catch (Exception e) {};
+                try
+                {
+                    if (con != null) con.close();
+                }
+                catch (Exception e) {};
+            }
+            
+            /* TRY BLOCK STOP*/
+        
+            
+        /* Return to Buisness Section Start */ 
+           
+            
+            
+            return BPArrayList;
+        /* Return to Buisness Section Start */
+        
+        
+        
+    }
  
 /******************************************************************************
  *          All Queries for the Employee table                                *
