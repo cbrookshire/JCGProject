@@ -39,11 +39,13 @@ public class Queries
     private QStrings qs;
     private int code;
     
+    
+    
     public Queries(Connection con)
     {
         
         setConnection(con);
-        
+               
     }
     
     private void setConnection(Connection con)
@@ -164,6 +166,7 @@ public class Queries
                     temp.setState(results.getString("State"));
                     temp.setZip(results.getString("Zip"));
                     
+                    System.out.print(temp.toString());
                     BPList.add(temp);
                 }
             /* List Prepare Section Stop */
