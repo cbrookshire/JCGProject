@@ -18,13 +18,15 @@ public class PasswordChangeJPanel extends javax.swing.JPanel {
      */
     public PasswordChangeJPanel() {
         initComponents();
+        lIO = JCGlIO.getInstance();
+        uic = UIController.getInstance(); 
     }
     public void changePassword()
     {
         //if (passwordTextField == confirmPasswordTextField)
         //{
-            //lIO.setP(passwordTextField.getText());
-            String code = uic.UIRouter(passwordTextField.getText(), "ASSIGNNEWPASSWORD");
+            lIO.setP(passwordTextField.getText());
+            String code = uic.UIRouter(lIO, "UPDATEPASSWORD");
             BaseJFrame.getInstance().setScreen(code);
         //}
     }
