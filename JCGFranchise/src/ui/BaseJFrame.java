@@ -74,6 +74,10 @@ public class BaseJFrame extends JFrame {
             case "003":  //Logout page
                 //Logout page
                 break;
+            case "004":  //First time login, change password
+                //Change Password
+                setContent(new PasswordChangeJPanel(), "Change Password");
+                break;
             
             
             //Franchisor
