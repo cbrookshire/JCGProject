@@ -265,13 +265,20 @@ public class Reservation {
         this.altState = altState;
     }
     //attrib 17
-    public String getAltZip() {
-        return altZip;
-    }
-
     public void setAltZip(String altZip) {
         this.altZip = altZip;
     }
+    
+    public void setAltZip(int altZip){
+        this.altZip = String.valueOf(altZip);
+    
+    }
+    
+    public int getAltZip() {
+        return Integer.parseInt(altZip);
+    }
+
+    
     
     //UTILITIES
     //Class Print Method

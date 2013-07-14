@@ -23,7 +23,7 @@ public class FranchiseManagerSession {
     public ArrayList <Vehicle> getVehicle(Object uiObject, String action){
         
         //local container
-        ArrayList <Vehicle> result;
+        ArrayList <Vehicle> result = new ArrayList<>();
         
         //send to dbSessionRouter      
         result = dControl.DBvehicleRouter(uiObject, action);
@@ -34,7 +34,7 @@ public class FranchiseManagerSession {
     public ArrayList <Employee> getEmployee(Object uiObject, String action){
         
         //local container
-        ArrayList <Employee> result;
+        ArrayList <Employee> result = new ArrayList<>();
         
         //send to dbSessionRouter      
         result = dControl.DBemployeeRouter(uiObject, action);
@@ -45,7 +45,7 @@ public class FranchiseManagerSession {
     public ArrayList <Reservation> getReservation(Object uiObject, String action){
         
         //local container
-        ArrayList <Reservation> result;
+        ArrayList <Reservation> result = new ArrayList<>();
         
         //send to dbSessionRouter      
         result = dControl.DBreservationRouter(uiObject, action);

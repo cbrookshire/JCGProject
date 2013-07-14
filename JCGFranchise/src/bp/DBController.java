@@ -124,8 +124,8 @@ public class DBController {
          
          try{
                 if (sysObject instanceof String && "VIEWALL".equals(action)){   
-                    temp = queryDB.AllEmployeesInFranchise
-                            (((Employee)sysObject).getFranchiseNumber());
+                    temp = queryDB.AllEmployeesInFranchise(1);
+                    //        (((Employee)sysObject).getFranchiseNumber());
                     return temp;
                 }
                 if (sysObject instanceof Employee && "VIEWITEM".equals(action)){    

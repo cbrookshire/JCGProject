@@ -22,7 +22,7 @@ public class FranchiseEmployeeSession {
     public ArrayList <Reservation> getReservation(Object uiObject, String action){
         
         //local container
-        ArrayList <Reservation> result;
+        ArrayList <Reservation> result = new ArrayList<>();
         
         //send to dbSessionRouter      
         result = dControl.DBreservationRouter(uiObject, action);
