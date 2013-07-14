@@ -1695,15 +1695,15 @@ public class Queries extends JCGDatabase
                     temp.setAddress(results.getString("Address"));
                     temp.setCity(results.getString("City"));
                     temp.setEmail(results.getString("Email"));
-                    temp.setEmpType(results.getString("EmpType"));
+                    temp.setEmpType(results.getInt("EmpType"));
                     temp.setFirstName(results.getString("Fname"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setLastName(results.getString("Surname"));
                     //temp.setPassword(results.getString("Address"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    temp.setEmployeeID(results.getString("EmployeeID"));
-                    temp.setZip(results.getString("Address"));
+                    temp.setEmployeeID(results.getInt("EmployeeID"));
+                    temp.setZip(results.getInt("Zip"));
                     
                     BPList.add(temp);
                 }
@@ -3249,6 +3249,43 @@ public class Queries extends JCGDatabase
         return 1;
     }
     
+    public int manUpdateReservation(Reservation res) throws UnauthorizedUserException, BadConnectionException {
+        
+        try {
+           PreparedStatement pStmnt = con.prepareStatement(qs.update_res_m);
+           pStmnt.setDouble(1, res.getFlightTime());
+           pStmnt.setDouble(2, (res.getFlightTime() - 1.00));
+           pStmnt.setDouble(3, (res.getFlightTime() + 1.00));
+           pStmnt.setString(4, res.getAltAddress());
+           pStmnt.setString(5, res.getAltCity());
+           pStmnt.setString(6, res.getAltState());
+           //pStmnt.setInt(7, res.getAltZip());
+           pStmnt.setInt(8, res.getReservationNumber());
+           pStmnt.executeQuery();
+           
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+        return 1;
+    }
+    /*
+    public int dUpdateReservation(Reservation res) {
+        PreparedStatement
+        // close a reservation and leave a comment
+        try {
+            
+        }
+        
+        // update the customer reservation count
+        
+        // may need to update to next level in membership.
+        
+        return 1;
+    }
+    */
     
 /******************************************************************************
  *          Administrative Section                                                     *  
