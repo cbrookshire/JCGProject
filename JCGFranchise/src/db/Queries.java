@@ -26,6 +26,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import bp.JCGlIO;
+import java.sql.DriverManager;
 
 /**a
  *
@@ -39,6 +41,10 @@ public class Queries
     private QStrings qs;
     private int code;
     
+    static final String DATABASE_URL = "jdbc:mysql://localhost/JCGroup";
+    Connection connection = null;
+    
+    
     
     
     public Queries(Connection con)
@@ -47,6 +53,35 @@ public class Queries
         setConnection(con);
                
     }
+    
+    /* Brute Force Copy Constructor */
+    public Queries()
+    {
+        try
+        {
+            con = DriverManager.getConnection(DATABASE_URL, "JC7703", "password");
+        }
+        catch(SQLException sqlE)
+        {
+            
+        }
+    }
+    
+    /* Brute Force Copy Constructor with io Import*/
+     public Queries(JCGlIO io)
+    {
+        
+        
+        try
+        {
+           con = DriverManager.getConnection(DATABASE_URL, io.getU(), io.getP());
+        }
+        catch(SQLException sqlE)
+        {
+            
+        }
+    }
+    
     
     private void setConnection(Connection con)
     {
