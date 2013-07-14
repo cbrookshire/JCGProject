@@ -166,6 +166,17 @@ public class Queries
             {
             /* Preparing Statment Section Start */
                 
+                if(con.isValid(120));
+                {
+                    System.out.println("Connection is Good!");
+                }
+                
+                if(!con.isValid(120));
+                {
+                    System.out.println("Connection is Bad!");
+                }
+                
+                
                 statment = con.createStatement();
                 
                 //statment = con.prepareStatement(statString);
