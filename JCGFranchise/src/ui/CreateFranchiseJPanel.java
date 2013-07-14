@@ -6,7 +6,7 @@ package ui;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
+import bp.*;
 /**
  *
  * @author Corey
@@ -17,10 +17,10 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
      * Creates new form CreateFranchiseJPanel
      */
     private int mode;
-    //private ArrayList<Franchise> list; 
+    private ArrayList<Franchise> list; 
     
     public CreateFranchiseJPanel(int m) {
-        //list = new ArrayList<Franchise>();
+        list = new ArrayList<Franchise>();
         mode = m;
         initComponents();
         
@@ -167,6 +167,13 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     private void getListSelection()
     {
         //Gets a list of all the Employees (should display name)
+        //list = LOLGETLIST();
+        list = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
+        for(int i = 0; i < list.size(); i++)
+        {
+            String t = list.get(i).getAddress() + ";" + list.get(i).getCity() + "," + list.get(i).getState();
+            listSelection.addItem(t);
+        }
     }
     
     private void loadInfoFromList()
@@ -255,8 +262,6 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
                 newFranchiseButtonActionPerformed(evt);
             }
         });
-
-        listSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setText("Selection:");
 
@@ -377,14 +382,29 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     private void newFranchiseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFranchiseButtonActionPerformed
         if(!checkFields())
             return;
+        
+        Franchise fr = new Franchise();
+        fr.setAddress(newFranchiseAddress.getText());
+        fr.setCity(newFranchiseCity.getText());
+        fr.setState(newFranchiseState.getText());
+        fr.setZip(newFranchiseZip.getText());
+        fr.setPhone(newFranchisePhone.getText());
+        fr.setEmail(newFranchiseEmail.getText());
+        fr.setAirport(newFranchiseAirport.getText());
         if(mode == 0)  //Create one
         {
             //send new Franchise to DB
+            UIController.getInstance().UIRouter(fr, "ADD");
         }
         
         if(mode == 1)  //Update one
         {
-            //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            UIController.getInstance().UIRouter(fr, "EDIT");
+        }
+        
+        if(mode == 1)  //Delete one
+        {
+            UIController.getInstance().UIRouter(fr, "DELETE");
         }
     }//GEN-LAST:event_newFranchiseButtonActionPerformed
 

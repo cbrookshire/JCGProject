@@ -32,7 +32,7 @@ public class FranchisorOverviewPanel extends javax.swing.JPanel  {
             Vector<String> data = new Vector<String>();
             for(int i = 0; i < list.size(); i++)
             {
-                data.add(list.get(i).getAirport());
+                data.add(list.get(i).toString());
             }
             jList1.setListData(data);
         }

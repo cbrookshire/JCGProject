@@ -5,6 +5,7 @@
 package ui;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import bp.*;
 
 /**
  *
@@ -13,14 +14,14 @@ import javax.swing.JOptionPane;
 public class CreateReservationsJPanel extends javax.swing.JPanel {
 
     private int mode;
-    //private ArrayList<Reservation> list;
+    private ArrayList<Reservation> list;
     
     /**
      * Creates new form CreateReservationsJPanel
      */
     public CreateReservationsJPanel(int m) {
         initComponents();
-        //list = new ArrayList<Reservation>();
+        list = new ArrayList<Reservation>();
         
         mode = m;
         if(mode == 0)  //Create mode
@@ -148,6 +149,13 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
     private void getListSelection()
     {
         //Gets a list of all the Employees (should display name)
+        //list = LOLGETLIST();
+        list = UIController.getInstance().UIreservationRouter(new String("RESERVATION"), "VIEWALL");
+        for(int i = 0; i < list.size(); i++)
+        {
+            String t = list.get(i).getCustomerID() + ";" + list.get(i).getDate() + "," + list.get(i).getAirline();
+            listSelection.addItem(t);
+        }
     }
     
     private void loadInfoFromList()
@@ -405,14 +413,37 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         if(!checkFields())
             return;
+        
+        Reservation res = new Reservation();
+        res.setReservationNumber(franchiseNumList.getSelectedIndex());
+        res.setVehicleID(vehicleIDList.getSelectedIndex());
+        res.setCustomerID(listCustomerID.getSelectedIndex());
+        res.setPrice(txtPrice.getText());
+        res.setStatus(txtStatus.getText());
+        res.setComment(txtComment.getText());
+        res.setFlightNumber(txtFlightNum.getText());
+        res.setAirline(txtAirline.getText());
+        res.setDate(txtDate.getText());
+        res.setFlightTime(txtFlightTime.getText());
+        res.setPickUpTime(txtPickupTime.getText());
+        res.setDropOffTime(txtDropoffTime.getText());
+        
         if(mode == 0)  //Create one
         {
             //send new Franchise to DB
+            UIController.getInstance().UIRouter(res, "ADD");
         }
         
         if(mode == 1)  //Update one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            UIController.getInstance().UIRouter(res, "EDIT");
+        }
+        
+        if(mode == 2)  //Delete one
+        {
+            //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            UIController.getInstance().UIRouter(res, "DELETE");
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 

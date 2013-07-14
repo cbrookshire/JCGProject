@@ -6,6 +6,7 @@ package ui;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import bp.*;
 /**
  *
  * @author Corey
@@ -16,12 +17,12 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
      * Creates new form CreateFranchise
      */
     private int mode;
-    //private ArrayList<Customer> list;
+    private ArrayList<Customer> list;
     /**
      * Creates new form CreateFranchise
      */
     public CreateCustomerJPanel(int m) {
-        //list = new ArrayList<Customer>();
+        list = new ArrayList<Customer>();
         mode = m;
         initComponents();
         
@@ -159,12 +160,31 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     private void getListSelection()
     {
         //Gets a list of all the Employees (should display name)
+        //list = LOLGETLIST();
+        list = UIController.getInstance().UIcustomerRouter(new String("CUSTOMER"), "VIEWALL");
+        for(int i = 0; i < list.size(); i++)
+        {
+            String t = list.get(i).getLastName() + "," + list.get(i).getFirstName();
+            listSelection.addItem(t);
+        }
     }
     
     private void loadInfoFromList()
     {
         //Loads the information after an item from the combo box has been selected.
         //The data is put into the text fields
+        Customer c = list.get(listSelection.getSelectedIndex());
+        
+        
+        newCustomerName.setText(c.getFirstName() + " " + c.getLastName());
+        newCustomerAddress.setText(c.getAddress());
+        newCustomerCity.setText(c.getCity());
+        newCustomerState.setText(c.getState());
+        newCustomerZip.setText(String.valueOf(c.getZip()));
+        newCustomerPhone.setText(c.getPhone());
+        newCustomerEmail.setText(c.getEmail());
+        
+                
         
     }
 
@@ -250,8 +270,6 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         jLabel9.setText("Reservation Count:");
 
         jLabel10.setText("Member ID:");
-
-        listSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         resCount.setText("resCount");
 
@@ -380,14 +398,32 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if(checkFields() == false)
             return;
+        Customer cust = new Customer();
+        String[] t = newCustomerName.getText().split(" ");
+        cust.setFirstName(t[0]);
+        cust.setLastName(t[1]);
+        cust.setAddress(newCustomerAddress.getText());
+        cust.setCity(newCustomerCity.getText());
+        cust.setState(newCustomerState.getText());
+        cust.setZip(newCustomerZip.getText());
+        cust.setPhone(newCustomerPhone.getText());
+        cust.setEmail(newCustomerEmail.getText());
+        
         if(mode == 0)  //Create one
         {
+            UIController.getInstance().UIRouter(cust, "ADD");
             //send new Customer to DB
         }
         
         if(mode == 1)  //Update one
         {
+            UIController.getInstance().UIRouter(cust, "EDIT");
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
+        }
+        
+        if(mode == 2)  //Delete one
+        {
+            UIController.getInstance().UIRouter(cust, "DELETE");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

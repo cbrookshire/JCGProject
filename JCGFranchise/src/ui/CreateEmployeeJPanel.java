@@ -6,6 +6,7 @@ package ui;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import bp.*;
 
 /**
  *
@@ -18,11 +19,11 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
      */
     private int mode;
     private boolean isDriver;
-    //private ArrayList<Employee> list;
+    private ArrayList<Employee> list;
     
     
     public CreateEmployeeJPanel(int m, boolean isDriver) {
-        //list = new ArrayList<Employee>();
+        list = new ArrayList<Employee>();
         mode = m;
         this.isDriver = isDriver;
         initComponents();
@@ -33,7 +34,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         }
         if(mode == 1)  //Edit mode
         {
-            //getListSelection();
+            getListSelection();
             jLabel1.setText("Edit a Employee");
             listSelection.setEnabled(true);
             jButton3.setText("Update");
@@ -42,7 +43,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         
         if(mode == 2)  //Delete mode
         {
-            //getListSelection();
+            getListSelection();
             jLabel1.setText("Delete a Employee");
             listSelection.setEnabled(true);
             jButton3.setText("Delete");
@@ -159,6 +160,37 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         
         return success;
     }
+    
+    private void getListSelection()
+    {
+        //Gets a list of all the Employees (should display name)
+        //list = LOLGETLIST();
+        list = UIController.getInstance().UIemployeeRouter(new String("EMPLOYEE"), "VIEWALL");
+        for(int i = 0; i < list.size(); i++)
+        {
+            String t = list.get(i).getLastName() + "," + list.get(i).getFirstName();
+            listSelection.addItem(t);
+        }
+        
+    }
+    
+    private void loadInfoFromList()
+    {
+        //Loads the information after an item from the combo box has been selected.
+        //The data is put into the text fields
+        Employee e = list.get(listSelection.getSelectedIndex());
+        
+        newEmployeeFirstName.setText(e.getFirstName());
+        newEmployeeLastName.setText(e.getLastName());
+        newEmployeeAddress.setText(e.getAddress());
+        newEmployeeCity.setText(e.getCity());
+        newEmployeeState.setText(e.getState());
+        newEmployeeZip.setText(String.valueOf(e.getZip()));
+        newEmployeePhone.setText(e.getPhone());
+        newEmployeeEmail.setText(e.getEmail());
+        newEmployeeType.setSelectedIndex(e.getEmpType());
+        newEmployeeNum.setSelectedIndex(e.getEmployeeID());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -245,8 +277,6 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
 
         jLabel11.setText("Selection:");
 
-        listSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel12.setText("Last Name:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -261,7 +291,6 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -289,8 +318,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                                             .addComponent(newEmployeeZip, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(newEmployeePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(newEmployeeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(listSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(listSelection, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(newEmployeeFirstName, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(newEmployeeLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))))
                                     .addGroup(layout.createSequentialGroup()
@@ -299,7 +328,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                                         .addGap(32, 32, 32)
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(newEmployeeNum, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(newEmployeeNum, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -380,14 +410,32 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         //Submit button
         if(checkFields() == false)
             return;
+        
+        Employee emp = new Employee();
+        emp.setFirstName(newEmployeeFirstName.getText());
+        emp.setLastName(newEmployeeLastName.getText());
+        emp.setAddress(newEmployeeAddress.getText());
+        emp.setCity(newEmployeeCity.getText());
+        emp.setState(newEmployeeState.getText());
+        emp.setZip(newEmployeeZip.getText());
+        emp.setPhone(newEmployeePhone.getText());
+        emp.setEmail(newEmployeeEmail.getText());
+        
         if(mode == 0)  //Create one
         {
             //send new Employee to DB
+            UIController.getInstance().UIRouter(emp, "ADD");
         }
         
         if(mode == 1)  //Update one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            UIController.getInstance().UIRouter(emp, "EDIT");
+        }
+        
+        if(mode == 2)  //Delete one
+        {
+            UIController.getInstance().UIRouter(emp, "DELETE");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
