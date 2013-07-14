@@ -21,12 +21,12 @@ public class PasswordChangeJPanel extends javax.swing.JPanel {
     }
     public void changePassword()
     {
-        if (passwordTextField == confirmPasswordTextField)
-        {
-            lIO.setP(passwordTextField.getText());
-            String code = uic.UIRouter(lIO, "UPDATEPASSWORD");
+        //if (passwordTextField == confirmPasswordTextField)
+        //{
+            //lIO.setP(passwordTextField.getText());
+            String code = uic.UIRouter(passwordTextField.getText(), "ASSIGNNEWPASSWORD");
             BaseJFrame.getInstance().setScreen(code);
-        }
+        //}
     }
 
     /**
@@ -55,6 +55,11 @@ public class PasswordChangeJPanel extends javax.swing.JPanel {
         jLabel2.setText("Re-Enter Password:");
 
         jButton1.setText("Confirm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Return to Login");
 
@@ -107,6 +112,12 @@ public class PasswordChangeJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                // TODO add your handling code here:
+        changePassword();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField confirmPasswordTextField;
     private javax.swing.JButton jButton1;
