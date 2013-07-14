@@ -160,7 +160,7 @@ public class Franchise {
    @Override
    public String toString(){
     
-    return String.format("%s%s%s  %s%s/n%s%s %s, %s %s\n%s%s\n%s%s\n",
+    return String.format("%s%s%s  %s%s\n%s%s %s, %s %s\n%s%s\n%s%s\n",
         "Franchise: ", name, getFranchiseID(), 
         "Airport:   ", getAirportID(),
         "Address:   ", getAddress(), getCity(), 

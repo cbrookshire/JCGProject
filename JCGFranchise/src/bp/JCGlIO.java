@@ -6,8 +6,6 @@
  */
 package bp;
 
-import java.sql.Connection;
-
 public class JCGlIO {
     
     //attributes
@@ -15,18 +13,17 @@ public class JCGlIO {
     private String p;
     private String fN;
     private String eT;
-    Connection sessionConnection;
-
-    public Connection getSessionConnection() {
-        return sessionConnection;
-    }
-
-    public void setSessionConnection(Connection sessionConnection) {
-        this.sessionConnection = sessionConnection;
-    }
+    
+    
     private static JCGlIO lIO;
 
-    private JCGlIO(){}
+    private JCGlIO(){
+    
+        u = "";
+        p = "";
+        fN = "";
+        eT = "";
+    }
         
     //CONSTRUCTOR
     //4 arg

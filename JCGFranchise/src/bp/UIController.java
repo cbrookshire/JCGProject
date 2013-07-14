@@ -50,7 +50,7 @@ public class UIController {
             String action){
     
         //local container
-        ArrayList<Franchise> temp = new ArrayList<>();
+        ArrayList<Franchise> temp;
         
         //only franchisor allowed to see franchises
         temp = foSession.getFranchise(uiObject, action);
@@ -66,12 +66,12 @@ public class UIController {
         
        //managers and customers can see vehicles
        //if type is manager call to appropriate session
-       if (MANAGER.equals(io.geteT())) {
+       if (MANAGER.equals(role.geteT())) {
             temp = fmSession.getVehicle(uiObject, action);
             return temp;
        }
        //if type is customer make call to appropriate session
-       if (CUSTOMER.equals(io.geteT())) {
+       if (CUSTOMER.equals(role.geteT())) {
             temp = custSession.getVehicle(uiObject, action);
             return temp;          
        }
@@ -84,16 +84,16 @@ public class UIController {
             String action){
     
         //local container
-        ArrayList<Employee> temp;
+        ArrayList<Employee> temp = new ArrayList<>();
         
         //owners and managers can see employees
         //if type is owner make call to appropriate session
-        if (OWNER.equals(io.geteT())) {
+        if (OWNER.equals(role.geteT())) {
             temp = foSession.getEmployee(object, action);
             return temp;
         }            
         //if type is manager make call to appropriate session
-        if (MANAGER.equals(io.geteT())) {
+        if (MANAGER.equals(role.geteT())) {
             temp = fmSession.getEmployee(object, action);
             return temp;
         }

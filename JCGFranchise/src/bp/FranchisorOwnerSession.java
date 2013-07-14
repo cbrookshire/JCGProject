@@ -27,7 +27,7 @@ public class FranchisorOwnerSession {
     public ArrayList <Franchise> getFranchise(Object uiObject, String action){
         
         //local container
-        ArrayList <Franchise> result = new ArrayList<>();
+        ArrayList <Franchise> result;
         
         //send to dbSessionRouter      
         result = dControl.DBfranchisorRouter(uiObject, action);
