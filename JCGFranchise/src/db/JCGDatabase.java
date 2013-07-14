@@ -67,9 +67,7 @@ public class JCGDatabase {
             update_cust_status = connection.prepareStatement(
                 "UPDATE Customer SET FIRSTLOG = 'N' WHERE Username = ?");
             
-                //saves Connection object in JCGlIO for use in 
-                //instantiation of Queries 
-                jcgLio.setSessionConnection(connection);               
+                 
                 
             }
         catch(SQLException sqlE) {
