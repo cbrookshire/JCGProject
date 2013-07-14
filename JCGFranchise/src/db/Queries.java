@@ -122,7 +122,7 @@ public class Queries extends JCGDatabase
             //PreparedStatement statment = null;
             Statement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM franchise";
+            String statString = "SELECT * FROM Franchise";
 
             /* Return Parameter */
             ArrayList<Franchise> BPList = new ArrayList<Franchise>();
@@ -154,8 +154,27 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery(statString);
                 
-                if(statment != null)
-                    statment.close();
+               
+                while (results.next())
+                {
+                    System.out.println("in the loop");
+                    Franchise temp = new Franchise();
+                    
+                    //rs.getBigDecimal("AMOUNT")
+                    
+                    temp.setAddress(results.getString("Address"));
+                    temp.setAirportID(results.getInt("AirportID"));
+                    //temp.setAirport(getFranchiseAirportName(results.getInt("AirportID")));
+                    temp.setCity(results.getString("City"));
+                    temp.setEmail(results.getString("Email"));
+                    temp.setFranchiseID(results.getInt("FranchiseNumber"));
+                    temp.setPhone(results.getString("Phone"));
+                    temp.setState(results.getString("State"));
+                    temp.setZip(results.getInt("Zip"));
+                    
+                    System.out.print(temp.toString());
+                    BPList.add(temp);
+                }
                 
             /* Query Section Stop */
             
@@ -171,19 +190,20 @@ public class Queries extends JCGDatabase
                 results.beforeFirst();
                 while (results.next() && rows > 0)
                 {
+                    System.out.println("in the loop");
                     Franchise temp = new Franchise();
                     
                     //rs.getBigDecimal("AMOUNT")
                     
                     temp.setAddress(results.getString("Address"));
-                    temp.setAirportID(results.getString("AirportID"));
-                    temp.setAirport(getFranchiseAirportName(results.getInt("AirportID")));
+                    temp.setAirportID(results.getInt("AirportID"));
+                    //temp.setAirport(getFranchiseAirportName(results.getInt("AirportID")));
                     temp.setCity(results.getString("City"));
                     temp.setEmail(results.getString("Email"));
-                    temp.setFranchiseID(results.getString("FranchiseNumber"));
+                    temp.setFranchiseID(results.getInt("FranchiseNumber"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    temp.setZip(results.getString("Zip"));
+                    temp.setZip(results.getInt("Zip"));
                     
                     System.out.print(temp.toString());
                     BPList.add(temp);
@@ -3207,7 +3227,7 @@ public class Queries extends JCGDatabase
             pStmnt.setString(11, res.getAltAddress());
             pStmnt.setString(12, res.getAltCity());
             pStmnt.setString(13, res.getAltState());
- //           pStmnt.setInt(14, res.getAltZip());                       
+           // pStmnt.setInt(14, res.getAltZip());                       
             pStmnt.executeQuery();
             
             
