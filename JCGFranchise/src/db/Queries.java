@@ -48,7 +48,7 @@ public class Queries extends JCGDatabase
 
         super(lio);
         setConnection(super.connection);
-       
+        qs = new QStrings();
 
     }
         
@@ -190,7 +190,7 @@ public class Queries extends JCGDatabase
                 results.beforeFirst();
                 while (results.next() && rows > 0)
                 {
-                    System.out.println("in the loop");
+                    //System.out.println("in the loop");
                     Franchise temp = new Franchise();
                     
                     //rs.getBigDecimal("AMOUNT")
@@ -205,7 +205,7 @@ public class Queries extends JCGDatabase
                     temp.setState(results.getString("State"));
                     temp.setZip(results.getInt("Zip"));
                     
-                    System.out.print(temp.toString());
+                    //System.out.print(temp.toString());
                     BPList.add(temp);
                 }
             /* List Prepare Section Stop */
@@ -1649,7 +1649,7 @@ public class Queries extends JCGDatabase
     public ArrayList<Employee> AllEmployeesInFranchise(int FranID)
             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
-        /* Variable Section Start */
+            /* Variable Section Start */
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
@@ -1657,7 +1657,7 @@ public class Queries extends JCGDatabase
 
             /* Return Parameter */
             ArrayList<Employee> BPList = new ArrayList<Employee>();
-        /* Variable Section Stop */
+            /* Variable Section Stop */
         
         
         /* TRY BLOCK START */

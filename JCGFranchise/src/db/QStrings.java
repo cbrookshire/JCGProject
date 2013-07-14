@@ -10,7 +10,9 @@ package db;
  */
 final class QStrings {
     
-// Fracnhise
+    public QStrings(){};
+    
+    // Fracnhise
     public String update_fran = "UPDATE Franchise SET Address = ?,"
                     + " City = ?, State = ?, Zip = ?, Phone = ?, Email = ?, "
                     + " AirportID = ? WHERE FranchiseNumber = ?";
