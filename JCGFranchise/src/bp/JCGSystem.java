@@ -43,7 +43,7 @@ public class JCGSystem {
        switch (dbCode){
                         //set employee type in JCGlIO and create sessions
            case "1":    lIO.seteT(dbCode);
-                        foSession = new FranchisorOwnerSession();
+                        foSession = FranchisorOwnerSession.getInstance();
                         sysCode = "OWNER"; //session name
                         return sysCode;               
            case "2":    lIO.seteT(dbCode);

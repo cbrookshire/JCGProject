@@ -34,6 +34,7 @@ public class UIController {
     private UIController()    {
         jcgSys = JCGSystem.getInstance();
         role = JCGlIO.getInstance();
+        foSession = FranchisorOwnerSession.getInstance();
     }
     
     //UTILITIES
@@ -49,7 +50,7 @@ public class UIController {
             String action){
     
         //local container
-        ArrayList<Franchise> temp;
+        ArrayList<Franchise> temp = new ArrayList<>();
         
         //only franchisor allowed to see franchises
         temp = foSession.getFranchise(uiObject, action);

@@ -20,11 +20,15 @@ public class DBController {
     private JCGDatabase dbase;
     private Queries queryDB;
     private static DBController dbcInstance;
+    private JCGlIO io;
          
     
     //CONSTRUCTOR
     //default
-    private DBController(){ }
+    private DBController(){        
+        io = JCGlIO.getInstance();
+        queryDB = new Queries(io.getSessionConnection());
+    }
     
     
     //UTILITIES
@@ -35,7 +39,7 @@ public class DBController {
              String action){
     
         //local container 
-        ArrayList <Franchise> temp;
+        ArrayList <Franchise> temp = new ArrayList<>();
          
         try{            
                 if (sysObject instanceof String && "VIEWALL".equals(action)){   
@@ -336,10 +340,10 @@ public class DBController {
                     dbReturnCode = queryDB.insertEmployee(((Employee)sysObject));
                     return String.valueOf(dbReturnCode);
                 }
-                /*if (sysObject instanceof Reservation) {
+                if (sysObject instanceof Reservation) {
                     dbReturnCode = queryDB.insertReservation((Reservation)sysObject);
                     return String.valueOf(dbReturnCode);
-                }*/
+                }
                 if (sysObject instanceof Customer) {
                     dbReturnCode = queryDB.insertCustomer(((Customer)sysObject));
                     return String.valueOf(dbReturnCode);
@@ -385,7 +389,7 @@ public class DBController {
                     else
                         return "0";
                 }
-                /*if (sysObject instanceof Reservation){
+                if (sysObject instanceof Reservation){
                     milesReturnCode = 
                     queryDB.RemoveReservation(((Reservation)sysObject).getReservationNumber());
                     if (milesReturnCode == true) 
@@ -400,7 +404,7 @@ public class DBController {
                         return "1";                             
                     else
                         return "0";
-                }*/                               
+                }                               
             }
             catch(UnauthorizedUserException e){
                 return e.getMessage();

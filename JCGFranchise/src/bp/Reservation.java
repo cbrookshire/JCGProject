@@ -92,8 +92,8 @@ public class Reservation {
         this.reservationNumber = String.valueOf(reservationNumber);
     }
     
-    public String getReservationNumber() {
-        return reservationNumber;
+    public int getReservationNumber() {
+        return Integer.parseInt(reservationNumber);
     }
 
     //attrib 2
