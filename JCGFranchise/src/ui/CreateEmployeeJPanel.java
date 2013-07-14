@@ -283,6 +283,12 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
 
         jLabel11.setText("Selection:");
 
+        listSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSelectionActionPerformed(evt);
+            }
+        });
+
         jLabel12.setText("Last Name:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -444,6 +450,10 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             UIController.getInstance().UIRouter(emp, "DELETE");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
+        loadInfoFromList();
+    }//GEN-LAST:event_listSelectionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

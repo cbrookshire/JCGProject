@@ -240,6 +240,12 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("List");
 
+        listSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSelectionActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Franchise No:");
 
         jLabel5.setText("Vehicle ID:");
@@ -473,6 +479,10 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
             UIController.getInstance().UIRouter(res, "DELETE");
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
+        loadInfoFromList();
+    }//GEN-LAST:event_listSelectionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;

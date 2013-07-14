@@ -271,6 +271,12 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
 
         jLabel10.setText("Member ID:");
 
+        listSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSelectionActionPerformed(evt);
+            }
+        });
+
         resCount.setText("resCount");
 
         memberID.setText("memberID");
@@ -430,6 +436,10 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     private void newCustomerEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newCustomerEmailActionPerformed
+
+    private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
+        loadInfoFromList();
+    }//GEN-LAST:event_listSelectionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;

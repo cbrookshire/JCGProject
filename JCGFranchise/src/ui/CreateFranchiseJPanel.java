@@ -263,6 +263,12 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             }
         });
 
+        listSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSelectionActionPerformed(evt);
+            }
+        });
+
         jLabel9.setText("Selection:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -411,6 +417,10 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     private void newFranchiseEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFranchiseEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newFranchiseEmailActionPerformed
+
+    private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
+        loadInfoFromList();
+    }//GEN-LAST:event_listSelectionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
