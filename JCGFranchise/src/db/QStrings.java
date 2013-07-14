@@ -58,23 +58,29 @@ final class QStrings {
                               "GRANT SELECT ON JCGroup.Franchise TO ?@'localhost' " +
                               "GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Vehicle TO ?@'localhost' " +
                               "GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Maintanence TO ?@'localhost' " +
-                              "GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Employee TO ?@'localhost'" +
-                              "GRANT SELECT, UPDATE, DELETE ON JCGroup.Customer TO ?@'localhost' " +
-                              "GRANT SELECT ON JCGroup.Customer TO ?@'localhost' WITH GRANT OPTION " +
-                              "GRANT SELECT ON JCGroup.Membership TO ?@'localhost' " +
-                              //"GRANT SELECT, UPDATE ON JCGroup.Reservation TO ?@'localhost' WITH GRANT OPTION " +
-                              //"GRANT INSERT, UPDATE ON JCGroup.Reservation TO ?@'localhost' " +
-                              "GRANT CREATE USER ON *.* to ?@'localhost' WITH GRANT OPTION " +
+                              "GRANT INSERT, DELETE ON JCGroup.Employee TO ?@'localhost' " +
+                              "GRANT SELECT, UPDATE ON JCGroup.Employee TO ?@'localhost' " +
+                              "GRANT INSERT, DELETE ON JCGroup.Customer TO ?@'localhost' " +
+                              "GRANT SELECT, UPDATE ON JCGroup.Customer TO ?@'localhost' WITH GRANT OPTION " +
+                              "GRANT SELECT ON JCGroup.Membership TO ?@'localhost' WITH GRANT OPTION " +
+                              "GRANT SELECT, UPDATE ON JCGroup.Reservation TO ?@'localhost' WITH GRANT OPTION " +
+                              "GRANT INSERT, DELETE ON JCGroup.Reservation TO ?@'localhost' " +
+                              "GRANT CREATE USER ON *.* to ?@'localhost' " +
                               "FLUSH PRIVILEGES";
     
-    public String grant_driver = "GRANT SELECT ON JCGroup.Customer to ?@'localhost' "
-                               + "GRANT SELECT, UPDATE ON JCGROUP.Employee to ?@'localhost'";
-                                 //add in grant for reservation
+    public String grant_driver = "GRANT SELECT, UPDATE ON JCGroup.Customer to ?@'localhost' "
+                               + "GRANT SELECT, UPDATE ON JCGroup.Employee to ?@'localhost' "
+                               + "GRANT SELECT, UPDATE ON JCGroup.Reservation TO ?@'localhost' "
+                               + "GRANT SELECT ON JCGroup.Membership TO ?@'localhost' "
+                               + "FLUSH PRIVILEGES";
+                               
     
     public String grant_owner = "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Airport TO ?@'localhost' "
                               + "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Franchise TO ?@'localhost' "
                               + "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Employee TO ?@'localhost' "
-                              + "GRANT SELECT, UPDATE ON JCGroup.Membership TO ?@'localhost'";   
+                              + "GRANT SELECT, UPDATE ON JCGroup.Membership TO ?@'localhost' "
+                              + "GRANT CREATE USER ON *.* TO ?@'localhost' WITH GRANT OPTION "
+                              + "FLUSH PRIVILEGES";   
     
     public String get_username = "SELECT Username FROM Employee "
                     + "WHERE Employee.EmpType = ?";    
@@ -114,6 +120,12 @@ final class QStrings {
     
     public String update_res_m = "UPDATE Reservation SET FlightTime = ?, PickupTime = ?, DropOffTime = ? "
             + "AltAddress = ?, AltCity = ?, AltState = ?, AltZip = ? WHERE ReservationNumber = ?";
+    
+    public String update_res_d = "UPDATE Reservation SET Status = 'Close', Comment = ? WHERE = ?";
+    
+    public String update_res_count = "Update Customer SET ReservationCount = ReservationCount + 1, " 
+                                   + "MemberID = (select MemberID from Membership where MinAmount "
+                                   + "<= ReservationCount ORDER BY MinAmount desc limit 1) WHERE CustomerID = ?";
     
 // Admin
     public String get_emp_username = "SELECT Username FROM Employee WHERE EmpType != 98";

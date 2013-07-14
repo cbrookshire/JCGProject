@@ -3271,21 +3271,52 @@ public class Queries extends JCGDatabase
         }
         return 1;
     }
-    /*
-    public int dUpdateReservation(Reservation res) {
-        PreparedStatement
+    
+    public int dUpdateReservation(Reservation res) throws UnauthorizedUserException, BadConnectionException {
+        PreparedStatement pStmnt = null;
+        
         // close a reservation and leave a comment
         try {
-            
+            pStmnt = con.prepareStatement(qs.update_res_d);
+            pStmnt.setString(1, res.getComment());
+            pStmnt.setInt(2, res.getReservationNumber());
+            pStmnt.executeQuery();            
         }
-        
-        // update the customer reservation count
-        
-        // may need to update to next level in membership.
-        
+        catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else 
+                throw(new BadConnectionException("BadConnection")); 
+        }
+        finally {
+             try {
+                 if(pStmnt != null) pStmnt.close();
+            } catch (Exception ex) {
+                
+            }
+        }
+                     
+        // update the customer reservation count and memberID (if needed)
+        try {
+            pStmnt = con.prepareStatement(qs.update_res_count);
+            pStmnt.setInt(1, res.getCustomerID());
+        }
+        catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else 
+                throw(new BadConnectionException("BadConnection")); 
+        }
+        finally {
+             try {
+                 if(pStmnt != null) pStmnt.close();
+            } catch (Exception ex) {
+                
+            }
+        }
         return 1;
     }
-    */
+    
     
 /******************************************************************************
  *          Administrative Section                                                     *  
