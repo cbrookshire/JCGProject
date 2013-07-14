@@ -110,7 +110,8 @@ final class QStrings {
             + "Price, FlightNumber, Airline, FlightTime, PickUpTime, DropOffTime,  Date, "
             + "AltAddress, AltCity, AltState, AltZip) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
-    
+    public String update_res_m = "UPDATE Reservation SET FlightTime = ?, PickupTime = ?, DropOffTime = ? "
+            + "AltAddress = ?, AltCity = ?, AltState = ?, AltZip = ? WHERE ReservationNumber = ?";
     
 // Admin
     public String get_emp_username = "SELECT Username FROM Employee WHERE EmpType != 98";
