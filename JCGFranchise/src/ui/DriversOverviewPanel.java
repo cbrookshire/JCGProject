@@ -4,6 +4,7 @@
  */
 package ui;
 
+import bp.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -23,7 +24,9 @@ public class DriversOverviewPanel extends javax.swing.JPanel  {
     public void setList()
     {
         
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<Employee> list = new ArrayList<Employee>();
+        list = UIController.getInstance().UIemployeeRouter(new String("EMPLOYEE"), "VIEWALL");
+        
         //obtain list list lol
         
         if(list.size() > 0)
@@ -31,7 +34,7 @@ public class DriversOverviewPanel extends javax.swing.JPanel  {
             Vector<String> data = new Vector<String>();
             for(int i = 0; i < list.size(); i++)
             {
-                data.add(list.get(i));
+                data.add(list.get(i).toString());
             }
             jList1.setListData(data);
         }
