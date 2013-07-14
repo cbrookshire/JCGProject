@@ -5,10 +5,12 @@ package db;
 
 import JCGExceptions.BadConnectionException;
 import JCGExceptions.DoubleEntryException;
+import JCGExceptions.InvalidUserException;
 import JCGExceptions.UnauthorizedUserException;
 import bp.Customer;
 import bp.Employee;
 import bp.Franchise;
+import bp.JCGlIO;
 import bp.Membership;
 import bp.Reservation;
 import bp.Vehicle;
@@ -31,7 +33,7 @@ import java.util.logging.Logger;
  *
  * @authors Taylor Reighard and Miles Leavens-Russell
  */
-public class Queries
+public class Queries extends JCGDatabase
 {
     
     private Connection con = null;
@@ -39,10 +41,10 @@ public class Queries
     private QStrings qs;
     private int code;
     
-    public Queries(Connection con)
+    public Queries(JCGlIO lio) throws InvalidUserException, BadConnectionException
     {
-        
-        setConnection(con);
+        super(lio);
+        setConnection(super.connection);
         
     }
     
