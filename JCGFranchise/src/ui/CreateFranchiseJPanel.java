@@ -79,7 +79,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         
         if(newFranchiseAddress.isEnabled())
         {
-            if(!newFranchiseAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
+            if(newFranchiseAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
