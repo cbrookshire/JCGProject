@@ -84,7 +84,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         
         if(newCustomerAddress.isEnabled())
         {
-            if(!newCustomerAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
+            if(newCustomerAddress.getText().isEmpty())
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
