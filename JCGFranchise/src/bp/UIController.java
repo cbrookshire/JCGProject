@@ -14,7 +14,6 @@ public class UIController {
     
    //attributes
     private JCGSystem jcgSys;
-    private JCGlIO io;
     private FranchisorOwnerSession foSession;
     private FranchiseManagerSession fmSession;
     private FranchiseEmployeeSession empSession;
@@ -26,8 +25,6 @@ public class UIController {
     private final String EMPLOYEE = "3";
     private final String CUSTOMER = "99";
     private final String SYSADMIN = "98";
-    
-    
     
     //CONSTRUCTOR
     //default
@@ -84,7 +81,7 @@ public class UIController {
             String action){
     
         //local container
-        ArrayList<Employee> temp = new ArrayList<>();
+        ArrayList<Employee> temp;
         
         //owners and managers can see employees
         //if type is owner make call to appropriate session
@@ -110,12 +107,12 @@ public class UIController {
        
        //managers and customers can see customers
        //if type is manager make call to appropriate session
-       if (MANAGER.equals(io.geteT())) {
+       if (MANAGER.equals(role.geteT())) {
             temp = fmSession.getCustomer(object, action);
             return temp;
        }            
        //if type is customer make call to appropriate session
-       if (CUSTOMER.equals(io.geteT())) {
+       if (CUSTOMER.equals(role.geteT())) {
             temp = custSession.getCustomer(object, action);
             return temp;
        }
@@ -132,17 +129,17 @@ public class UIController {
         
        //managers, employees, and customers can see reservations
        //if type is manager make call to appropriate session
-       if (MANAGER.equals(io.geteT())) {
+       if (MANAGER.equals(role.geteT())) {
             temp = fmSession.getReservation(object, action);
             return temp;
        }            
        //if type is employee make call to appropriate session
-       if (EMPLOYEE.equals(io.geteT())) {
+       if (EMPLOYEE.equals(role.geteT())) {
             temp = empSession.getReservation(object, action);
             return temp;
        }
        //if type is customer make call to appropriate session
-       if (CUSTOMER.equals(io.geteT())) {
+       if (CUSTOMER.equals(role.geteT())) {
             temp = custSession.getReservation(object, action);
             return temp;
        }       
@@ -194,6 +191,8 @@ public class UIController {
                     return "902";                                   }
                 if ("1".equals(returnCode)) {
                     return "001";   /*LogInScreen*/                 }
+                if ("Please enter new password".equals(returnCode)) {
+                    return "004";   /*LogInScreen*/                 }     
             
         case "RESET": 
                 
