@@ -152,6 +152,9 @@ public class Franchise {
         return Integer.parseInt(airportID);
     }
    
+   
+   
+   
    //UTILITIES
    //Class Print Method
    @Override
@@ -159,7 +162,7 @@ public class Franchise {
     
     return String.format("%s%s%s  %s%s/n%s%s %s, %s %s\n%s%s\n%s%s\n",
         "Franchise: ", name, getFranchiseID(), 
-        "Airport:   ", getAirport(),
+        "Airport:   ", getAirportID(),
         "Address:   ", getAddress(), getCity(), 
         "           ", getState(), getZip(),
         "Phone:     ", getPhone(), 
