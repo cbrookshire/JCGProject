@@ -86,6 +86,18 @@ public class JCGSystem {
         dControl.dbSystemRouter(sysObject, action);             
     }
     
+    public String changePassword (Object sysObject, String action){
+    
+        
+        if (sysObject instanceof String) {
+            lIO.setP((String)sysObject);
+            return "PasswordChanged";
+            //add code to notify DB that password has been updated
+        }
+        
+        return "ClassNotFoundException";
+    }
+    
     
     
            

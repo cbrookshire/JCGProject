@@ -192,7 +192,15 @@ public class UIController {
                 if ("1".equals(returnCode)) {
                     return "001";   /*LogInScreen*/                 }
                 if ("Please enter new password".equals(returnCode)) {
-                    return "004";   /*LogInScreen*/                 }     
+                    return "004";   /*passwordchangescreen*/        } 
+            
+        case "ASSIGNNEWPASSWORD":
+            
+                returnCode = jcgSys.changePassword(UIObject, action);
+                if ("ClassNotFoundException".equals(returnCode)) {
+                    return "902";
+                }     
+            
             
         case "RESET": 
                 
