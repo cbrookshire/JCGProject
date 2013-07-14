@@ -153,8 +153,35 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         list = UIController.getInstance().UIreservationRouter(new String("RESERVATION"), "VIEWALL");
         for(int i = 0; i < list.size(); i++)
         {
-            String t = list.get(i).getCustomerID() + ";" + list.get(i).getDate() + "," + list.get(i).getAirline();
+            String t = list.get(i).toString();
             listSelection.addItem(t);
+        }
+        
+        ArrayList<Franchise> list2 = new ArrayList<Franchise>();
+        list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
+        
+        for(int i = 0; i < list2.size(); i++)
+        {
+            String t = list2.get(i).toString();
+            franchiseNumList.addItem(t);
+        }
+        
+        ArrayList<Vehicle> list3 = new ArrayList<Vehicle>();
+        list3 = UIController.getInstance().UIvehicleRouter(new String("VEHICLE"), "VIEWALL");
+        
+        for(int i = 0; i < list3.size(); i++)
+        {
+            String t = list3.get(i).toString();
+            vehicleIDList.addItem(t);
+        }
+        
+        ArrayList<Customer> list4 = new ArrayList<Customer>();
+        list4 = UIController.getInstance().UIcustomerRouter(new String("CUSTOMER"), "VIEWALL");
+        
+        for(int i = 0; i < list4.size(); i++)
+        {
+            String t = list4.get(i).toString();
+            listCustomerID.addItem(t);
         }
     }
     

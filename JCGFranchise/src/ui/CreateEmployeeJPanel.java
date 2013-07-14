@@ -168,10 +168,18 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         list = UIController.getInstance().UIemployeeRouter(new String("EMPLOYEE"), "VIEWALL");
         for(int i = 0; i < list.size(); i++)
         {
-            String t = list.get(i).getLastName() + "," + list.get(i).getFirstName();
+            String t = list.get(i).toString();
             listSelection.addItem(t);
         }
         
+        ArrayList<Franchise> list2 = new ArrayList<Franchise>();
+        list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
+        for(int i = 0; i < list2.size(); i++)
+        {
+            String t = list2.get(i).toString();
+            newEmployeeNum.addItem(t);
+        }
+            
     }
     
     private void loadInfoFromList()
@@ -270,8 +278,6 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         newEmployeeType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franchisor", "Franchisee", "Driver" }));
 
         jLabel9.setText("Employee Type:");
-
-        newEmployeeNum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franchisor", "Franchisee", "Driver" }));
 
         jLabel10.setText("Franchise Number:");
 
