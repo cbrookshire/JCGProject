@@ -17,7 +17,7 @@ import java.util.Iterator;
 public class DBController {
     
     //attributes
-    private JCGDatabase dbase;
+    private Queries dbase;
     private Queries queryDB;
     private static DBController dbcInstance;
          
@@ -265,10 +265,10 @@ public class DBController {
             try{   
                      //Cast object and attempt connection
                      JCGlIO temp = (JCGlIO)sysObject;
-                     dbase = new JCGDatabase(temp);
+                     queryDB = new Queries(temp);
                      //System.out.println(temp.getU() + temp.getP());
                      //Attempt login 
-                     dbReturnCode = dbase.login(temp);
+                     dbReturnCode = queryDB.login(temp);
                      String convert = Integer.toString(dbReturnCode);
                      //Return user role
                      return convert;                                
@@ -288,7 +288,7 @@ public class DBController {
             try{ 
                 //Cast object and attempt update
                 JCGlIO temp = (JCGlIO)sysObject;
-                dbReturnCode = dbase.updatePassword(temp);
+                dbReturnCode = queryDB.updatePassword(temp);
                 String convert = Integer.toString(dbReturnCode);
                 //return status
                 return convert;
@@ -316,7 +316,7 @@ public class DBController {
         
         case "LOGOUT":  
             
-            dbase.logOff();                                
+            queryDB.logOff();                                
                 
             
         case "ADD": 
