@@ -115,7 +115,8 @@ public class Queries
     {
         /* Variable Section Start */
             /* Database and Query Preperation */
-            PreparedStatement statment = null;
+            //PreparedStatement statment = null;
+            Statement statment = null;
             ResultSet results = null;
             String statString = "SELECT * FROM franchise";
 
@@ -128,12 +129,15 @@ public class Queries
             
             try
             {
-            /* Preparing Statment Section Start */                
-                statment = con.prepareStatement(statString);
+            /* Preparing Statment Section Start */
+                
+                statment = con.createStatement();
+                
+                //statment = con.prepareStatement(statString);
                 //statment.setString();
             /* Preparing Statment Section Stop */
             /* Query Section Start */
-                results = statment.executeQuery();
+                results = statment.executeQuery(statString);
                 
                 if(statment != null)
                     statment.close();
