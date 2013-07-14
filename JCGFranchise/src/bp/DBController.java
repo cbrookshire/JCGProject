@@ -11,7 +11,6 @@ import JCGExceptions.*;
 import db.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 
 public class DBController {
