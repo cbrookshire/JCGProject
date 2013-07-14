@@ -36,6 +36,8 @@ public class OpeningJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         viewButton1 = new javax.swing.JButton();
+        btnTester = new javax.swing.JButton();
+        txtTester = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -52,6 +54,15 @@ public class OpeningJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnTester.setText("Tester");
+        btnTester.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTesterActionPerformed(evt);
+            }
+        });
+
+        txtTester.setText("000");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,7 +73,11 @@ public class OpeningJPanel extends javax.swing.JPanel {
                 .addContainerGap(49, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(viewButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTester, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTester)
+                    .addComponent(viewButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(321, 321, 321))
         );
         layout.setVerticalGroup(
@@ -70,7 +85,11 @@ public class OpeningJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTester)
+                    .addComponent(txtTester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
                 .addComponent(viewButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116))
         );
@@ -80,8 +99,14 @@ public class OpeningJPanel extends javax.swing.JPanel {
         openLogin();
     }//GEN-LAST:event_viewButton1ActionPerformed
 
+    private void btnTesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTesterActionPerformed
+        BaseJFrame.getInstance().setScreen(txtTester.getText());
+    }//GEN-LAST:event_btnTesterActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTester;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField txtTester;
     private javax.swing.JButton viewButton1;
     // End of variables declaration//GEN-END:variables
 }

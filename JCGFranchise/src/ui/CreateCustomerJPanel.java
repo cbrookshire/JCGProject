@@ -5,7 +5,8 @@
 package ui;
 
 import java.util.ArrayList;
-
+import javax.swing.JOptionPane;
+import bp.*;
 /**
  *
  * @author Corey
@@ -16,12 +17,12 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
      * Creates new form CreateFranchise
      */
     private int mode;
-    //private ArrayList<Customer> list;
+    private ArrayList<Customer> list;
     /**
      * Creates new form CreateFranchise
      */
     public CreateCustomerJPanel(int m) {
-        //list = new ArrayList<Customer>();
+        list = new ArrayList<Customer>();
         mode = m;
         initComponents();
         
@@ -64,16 +65,126 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             memberID.setEnabled(false);
         }
     }
+    
+    private boolean checkFields()
+    {
+        boolean success = true;
+        
+        if(newCustomerName.isEnabled())
+        {
+            if(newCustomerName.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Customer name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerAddress.isEnabled())
+        {
+            if(!newCustomerAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Address is invalid.  Example: 123 Dragon drive",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerCity.isEnabled())
+        {
+            if(newCustomerCity.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "City name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerState.isEnabled())
+        {
+            if(newCustomerState.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "State name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerZip.isEnabled())
+        {
+            if(!newCustomerZip.getText().matches("[1-9]{1}[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Zip code is invalid (example: 30047)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerPhone.isEnabled())
+        {
+            if(!newCustomerPhone.getText().matches("[0-9]{3}-[0-9]{3}-[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Phone number is invalid (example: 770-666-1234)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newCustomerEmail.isEnabled())
+        {
+            if(!newCustomerEmail.getText().matches("\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Email is invalid.  (Example: someuser@website.com)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        return success;
+    }
 
     private void getListSelection()
     {
         //Gets a list of all the Employees (should display name)
+        //list = LOLGETLIST();
+        list = UIController.getInstance().UIcustomerRouter(new String("CUSTOMER"), "VIEWALL");
+        for(int i = 0; i < list.size(); i++)
+        {
+            String t = list.get(i).getLastName() + "," + list.get(i).getFirstName();
+            listSelection.addItem(t);
+        }
     }
     
     private void loadInfoFromList()
     {
         //Loads the information after an item from the combo box has been selected.
         //The data is put into the text fields
+        Customer c = list.get(listSelection.getSelectedIndex());
+        
+        
+        newCustomerName.setText(c.getFirstName() + " " + c.getLastName());
+        newCustomerAddress.setText(c.getAddress());
+        newCustomerCity.setText(c.getCity());
+        newCustomerState.setText(c.getState());
+        newCustomerZip.setText(String.valueOf(c.getZip()));
+        newCustomerPhone.setText(c.getPhone());
+        newCustomerEmail.setText(c.getEmail());
+        
+                
         
     }
 
@@ -160,7 +271,11 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
 
         jLabel10.setText("Member ID:");
 
-        listSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSelectionActionPerformed(evt);
+            }
+        });
 
         resCount.setText("resCount");
 
@@ -287,20 +402,44 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if(checkFields() == false)
+            return;
+        Customer cust = new Customer();
+        String[] t = newCustomerName.getText().split(" ");
+        cust.setFirstName(t[0]);
+        cust.setLastName(t[1]);
+        cust.setAddress(newCustomerAddress.getText());
+        cust.setCity(newCustomerCity.getText());
+        cust.setState(newCustomerState.getText());
+        cust.setZip(newCustomerZip.getText());
+        cust.setPhone(newCustomerPhone.getText());
+        cust.setEmail(newCustomerEmail.getText());
+        
         if(mode == 0)  //Create one
         {
+            UIController.getInstance().UIRouter(cust, "ADD");
             //send new Customer to DB
         }
         
         if(mode == 1)  //Update one
         {
+            UIController.getInstance().UIRouter(cust, "EDIT");
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
+        }
+        
+        if(mode == 2)  //Delete one
+        {
+            UIController.getInstance().UIRouter(cust, "DELETE");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void newCustomerEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newCustomerEmailActionPerformed
+
+    private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
+        loadInfoFromList();
+    }//GEN-LAST:event_listSelectionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;

@@ -5,6 +5,8 @@
 package ui;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import bp.*;
 
 /**
  *
@@ -17,11 +19,11 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
      */
     private int mode;
     private boolean isDriver;
-    //private ArrayList<Employee> list;
+    private ArrayList<Employee> list;
     
     
     public CreateEmployeeJPanel(int m, boolean isDriver) {
-        //list = new ArrayList<Employee>();
+        list = new ArrayList<Employee>();
         mode = m;
         this.isDriver = isDriver;
         initComponents();
@@ -32,7 +34,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         }
         if(mode == 1)  //Edit mode
         {
-            //getListSelection();
+            getListSelection();
             jLabel1.setText("Edit a Employee");
             listSelection.setEnabled(true);
             jButton3.setText("Update");
@@ -41,7 +43,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         
         if(mode == 2)  //Delete mode
         {
-            //getListSelection();
+            getListSelection();
             jLabel1.setText("Delete a Employee");
             listSelection.setEnabled(true);
             jButton3.setText("Delete");
@@ -66,6 +68,136 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         {
             //change code here
         }
+    }
+    
+    private boolean checkFields()
+    {
+        boolean success = true;
+        
+        if(newEmployeeFirstName.isEnabled())
+        {
+            if(newEmployeeFirstName.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "First name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newEmployeeLastName.isEnabled())
+        {
+            if(newEmployeeLastName.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Last name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newEmployeeAddress.isEnabled())
+        {
+            if(!newEmployeeAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Address is invalid.  Example: 123 Dragon drive",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newEmployeeCity.isEnabled())
+        {
+            if(newEmployeeCity.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "City name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newEmployeeState.isEnabled())
+        {
+            if(newEmployeeState.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "State is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newEmployeeZip.isEnabled())
+        {
+            if(!newEmployeeZip.getText().matches("[1-9]{1}[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Zip code is invalid (example: 30047)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newEmployeePhone.isEnabled())
+        {
+            if(!newEmployeePhone.getText().matches("[0-9]{3}-[0-9]{3}-[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Phone number is invalid (example: 770-666-1234)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        return success;
+    }
+    
+    private void getListSelection()
+    {
+        //Gets a list of all the Employees (should display name)
+        //list = LOLGETLIST();
+        list = UIController.getInstance().UIemployeeRouter(new String("EMPLOYEE"), "VIEWALL");
+        for(int i = 0; i < list.size(); i++)
+        {
+            String t = list.get(i).toString();
+            listSelection.addItem(t);
+        }
+        
+        ArrayList<Franchise> list2 = new ArrayList<Franchise>();
+        list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
+        for(int i = 0; i < list2.size(); i++)
+        {
+            String t = list2.get(i).toString();
+            newEmployeeNum.addItem(t);
+        }
+            
+    }
+    
+    private void loadInfoFromList()
+    {
+        //Loads the information after an item from the combo box has been selected.
+        //The data is put into the text fields
+        Employee e = list.get(listSelection.getSelectedIndex());
+        
+        newEmployeeFirstName.setText(e.getFirstName());
+        newEmployeeLastName.setText(e.getLastName());
+        newEmployeeAddress.setText(e.getAddress());
+        newEmployeeCity.setText(e.getCity());
+        newEmployeeState.setText(e.getState());
+        newEmployeeZip.setText(String.valueOf(e.getZip()));
+        newEmployeePhone.setText(e.getPhone());
+        newEmployeeEmail.setText(e.getEmail());
+        newEmployeeType.setSelectedIndex(e.getEmpType());
+        newEmployeeNum.setSelectedIndex(e.getEmployeeID());
     }
 
     /**
@@ -147,13 +279,15 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
 
         jLabel9.setText("Employee Type:");
 
-        newEmployeeNum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franchisor", "Franchisee", "Driver" }));
-
         jLabel10.setText("Franchise Number:");
 
         jLabel11.setText("Selection:");
 
-        listSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSelectionActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Last Name:");
 
@@ -169,7 +303,6 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -191,7 +324,6 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(23, 23, 23)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(newEmployeeLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(newEmployeeAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(newEmployeeCity, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(newEmployeeState, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,14 +332,16 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                                             .addComponent(newEmployeeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addComponent(listSelection, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(newEmployeeFirstName, javax.swing.GroupLayout.Alignment.LEADING))))
+                                                .addComponent(newEmployeeFirstName, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(newEmployeeLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(newEmployeeType, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(32, 32, 32)
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(newEmployeeNum, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(newEmployeeNum, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -286,16 +420,40 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //Submit button
+        if(checkFields() == false)
+            return;
+        
+        Employee emp = new Employee();
+        emp.setFirstName(newEmployeeFirstName.getText());
+        emp.setLastName(newEmployeeLastName.getText());
+        emp.setAddress(newEmployeeAddress.getText());
+        emp.setCity(newEmployeeCity.getText());
+        emp.setState(newEmployeeState.getText());
+        emp.setZip(newEmployeeZip.getText());
+        emp.setPhone(newEmployeePhone.getText());
+        emp.setEmail(newEmployeeEmail.getText());
+        
         if(mode == 0)  //Create one
         {
             //send new Employee to DB
+            UIController.getInstance().UIRouter(emp, "ADD");
         }
         
         if(mode == 1)  //Update one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            UIController.getInstance().UIRouter(emp, "EDIT");
+        }
+        
+        if(mode == 2)  //Delete one
+        {
+            UIController.getInstance().UIRouter(emp, "DELETE");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
+        loadInfoFromList();
+    }//GEN-LAST:event_listSelectionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

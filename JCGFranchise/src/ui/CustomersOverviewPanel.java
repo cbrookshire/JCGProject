@@ -6,6 +6,7 @@ package ui;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import bp.*;
 
 /**
  *
@@ -23,15 +24,15 @@ public class CustomersOverviewPanel extends javax.swing.JPanel  {
     public void setList()
     {
         
-        ArrayList<String> list = new ArrayList<String>();
-        //obtain list list lol
+        ArrayList<Customer> list = new ArrayList<Customer>();
+        list = UIController.getInstance().UIcustomerRouter(new String("CUSTOMER"), "VIEWALL");
         
         if(list.size() > 0)
         {
             Vector<String> data = new Vector<String>();
             for(int i = 0; i < list.size(); i++)
             {
-                data.add(list.get(i));
+                data.add(list.get(i).toString());
             }
             jList1.setListData(data);
         }

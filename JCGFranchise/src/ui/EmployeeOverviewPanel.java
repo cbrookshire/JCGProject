@@ -4,6 +4,10 @@
  */
 package ui;
 
+import bp.*;
+import java.util.ArrayList;
+import java.util.Vector;
+
 /**
  *
  * @author Corey
@@ -15,8 +19,28 @@ public class EmployeeOverviewPanel extends javax.swing.JPanel {
      */
     public EmployeeOverviewPanel() {
         initComponents();
+        setList();
     }
 
+    public void setList()
+    {
+        
+        ArrayList<Employee> list = new ArrayList<Employee>();
+        list = UIController.getInstance().UIemployeeRouter(new String("EMPLOYEE"), "VIEWALL");
+        
+        //obtain list list lol
+        
+        if(list.size() > 0)
+        {
+            Vector<String> data = new Vector<String>();
+            for(int i = 0; i < list.size(); i++)
+            {
+                data.add(list.get(i).toString());
+            }
+            jList1.setListData(data);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,11 +61,6 @@ public class EmployeeOverviewPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Employee Overview");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Employee 1", "Employee 2", "Employee 3", "Employee 4", "Employee 5", "Employee 6" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 

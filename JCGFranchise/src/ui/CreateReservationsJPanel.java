@@ -4,6 +4,8 @@
  */
 package ui;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import bp.*;
 
 /**
  *
@@ -12,14 +14,14 @@ import java.util.ArrayList;
 public class CreateReservationsJPanel extends javax.swing.JPanel {
 
     private int mode;
-    //private ArrayList<Reservation> list;
+    private ArrayList<Reservation> list;
     
     /**
      * Creates new form CreateReservationsJPanel
      */
     public CreateReservationsJPanel(int m) {
         initComponents();
-        //list = new ArrayList<Reservation>();
+        list = new ArrayList<Reservation>();
         
         mode = m;
         if(mode == 0)  //Create mode
@@ -65,9 +67,122 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         
     }
     
+    private boolean checkFields()
+    {
+        boolean success = true;
+        
+        if(txtFlightNum.isEnabled())
+        {
+            if(!txtFlightNum.getText().matches("[0-9]+"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Flight number is invalid.  Numbers only",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtAirline.isEnabled())
+        {
+            if(txtAirline.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Airline name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtDate.isEnabled())
+        {
+            if(!txtDate.getText().matches("[0-9]{1,2}/[0-9]{1,2}/[0-9]{1,2}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Invalid date.  Example (1/1/10)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtFlightTime.isEnabled())
+        {
+            if(!txtFlightTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Invalid flight time.  Example (1:15 AM)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtPickupTime.isEnabled())
+        {
+            if(!txtPickupTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Invalid pickup time.  Example (1:15 AM)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(txtDropoffTime.isEnabled())
+        {
+            if(!txtDropoffTime.getText().matches("^((([0]?[1-9]|1[0-2])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?( )?(AM|am|aM|Am|PM|pm|pM|Pm))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\\.)[0-5][0-9]((:|\\.)[0-5][0-9])?))$"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Invalid pickup time.  Example (1:15 AM)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        return success;
+    }
+    
     private void getListSelection()
     {
         //Gets a list of all the Employees (should display name)
+        //list = LOLGETLIST();
+        list = UIController.getInstance().UIreservationRouter(new String("RESERVATION"), "VIEWALL");
+        for(int i = 0; i < list.size(); i++)
+        {
+            String t = list.get(i).toString();
+            listSelection.addItem(t);
+        }
+        
+        ArrayList<Franchise> list2 = new ArrayList<Franchise>();
+        list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
+        
+        for(int i = 0; i < list2.size(); i++)
+        {
+            String t = list2.get(i).toString();
+            franchiseNumList.addItem(t);
+        }
+        
+        ArrayList<Vehicle> list3 = new ArrayList<Vehicle>();
+        list3 = UIController.getInstance().UIvehicleRouter(new String("VEHICLE"), "VIEWALL");
+        
+        for(int i = 0; i < list3.size(); i++)
+        {
+            String t = list3.get(i).toString();
+            vehicleIDList.addItem(t);
+        }
+        
+        ArrayList<Customer> list4 = new ArrayList<Customer>();
+        list4 = UIController.getInstance().UIcustomerRouter(new String("CUSTOMER"), "VIEWALL");
+        
+        for(int i = 0; i < list4.size(); i++)
+        {
+            String t = list4.get(i).toString();
+            listCustomerID.addItem(t);
+        }
     }
     
     private void loadInfoFromList()
@@ -125,6 +240,12 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("List");
 
+        listSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSelectionActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Franchise No:");
 
         jLabel5.setText("Vehicle ID:");
@@ -161,7 +282,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         jLabel14.setText("Pickup time");
 
         txtFlightTime.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        txtFlightTime.setText("12:00 am");
+        txtFlightTime.setText("12:00 AM");
 
         jLabel15.setText("Dropoff Time");
 
@@ -323,16 +444,45 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        if(!checkFields())
+            return;
+        
+        Reservation res = new Reservation();
+        res.setReservationNumber(franchiseNumList.getSelectedIndex());
+        res.setVehicleID(vehicleIDList.getSelectedIndex());
+        res.setCustomerID(listCustomerID.getSelectedIndex());
+        res.setPrice(txtPrice.getText());
+        res.setStatus(txtStatus.getText());
+        res.setComment(txtComment.getText());
+        res.setFlightNumber(txtFlightNum.getText());
+        res.setAirline(txtAirline.getText());
+        res.setDate(txtDate.getText());
+        res.setFlightTime(txtFlightTime.getText());
+        res.setPickUpTime(txtPickupTime.getText());
+        res.setDropOffTime(txtDropoffTime.getText());
+        
         if(mode == 0)  //Create one
         {
             //send new Franchise to DB
+            UIController.getInstance().UIRouter(res, "ADD");
         }
         
         if(mode == 1)  //Update one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            UIController.getInstance().UIRouter(res, "EDIT");
+        }
+        
+        if(mode == 2)  //Delete one
+        {
+            //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            UIController.getInstance().UIRouter(res, "DELETE");
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
+        loadInfoFromList();
+    }//GEN-LAST:event_listSelectionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;

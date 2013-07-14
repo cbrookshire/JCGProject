@@ -5,7 +5,8 @@
 package ui;
 
 import java.util.ArrayList;
-
+import javax.swing.JOptionPane;
+import bp.*;
 /**
  *
  * @author Corey
@@ -16,10 +17,10 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
      * Creates new form CreateFranchiseJPanel
      */
     private int mode;
-    //private ArrayList<Franchise> list; 
+    private ArrayList<Franchise> list; 
     
     public CreateFranchiseJPanel(int m) {
-        //list = new ArrayList<Franchise>();
+        list = new ArrayList<Franchise>();
         mode = m;
         initComponents();
         
@@ -59,10 +60,120 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             
         }
     }
+    
+    private boolean checkFields()
+    {
+        boolean success = true;
+        
+        if(newFranchiseCity.isEnabled())
+        {
+            if(newFranchiseCity.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "City name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseAddress.isEnabled())
+        {
+            if(!newFranchiseAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Address is invalid.  Example: 123 Dragon drive",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseCity.isEnabled())
+        {
+            if(newFranchiseCity.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "City name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseState.isEnabled())
+        {
+            if(newFranchiseState.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "City name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseZip.isEnabled())
+        {
+            if(!newFranchiseZip.getText().matches("[1-9]{1}[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Zip code is invalid (example: 30047)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchisePhone.isEnabled())
+        {
+            if(!newFranchisePhone.getText().matches("[0-9]{3}-[0-9]{3}-[0-9]{4}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Phone number is invalid (example: 770-666-1234)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseEmail.isEnabled())
+        {
+            if(!newFranchiseEmail.getText().matches("\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6}"))
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Email is invalid.  (Example: someuser@website.com)",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(newFranchiseAirport.isEnabled())
+        {
+            if(newFranchiseAirport.getText().isEmpty())
+            {
+                success = false;
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Airport name is invalid.  Type something in there...",
+                    "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        return success;
+    }
 
     private void getListSelection()
     {
         //Gets a list of all the Employees (should display name)
+        //list = LOLGETLIST();
+        list = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
+        for(int i = 0; i < list.size(); i++)
+        {
+            String t = list.get(i).getAddress() + ";" + list.get(i).getCity() + "," + list.get(i).getState();
+            listSelection.addItem(t);
+        }
     }
     
     private void loadInfoFromList()
@@ -152,7 +263,11 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             }
         });
 
-        listSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSelectionActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Selection:");
 
@@ -271,20 +386,41 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void newFranchiseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFranchiseButtonActionPerformed
+        if(!checkFields())
+            return;
+        
+        Franchise fr = new Franchise();
+        fr.setAddress(newFranchiseAddress.getText());
+        fr.setCity(newFranchiseCity.getText());
+        fr.setState(newFranchiseState.getText());
+        fr.setZip(newFranchiseZip.getText());
+        fr.setPhone(newFranchisePhone.getText());
+        fr.setEmail(newFranchiseEmail.getText());
+        fr.setAirport(newFranchiseAirport.getText());
         if(mode == 0)  //Create one
         {
             //send new Franchise to DB
+            UIController.getInstance().UIRouter(fr, "ADD");
         }
         
         if(mode == 1)  //Update one
         {
-            //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            UIController.getInstance().UIRouter(fr, "EDIT");
+        }
+        
+        if(mode == 1)  //Delete one
+        {
+            UIController.getInstance().UIRouter(fr, "DELETE");
         }
     }//GEN-LAST:event_newFranchiseButtonActionPerformed
 
     private void newFranchiseEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFranchiseEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newFranchiseEmailActionPerformed
+
+    private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
+        loadInfoFromList();
+    }//GEN-LAST:event_listSelectionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;

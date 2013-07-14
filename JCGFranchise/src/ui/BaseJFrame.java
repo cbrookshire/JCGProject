@@ -69,7 +69,7 @@ public class BaseJFrame extends JFrame {
                 setContent(new LoginJPanel(), "Login screen");  
                 break;
             case "002":  //Create account page
-                //Create account
+                setContent(new RegistrationJPanel(), "Registration");
                 break;
             case "003":  //Logout page
                 //Logout page

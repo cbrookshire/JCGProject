@@ -23,7 +23,7 @@ public class JCGDatabase {
   static final String DATABASE_URL = "jdbc:mysql://localhost/JCGroup";
     Connection connection = null;
     Statement statement = null;
-    ResultSet resultSet = null;
+    ResultSet resultSet = null;   
     
     private PreparedStatement loginStatus = null;
     private PreparedStatement empType = null;
@@ -66,6 +66,11 @@ public class JCGDatabase {
             
             update_cust_status = connection.prepareStatement(
                 "UPDATE Customer SET FIRSTLOG = 'N' WHERE Username = ?");
+            
+                //saves Connection object in JCGlIO for use in 
+                //instantiation of Queries 
+                jcgLio.setSessionConnection(connection);               
+                
             }
         catch(SQLException sqlE) {
             
