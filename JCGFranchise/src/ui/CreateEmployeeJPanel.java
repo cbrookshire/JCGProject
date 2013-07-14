@@ -100,7 +100,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         
         if(newEmployeeAddress.isEnabled())
         {
-            if(!newEmployeeAddress.getText().matches("\\d+ ([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"))
+            if(newEmployeeAddress.getText().isEmpty())
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
