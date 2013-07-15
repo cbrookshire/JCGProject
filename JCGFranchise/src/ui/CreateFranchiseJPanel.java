@@ -171,7 +171,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         list = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
         for(int i = 0; i < list.size(); i++)
         {
-            String t = list.get(i).getAddress() + ";" + list.get(i).getCity() + "," + list.get(i).getState();
+            String t = list.get(i).getFranchiseID() + ":" + list.get(i).getAddress() + ";" + list.get(i).getCity() + "," + list.get(i).getState();
             listSelection.addItem(t);
         }
     }
@@ -407,30 +407,43 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         fr.setZip(newFranchiseZip.getText());
         fr.setPhone(newFranchisePhone.getText());
         fr.setEmail(newFranchiseEmail.getText());
-        fr.setAirportID(String.valueOf(AirportjComboBox.getSelectedIndex()));
         
+        fr.setAirportID(String.valueOf(AirportjComboBox.getSelectedIndex()+1));
+        String sc = "1";
         if(mode == 0)  //Create one
         {
-            
-            String sc = UIController.getInstance().UIRouter(fr, "ADD");
-            System.out.println(sc);
-            if(sc == "1")
-            {
-                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), "Success!");
-            }
-            else
-                BaseJFrame.getInstance().setScreen(sc);
+            sc = UIController.getInstance().UIRouter(fr, "ADD");
         }
         
         if(mode == 1)  //Update one
         {
-            UIController.getInstance().UIRouter(fr, "EDIT");
+            fr.setFranchiseID(list.get(listSelection.getSelectedIndex()).getFranchiseID());
+            sc = UIController.getInstance().UIRouter(fr, "EDIT");
         }
         
         if(mode == 2)  //Delete one
         {
-            UIController.getInstance().UIRouter(fr, "DELETE");
+            fr.setFranchiseID(list.get(listSelection.getSelectedIndex()).getFranchiseID());
+            sc = UIController.getInstance().UIRouter(fr, "DELETE");
         }
+        
+            if(sc == "1")
+            {
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Success!",
+                    "Success",
+                    JOptionPane.PLAIN_MESSAGE);
+                BaseJFrame.getInstance().setScreen("100");
+            }
+            else if(sc == "DoubleEntry")
+            {
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Data already exists",
+                    "Success",
+                    JOptionPane.PLAIN_MESSAGE);
+            }
+            else
+                BaseJFrame.getInstance().setScreen(sc);
     }//GEN-LAST:event_newFranchiseButtonActionPerformed
 
     private void newFranchiseEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFranchiseEmailActionPerformed
