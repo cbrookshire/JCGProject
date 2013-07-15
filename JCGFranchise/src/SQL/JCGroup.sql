@@ -160,11 +160,11 @@ INSERT INTO Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
  VALUES ('James', 'Cheeves', '139 Flatbush Ave', 'Brooklyn', 'New York', 11217, '718-230-7703', 'JCheeves@gmail.com', 1, 1, 'JC7703', 'N');
  
 CREATE USER 'JC7703'@'localhost' IDENTIFIED BY 'password';
-GRANT CREATE USER ON *.* TO 'JC7703'@'localhost';
-GRANT SELECT, UPDATE, DELETE, INSERT ON JCGroup.Franchise TO 'JC7703'@'localhost';
-GRANT SELECT, UPDATE, DELETE, INSERT ON JCGroup.Employee TO 'JC7703'@'localhost';
+GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Airport TO 'JC7703'@'localhost';
+GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Franchise TO 'JC7703'@'localhost';
+GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Employee TO 'JC7703'@'localhost';
 GRANT SELECT, UPDATE ON JCGroup.Membership TO 'JC7703'@'localhost';
-GRANT SELECT, UPDATE, DELETE, INSERT ON JCGroup.Airport TO 'JC7703'@'localhost';
+GRANT CREATE USER ON *.* TO 'JC7703'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
 INSERT INTO Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username, FirstLog)
@@ -174,156 +174,191 @@ INSERT INTO Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
  VALUES('Henry', 'Henderson', '599 Sibly Blvd.', 'Dolton', 'Illinois', 60419, '708-841-7336', 'HenryH@gmail.com', 2, 6, 'HH7336', 'N' );
  
 CREATE USER 'HH7336'@'localhost' IDENTIFIED BY 'hulkhogan';
-grant select on JCGroup.Airport to 'HH7336'@'localhost';
-grant select on JCGroup.Franchise to 'HH7336'@'localhost';
-grant select, insert, update, delete on JCGroup.Maintanence to 'HH7336'@'localhost';
-grant SELECT, UPDATE, DELETE, INSERT on JCGroup.Employee to 'HH7336'@'localhost';
-grant insert, update, delete on JCGroup.Customer to 'HH7336'@'localhost';
-grant SELECT, UPDATE, DELETE, INSERT on JCGroup.Vehicle to 'HH7336'@'localhost';
-grant select on JCGroup.Customer to 'HH7336'@'localhost' with grant option;
-grant select on JCGroup.Membership to 'HH7336'@'localhost';
-grant CREATE USER on *.* to 'HH7336'@'localhost' with grant option;
-flush privileges;
+GRANT SELECT ON JCGroup.Airport to 'HH7336'@'localhost';
+GRANT SELECT ON JCGroup.Franchise TO 'HH7336'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Vehicle TO 'HH7336'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Maintanence TO 'HH7336'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Employee TO 'HH7336'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'HH7336'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Customer TO 'HH7336'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Customer TO 'HH7336'@'localhost' WITH GRANT OPTION;
+GRANT SELECT ON JCGroup.Membership TO 'HH7336'@'localhost' WITH GRANT OPTION;
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'HH7336'@'localhost' WITH GRANT OPTION;
+GRANT INSERT, DELETE ON JCGroup.Reservation TO 'HH7336'@'localhost';
+GRANT CREATE USER ON *.* to 'HH7336'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Jennifer', 'Smith', '6775 Santa Monica Blvd.', 'Los Angeles', 'California', 90038, '323-957-9553', 'JSmith@gmail.com', 2, 5, 'JS9553' );
  
 CREATE USER 'JS9553'@'localhost' IDENTIFIED BY 'JS9553';
-grant select on JCGroup.Airport to 'JS9553'@'localhost';
-grant select on JCGroup.Franchise to 'JS9553'@'localhost';
-grant select, insert, update, delete on JCGroup.Vehicle to 'JS9553'@'localhost';
-grant select, insert, update, delete on JCGroup.Maintanence to 'JS9553'@'localhost';
-grant select, insert, update, delete on JCGroup.Employee to 'JS9553'@'localhost';
-grant insert, update, delete on JCGroup.Customer to 'JS9553'@'localhost';
-grant select on JCGroup.Customer to 'JS9553'@'localhost' with grant option;
-grant select on JCGroup.Membership to 'JS9553'@'localhost';
-grant CREATE USER on *.* to 'JS9553'@'localhost' with grant option;
-flush privileges;
+GRANT SELECT ON JCGroup.Airport to 'JS9553'@'localhost';
+GRANT SELECT ON JCGroup.Franchise TO 'JS9553'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Vehicle TO 'JS9553'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Maintanence TO 'JS9553'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Employee TO 'JS9553'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'JS9553'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Customer TO 'JS9553'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Customer TO 'JS9553'@'localhost' WITH GRANT OPTION;
+GRANT SELECT ON JCGroup.Membership TO 'JS9553'@'localhost' WITH GRANT OPTION;
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'JS9553'@'localhost' WITH GRANT OPTION;
+GRANT INSERT, DELETE ON JCGroup.Reservation TO 'JS9553'@'localhost';
+GRANT CREATE USER ON *.* to 'JS9553'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Frank', 'Keisler', '6660 W Sunset Blvd.', 'Hollywood', 'California', 90028, '323-962-7823', 'FrankK@gmail.com', 2, 4, 'FK7823' );
  
 CREATE USER 'FK7823'@'localhost' IDENTIFIED BY 'FK7823';
-grant select on JCGroup.Airport to 'FK7823'@'localhost';
-grant select on JCGroup.Franchise to 'FK7823'@'localhost';
-grant select, insert, update, delete on JCGroup.Vehicle to 'FK7823'@'localhost';
-grant select, insert, update, delete on JCGroup.Maintanence to 'FK7823'@'localhost';
-grant select, insert, update, delete on JCGroup.Employee to 'FK7823'@'localhost';
-grant insert, update, delete on JCGroup.Customer to 'FK7823'@'localhost';
-grant select on JCGroup.Customer to 'FK7823'@'localhost' with grant option;
-grant select on JCGroup.Membership to 'FK7823'@'localhost';
-grant CREATE USER on *.* to 'FK7823'@'localhost' with grant option;
-flush privileges;
+GRANT SELECT ON JCGroup.Airport to 'FK7823'@'localhost';
+GRANT SELECT ON JCGroup.Franchise TO 'FK7823'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Vehicle TO 'FK7823'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Maintanence TO 'FK7823'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Employee TO 'FK7823'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'FK7823'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Customer TO 'FK7823'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Customer TO 'FK7823'@'localhost' WITH GRANT OPTION;
+GRANT SELECT ON JCGroup.Membership TO 'FK7823'@'localhost' WITH GRANT OPTION;
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'FK7823'@'localhost' WITH GRANT OPTION;
+GRANT INSERT, DELETE ON JCGroup.Reservation TO 'FK7823'@'localhost';
+GRANT CREATE USER ON *.* to 'FK7823'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Ararat', 'Arsenio', '7431 N Point Pky', 'Alpharetta', 'Georgia', 30022, '770-518-1787', 'Arsenio_A@gmail.com', 2, 3, 'AA1787');
  
 CREATE USER 'AA1787'@'localhost' IDENTIFIED BY 'AA1787';
-grant select on JCGroup.Airport to 'AA1787'@'localhost';
-grant select on JCGroup.Franchise to 'AA1787'@'localhost';
-grant select, insert, update, delete on JCGroup.Vehicle to 'AA1787'@'localhost';
-grant select, insert, update, delete on JCGroup.Maintanence to 'AA1787'@'localhost';
-grant select, insert, update, delete on JCGroup.Employee to 'AA1787'@'localhost';
-grant insert, update, delete on JCGroup.Customer to 'AA1787'@'localhost';
-grant select on JCGroup.Customer to 'AA1787'@'localhost' with grant option;
-grant select on JCGroup.Membership to 'AA1787'@'localhost';
-grant CREATE USER on *.* to 'AA1787'@'localhost' with grant option;
-flush privileges;
+GRANT SELECT ON JCGroup.Airport to 'AA1787'@'localhost';
+GRANT SELECT ON JCGroup.Franchise TO 'AA1787'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Vehicle TO 'AA1787'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Maintanence TO 'AA1787'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Employee TO 'AA1787'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'AA1787'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Customer TO 'AA1787'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Customer TO 'AA1787'@'localhost' WITH GRANT OPTION;
+GRANT SELECT ON JCGroup.Membership TO 'AA1787'@'localhost' WITH GRANT OPTION;
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'AA1787'@'localhost' WITH GRANT OPTION;
+GRANT INSERT, DELETE ON JCGroup.Reservation TO 'AA1787'@'localhost';
+GRANT CREATE USER ON *.* to 'AA1787'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Nolan', 'Kelly', '50 Lower Alabama St', 'Atlanta', 'Georgia', 30303, '404-589-4647', 'NKelly@gmail.com', 2, 2, 'NK4647');
  
 CREATE USER 'NK4647'@'localhost' IDENTIFIED BY 'NK4647';
-grant select on JCGroup.Airport to 'NK4647'@'localhost';
-grant select on JCGroup.Franchise to 'NK4647'@'localhost';
-grant select, insert, update, delete on JCGroup.Vehicle to 'NK4647'@'localhost';
-grant select, insert, update, delete on JCGroup.Maintanence to 'NK4647'@'localhost';
-grant select, insert, update, delete on JCGroup.Employee to 'NK4647'@'localhost';
-grant insert, update, delete on JCGroup.Customer to 'NK4647'@'localhost';
-grant select on JCGroup.Customer to 'NK4647'@'localhost' with grant option;
-grant select on JCGroup.Membership to 'NK4647'@'localhost';
-grant CREATE USER on *.* to 'NK4647'@'localhost' with grant option;
-flush privileges;
+GRANT SELECT ON JCGroup.Airport to 'NK4647'@'localhost';
+GRANT SELECT ON JCGroup.Franchise TO 'NK4647'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Vehicle TO 'NK4647'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON JCGroup.Maintanence TO 'NK4647'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Employee TO 'NK4647'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee TO 'NK4647'@'localhost';
+GRANT INSERT, DELETE ON JCGroup.Customer TO 'NK4647'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Customer TO 'NK4647'@'localhost' WITH GRANT OPTION;
+GRANT SELECT ON JCGroup.Membership TO 'NK4647'@'localhost' WITH GRANT OPTION;
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'NK4647'@'localhost' WITH GRANT OPTION;
+GRANT INSERT, DELETE ON JCGroup.Reservation TO 'NK4647'@'localhost';
+GRANT CREATE USER ON *.* to 'NK4647'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Esmail', 'Osama', '68 Broad St NW', 'Atlanta', 'Geaorgia', 30303, '404-522-2336', 'EsmailO@gmail.com', 3, 2, 'EO2336');
  
 CREATE USER 'EO2336'@'localhost' IDENTIFIED BY 'EO2336';
-GRANT SELECT ON JCGroup.Customer TO 'EO2336'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'EO2336'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'EO2336'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'EO2336'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'EO2336'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'EO2336'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Bedros', 'August', '183 Edgewood Ave', 'Atlanta', 'Georgia', 30303, '404-8286', 'BedrosA@gmail.com', 3, 2, 'BA8286');
  
 CREATE USER 'BA8286'@'localhost' IDENTIFIED BY 'BA8286';
-GRANT SELECT ON JCGroup.Customer TO 'BA8286'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'BA8286'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'BA8286'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'BA8286'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'BA8286'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'BA8286'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Konstantyn', 'Kuba', '4418 Roswell Rd', 'Atlanta', 'Georgia', 30342, '404-250-1625', 'KubaK@gmail.com', 3, 3, 'KK1625');
 
 CREATE USER 'KK1625'@'localhost' IDENTIFIED BY 'KK1625';
-GRANT SELECT ON JCGroup.Customer TO 'KK1625'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'KK1625'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'KK1625'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'KK1625'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'KK1625'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'KK1625'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Petya', 'Luka', '1825 Piedmont Rd', 'Atlanta', 'Georgia', 30324, '404-876-2246', 'PetyaL@gmail.com', 3, 3, 'PL2246');
  
 CREATE USER 'PL2246'@'localhost' IDENTIFIED BY 'PL2246';
-GRANT SELECT ON JCGroup.Customer TO 'PL2246'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'PL2246'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'PL2246'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'PL2246'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'PL2246'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'PL2246'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Aleksander', 'Vincenc', '6051 Hollywood Blvd', 'Hollywood', 'California', 90028, '323-469-9480', 'VincencA@gmail.com', 3, 4, 'AV9480');
 
 CREATE USER 'AV9480'@'localhost' IDENTIFIED BY 'AV9480';
-GRANT SELECT ON JCGroup.Customer TO 'AV9480'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'AV9480'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'AV9480'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'AV9480'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'AV9480'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'AV9480'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Mehrdad', 'Gevorg', '5537 Sunset Blvd.', 'Hollywood', 'California', 90028, '323-871-1090', 'GevorgM@gmail.com', 3, 4, 'MG1090');
 
 CREATE USER 'MG1090'@'localhost' IDENTIFIED BY 'MG1090';
-GRANT SELECT ON JCGroup.Customer TO 'MG1090'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'MG1090'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'MG1090'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'MG1090'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'MG1090'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'MG1090'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Dorotheos', 'Vasilis', '7040 Sunset Blvd', 'Los Angeles', 'California', 90068, '323-851-5501', 'VasilisD@gmail.com', 3, 5, 'DV5501');
 
 CREATE USER 'DV5501'@'localhost' IDENTIFIED BY 'DV5501';
-GRANT SELECT ON JCGroup.Customer TO 'DV5501'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'DV5501'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'DV5501'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'DV5501'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'DV5501'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'DV5501'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Sevan', 'Henrik', '1075 N Western Ave', 'Los Angeles', 'California', 90029, '323-856-0990', 'HenrikS@gmail.com', 3, 5, 'SH0990');
 
 CREATE USER 'SH0990'@'localhost' IDENTIFIED BY 'SH0990';
-GRANT SELECT ON JCGroup.Customer TO 'SH0990'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'SH0990'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'SH0990'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'SH0990'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'SH0990'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'SH0990'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Krikor', 'Rudolf', '700 E. Tri-State', ' S Holland', 'Illinois', 60473, '224-277-4356', 'KrikorR@gmail.com', 3, 6, 'KR4356');
 
 CREATE USER 'KR4356'@'localhost' IDENTIFIED BY 'KR4356';
-GRANT SELECT ON JCGroup.Customer TO 'KR4356'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'KR4356'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'KR4356'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'KR4356'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'KR4356'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'KR4356'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Voski', 'Aleksandr', '578 Torrence Ave', 'Calumet City', 'Illinois', 60409, '708-832-0283', 'VoskiA@gmail.com', 3, 6, 'VA0283');
 
 CREATE USER 'VA0283'@'localhost' IDENTIFIED BY 'VA0283';
-GRANT SELECT ON JCGroup.Customer TO 'VA0283'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Employee TO 'VA0283'@'localhost';
-flush privileges;
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'VA0283'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'VA0283'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'VA0283'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'VA0283'@'localhost';
+FLUSH PRIVILEGES;
 
 insert into Membership(MemberID, Discount, MinAmount)
 values('Diamond', 000.85, 50), ('Gold', 000.90, 35), ('Silver', 000.95, 20), ('Bronze' , 1.00, 0);
