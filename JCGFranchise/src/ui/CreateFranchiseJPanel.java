@@ -390,6 +390,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             return;
         
         Franchise fr = new Franchise();
+        
         fr.setAddress(newFranchiseAddress.getText());
         fr.setCity(newFranchiseCity.getText());
         fr.setState(newFranchiseState.getText());
@@ -397,10 +398,18 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         fr.setPhone(newFranchisePhone.getText());
         fr.setEmail(newFranchiseEmail.getText());
         fr.setAirport(newFranchiseAirport.getText());
+        
         if(mode == 0)  //Create one
         {
-            //send new Franchise to DB
-            UIController.getInstance().UIRouter(fr, "ADD");
+            
+            String sc = UIController.getInstance().UIRouter(fr, "ADD");
+            System.out.println(sc);
+            if(sc == "1")
+            {
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), "Success!");
+            }
+            else
+                BaseJFrame.getInstance().setScreen(sc);
         }
         
         if(mode == 1)  //Update one
