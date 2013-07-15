@@ -245,9 +245,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start */
@@ -260,7 +257,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Franchise temp = new Franchise();
                     
@@ -420,9 +417,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start */
@@ -435,7 +429,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     //Franchise temp = new Franchise();
                     
@@ -526,10 +520,6 @@ public class Queries extends JCGDatabase
             /* Preparing Statment Section Stop */
             /* Query Section Start */
                 results = statment.executeQuery();
-                
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -542,7 +532,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Membership temp = new Membership();
                     
@@ -679,10 +669,6 @@ public class Queries extends JCGDatabase
             /* Preparing Statment Section Stop */
             /* Query Section Start */
                 results = statment.executeQuery();
-                
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -695,7 +681,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Vehicle temp = new Vehicle();
                     
@@ -846,10 +832,6 @@ public class Queries extends JCGDatabase
             /* Preparing Statment Section Stop */
             /* Query Section Start */
                 results = statment.executeQuery();
-                
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -862,7 +844,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Vehicle temp = new Vehicle();
                     
@@ -974,10 +956,6 @@ public class Queries extends JCGDatabase
             /* Preparing Statment Section Stop */
             /* Query Section Start */
                 results = statment.executeQuery();
-                
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -990,7 +968,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Reservation temp = new Reservation();
                     
@@ -1107,7 +1085,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                      Vehicle temp = new Vehicle();
                     
@@ -1398,10 +1376,6 @@ public class Queries extends JCGDatabase
             /* Preparing Statment Section Stop */
             /* Query Section Start */
                 results = statment.executeQuery();
-                
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -1414,7 +1388,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Employee temp = new Employee();
                     
@@ -1493,10 +1467,6 @@ public class Queries extends JCGDatabase
             /* Preparing Statment Section Stop */
             /* Query Section Start */
                 results = statment.executeQuery();
-                
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -1509,7 +1479,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Employee temp = new Employee();
                     
@@ -1594,9 +1564,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -1609,7 +1576,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Employee temp = new Employee();
                     
@@ -1689,9 +1656,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -1704,7 +1668,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     int temp = 0;
                     
@@ -1775,9 +1739,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -1790,7 +1751,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Employee temp = new Employee();
                     
@@ -2110,9 +2071,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -2125,7 +2083,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Customer temp = new Customer();
                     
@@ -2228,9 +2186,6 @@ public class Queries extends JCGDatabase
                     /* Query Section Start */
                         results = statment.executeQuery();
 
-        
-                            statment.close();
-
                     /* Query Section Stop */
 
                     /* Metadata Section Start*/
@@ -2243,7 +2198,7 @@ public class Queries extends JCGDatabase
 
 
                         
-                        while (results.next() && rows > 0)
+                        while (results.next())
                         {
                             Customer temp = new Customer();
 
@@ -2333,9 +2288,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -2348,7 +2300,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     int temp;
                     
@@ -2596,9 +2548,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -2611,7 +2560,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Reservation temp = new Reservation();
                     
@@ -2697,9 +2646,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -2712,7 +2658,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Reservation temp = new Reservation();
                     
@@ -2798,9 +2744,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -2813,7 +2756,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Reservation temp = new Reservation();
                     
@@ -2899,9 +2842,6 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-
-                    statment.close();
-                
             /* Query Section Stop */
             
             /* Metadata Section Start*/
@@ -2914,7 +2854,7 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next() && rows > 0)
+                while (results.next())
                 {
                     Reservation temp = new Reservation();
                     
