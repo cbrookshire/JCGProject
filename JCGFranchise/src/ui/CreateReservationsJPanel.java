@@ -189,7 +189,19 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
     {
         //Loads the information after an item from the combo box has been selected.
         //The data is put into the text fields
-        
+        Reservation me = list.get(listSelection.getSelectedIndex());
+        franchiseNumList.setSelectedIndex(me.getFranchiseNumber());
+        vehicleIDList.setSelectedIndex(me.getVehicleID());
+        listCustomerID.setSelectedIndex(me.getCustomerID());
+        txtPrice.setText(String.valueOf(me.getPrice()));
+        txtStatus.setText(me.getStatus());
+        txtComment.setText(me.getComment());
+        txtFlightNum.setText(String.valueOf(me.getFlightNumber()));
+        txtAirline.setText(me.getAirline());
+        txtDate.setText(me.getDate());
+        txtFlightTime.setText(String.valueOf(me.getFlightTime()));
+        txtPickupTime.setText(String.valueOf(me.getPickUpTime()));
+        txtDropoffTime.setText(String.valueOf(me.getDropOffTime()));
     }
 
     /**
