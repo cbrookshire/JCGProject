@@ -20,8 +20,7 @@ public class Franchise {
    private String email; 
    private String airport;
    private String airportID;
-
-      
+        
    //CONTRUCTORS
    //default
    public Franchise(){

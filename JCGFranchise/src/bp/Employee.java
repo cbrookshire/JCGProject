@@ -114,7 +114,7 @@ public class Employee {
     }
    
     public int getZip (){
-        return Integer.parseInt(zip);
+        return Integer.valueOf(zip);
     } 
    
     //attribute 7
@@ -179,7 +179,7 @@ public class Employee {
     @Override
     public String toString(){
     
-        return String.format("%s%s  %s%s/n%s%s %s, %s %s\n%s%s\n%s%s\n",
+        return String.format("%s%s  %s%s\n%s%s %s, %s %s\n%s%s\n%s%s\n",
         "First Name: ", getFirstName(),
 	"Last Name: ", getLastName(),
         "Address: ", getAddress(), getCity(), 

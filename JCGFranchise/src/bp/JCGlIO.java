@@ -13,8 +13,7 @@ public class JCGlIO {
     private String p;
     private String fN;
     private String eT;
-    private final String thisFranchise = "1";
-    
+    private final String thisFranchise = "2";
     
     private static JCGlIO lIO;
 
@@ -55,14 +54,17 @@ public class JCGlIO {
     }
     
     //attrib 3
-    public String getfN() {
-        return fN;
+    public int getfN() {
+        return Integer.parseInt(fN);
     }
 
     public void setfN(String fN) {
         this.fN = fN;
     }
     
+    public void setfN(int fN) {
+        this.fN = String.valueOf(fN);
+    }
     //attrib 4
     public String geteT() {
         return eT;

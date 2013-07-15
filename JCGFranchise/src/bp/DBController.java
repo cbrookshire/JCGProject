@@ -18,11 +18,14 @@ public class DBController {
     //attributes
     private Queries queryDB;
     private static DBController dbcInstance;
+    private JCGlIO lIO;
          
     
     //CONSTRUCTOR
     //default
-    private DBController(){ }
+    private DBController(){ 
+       lIO = JCGlIO.getInstance();    
+    }
     
     
     //UTILITIES
@@ -79,8 +82,7 @@ public class DBController {
          
         try{
             if (sysObject instanceof String && "VIEWALL".equals(action)){   
-                temp = queryDB.VehiclesForFranchise
-                        (((Vehicle)sysObject).getFranchiseNumber());
+                temp = queryDB.VehiclesForFranchise(lIO.getfN());
                 return temp;
             }
             if (sysObject instanceof Vehicle && "VIEWITEM".equals(action)){    
@@ -122,8 +124,7 @@ public class DBController {
          
          try{
                 if (sysObject instanceof String && "VIEWALL".equals(action)){   
-                    temp = queryDB.AllEmployeesInFranchise
-                            (((Employee)sysObject).getFranchiseNumber());
+                    temp = queryDB.AllEmployeesInFranchise(lIO.getfN());
                     return temp;
                 }
                 if (sysObject instanceof Employee && "VIEWITEM".equals(action)){    
@@ -166,8 +167,7 @@ public class DBController {
          
         try{
             if (sysObject instanceof String && "VIEWALL".equals(action)){   
-                temp = queryDB.SingleCustomerData
-                        (((Customer)sysObject).getCustomerID());
+                temp = queryDB.SingleCustomerData(lIO.getfN());
                 return temp;
             }
             if (sysObject instanceof Customer && "VIEWITEM".equals(action)){    
@@ -210,8 +210,7 @@ public class DBController {
          
         try{
             if (sysObject instanceof String && "VIEWALL".equals(action)){   
-                temp = queryDB.ReservationsForFranchise
-                        (((Reservation)sysObject).getFranchiseNumber());
+                temp = queryDB.ReservationsForFranchise  (lIO.getfN());
                 return temp;
             }
             if (sysObject instanceof Reservation && "VIEWITEM".equals(action)) {    
