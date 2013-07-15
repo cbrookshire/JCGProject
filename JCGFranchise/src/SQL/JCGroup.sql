@@ -270,6 +270,36 @@ GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'EO2336'@'localhost';
 GRANT SELECT ON JCGroup.Membership TO 'EO2336'@'localhost';
 FLUSH PRIVILEGES;
 
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username, FirstLog)
+ VALUES('Whitaker', 'Carter', '1295 SOUTH LAKE RD', 'WARNER ROBINS', 'Georgia', 31088, '478-987-4632', 'CarterW@gmail.com', 3, 2, 'WC4632', 'N');
+ 
+CREATE USER 'WC4632'@'localhost' IDENTIFIED BY 'wilder';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'WC4632'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'WC4632'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'WC4632'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'WC4632'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Branson', 'Sacheverell', '2925 WATSON RD', 'WARNER ROBINS', 'Georgia', 31088, '478-953-0964', 'BransonS@gmail.com', 3, 2, 'BS0964');
+ 
+CREATE USER 'BS0964'@'localhost' IDENTIFIED BY 'BS0964';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'BS0964'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'BS0964'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'BS0964'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'BS0964'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Mackenzie', 'Kory', '2105 MOODY RD', 'WARNER ROBINS', 'Georgia', 31088, '478-929-0008', 'MKory@yahoo.com', 3, 2, 'MK0008');
+ 
+CREATE USER 'MK0008'@'localhost' IDENTIFIED BY 'MK0008';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'MK0008'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'MK0008'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'MK0008'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'MK0008'@'localhost';
+FLUSH PRIVILEGES;
+
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Bedros', 'August', '183 Edgewood Ave', 'Atlanta', 'Georgia', 30303, '404-8286', 'BedrosA@gmail.com', 3, 2, 'BA8286');
  
@@ -301,6 +331,36 @@ GRANT SELECT ON JCGroup.Membership TO 'PL2246'@'localhost';
 FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Benjamin', 'Patton', '2957 N DRUID HILLS RD', 'ATLANTA', 'Georgia', 30329, '404-329-9385', 'PattonB@gmail.com', 3, 3, 'BP9385');
+ 
+CREATE USER 'BP9385'@'localhost' IDENTIFIED BY 'BP9385';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'BP9385'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'BP9385'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'BP9385'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'BP9385'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Reilly', 'Mackenzie', '2050 LAWRENCEVILLE HWY', 'DECATUR', 'Georgia', 30033, '404-320-6919', 'ReillyM@aol.com', 3, 3, 'RM6919');
+ 
+CREATE USER 'RM6919'@'localhost' IDENTIFIED BY 'RM6919';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'RM6919'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'RM6919'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'RM6919'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'RM6919'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Nnamdi', 'Ladislao', '1705 SCOTT BLVD', 'DECATUR', 'Georgia', 30033, '404-633-5396', 'NnamdiL@gmail.com', 3, 3, 'NL5396');
+ 
+CREATE USER 'NL5396'@'localhost' IDENTIFIED BY 'NL5396';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'NL5396'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'NL5396'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'ENL5396'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'NL5396'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Aleksander', 'Vincenc', '6051 Hollywood Blvd', 'Hollywood', 'California', 90028, '323-469-9480', 'VincencA@gmail.com', 3, 4, 'AV9480');
 
 CREATE USER 'AV9480'@'localhost' IDENTIFIED BY 'AV9480';
@@ -318,6 +378,36 @@ GRANT SELECT, UPDATE ON JCGroup.Customer to 'MG1090'@'localhost';
 GRANT SELECT, UPDATE ON JCGroup.Employee to 'MG1090'@'localhost';
 GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'MG1090'@'localhost';
 GRANT SELECT ON JCGroup.Membership TO 'MG1090'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Klemens', 'Salvatore', '4314 SOUTH STREET', 'LAKEWOOD', 'California', 90712, '562-531-0345', 'KlemensS@wow.com', 3, 4, 'KS0345');
+ 
+CREATE USER 'KS0345'@'localhost' IDENTIFIED BY 'KS0345';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'KS0345'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'KS0345'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'KS0345'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'KS0345'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Gennaro', 'Eustachio', '17420 SOUTH WESTERN', 'GARDENA', 'California', 90248, '310-327-7707', 'GennaroE@aol.com', 3, 4, 'GE7707');
+ 
+CREATE USER 'GE7707'@'localhost' IDENTIFIED BY 'GE7707';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'GE7707'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'GE7707'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'GE7707'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'GE7707'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Raimondo', 'Rocco', '14305 LAKEWOOD', 'DOWNEY', 'California', 90242, '562-630-0875', 'RoccoR@funtime.com', 3, 4, 'RR0875');
+ 
+CREATE USER 'RR0875'@'localhost' IDENTIFIED BY 'RR0875';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'RR0875'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'RR0875'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'RR0875'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'RR0875'@'localhost';
 FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
@@ -341,6 +431,36 @@ GRANT SELECT ON JCGroup.Membership TO 'SH0990'@'localhost';
 FLUSH PRIVILEGES;
 
 insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Colombo', 'Ottaviano', '7135 SUNSET BLVD', 'LOS ANGELES', 'California', 90046, '323-876-1925', 'Colombo@gmail.com', 3, 5, 'CO1925');
+ 
+CREATE USER 'CO1925'@'localhost' IDENTIFIED BY 'CO1925';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'CO1925'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'CO1925'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'CO1925'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'CO1925'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Giancarlo', 'Xuan', '1305 N. VERMONT AVE.', 'HOLLYWOOD', 'California', 90027, '323-663-7387', 'G_Xuan@gmail.com', 3, 5, 'GX7387');
+ 
+CREATE USER 'GX7387'@'localhost' IDENTIFIED BY 'GX7387';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'GX7387'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'GX7387'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'GX7387'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'GX7387'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Celino', 'Aroldo', '3019 SOUTH HOOVER', 'LOS ANGELES', 'California', 90007, '213-746-8072', 'CelinoA@hotmail.com', 3, 5, 'CA8072');
+ 
+CREATE USER 'CA8072'@'localhost' IDENTIFIED BY 'CA8072';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'CA8072'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'CA8072'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'CA8072'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'CA8072'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
  VALUES('Krikor', 'Rudolf', '700 E. Tri-State', ' S Holland', 'Illinois', 60473, '224-277-4356', 'KrikorR@gmail.com', 3, 6, 'KR4356');
 
 CREATE USER 'KR4356'@'localhost' IDENTIFIED BY 'KR4356';
@@ -358,6 +478,36 @@ GRANT SELECT, UPDATE ON JCGroup.Customer to 'VA0283'@'localhost';
 GRANT SELECT, UPDATE ON JCGroup.Employee to 'VA0283'@'localhost';
 GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'VA0283'@'localhost';
 GRANT SELECT ON JCGroup.Membership TO 'VA0283'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Patrizio', 'Modesto', '12723 S ASHLAND AVE', 'CALUMET PARK', 'Illinois', 60827, '708-389-1646', 'PModesto@yahoo.com', 3, 6, 'PM1646');
+ 
+CREATE USER 'PM1646'@'localhost' IDENTIFIED BY 'PM1646';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'PM1646'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'PM1646'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'PM1646'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'PM1646'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Vince', 'Hayk', '170 WEST ST', 'S.HOLLAND', 'Illinois', 60473, '708-596-3318', 'VHayk@gmail.com', 3, 6, 'VK3318');
+ 
+CREATE USER 'VK3318'@'localhost' IDENTIFIED BY 'VK3318';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'VK3318'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'VK3318'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'VK3318'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'VK3318'@'localhost';
+FLUSH PRIVILEGES;
+
+insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, Username)
+ VALUES('Conrad', 'Wenzeslaus', '1200 E. SIBLEY BLVD', 'DOLTON', 'Illinois', 60419, '708-849-9555', 'ConradW@hotmail.com', 3, 6, 'CW9555');
+ 
+CREATE USER 'CW9555'@'localhost' IDENTIFIED BY 'CW9555';
+GRANT SELECT, UPDATE ON JCGroup.Customer to 'CW9555'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Employee to 'CW9555'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'CW9555'@'localhost';
+GRANT SELECT ON JCGroup.Membership TO 'CW9555'@'localhost';
 FLUSH PRIVILEGES;
 
 insert into Membership(MemberID, Discount, MinAmount)
