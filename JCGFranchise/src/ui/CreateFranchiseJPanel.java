@@ -408,7 +408,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             UIController.getInstance().UIRouter(fr, "EDIT");
         }
         
-        if(mode == 1)  //Delete one
+        if(mode == 2)  //Delete one
         {
             UIController.getInstance().UIRouter(fr, "DELETE");
         }
