@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class DBController {
     
     //attributes
-    private Queries dbase;
     private Queries queryDB;
     private static DBController dbcInstance;
          
@@ -123,8 +122,8 @@ public class DBController {
          
          try{
                 if (sysObject instanceof String && "VIEWALL".equals(action)){   
-                    temp = queryDB.AllEmployeesInFranchise(1);
-                    //        (((Employee)sysObject).getFranchiseNumber());
+                    temp = queryDB.AllEmployeesInFranchise
+                            (((Employee)sysObject).getFranchiseNumber());
                     return temp;
                 }
                 if (sysObject instanceof Employee && "VIEWITEM".equals(action)){    

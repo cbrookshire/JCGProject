@@ -194,20 +194,15 @@ public class UIController {
                 if ("Please enter new password".equals(returnCode)) {
                     return "004";   /*passwordchangescreen*/        } 
             
-        case "ASSIGNNEWPASSWORD":
-            
-                returnCode = jcgSys.changePassword(UIObject, action);
-                if ("ClassNotFoundException".equals(returnCode)) {
-                    return "902";                                   }     
-                if ("1".equals(returnCode)) {
-                    return "001";   /*LogInScreen*/                 }        
         case "RESET": 
                 
                 returnCode = jcgSys.ResetDatabase(UIObject, action);
                 if ("BadConnection".equals(returnCode)){
                     return "902";                                   }
                 if ("FileNotFoundException".equals(returnCode)){
-                    return "902";                                   }           
+                    return "902";                                   } 
+                if ("1".equals(returnCode)) {
+                    return "001";   /*LogInScreen*/                 }
                                      
         case "LOGOUT":
             

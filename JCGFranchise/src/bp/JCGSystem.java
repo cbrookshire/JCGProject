@@ -86,23 +86,7 @@ public class JCGSystem {
         dControl.dbSystemRouter(sysObject, action);             
     }
     
-    public String changePassword (Object sysObject, String action){
-        
-        String dbCode;
-        if (sysObject instanceof String) {
-            lIO.setP((String)sysObject);
-            //return "PasswordChanged";
-            //add code to notify DB that password has been updated
-            dbCode = dControl.dbSystemRouter(sysObject, "UPDATEPASSWORD");
-            return dbCode;
-        }
-        
-        return "ClassNotFoundException";
-    }
-    
-    
-    
-           
+             
 /******************************************************
  * Singleton method for JCGSystem class + Object 
  * clone override 
