@@ -408,7 +408,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         fr.setPhone(newFranchisePhone.getText());
         fr.setEmail(newFranchiseEmail.getText());
         
-        fr.setAirportID(String.valueOf(AirportjComboBox.getSelectedIndex()));
+        fr.setAirportID(String.valueOf(AirportjComboBox.getSelectedIndex()+1));
         String sc = "1";
         if(mode == 0)  //Create one
         {

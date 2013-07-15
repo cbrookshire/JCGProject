@@ -205,7 +205,10 @@ public class BaseJFrame extends JFrame {
            case "906": //Access denied (Login)
                setContent(new errorJPanel("Access Denied.", lastCode), "Error!");  
                break;
+           default:
+               return;
         }
-        lastCode = code;
+        if(code.charAt(0) != '9')
+            lastCode = code;
     }
 }
