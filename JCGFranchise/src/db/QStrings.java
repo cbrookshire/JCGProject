@@ -10,7 +10,7 @@ package db;
  */
 final class QStrings {
     
-    public QStrings(){};
+    public QStrings(){ };
     
     // Fracnhise
     public String update_fran = "UPDATE Franchise SET Address = ?,"
@@ -131,4 +131,5 @@ final class QStrings {
     public String get_emp_username = "SELECT Username FROM Employee WHERE EmpType != 98";
     public String get_cust_username = "SELECT Username FROM Customer";
     public String drop_user = "DROP USER ?@'localhost'";
+    
 }
