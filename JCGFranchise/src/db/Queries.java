@@ -179,9 +179,9 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start */
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
+                //int columns = metaData.getColumnCount();
+                //int rows = results.getRow(); 
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -248,9 +248,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start */
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -420,9 +418,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start */
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -523,9 +519,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -672,9 +666,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -835,9 +827,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -959,9 +949,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* ArrayList Prepare Section Start */
@@ -1379,9 +1367,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -1470,9 +1456,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -1656,9 +1640,7 @@ public class Queries extends JCGDatabase
                 
                 
                 /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
             /* List Prepare Section Stop */
             }
@@ -1722,9 +1704,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -1805,9 +1785,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* List Prepare Section Start */
@@ -1908,9 +1886,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* Drop Use Preperation Section Start*/
@@ -2137,9 +2113,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* ArrayList Prepare Section Start */
@@ -2354,9 +2328,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* ArrayList Prepare Section Start */
@@ -2459,9 +2431,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* Drop Use Preperation Section Start*/
@@ -2614,9 +2584,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* ArrayList Prepare Section Start */
@@ -2712,9 +2680,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* ArrayList Prepare Section Start */
@@ -2810,9 +2776,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* ArrayList Prepare Section Start */
@@ -2908,9 +2872,7 @@ public class Queries extends JCGDatabase
             /* Query Section Stop */
             
             /* Metadata Section Start*/
-                ResultSetMetaData metaData = results.getMetaData();
-                int columns = metaData.getColumnCount();
-                int rows = results.getRow(); 
+                //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
             /* ArrayList Prepare Section Start */
