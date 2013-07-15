@@ -180,7 +180,13 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     {
         //Loads the information after an item from the combo box has been selected.
         //The data is put into the text fields
-        
+        Franchise me = list.get(listSelection.getSelectedIndex());
+        newFranchiseAddress.setText(me.getAddress());
+        newFranchiseCity.setText(me.getCity());
+        newFranchiseState.setText(me.getState());
+        newFranchiseZip.setText(String.valueOf(me.getZip()));
+        newFranchisePhone.setText(me.getPhone());
+        newFranchiseEmail.setText(me.getEmail());
     }
     
 
