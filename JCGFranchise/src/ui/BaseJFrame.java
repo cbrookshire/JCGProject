@@ -16,7 +16,7 @@ import ui.*;
 public class BaseJFrame extends JFrame {
     private JPanel content = null;
     private static BaseJFrame instance;
-    
+    private String lastCode = "000";
     public BaseJFrame()
     {
         //Constructor.  I use the flow layout because there's 
@@ -185,26 +185,27 @@ public class BaseJFrame extends JFrame {
            
            //Error prompts
            case "900": //Unable to login
-               setContent(new errorJPanel("Unable to login.", "001"), "Error!");  //call the error and return to login
+               setContent(new errorJPanel("Unable to login.", lastCode), "Error!");  //call the error and return to login
                break;
            case "901": //Unable to register
-               setContent(new errorJPanel("Unable to create account.", "001"), "Error!");  //call the error code and return to registration
+               setContent(new errorJPanel("Unable to create account.", lastCode), "Error!");  //call the error code and return to registration
                break;
            case "902": //Unable to connect
-               setContent(new errorJPanel("Bad connection.  Check your internet connection and try again.", "001"), "Error!");  //call the error code and return to registration
+               setContent(new errorJPanel("Bad connection.  Check your internet connection and try again.", lastCode), "Error!");  //call the error code and return to registration
                break;
            case "903": //Access denied (Franchisee)
-               setContent(new errorJPanel("Access Denied.", "200"), "Error!");  
+               setContent(new errorJPanel("Access Denied.", lastCode), "Error!");  
                break;
            case "904": //Access denied (Franchisor)
-               setContent(new errorJPanel("Access Denied.", "100"), "Error!");  
+               setContent(new errorJPanel("Access Denied.", lastCode), "Error!");  
                break;
            case "905": //Access denied (Customer)
-               setContent(new errorJPanel("Access Denied.", "300"), "Error!");  
+               setContent(new errorJPanel("Access Denied.", lastCode), "Error!");  
                break;
            case "906": //Access denied (Login)
-               setContent(new errorJPanel("Access Denied.", "001"), "Error!");  
+               setContent(new errorJPanel("Access Denied.", lastCode), "Error!");  
                break;
         }
+        lastCode = code;
     }
 }
