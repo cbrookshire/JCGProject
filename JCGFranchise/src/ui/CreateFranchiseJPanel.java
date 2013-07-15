@@ -171,7 +171,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         list = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
         for(int i = 0; i < list.size(); i++)
         {
-            String t = list.get(i).getAddress() + ";" + list.get(i).getCity() + "," + list.get(i).getState();
+            String t = list.get(i).getFranchiseID() + ":" + list.get(i).getAddress() + ";" + list.get(i).getCity() + "," + list.get(i).getState();
             listSelection.addItem(t);
         }
     }
@@ -407,6 +407,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         fr.setZip(newFranchiseZip.getText());
         fr.setPhone(newFranchisePhone.getText());
         fr.setEmail(newFranchiseEmail.getText());
+        
         fr.setAirportID(String.valueOf(AirportjComboBox.getSelectedIndex()));
         String sc = "1";
         if(mode == 0)  //Create one
@@ -416,11 +417,13 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         
         if(mode == 1)  //Update one
         {
+            fr.setFranchiseID(list.get(listSelection.getSelectedIndex()).getFranchiseID());
             sc = UIController.getInstance().UIRouter(fr, "EDIT");
         }
         
         if(mode == 2)  //Delete one
         {
+            fr.setFranchiseID(list.get(listSelection.getSelectedIndex()).getFranchiseID());
             sc = UIController.getInstance().UIRouter(fr, "DELETE");
         }
         
