@@ -1576,7 +1576,7 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = ?";
+            String statString = "SELECT * FROM `employee` WHERE 'FranchiseNumber' = ?";
 
             /* Return Parameter */
             ArrayList<Employee> BPList = new ArrayList<Employee>();
