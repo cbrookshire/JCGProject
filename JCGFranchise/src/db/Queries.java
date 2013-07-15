@@ -245,7 +245,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -259,7 +259,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Franchise temp = new Franchise();
@@ -420,7 +420,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -434,7 +434,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     //Franchise temp = new Franchise();
@@ -527,7 +527,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -541,7 +541,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Membership temp = new Membership();
@@ -680,7 +680,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -694,7 +694,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Vehicle temp = new Vehicle();
@@ -847,7 +847,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -861,7 +861,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Vehicle temp = new Vehicle();
@@ -975,7 +975,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -989,7 +989,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Reservation temp = new Reservation();
@@ -1106,7 +1106,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                      Vehicle temp = new Vehicle();
@@ -1399,7 +1399,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -1413,7 +1413,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Employee temp = new Employee();
@@ -1494,7 +1494,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -1508,7 +1508,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Employee temp = new Employee();
@@ -1594,7 +1594,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -1608,7 +1608,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Employee temp = new Employee();
@@ -1689,7 +1689,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -1703,7 +1703,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     int temp = 0;
@@ -1775,7 +1775,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -1789,7 +1789,7 @@ public class Queries extends JCGDatabase
             /* List Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Employee temp = new Employee();
@@ -2110,7 +2110,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -2124,7 +2124,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Customer temp = new Customer();
@@ -2228,7 +2228,7 @@ public class Queries extends JCGDatabase
                     /* Query Section Start */
                         results = statment.executeQuery();
 
-                        if(statment != null)
+        
                             statment.close();
 
                     /* Query Section Stop */
@@ -2242,7 +2242,7 @@ public class Queries extends JCGDatabase
                     /* ArrayList Prepare Section Start */
 
 
-                        results.beforeFirst();
+                        
                         while (results.next() && rows > 0)
                         {
                             Customer temp = new Customer();
@@ -2333,7 +2333,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -2347,7 +2347,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     int temp;
@@ -2596,7 +2596,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -2610,7 +2610,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Reservation temp = new Reservation();
@@ -2697,7 +2697,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -2711,7 +2711,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Reservation temp = new Reservation();
@@ -2798,7 +2798,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+                
                     statment.close();
                 
             /* Query Section Stop */
@@ -2812,7 +2812,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Reservation temp = new Reservation();
@@ -2899,7 +2899,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-                if(statment != null)
+
                     statment.close();
                 
             /* Query Section Stop */
@@ -2913,7 +2913,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                results.beforeFirst();
+                
                 while (results.next() && rows > 0)
                 {
                     Reservation temp = new Reservation();
