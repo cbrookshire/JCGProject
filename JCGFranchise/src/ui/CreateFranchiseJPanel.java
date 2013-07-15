@@ -56,7 +56,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             newFranchiseZip.setEnabled(false);
             newFranchisePhone.setEnabled(false);
             newFranchiseEmail.setEnabled(false);
-            newFranchiseAirport.setEnabled(false);
+            AirportjComboBox.setEnabled(false);
             
         }
     }
@@ -149,7 +149,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             }
         }
         
-        if(newFranchiseAirport.isEnabled())
+       /* if(newFranchiseAirport.isEnabled())
         {
             if(!newFranchiseAirport.getText().matches("[0-9]+"))
             {
@@ -159,7 +159,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
                     "Error!",
                     JOptionPane.ERROR_MESSAGE);
             }
-        }
+        } */
         
         return success;
     }
@@ -208,11 +208,11 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         newFranchiseZip = new javax.swing.JTextField();
         newFranchisePhone = new javax.swing.JTextField();
         newFranchiseEmail = new javax.swing.JTextField();
-        newFranchiseAirport = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
         newFranchiseButton = new javax.swing.JButton();
         listSelection = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
+        AirportjComboBox = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -271,6 +271,13 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
 
         jLabel9.setText("Selection:");
 
+        AirportjComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
+        AirportjComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AirportjComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -302,10 +309,10 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
                                     .addComponent(newFranchiseCity)
                                     .addComponent(newFranchiseState)
                                     .addComponent(newFranchiseZip)
-                                    .addComponent(newFranchiseAirport)
                                     .addComponent(newFranchiseEmail)
                                     .addComponent(newFranchisePhone)
-                                    .addComponent(newFranchiseAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)))
+                                    .addComponent(newFranchiseAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                    .addComponent(AirportjComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -345,7 +352,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newFranchiseAirport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(AirportjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,7 +386,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         newFranchiseZip.setText("");
         newFranchisePhone.setText("");
         newFranchiseEmail.setText("");
-        newFranchiseAirport.setText("");
+        //newFranchiseAirport.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void newFranchiseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFranchiseButtonActionPerformed
@@ -394,7 +401,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         fr.setZip(newFranchiseZip.getText());
         fr.setPhone(newFranchisePhone.getText());
         fr.setEmail(newFranchiseEmail.getText());
-        fr.setAirport(newFranchiseAirport.getText());
+        fr.setAirportID(String.valueOf(AirportjComboBox.getSelectedIndex()));
         
         if(mode == 0)  //Create one
         {
@@ -428,7 +435,16 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         loadInfoFromList();
     }//GEN-LAST:event_listSelectionActionPerformed
 
+    private void AirportjComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirportjComboBoxActionPerformed
+        // TODO add your handling code here:
+        /*if(AirportjComboBox.getSelectedIndex() == 1)
+        {
+            
+        }*/
+    }//GEN-LAST:event_AirportjComboBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox AirportjComboBox;
     private javax.swing.JButton btnClear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -442,7 +458,6 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox listSelection;
     private javax.swing.JTextField newFranchiseAddress;
-    private javax.swing.JTextField newFranchiseAirport;
     private javax.swing.JButton newFranchiseButton;
     private javax.swing.JTextField newFranchiseCity;
     private javax.swing.JTextField newFranchiseEmail;
