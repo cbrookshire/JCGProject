@@ -267,14 +267,14 @@ public class Queries extends JCGDatabase
                     //rs.getBigDecimal("AMOUNT")
                     
                     temp.setAddress(results.getString("Address"));
-                    temp.setAirportID(results.getString("AirportID"));
+                    temp.setAirportID(results.getInt("AirportID"));
                     temp.setAirport(getFranchiseAirportName(results.getInt("AirportID")));
                     temp.setCity(results.getString("City"));
                     temp.setEmail(results.getString("Email"));
-                    temp.setFranchiseID(results.getString("FranchiseNumber"));
+                    temp.setFranchiseID(results.getInt("FranchiseNumber"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    temp.setZip(results.getString("Zip"));
+                    temp.setZip(results.getInt("Zip"));
                     
                     BPList.add(temp);
                 }
@@ -701,17 +701,17 @@ public class Queries extends JCGDatabase
                     
                     //rs.getBigDecimal("AMOUNT")
                     
-                    temp.setCapacity(results.getString("Capacity"));
+                    temp.setCapacity(results.getInt("Capacity"));
                     temp.setCondition(results.getString("VCondition"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setMake(results.getString("Make"));
-                    temp.setMileage(results.getString("Milage"));
+                    temp.setMileage(results.getInt("Milage"));
                     temp.setModel(results.getString("Model"));
-                    temp.setRate(results.getString("RentalPrice"));
+                    temp.setRate(results.getDouble("RentalPrice"));
                     temp.setTablet(results.getString("Tablet"));
-                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setVin(results.getString("VIN"));
-                    temp.setYear(results.getString("MakeYear"));
+                    temp.setYear(results.getInt("MakeYear"));
                     
                     BPList.add(temp);
                 }
@@ -868,17 +868,17 @@ public class Queries extends JCGDatabase
                     
                     //rs.getBigDecimal("AMOUNT")
                     
-                    temp.setCapacity(results.getString("Capacity")); 
+                    temp.setCapacity(results.getInt("Capacity")); 
                     temp.setCondition(results.getString("VCondition")); 
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setMake(results.getString("Make")); 
                     temp.setMileage(results.getString("Millage")); 
                     temp.setModel(results.getString("Model")); 
-                    temp.setRate(results.getString("RentalPrice")); 
+                    temp.setRate(results.getDouble("RentalPrice")); 
                     temp.setTablet(results.getString("Tablet"));
-                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setVin(results.getString("VIN"));
-                    temp.setYear(results.getString("MakeYear"));
+                    temp.setYear(results.getInt("MakeYear"));
                     temp.setvIndex(results.getString("VIndex"));
                     
                     BPList.add(temp);
@@ -998,21 +998,21 @@ public class Queries extends JCGDatabase
                     
                     temp.setAirline(results.getString("Airline"));
                     temp.setComment(results.getString("Comment"));
-                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setCustomerID(results.getInt("CustomerID"));
                     temp.setDate(results.getString("Date"));
-                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setDropOffTime(results.getDouble("DropOffTime"));
                     temp.setFlightNumber(results.getString("FlightNumber"));
-                    temp.setFlightTime(results.getString("FlightTime"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
-                    temp.setPickUpTime(results.getString("PickUpTime"));
-                    temp.setPrice(results.getString("Price"));
+                    temp.setFlightTime(results.getDouble("FlightTime"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
+                    temp.setPickUpTime(results.getDouble("PickUpTime"));
+                    temp.setPrice(results.getDouble("Price"));
                     temp.setReservationNumber(results.getString("ReservationNumber"));
                     temp.setStatus(results.getString("Status"));
-                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setAltAddress(results.getString("AltAddress"));
                     temp.setAltCity(results.getString("AltCity"));
                     temp.setAltState(results.getString("AltState"));
-                    temp.setAltZip(results.getString("AltZip"));
+                    temp.setAltZip(results.getInt("AltZip"));
                     
                     AllReservations.add(temp);
                 }
@@ -1113,17 +1113,17 @@ public class Queries extends JCGDatabase
                     
                     //rs.getBigDecimal("AMOUNT")
                     
-                    temp.setCapacity(results.getString("Capacity"));
+                    temp.setCapacity(results.getInt("Capacity"));
                     temp.setCondition(results.getString("VCondition"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setMake(results.getString("Make"));
-                    temp.setMileage(results.getString("Milage"));
+                    temp.setMileage(results.getInt("Milage"));
                     temp.setModel(results.getString("Model"));
-                    temp.setRate(results.getString("RentalPrice"));
+                    temp.setRate(results.getDouble("RentalPrice"));
                     temp.setTablet(results.getString("Tablet"));
-                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setVin(results.getString("VIN"));
-                    temp.setYear(results.getString("MakeYear"));
+                    temp.setYear(results.getInt("MakeYear"));
                     
                     BPArrayList.add(temp);
                 }
@@ -1423,15 +1423,15 @@ public class Queries extends JCGDatabase
                     temp.setAddress(results.getString("Address"));
                     temp.setCity(results.getString("City"));
                     temp.setEmail(results.getString("Email"));
-                    temp.setEmpType(results.getString("EmpType"));
+                    temp.setEmpType(results.getInt("EmpType"));
                     temp.setFirstName(results.getString("Fname"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setLastName(results.getString("Surname"));
                     //temp.setPassword(results.getString("Address"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    temp.setEmployeeID(results.getString("EmployeeID"));
-                    temp.setZip(results.getString("Address"));
+                    temp.setEmployeeID(results.getInt("EmployeeID"));
+                    temp.setZip(results.getInt("Zip"));
                     
                     BPList.add(temp);
                 }
@@ -1518,15 +1518,15 @@ public class Queries extends JCGDatabase
                     temp.setAddress(results.getString("Address"));
                     temp.setCity(results.getString("City"));
                     temp.setEmail(results.getString("Email"));
-                    temp.setEmpType(results.getString("EmpType"));
+                    temp.setEmpType(results.getInt("EmpType"));
                     temp.setFirstName(results.getString("Fname"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setLastName(results.getString("Surname"));
                     //temp.setPassword(results.getString("Address"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    temp.setEmployeeID(results.getString("EmployeeID"));
-                    temp.setZip(results.getString("Address"));
+                    temp.setEmployeeID(results.getInt("EmployeeID"));
+                    temp.setZip(results.getInt("Zip"));
                     
                     BPList.add(temp);
                 }
@@ -1799,15 +1799,15 @@ public class Queries extends JCGDatabase
                     temp.setAddress(results.getString("Address"));
                     temp.setCity(results.getString("City"));
                     temp.setEmail(results.getString("Email"));
-                    temp.setEmpType(results.getString("EmpType"));
+                    temp.setEmpType(results.getInt("EmpType"));
                     temp.setFirstName(results.getString("Fname"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setLastName(results.getString("Surname"));
                     //temp.setPassword(results.getString("Address"));
                     temp.setPhone(results.getString("Phone"));
                     temp.setState(results.getString("State"));
-                    temp.setEmployeeID(results.getString("EmployeeID"));
-                    temp.setZip(results.getString("Address"));
+                    temp.setEmployeeID(results.getInt("EmployeeID"));
+                    temp.setZip(results.getInt("Zip"));
                     
                     BPList.add(temp);
                 }
@@ -2133,17 +2133,17 @@ public class Queries extends JCGDatabase
                     
                     temp.setAddress(results.getString("Address"));
                     temp.setCity(results.getString("City"));
-                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setCustomerID(results.getInt("CustomerID"));
                     temp.setEmail(results.getString("Email"));
                     temp.setFirstName(results.getString("Fname"));
                     temp.setLastName(results.getString("Surname"));
                     temp.setMemberID(results.getString("MemberID"));
                     //temp.setPassword(statString);
                     temp.setPhone(results.getString("Phone"));
-                    temp.setReservationCount(results.getString("ReservationCount"));
+                    temp.setReservationCount(results.getInt("ReservationCount"));
                     temp.setState(results.getString("State"));
                     //temp.setUserID(results.getString("Address"));
-                    temp.setZip(results.getString("Zip"));
+                    temp.setZip(results.getInt("Zip"));
                     
                     BPArrayList.add(temp);
                 }
@@ -2251,17 +2251,17 @@ public class Queries extends JCGDatabase
 
                             temp.setAddress(results.getString("Address"));
                             temp.setCity(results.getString("City"));
-                            temp.setCustomerID(results.getString("CustomerID"));
+                            temp.setCustomerID(results.getInt("CustomerID"));
                             temp.setEmail(results.getString("Email"));
                             temp.setFirstName(results.getString("Fname"));
                             temp.setLastName(results.getString("Surname"));
                             temp.setMemberID(results.getString("MemberID"));
                             //temp.setPassword(statString);
                             temp.setPhone(results.getString("Phone"));
-                            temp.setReservationCount(results.getString("ReservationCount"));
+                            temp.setReservationCount(results.getInt("ReservationCount"));
                             temp.setState(results.getString("State"));
                             //temp.setUserID(results.getString("Address"));
-                            temp.setZip(results.getString("Zip"));
+                            temp.setZip(results.getInt("Zip"));
 
                             BPArrayList.add(temp);
                         }
@@ -2620,21 +2620,21 @@ public class Queries extends JCGDatabase
                     
                     temp.setAirline(results.getString("Airline"));
                     temp.setComment(results.getString("Comment"));
-                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setCustomerID(results.getInt("CustomerID"));
                     temp.setDate(results.getString("Date"));
-                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setDropOffTime(results.getDouble("DropOffTime"));
                     temp.setFlightNumber(results.getString("FlightNumber"));
-                    temp.setFlightTime(results.getString("FlightTime"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
-                    temp.setPickUpTime(results.getString("PickUpTime"));
-                    temp.setPrice(results.getString("Price"));
+                    temp.setFlightTime(results.getDouble("FlightTime"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
+                    temp.setPickUpTime(results.getDouble("PickUpTime"));
+                    temp.setPrice(results.getDouble("Price"));
                     temp.setReservationNumber(results.getString("ReservationNumber"));
                     temp.setStatus(results.getString("Status"));
-                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setAltAddress(results.getString("AltAddress"));
                     temp.setAltCity(results.getString("AltCity"));
                     temp.setAltState(results.getString("AltState"));
-                    temp.setAltZip(results.getString("AltZip"));
+                    temp.setAltZip(results.getInt("AltZip"));
                     
                     BPArrayList.add(temp);
                 }
@@ -2721,21 +2721,21 @@ public class Queries extends JCGDatabase
                     
                     temp.setAirline(results.getString("Airline"));
                     temp.setComment(results.getString("Comment"));
-                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setCustomerID(results.getInt("CustomerID"));
                     temp.setDate(results.getString("Date"));
-                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setDropOffTime(results.getDouble("DropOffTime"));
                     temp.setFlightNumber(results.getString("FlightNumber"));
-                    temp.setFlightTime(results.getString("FlightTime"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
-                    temp.setPickUpTime(results.getString("PickUpTime"));
-                    temp.setPrice(results.getString("Price"));
+                    temp.setFlightTime(results.getDouble("FlightTime"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
+                    temp.setPickUpTime(results.getDouble("PickUpTime"));
+                    temp.setPrice(results.getDouble("Price"));
                     temp.setReservationNumber(results.getString("ReservationNumber"));
                     temp.setStatus(results.getString("Status"));
-                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setAltAddress(results.getString("AltAddress"));
                     temp.setAltCity(results.getString("AltCity"));
                     temp.setAltState(results.getString("AltState"));
-                    temp.setAltZip(results.getString("AltZip"));
+                    temp.setAltZip(results.getInt("AltZip"));
                     
                     BPArrayList.add(temp);
                 }
@@ -2822,21 +2822,21 @@ public class Queries extends JCGDatabase
                     
                     temp.setAirline(results.getString("Airline"));
                     temp.setComment(results.getString("Comment"));
-                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setCustomerID(results.getInt("CustomerID"));
                     temp.setDate(results.getString("Date"));
-                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setDropOffTime(results.getDouble("DropOffTime"));
                     temp.setFlightNumber(results.getString("FlightNumber"));
-                    temp.setFlightTime(results.getString("FlightTime"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
-                    temp.setPickUpTime(results.getString("PickUpTime"));
-                    temp.setPrice(results.getString("Price"));
+                    temp.setFlightTime(results.getDouble("FlightTime"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
+                    temp.setPickUpTime(results.getDouble("PickUpTime"));
+                    temp.setPrice(results.getDouble("Price"));
                     temp.setReservationNumber(results.getString("ReservationNumber"));
                     temp.setStatus(results.getString("Status"));
-                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setAltAddress(results.getString("AltAddress"));
                     temp.setAltCity(results.getString("AltCity"));
                     temp.setAltState(results.getString("AltState"));
-                    temp.setAltZip(results.getString("AltZip"));
+                    temp.setAltZip(results.getInt("AltZip"));
                     
                     BPArrayList.add(temp);
                 }
@@ -2923,21 +2923,21 @@ public class Queries extends JCGDatabase
                     
                     temp.setAirline(results.getString("Airline"));
                     temp.setComment(results.getString("Comment"));
-                    temp.setCustomerID(results.getString("CustomerID"));
+                    temp.setCustomerID(results.getInt("CustomerID"));
                     temp.setDate(results.getString("Date"));
-                    temp.setDropOffTime(results.getString("DropOffTime"));
+                    temp.setDropOffTime(results.getDouble("DropOffTime"));
                     temp.setFlightNumber(results.getString("FlightNumber"));
-                    temp.setFlightTime(results.getString("FlightTime"));
-                    temp.setFranchiseNumber(results.getString("FranchiseNumber"));
-                    temp.setPickUpTime(results.getString("PickUpTime"));
-                    temp.setPrice(results.getString("Price"));
+                    temp.setFlightTime(results.getDouble("FlightTime"));
+                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
+                    temp.setPickUpTime(results.getDouble("PickUpTime"));
+                    temp.setPrice(results.getDouble("Price"));
                     temp.setReservationNumber(results.getString("ReservationNumber"));
                     temp.setStatus(results.getString("Status"));
-                    temp.setVehicleID(results.getString("VehicleID"));
+                    temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setAltAddress(results.getString("AltAddress"));
                     temp.setAltCity(results.getString("AltCity"));
                     temp.setAltState(results.getString("AltState"));
-                    temp.setAltZip(results.getString("AltZip"));
+                    temp.setAltZip(results.getInt("AltZip"));
                     
                     BPArrayList.add(temp);
                 }
