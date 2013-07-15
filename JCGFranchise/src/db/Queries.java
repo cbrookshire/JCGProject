@@ -186,28 +186,6 @@ public class Queries extends JCGDatabase
                 
             /* List Prepare Section Start */
                 
-                
-                results.beforeFirst();
-                while (results.next() && rows > 0)
-                {
-                    //System.out.println("in the loop");
-                    Franchise temp = new Franchise();
-                    
-                    //rs.getBigDecimal("AMOUNT")
-                    
-                    temp.setAddress(results.getString("Address"));
-                    temp.setAirportID(results.getInt("AirportID"));
-                    //temp.setAirport(getFranchiseAirportName(results.getInt("AirportID")));
-                    temp.setCity(results.getString("City"));
-                    temp.setEmail(results.getString("Email"));
-                    temp.setFranchiseID(results.getInt("FranchiseNumber"));
-                    temp.setPhone(results.getString("Phone"));
-                    temp.setState(results.getString("State"));
-                    temp.setZip(results.getInt("Zip"));
-                    
-                    //System.out.print(temp.toString());
-                    BPList.add(temp);
-                }
             /* List Prepare Section Stop */
             }
             catch(SQLException sqlE)
@@ -229,11 +207,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -328,11 +301,6 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
         /* TRY BLOCK STOP*/
         
@@ -421,11 +389,6 @@ public class Queries extends JCGDatabase
                     if (query != null) query.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
            /* TRY BLOCK STOP */
             
@@ -503,11 +466,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -617,11 +575,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -785,11 +738,6 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
         /* TRY BLOCK STOP*/
         
@@ -865,11 +813,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (query != null) query.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -961,11 +904,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -1232,11 +1170,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -1525,11 +1458,6 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
         /* TRY BLOCK STOP*/
         
@@ -1623,11 +1551,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -1730,11 +1653,6 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
         /* TRY BLOCK STOP*/
         
@@ -1818,11 +1736,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -1919,11 +1832,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -2041,11 +1949,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (query != null) query.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -2267,11 +2170,6 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
         /* TRY BLOCK STOP*/
         
@@ -2391,11 +2289,6 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
         /* TRY BLOCK STOP*/
         
@@ -2507,11 +2400,6 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
         /* TRY BLOCK STOP*/
         
@@ -2621,11 +2509,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (query != null) query.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -2778,11 +2661,6 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
         /* TRY BLOCK STOP*/
         
@@ -2882,11 +2760,6 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
                 }
                 catch (Exception e) {};
             }
@@ -2990,11 +2863,6 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
             }
         /* TRY BLOCK STOP*/
         
@@ -3096,11 +2964,7 @@ public class Queries extends JCGDatabase
                     if (statment != null) statment.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (con != null) con.close();
-                }
-                catch (Exception e) {};
+
             }
         /* TRY BLOCK STOP*/
         
