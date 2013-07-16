@@ -31,11 +31,18 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         if (mode ==0) //Add mode
         {   
             listSelection.setEnabled(false);
+            if(isDriver)
+                jLabel1.setText("Add a driver");
+            else
+                jLabel1.setText("Add an Employee");
         }
         if(mode == 1)  //Edit mode
         {
             getListSelection();
-            jLabel1.setText("Edit a Employee");
+            if(isDriver)
+                jLabel1.setText("Edit a driver");
+            else
+                jLabel1.setText("Edit an Employee");
             listSelection.setEnabled(true);
             jButton3.setText("Update");
             jButton1.setEnabled(false);
@@ -44,7 +51,10 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         if(mode == 2)  //Delete mode
         {
             getListSelection();
-            jLabel1.setText("Delete a Employee");
+            if(isDriver)
+                jLabel1.setText("Delete a driver");
+            else
+                jLabel1.setText("Delete an Employee");
             listSelection.setEnabled(true);
             jButton3.setText("Delete");
             jButton1.setEnabled(false);
@@ -67,6 +77,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         if(isDriver)
         {
             //change code here
+            newEmployeeType.setSelectedIndex(2);
+            newEmployeeType.setEnabled(false);
         }
     }
     
