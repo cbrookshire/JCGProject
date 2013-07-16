@@ -26,7 +26,7 @@ public class EmployeeOverviewPanel extends javax.swing.JPanel {
     {
         
         ArrayList<Employee> list = new ArrayList<Employee>();
-        list = UIController.getInstance().UIemployeeRouter(new String("EMPLOYEE"), "VIEWALL");
+        list = UIController.getInstance().UIemployeeRouter(new String("FRANCHISOR"), "VIEWALL");
         
         //obtain list list lol
         

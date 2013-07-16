@@ -178,14 +178,14 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
     {
         //Gets a list of all the Employees (should display name)
         //list = LOLGETLIST();
-        list = UIController.getInstance().UIemployeeRouter(new String("EMPLOYEE"), "VIEWALL");
+        list = UIController.getInstance().UIemployeeRouter(new String("FRANCHISOR"), "VIEWALL");
         for(int i = 0; i < list.size(); i++)
         {
             String t = list.get(i).toString();
             listSelection.addItem(t);
         }
         
-        list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
+        list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISOR"), "VIEWALL");
         for(int i = 0; i < list2.size(); i++)
         {
             String t = list2.get(i).toString();
