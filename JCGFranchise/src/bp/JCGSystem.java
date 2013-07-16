@@ -47,7 +47,7 @@ public class JCGSystem {
                         sysCode = "OWNER"; //session name
                         return sysCode;               
            case "2":    lIO.seteT(dbCode);
-                        fmSession = new FranchiseManagerSession();
+                        fmSession = FranchiseManagerSession.getInstance();
                         sysCode = "MANAGER";      //session name
                         return sysCode;
            case "3":    lIO.seteT(dbCode);
