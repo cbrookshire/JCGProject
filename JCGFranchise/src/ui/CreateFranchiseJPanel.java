@@ -426,7 +426,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
             fr.setFranchiseID(list.get(listSelection.getSelectedIndex()).getFranchiseID());
             sc = UIController.getInstance().UIRouter(fr, "DELETE");
         }
-        
+        System.out.println("YOU DIRTY CHEATER!  I HOPE YOU " + sc);
             if(sc == "1")
             {
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 

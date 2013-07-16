@@ -4,6 +4,7 @@
  */
 package ui;
 
+import bp.*;
 import ui.*;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
@@ -282,11 +283,21 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-       BaseJFrame.getInstance().setContent(new OpeningJPanel(), "Main Page");
+       BaseJFrame.getInstance().setScreen("001");
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnReturn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturn1ActionPerformed
-        // TODO add your handling code here:
+        
+        String code = UIController.getInstance().UIRouter("dummydata", "LOGOUT");
+       System.out.println(code);
+       if(code == "1")
+       {
+           BaseJFrame.getInstance().setScreen("000");
+       }
+       else
+       {
+           BaseJFrame.getInstance().setScreen(code);
+       }
     }//GEN-LAST:event_btnReturn1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
