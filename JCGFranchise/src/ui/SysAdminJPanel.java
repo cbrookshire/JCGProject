@@ -135,7 +135,16 @@ public class SysAdminJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-       UIController.getInstance().UIRouter("dummydata", "LOGOUT");
+       String code = UIController.getInstance().UIRouter("dummydata", "LOGOUT");
+       System.out.println(code);
+       if(code == "1")
+       {
+           BaseJFrame.getInstance().setScreen("000");
+       }
+       else
+       {
+           BaseJFrame.getInstance().setScreen(code);
+       }
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
