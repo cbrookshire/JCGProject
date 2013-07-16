@@ -319,19 +319,23 @@ public class Queries extends JCGDatabase
         /* Variable Section Stop */
         
         /* Preparing Statment Section Start */
-        String MyQuery = "DELETE * FROM `franchise` WHERE 'FranchiseNumber' = ?";
+        String MyQuery = "DELETE FROM `franchise` WHERE 'FranchiseNumber' = ?";
         //String to get All EmpIDs
         
         
         
         /* Delete Employee Section Start */
         
+        System.out.println("Calling AllEmpIDInFranchise");
         EmployeeIDs = AllEmpIDInFranchise(ID);
         
+        System.out.println("Entering For Loop");
         for(int c = 0; c < EmployeeIDs.size(); c++)
         {
+            System.out.println("Running RemoveEmployee on " + c);
             RemoveEmployee(EmployeeIDs.get(c));
         }
+        System.out.println("Exited For Loop");
         
         /* Delete Employee Section Stop */
         
@@ -348,7 +352,9 @@ public class Queries extends JCGDatabase
             /* Preparing Statment Section Stop */
   
             /* Query Section Start */
+                System.out.println("Running Statement");
                 success = statement.executeUpdate();
+                System.out.println("Statement run " + success);
             /* Query Section Stop* /
 
             /* Return to Buisness Section Start */
@@ -370,6 +376,7 @@ public class Queries extends JCGDatabase
                 else if(sqlE.getErrorCode() == 1062)
                     throw(new DoubleEntryException("DoubleEntry"));
                 else 
+                    System.out.println(sqlE);
                     throw(new BadConnectionException("BadConnection"));
             }
             finally
