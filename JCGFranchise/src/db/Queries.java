@@ -172,7 +172,7 @@ public class Queries extends JCGDatabase
                     temp.setState(results.getString("State"));
                     temp.setZip(results.getInt("Zip"));
                     
-                    System.out.print(temp.toString());
+                    //System.out.print(temp.toString());
                     BPList.add(temp);
                 }
                 
@@ -1782,9 +1782,11 @@ public class Queries extends JCGDatabase
             
             try
             {
+                System.out.println("In Try Block");
             /* Preparing Statment Section Start */                
                 statment = con.prepareStatement(statString);
                 statment.setInt(1, FranID);
+                System.out.println("Executed Query");
             /* Preparing Statment Section Stop */
             /* Query Section Start */
                 results = statment.executeQuery();
@@ -1801,6 +1803,7 @@ public class Queries extends JCGDatabase
                 
                 while (results.next())
                 {
+                    System.out.println("In While Loop");
                     Employee temp = new Employee();
                     
                     //rs.getBigDecimal("AMOUNT")
@@ -1818,6 +1821,7 @@ public class Queries extends JCGDatabase
                     temp.setEmployeeID(results.getInt("EmployeeID"));
                     temp.setZip(results.getInt("Zip"));
                     
+                    System.out.print(temp.toString());
                     BPList.add(temp);
                 }
             /* List Prepare Section Stop */
@@ -1828,8 +1832,11 @@ public class Queries extends JCGDatabase
                     throw(new UnauthorizedUserException("AccessDenied"));
                 else if(sqlE.getErrorCode() == 1062)
                     throw(new DoubleEntryException("DoubleEntry"));
-                else 
+                else
+                {
+                    System.out.println(sqlE);
                     throw(new BadConnectionException("BadConnection"));
+                }
             }
             finally
             {
@@ -2235,9 +2242,9 @@ public class Queries extends JCGDatabase
                     /* Query Section Stop */
 
                     /* Metadata Section Start*/
-                        ResultSetMetaData metaData = results.getMetaData();
-                        int columns = metaData.getColumnCount();
-                        int rows = results.getRow(); 
+                       // ResultSetMetaData metaData = results.getMetaData();
+                       // int columns = metaData.getColumnCount();
+                       // int rows = results.getRow(); 
                     /* Metadata Section Start*/
 
                     /* ArrayList Prepare Section Start */
