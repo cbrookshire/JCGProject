@@ -123,10 +123,17 @@ public class DBController {
         ArrayList <Employee> temp;
          
          try{
-                if (sysObject instanceof String && "VIEWALL".equals(action)){   
+                if (sysObject instanceof String && "VIEWALL".equals(action) 
+                        && "FRANCHISOR".equals(sysObject)){   
                     temp = queryDB.AllEmployeesInFranchise(lIO.getfN());
                     return temp;
                 }
+                if (sysObject instanceof String && "VIEWALL".equals(action) 
+                        && "MANAGER".equals(sysObject)){   
+                    temp = queryDB.AllEmployeesInFranchise(lIO.getfN());
+                    return temp;
+                }  
+                
                 if (sysObject instanceof Employee && "VIEWITEM".equals(action)){    
                     temp = queryDB.SingleEmployeeData
                             (((Employee)sysObject).getEmployeeID());
