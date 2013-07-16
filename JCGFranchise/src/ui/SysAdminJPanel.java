@@ -7,6 +7,7 @@ package ui;
 import bp.UIController;
 import ui.*;
 import java.awt.FlowLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -29,6 +30,10 @@ public class SysAdminJPanel extends javax.swing.JPanel {
     public void resetDB()
     {
     String code = uic.UIRouter("dummydata", "RESET");    
+    if(code == "1")
+    {
+        JOptionPane.showMessageDialog(BaseJFrame.getInstance(), "Data successfully reset!", "Sucess!", JOptionPane.INFORMATION_MESSAGE);
+    }
     BaseJFrame.getInstance().setScreen(code);
     }
     
@@ -130,7 +135,7 @@ public class SysAdminJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-       BaseJFrame.getInstance().setContent(new OpeningJPanel(), "Main Page");
+       UIController.getInstance().UIRouter("dummydata", "LOGOUT");
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
