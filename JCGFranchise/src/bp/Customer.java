@@ -163,6 +163,9 @@ public class Customer {
        this.memberID = memberID;
     }
    
+    public void setMemberID (int memberID){     
+       this.memberID = String.valueOf(memberID);
+    }
     public String getMemberID (){
        return memberID;
     } 

@@ -124,20 +124,18 @@ public class DBController {
          
          try{
                 if (sysObject instanceof String && "VIEWALL".equals(action) 
-                        && "FRANCHISOR".equals(sysObject)){   
+                        && "FRANCHISOR".equals(sysObject)){                     
                     temp = queryDB.AllEmployeesInFranchise(lIO.getfN());
-                    return temp;
-                }
+                    return temp;}
                 if (sysObject instanceof String && "VIEWALL".equals(action) 
                         && "MANAGER".equals(sysObject)){   
-                    temp = queryDB.AllEmployeesInFranchise(lIO.getfN());
+                    temp = queryDB.AllEmployeesInFranchise(lIO.getfN());                    
                     return temp;
                 }  
-                
                 if (sysObject instanceof Employee && "VIEWITEM".equals(action)){    
                     temp = queryDB.SingleEmployeeData
                             (((Employee)sysObject).getEmployeeID());
-                    return temp;
+                    return temp;             
             }               
         }
         catch(UnauthorizedUserException e){
@@ -174,7 +172,7 @@ public class DBController {
          
         try{
             if (sysObject instanceof String && "VIEWALL".equals(action)){   
-                temp = queryDB.SingleCustomerData(lIO.getfN());
+                temp = queryDB.AllCustomersInFranchise(lIO.getfN());
                 return temp;
             }
             if (sysObject instanceof Customer && "VIEWITEM".equals(action)){    
