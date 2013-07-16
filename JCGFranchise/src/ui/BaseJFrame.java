@@ -78,7 +78,10 @@ public class BaseJFrame extends JFrame {
                 //Change Password
                 setContent(new PasswordChangeJPanel(), "Change Password");
                 break;
-            
+            case "005":  //First time login, change password
+                //Change Password
+                setContent(new SysAdminJPanel(), "System Admin");
+                break;
             
             //Franchisor
             case "100":  //Franchisor main page
