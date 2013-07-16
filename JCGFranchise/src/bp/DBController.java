@@ -313,7 +313,9 @@ public class DBController {
         
         case "LOGOUT":  
             
-            queryDB.logOff();                                
+            dbReturnCode = queryDB.logOff();
+            String convert = Integer.toString(dbReturnCode);
+            return convert;
                 
             
         case "ADD": 
@@ -382,7 +384,7 @@ public class DBController {
                     else
                         return "0";
                 }
-                /*if (sysObject instanceof Reservation){
+                if (sysObject instanceof Reservation){
                     milesReturnCode = 
                     queryDB.RemoveReservation(((Reservation)sysObject).getReservationNumber());
                     if (milesReturnCode == true) 
@@ -397,7 +399,7 @@ public class DBController {
                         return "1";                             
                     else
                         return "0";
-                }*/                               
+                }                              
             }
             catch(UnauthorizedUserException e){
                 return e.getMessage();
@@ -427,7 +429,7 @@ public class DBController {
                     return String.valueOf(dbReturnCode);
                 }
                 /*if (sysObject instanceof Reservation) {
-                    dbReturnCode = queryDB.updateReservation((Reservation)sysObject);
+                    dbReturnCode = queryDB.manUpdateReservation((Reservation)sysObject);
                     return String.valueOf(dbReturnCode);
                 }*/
                 if (sysObject instanceof Customer) {

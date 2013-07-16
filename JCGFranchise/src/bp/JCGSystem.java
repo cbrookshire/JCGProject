@@ -81,9 +81,11 @@ public class JCGSystem {
         return dbCode;          
     }
     
-    public void Logout (Object sysObject, String action){    
+    public String Logout (Object sysObject, String action){    
         
-        dControl.dbSystemRouter(sysObject, action);             
+        String dbCode;
+        dbCode = dControl.dbSystemRouter(sysObject, action); 
+        return dbCode;
     }
     
              

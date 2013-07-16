@@ -179,14 +179,13 @@ public class Employee {
     @Override
     public String toString(){
     
-        return String.format("%s%s  %s%s\n%s%s %s, %s %s\n%s%s\n%s%s\n",
-        "First Name: ", getFirstName(),
-	"Last Name: ", getLastName(),
-        "Address: ", getAddress(), getCity(), 
-        "         ", getState(), getZip(),
-        "Phone: ", getPhone(), 
-        "Email: ", getEmail(),
-	"Emp Type: ", getEmpType(),
-	"Franchise Number: ", getFranchiseNumber());	
+        return String.format("%s%s\n%s%s\n%s %s\n%s\n%s, %s %s\n%s\n%s\n\n",
+        "Employee Type: ", getEmpType(),
+	"Franchise Number: ", getFranchiseNumber(),
+        getFirstName(), getLastName(),
+        getAddress(), 
+        getCity(), getState(), getZip(),
+        getPhone(), 
+        getEmail());	
     }//end UTILS    
 } // end class Employee

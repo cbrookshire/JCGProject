@@ -201,13 +201,16 @@ public class UIController {
                     return "902";                                   }
                 if ("FileNotFoundException".equals(returnCode)){
                     return "902";                                   } 
+                if ("98".equals(returnCode)){
+                    return "005";                                   }
                 if ("1".equals(returnCode)) {
                     return "001";   /*LogInScreen*/                 }
                                      
         case "LOGOUT":
             
                 jcgSys.Logout(UIObject, action);
-                        
+                if ("1".equals(returnCode)) {
+                    return "001";   /*LogInScreen*/                 }        
         
         case "ADD":     
                 
