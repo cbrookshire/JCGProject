@@ -23,7 +23,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
     
     public FranchiseeJPanel() {
         initComponents();
-        jComboBox1.setSelectedIndex(1);
+        jComboBox1.setSelectedIndex(2);
         changeContent();
     }
     
@@ -167,7 +167,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        btnReturn.setBackground(new java.awt.Color(102, 102, 102));
+        btnReturn.setBackground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("Return");
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +179,7 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("JCG Franchise Management System");
 
-        btnReturn1.setBackground(new java.awt.Color(102, 102, 102));
+        btnReturn1.setBackground(new java.awt.Color(255, 255, 255));
         btnReturn1.setText("Logout");
         btnReturn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -19,6 +19,7 @@ public class CustomersOverviewPanel extends javax.swing.JPanel  {
      */
     public CustomersOverviewPanel() {
         initComponents();
+        setList();
     }
     
     public void setList()

@@ -19,6 +19,7 @@ public class DriversOverviewPanel extends javax.swing.JPanel  {
      */
     public DriversOverviewPanel() {
         initComponents();
+        setList();
     }
 
     public void setList()
@@ -39,9 +40,13 @@ public class DriversOverviewPanel extends javax.swing.JPanel  {
             }
             jList1.setListData(data);
             */
-            
+            //System.out.println("List is supposedly populated");
             for(int i = 0; i < list.size(); i++)
                 jTextArea1.append(list.get(i).toString() + "\n");
+        }
+        else
+        {
+            System.out.println("List is empty");
         }
     }
     /**

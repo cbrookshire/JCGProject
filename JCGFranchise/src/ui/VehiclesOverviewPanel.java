@@ -18,6 +18,7 @@ public class VehiclesOverviewPanel extends javax.swing.JPanel  {
      */
     public VehiclesOverviewPanel() {
         initComponents();
+        setList();
     }
     
     public void setList()
