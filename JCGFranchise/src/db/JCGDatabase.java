@@ -267,10 +267,11 @@ public class JCGDatabase {
 /******************************************************************************
  * Closes the connection to the database for current user.
  ******************************************************************************/
-    public void logOff() {
+    public int logOff() {
         try {
                 connection.close();
             }catch(Exception exception) {
             }
+        return 1;
     }    
 }//end JCGDatabase
