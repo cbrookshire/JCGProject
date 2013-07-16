@@ -356,7 +356,7 @@ insert into Employee (Fname, Surname, Address, City, State, Zip, Phone, Email, E
 CREATE USER 'NL5396'@'localhost' IDENTIFIED BY 'NL5396';
 GRANT SELECT, UPDATE ON JCGroup.Customer to 'NL5396'@'localhost';
 GRANT SELECT, UPDATE ON JCGroup.Employee to 'NL5396'@'localhost';
-GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'ENL5396'@'localhost';
+GRANT SELECT, UPDATE ON JCGroup.Reservation TO 'NL5396'@'localhost';
 GRANT SELECT ON JCGroup.Membership TO 'NL5396'@'localhost';
 FLUSH PRIVILEGES;
 
