@@ -20,14 +20,15 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
     private int mode;
     private boolean isDriver;
     private ArrayList<Employee> list;
-    
+    private ArrayList<Franchise> list2;
     
     public CreateEmployeeJPanel(int m, boolean isDriver) {
         list = new ArrayList<Employee>();
+        list2 = new ArrayList<Franchise>();
         mode = m;
         this.isDriver = isDriver;
         initComponents();
-        
+        getListSelection();
         if (mode ==0) //Add mode
         {   
             listSelection.setEnabled(false);
@@ -184,7 +185,6 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             listSelection.addItem(t);
         }
         
-        ArrayList<Franchise> list2 = new ArrayList<Franchise>();
         list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
         for(int i = 0; i < list2.size(); i++)
         {
@@ -209,7 +209,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         newEmployeePhone.setText(e.getPhone());
         newEmployeeEmail.setText(e.getEmail());
         newEmployeeType.setSelectedIndex(e.getEmpType());
-        newEmployeeNum.setSelectedIndex(e.getEmployeeID());
+        newEmployeeNum.setSelectedIndex(list2.get(newEmployeeNum.getSelectedIndex()).getFranchiseID());
     }
 
     /**

@@ -41,7 +41,7 @@ public class DriversOverviewPanel extends javax.swing.JPanel  {
             */
             
             for(int i = 0; i < list.size(); i++)
-                jTextArea1.append(list.get(i).toString());
+                jTextArea1.append(list.get(i).toString() + "\n");
         }
     }
     /**
