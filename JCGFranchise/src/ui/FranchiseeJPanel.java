@@ -73,13 +73,13 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new DriversOverviewPanel());
                 }
                 if (list.getSelectedIndex() == 0){
-                    //setContent(new CreateDriverJPanel(0));
+                    setContent(new CreateEmployeeJPanel(0, true));
                 }
                 if (list.getSelectedIndex() == 1){
-                    //setContent(new CreateDriverJPanel(1));
+                    setContent(new CreateEmployeeJPanel(1, true));
                 }
                 if (list.getSelectedIndex() == 2){
-                    //setContent(new CreateDriverJPanel(2));
+                    setContent(new CreateEmployeeJPanel(2, true));
                 }
                 if (list.getSelectedIndex() == 3){
                     setContent(new DriversOverviewPanel());
