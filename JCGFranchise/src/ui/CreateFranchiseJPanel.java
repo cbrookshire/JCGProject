@@ -168,7 +168,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
     {
         //Gets a list of all the Employees (should display name)
         //list = LOLGETLIST();
-        list = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
+        list = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISOR"), "VIEWALL");
         for(int i = 0; i < list.size(); i++)
         {
             String t = list.get(i).getFranchiseID() + ":" + list.get(i).getAddress() + ";" + list.get(i).getCity() + "," + list.get(i).getState();

@@ -209,7 +209,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         newEmployeePhone.setText(e.getPhone());
         newEmployeeEmail.setText(e.getEmail());
         newEmployeeType.setSelectedIndex(e.getEmpType());
-        newEmployeeNum.setSelectedIndex(list2.get(newEmployeeNum.getSelectedIndex()).getFranchiseID());
+        //newEmployeeNum.setSelectedIndex(list2.get(newEmployeeNum.getSelectedIndex()).getFranchiseID());
     }
 
     /**
