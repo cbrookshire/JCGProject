@@ -208,7 +208,7 @@ public class UIController {
                                      
         case "LOGOUT":
             
-                jcgSys.Logout(UIObject, action);
+                returnCode = jcgSys.Logout(UIObject, action);
                 if ("1".equals(returnCode)) {
                     return "001";   /*LogInScreen*/                 }        
         
