@@ -1064,9 +1064,9 @@ public class Queries extends JCGDatabase
                 
                 
                  /* Metadata Section Start*/
-                metaData = results.getMetaData();
-                columns = metaData.getColumnCount();
-                rows = results.getRow(); 
+                //metaData = results.getMetaData();
+                //columns = metaData.getColumnCount();
+                //rows = results.getRow(); 
             /* Metadata Section Start*/
                 
             /* ArrayList Prepare Section Start */
@@ -1858,6 +1858,8 @@ public class Queries extends JCGDatabase
         /* Variable Section Start */
         Statement query = null;
         PreparedStatement statement = null;
+        PreparedStatement statement2 = null;
+        PreparedStatement statement3 = null;
         ResultSet results = null;
         int success = -1;
         String Username = null;
@@ -1892,8 +1894,8 @@ public class Queries extends JCGDatabase
             /* Drop Use Preperation Section Start*/
                 Username = results.getString("Username");
                 
-                statement = con.prepareStatement(DropUser);
-                statement.setString(1, Username);
+                statement2 = con.prepareStatement(DropUser);
+                statement2.setString(1, Username);
             /* Drop Use Preperation Section Start*/
                 
         
@@ -1904,13 +1906,13 @@ public class Queries extends JCGDatabase
                 {
                     /* Delete Employee Preperation Section Start*/
                     
-                    statement = con.prepareStatement(MyQuery);
+                    statement3 = con.prepareStatement(MyQuery);
                     
-                    statement.setInt(1, ID);
+                    statement3.setInt(1, ID);
                     
                     
                     /* Query Section Start */
-                    success = statement.executeUpdate();
+                    success = statement3.executeUpdate();
                     /* Query Section Stop* /
 
                     
