@@ -32,6 +32,7 @@ public class UIController {
         jcgSys = JCGSystem.getInstance();
         role = JCGlIO.getInstance();
         foSession = FranchisorOwnerSession.getInstance();
+        fmSession = FranchiseManagerSession.getInstance();
     }
     
     //UTILITIES

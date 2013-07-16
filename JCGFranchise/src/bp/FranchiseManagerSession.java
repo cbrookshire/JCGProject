@@ -12,6 +12,7 @@ public class FranchiseManagerSession {
     
     //class attributes
     private DBController dControl;
+    private static FranchiseManagerSession fMS;
     
     
     //CONSTRUCTOR
@@ -96,4 +97,21 @@ public class FranchiseManagerSession {
         dbCode = dControl.dbSystemRouter(uiObject, action);
         return dbCode;
     }//end EditItem method
+    
+ /******************************************************
+ * Singleton method for UIController class + Object 
+ * clone override 
+ ******************************************************/
+    public static synchronized FranchiseManagerSession getInstance(){            
+        if(fMS == null) {
+            fMS = new FranchiseManagerSession();
+        }
+        return fMS;
+    }
+    
+    @Override
+    public Object clone() throws CloneNotSupportedException{    
+        throw new CloneNotSupportedException();    
+    }//end class UIController  
+    
 }//end FranchiseManagerSession class
