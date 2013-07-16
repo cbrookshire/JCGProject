@@ -28,7 +28,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         mode = m;
         this.isDriver = isDriver;
         initComponents();
-        getListSelection();
+        
+        
         if (mode ==0) //Add mode
         {   
             listSelection.setEnabled(false);
@@ -81,6 +82,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             newEmployeeType.setSelectedIndex(2);
             newEmployeeType.setEnabled(false);
         }
+        
+        listSelection.setSize(28, 20);  //Make sure it doesn't get too fat
     }
     
     private boolean checkFields()
@@ -343,9 +346,9 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                                             .addComponent(newEmployeePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(newEmployeeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(listSelection, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(newEmployeeFirstName, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(newEmployeeLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))))
+                                                .addComponent(newEmployeeLastName, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(listSelection, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(newEmployeeType, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)

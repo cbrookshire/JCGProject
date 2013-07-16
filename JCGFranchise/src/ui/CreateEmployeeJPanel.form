@@ -63,9 +63,9 @@
                                           <Component id="newEmployeePhone" alignment="0" min="-2" pref="278" max="-2" attributes="0"/>
                                           <Component id="newEmployeeEmail" alignment="0" min="-2" pref="278" max="-2" attributes="0"/>
                                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="listSelection" alignment="0" max="32767" attributes="0"/>
                                               <Component id="newEmployeeFirstName" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="newEmployeeLastName" alignment="0" pref="124" max="32767" attributes="0"/>
+                                              <Component id="newEmployeeLastName" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="listSelection" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
