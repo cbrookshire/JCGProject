@@ -171,7 +171,8 @@ public class DBController {
         ArrayList <Customer> temp;
          
         try{
-            if (sysObject instanceof String && "VIEWALL".equals(action)){   
+            if (sysObject instanceof String && "VIEWALL".equals(action) 
+                    && "MANAGER".equals(sysObject)){   
                 temp = queryDB.AllCustomersInFranchise(lIO.getfN());
                 return temp;
             }
