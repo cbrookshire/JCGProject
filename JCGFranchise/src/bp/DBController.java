@@ -81,7 +81,8 @@ public class DBController {
         ArrayList <Vehicle> temp;
          
         try{
-            if (sysObject instanceof String && "VIEWALL".equals(action)){   
+            if (sysObject instanceof String && "VIEWALL".equals(action)
+                    && "MANAGER".equals(sysObject)){   
                 temp = queryDB.VehiclesForFranchise(lIO.getfN());
                 return temp;
             }

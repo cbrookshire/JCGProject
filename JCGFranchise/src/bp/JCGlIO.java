@@ -60,10 +60,12 @@ public class JCGlIO {
 
     public void setfN(String fN) {
         this.fN = fN;
+        System.out.println(fN);
     }
     
     public void setfN(int fN) {
         this.fN = String.valueOf(fN);
+        System.out.println(fN);
     }
     //attrib 4
     public String geteT() {
