@@ -268,6 +268,12 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Selection:");
 
+        listSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSelectionActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("VIN Number");
 
         jLabel4.setText("Make:");
@@ -461,6 +467,11 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
             UIController.getInstance().UIRouter(v, "DELETE");
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
+        // Change edit
+        loadInfoFromList();
+    }//GEN-LAST:event_listSelectionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;

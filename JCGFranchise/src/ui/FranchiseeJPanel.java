@@ -24,6 +24,8 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
     public FranchiseeJPanel() {
         initComponents();
         jComboBox1.setSelectedIndex(0);
+        list.setSelectedIndex(0);
+        
         changeContent();
     }
     
