@@ -2207,6 +2207,7 @@ public class Queries extends JCGDatabase
             String statString = "SELECT * FROM `customer` WHERE 'CustomerID' = ?";
             //Set<Integer> CustomerIDHolder;
             ArrayList<Integer> CustomerIDs = new ArrayList<Integer>();
+            boolean holder;
             
 
             /* Return Parameter */
@@ -2224,12 +2225,12 @@ public class Queries extends JCGDatabase
             
             /* Customer IDs Acquisition Start */
             System.out.println("Calling CustomerIDsFromReservationsForFranchise");
-                CustomerIDs = CustomerIDsFromReservationsForFranchise(FranID);
+                holder = CustomerIDs.addAll(CustomerIDsFromReservationsForFranchise(FranID));
             /* Customer IDs Acquisition Start */
             
             try
             {
-                if(!results.next())
+                if(CustomerIDs.size() < 1)
                 {
                     System.out.println("Start of loop");
                     
@@ -2253,7 +2254,7 @@ public class Queries extends JCGDatabase
 
                                 BPArrayList.add(temp);
                 }
-                else if(CustomerIDs.size() > 0 && CustomerIDs.get(0) > 0 && results.next())
+                else if(CustomerIDs.size() > 0 && CustomerIDs.get(0) > 0)
                 {
                     for(int c = 0; c < CustomerIDs.size(); c++)
                     {
@@ -2375,7 +2376,7 @@ public class Queries extends JCGDatabase
             ResultSet results = null;
             String statString = "SELECT * FROM `reservation` WHERE 'FranchiseNumber' = ?";
             Set<Integer> CustomerIDHolder = null;
-            ArrayList<Integer> list = new ArrayList<Integer>();
+            
             boolean holder;
             
             System.out.println("Made Variables.");
@@ -2440,7 +2441,7 @@ public class Queries extends JCGDatabase
                             CustIDs[index++] = a;
                         }
 
-
+                        ArrayList<Integer> list = new ArrayList<Integer>();
                         
                         for (int s : CustIDs)
                         {
@@ -2453,22 +2454,22 @@ public class Queries extends JCGDatabase
                     if(!CustomerIDHolder.isEmpty() || !results.next() || results == null)
                     {
                          System.out.println("If it is Null");
-                            //ArrayList<Integer> list = new ArrayList<Integer>();
-                            list.add(-1);
+                            ArrayList<Integer> list = new ArrayList<Integer>(1);
+                            list.add(0, -1);
                             return list;
                     }
                 }
                 else 
                 {
                     System.out.println("If it is Null");
-                    //ArrayList<Integer> list = new ArrayList<Integer>();
-                    list.add(-1);
-                    return list;
+                    ArrayList<Integer> list2 = new ArrayList<Integer>(1);
+                    list2.add(-1);
+                    return list2;
                 }
                 
             /* ArrayList Prepare Section Stop */
                 
-                return list;
+                //return list;
             }
             catch(SQLException sqlE)
             {
@@ -2479,7 +2480,7 @@ public class Queries extends JCGDatabase
                     throw(new DoubleEntryException("DoubleEntry"));
                 else if(sqlE.getErrorCode() == 0)
                 {
-                    //ArrayList<Integer> list = new ArrayList<Integer>();
+                    ArrayList<Integer> list = new ArrayList<Integer>();
                     list.add(-1);
                     return list;
                 }
@@ -2505,6 +2506,7 @@ public class Queries extends JCGDatabase
         /* Return to Buisness Section Start */ 
 //            return list;
         /* Return to Buisness Section Start */
+        return null;
     }
     
      //DELETE: Customer
