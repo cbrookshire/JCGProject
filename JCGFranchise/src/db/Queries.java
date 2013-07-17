@@ -2229,7 +2229,7 @@ public class Queries extends JCGDatabase
             try
             {
                 
-                if(CustomerIDs.size() > 0)
+                if(CustomerIDs.size() > 0 && CustomerIDs.get(0) > 0)
                 {
                     for(int c = 0; c < CustomerIDs.size(); c++)
                     {
@@ -2412,6 +2412,7 @@ public class Queries extends JCGDatabase
                 else
                 {
                     ArrayList<Integer> list = new ArrayList<Integer>();
+                    list.add(-1);
                     return list;
                 }
                 
