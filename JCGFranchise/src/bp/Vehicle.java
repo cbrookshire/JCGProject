@@ -211,7 +211,7 @@ public class Vehicle {
     public String toString(){
     
         return String.format
-        ("%s%s\n%s%s  %s%s  %s%s/n%s%s  %s%s,  %s%s\n%s%s %s%s %s%s\n",
+        ("%s%s\n%s%s  %s%s  %s%s\n%s%s  %s%s,  %s%s\n%s%s %s%s %s%s\n",
         "VIN Number: ", getVin(), 
         "Make: ", getMake(), "Model: ", getModel(), "Year: ", getYear(),
         "Mileage: ", getMileage(), "Capacity: ", getCapacity(), 
