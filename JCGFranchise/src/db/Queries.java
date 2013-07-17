@@ -2378,35 +2378,42 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                
-                while (results.next())
+                if(results != null)
                 {
-                    int temp;
-                    
-                    //results.getBigDecimal("AMOUNT")
+                    while (results.next())
+                    {
+                        int temp;
 
-                    holder = CustomerIDHolder.add(results.getInt("CustomerID"));
+                        //results.getBigDecimal("AMOUNT")
 
-                    //BPArrayList.add(temp);
+                        holder = CustomerIDHolder.add(results.getInt("CustomerID"));
+
+                        //BPArrayList.add(temp);
+                    }
+
+                    int[] CustIDs = new int[CustomerIDHolder.size()];
+
+                    int index = 0;
+
+                    for( Integer a : CustomerIDHolder )
+                    {
+                        CustIDs[index++] = a;
+                    }
+
+
+                    ArrayList<Integer> list = new ArrayList<Integer>(CustIDs.length);
+                    for (int s : CustIDs)
+                    {
+                        list.add(s);
+                    } 
+
+                    return list;
                 }
-                
-                int[] CustIDs = new int[CustomerIDHolder.size()];
-
-                int index = 0;
-
-                for( Integer a : CustomerIDHolder )
+                else
                 {
-                    CustIDs[index++] = a;
+                    ArrayList<Integer> list = new ArrayList<Integer>();
+                    return list;
                 }
-                
-                
-                ArrayList<Integer> list = new ArrayList<Integer>(CustIDs.length);
-                for (int s : CustIDs)
-                {
-                    list.add(s);
-                } 
-                
-                return list;
                 
             /* ArrayList Prepare Section Stop */
             }
