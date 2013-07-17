@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS Reservation
   CustomerID int,
   Price double(4, 2),
   Statuse ENUM('Open', 'Closed') DEFAULT 'Open',
+  drop_pick ENUM('Drop', 'Pickup'),
   Comment varchar(300),
   FlightNumber int NOT NULL,
   Airline varchar(20),
