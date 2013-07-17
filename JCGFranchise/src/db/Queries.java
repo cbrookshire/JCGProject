@@ -696,7 +696,7 @@ public class Queries extends JCGDatabase
                     temp.setTablet(results.getString("Tablet"));
                     temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setVin(results.getString("VIN"));
-                    temp.setYear(results.getInt("MakeYear"));
+                    temp.setYear(results.getInt("Year"));
                     
                     BPList.add(temp);
                 }
@@ -857,7 +857,7 @@ public class Queries extends JCGDatabase
                     temp.setTablet(results.getString("Tablet"));
                     temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setVin(results.getString("VIN"));
-                    temp.setYear(results.getInt("MakeYear"));
+                    temp.setYear(results.getInt("Year"));
                     temp.setvIndex(results.getString("VIndex"));
                     
                     BPList.add(temp);
@@ -1096,7 +1096,7 @@ public class Queries extends JCGDatabase
                     temp.setTablet(results.getString("Tablet"));
                     temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setVin(results.getString("VIN"));
-                    temp.setYear(results.getInt("MakeYear"));
+                    temp.setYear(results.getInt("Year"));
                     
                     BPArrayList.add(temp);
                 }
@@ -2408,7 +2408,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 System.out.println("Checking for Null.");
-                if(results != null && !results.next())
+                if(results != null && !results.next() && results.getRow() > 0)
                 {
                     System.out.println("If it's not Null...");
                     while (results != null && results.next())
@@ -2427,7 +2427,7 @@ public class Queries extends JCGDatabase
                         //BPArrayList.add(temp);
                     }
                     
-                    if(!CustomerIDHolder.isEmpty() && results != null)
+                    if(!CustomerIDHolder.isEmpty() && !CustomerIDHolder.contains(0) && !CustomerIDHolder.contains(null))
                     {
                         System.out.println("Got into CustomerIDHolder.size() != 0");
                         int[] CustIDs = new int[CustomerIDHolder.size()];
@@ -2477,6 +2477,12 @@ public class Queries extends JCGDatabase
                     throw(new UnauthorizedUserException("AccessDenied"));
                 else if(sqlE.getErrorCode() == 1062)
                     throw(new DoubleEntryException("DoubleEntry"));
+                else if(sqlE.getErrorCode() == 0)
+                {
+                    //ArrayList<Integer> list = new ArrayList<Integer>();
+                    list.add(-1);
+                    return list;
+                }
                 else 
                     throw(new BadConnectionException("BadConnection"));
             }

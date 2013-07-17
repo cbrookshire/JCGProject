@@ -93,13 +93,13 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new VehiclesOverviewPanel());
                 }
                 if (list.getSelectedIndex() == 0){
-                    //setContent(new CreateVehicleJPanel(0));
+                    setContent(new CreateVehicleJPanel(0));
                 }
                 if (list.getSelectedIndex() == 1){
-                    //setContent(new CreateVehicleJPanel(1));
+                    setContent(new CreateVehicleJPanel(1));
                 }
                 if (list.getSelectedIndex() == 2){
-                    //setContent(new CreateVehicleJPanel(2));
+                    setContent(new CreateVehicleJPanel(2));
                 }
                 if (list.getSelectedIndex() == 3){
                     setContent(new VehiclesOverviewPanel());
