@@ -2223,13 +2223,37 @@ public class Queries extends JCGDatabase
             //Get all Customers for those IDs.
             
             /* Customer IDs Acquisition Start */
+            System.out.println("Calling CustomerIDsFromReservationsForFranchise");
                 CustomerIDs = CustomerIDsFromReservationsForFranchise(FranID);
             /* Customer IDs Acquisition Start */
             
             try
             {
-                
-                if(CustomerIDs.size() > 0 && CustomerIDs.get(0) > 0)
+                if(!results.next())
+                {
+                    System.out.println("Start of loop");
+                    
+                    Customer temp = new Customer();
+
+                                //rs.getBigDecimal("AMOUNT")
+
+                                temp.setAddress(null);
+                                temp.setCity(null);
+                                temp.setCustomerID(null);
+                                temp.setEmail(null);
+                                temp.setFirstName("No Customers ");
+                                temp.setLastName("Booked at Your Franchise.");
+                                temp.setMemberID(null);
+                                //temp.setPassword(statString);
+                                temp.setPhone(null);
+                                temp.setReservationCount(null);
+                                temp.setState(null);
+                                //temp.setUserID(results.getString("Address"));
+                                temp.setZip(null);
+
+                                BPArrayList.add(temp);
+                }
+                else if(CustomerIDs.size() > 0 && CustomerIDs.get(0) > 0 && results.next())
                 {
                     for(int c = 0; c < CustomerIDs.size(); c++)
                     {
@@ -2344,6 +2368,7 @@ public class Queries extends JCGDatabase
     public  ArrayList<Integer> CustomerIDsFromReservationsForFranchise(int FranID)
              throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
+        System.out.println("Start of Method.");
         /* Variable Section Start */
             /* Database and Query Preperation */
             PreparedStatement statment = null;
@@ -2351,6 +2376,8 @@ public class Queries extends JCGDatabase
             String statString = "SELECT * FROM `reservations` WHERE 'FranchiseNumber' = ?";
             Set<Integer> CustomerIDHolder = null;
             boolean holder;
+            
+            System.out.println("Made Variables.");
 
             /* Return Parameter */
             //ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
@@ -2367,7 +2394,9 @@ public class Queries extends JCGDatabase
                 //statment.setInt(2, CustID);
             /* Preparing Statment Section Stop */
             /* Query Section Start */
+                System.out.println("Getting Results");
                 results = statment.executeQuery();
+                System.out.println("Got Results.");
                 
             /* Query Section Stop */
             
@@ -2377,11 +2406,13 @@ public class Queries extends JCGDatabase
                 
             /* ArrayList Prepare Section Start */
                 
-                
+                System.out.println("Checking for Null.");
                 if(results != null)
                 {
+                    System.out.println("If it's not Null...");
                     while (results.next())
                     {
+                        System.out.println("Results not Null...");
                         int temp;
 
                         //results.getBigDecimal("AMOUNT")
@@ -2397,6 +2428,7 @@ public class Queries extends JCGDatabase
 
                     for( Integer a : CustomerIDHolder )
                     {
+                        System.out.println("Adding Customer IDs");
                         CustIDs[index++] = a;
                     }
 
@@ -2409,8 +2441,9 @@ public class Queries extends JCGDatabase
 
                     return list;
                 }
-                else
+                else 
                 {
+                    System.out.println("If it is Null");
                     ArrayList<Integer> list = new ArrayList<Integer>();
                     list.add(-1);
                     return list;
