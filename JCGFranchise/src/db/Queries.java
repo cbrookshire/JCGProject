@@ -2453,6 +2453,7 @@ public class Queries extends JCGDatabase
             }
             catch(SQLException sqlE)
             {
+                System.out.println(sqlE.getErrorCode() + "\n" + sqlE.getMessage());
                 if(sqlE.getErrorCode() == 1142)
                     throw(new UnauthorizedUserException("AccessDenied"));
                 else if(sqlE.getErrorCode() == 1062)
