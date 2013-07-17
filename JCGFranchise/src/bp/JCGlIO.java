@@ -13,7 +13,7 @@ public class JCGlIO {
     private String p;
     private String fN;
     private String eT;
-    private final String thisFranchise = "2";
+    //private final String thisFranchise = "2";
     
     private static JCGlIO lIO;
 
@@ -21,16 +21,16 @@ public class JCGlIO {
     
         u = "";
         p = "";
-        fN = thisFranchise;
+        fN = "";
         eT = "";
     }
         
     //CONSTRUCTOR
     //4 arg
-    public JCGlIO(String u, String p, String eT) {
+    public JCGlIO(String u, String p, String eT, String fN) {
         this.u = u;
         this.p = p;
-        this.fN = thisFranchise;
+        this.fN = fN;
         this.eT = eT;
     }
     
