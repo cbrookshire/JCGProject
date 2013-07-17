@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS Reservation
   VehicleID int,
   CustomerID int,
   Price double(4, 2),
-  Statuse ENUM('Open', 'Closed') DEFAULT 'Open',
+  Status ENUM('Open', 'Closed') DEFAULT 'Open',
   drop_pick ENUM('Drop', 'Pickup'),
   Comment varchar(300),
   FlightNumber int NOT NULL,
@@ -577,3 +577,27 @@ INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCond
         (1306, '1COAC12F3B5121306', 'Cadillac', 'Escalade ESV', 2011, 45023, 6, 'Exellent', 'NNSW23SWQAIOP', 85.00, 6),
         (3412, '1GNGT34E4A0013412', 'Lincoln', 'Stretch Limousine', 2010, 53002, 10, 'Great', 'SSUIOWPQ09OSJ', 115.00, 6),
         (5001, '1MWAW58S6C0005001', 'Mercedes', 'Sprinter Executive Van', 2012, 8302, 13, 'Exellent', 'LSUIW92SIWMWI', 130.00, 6);
+
+INSERT INTO Reservation (FranchiseNumber, VehicleID, CustomerID, Price, drop_pick, Status, Comment, FlightNumber, Airline, FlightTime, PickupTime, DropOffTime, Date)
+ VALUES (4, 2734, 1001, 40.00, 'Drop', 'Closed', 'Drop went well', 1143, 'Delta', 11.30, 10.30, 12.30, '6/7/13'),
+        (4, 7596, 1001, 55.00, 'Pickup', 'Closed', 'oil light on', 1204, 'Delta', 9.30, 8.30, 10.30, '6/9/13'),
+        (4, 2734, 1001, 40.00, 'Drop', 'Closed', 'no problems', 2309, 'Delta', 1.30, 12.30, 2.30, '7/2/13'),
+        (4, 7596, 1001, 40.00, 'Pickup', 'Open', '*', 4504, 'Delta', 14.30, 13.30, 15.30, '7/5/13');
+
+INSERT INTO reservation (FranchiseNumber, VehicleID, CustomerID, Price, drop_pick, Status, Comment, FlightNumber, Airline, FlightTime, PickupTime, DropOffTime, Date)
+ VALUES (5, 2734, 1000, 40.00, 'Drop', 'Closed', 'no problems', 1203, 'Delta', 9.00, 10.00, 11.00, '2/7/13'),
+        (5, 2734, 1000, 40.00, 'Pickup', 'Closed', 'no problems', 1403, 'Delta', 2.00, 1.00, 3.00, '2/10/13'),
+        (5, 2734, 1000, 40.00, 'Drop', 'Closed', 'no problems', 3400, 'Delta', 14.00, 13.00, 15.00, '2/20/13'),
+        (5, 2734, 1000, 40.00, 'Pickup', 'Closed', 'no problems', 1456, 'Delta', 11.00, 10.00, 12.00, '2/23/13');
+
+INSERT INTO reservation (FranchiseNumber, VehicleID, CustomerID, Price, drop_pick, Status, Comment, FlightNumber, Airline, FlightTime, PickupTime, DropOffTime, Date, AltAddress, AltCity, AltState, AltZip)
+ Values (3, 7596, 1000, 55.00, 'Pickup', 'Closed', 'no problems', 1203, 'Delta', 11.00, 10.00, 12.00, '2/7/13', '569 Asbury Cir', 'Atlanta', 'Georgia', 30322),
+        (3, 7596, 1000, 55.00, 'Drop', 'Closed', 'no problems', 1403, 'Delta', 12.00, 11.00, 1.00, '2/10/13', '569 Asbury Cir', 'Atlanta', 'Georgia', 30322),
+        (6, 2734, 1000, 40.00, 'Pickup', 'Closed', 'no problems', 3400, 'Delta', 16.00, 15.00, 17.00, '2/20/13', '934 Elm Ave', 'Dolton', 'Illinois', 45003),
+        (6, 7596, 1000, 55.00, 'Drop', 'Closed', 'no problems', 1456, 'Delta', 9.00, 8.00, 10.00, '2/23/13', '934 Elm Ave', 'Dolton', 'Illinois', 45003);
+
+INSERT INTO reservation (FranchiseNumber, VehicleID, CustomerID, Price, drop_pick, Status, Comment, FlightNumber, Airline, FlightTime, PickupTime, DropOffTime, Date)
+ VALUES (2, 2734, 1002, 40.00, 'Drop', 'Closed', 'Drop went well', 1143, 'Delta', 11.30, 10.30, 12.30, '6/7/13'),
+        (2, 7596, 1002, 55.00, 'Pickup', 'Closed', 'oil light on', 1204, 'Delta', 9.30, 8.30, 10.30, '6/9/13'),
+        (2, 2734, 1002, 40.00, 'Drop', 'Closed', 'no problems', 2309, 'Delta', 1.30, 12.30, 2.30, '7/2/13'),
+        (2, 7596, 1002, 40.00, 'Pickup', 'Open', ' ', 4504, 'Delta', 14.30, 13.30, 15.30, '7/5/13');
