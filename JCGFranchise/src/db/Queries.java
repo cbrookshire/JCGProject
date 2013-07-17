@@ -2427,7 +2427,7 @@ public class Queries extends JCGDatabase
                         //BPArrayList.add(temp);
                     }
                     
-                    if(!CustomerIDHolder.isEmpty() && results != null)
+                    if(!CustomerIDHolder.isEmpty() && !CustomerIDHolder.contains(0) && !CustomerIDHolder.contains(null))
                     {
                         System.out.println("Got into CustomerIDHolder.size() != 0");
                         int[] CustIDs = new int[CustomerIDHolder.size()];
