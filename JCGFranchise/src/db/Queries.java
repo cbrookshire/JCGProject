@@ -2407,7 +2407,7 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 System.out.println("Checking for Null.");
-                if(results != null)
+                if(results != null && !results.next())
                 {
                     System.out.println("If it's not Null...");
                     while (results.next())
