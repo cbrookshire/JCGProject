@@ -65,6 +65,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             //Don't worry, we can still use setText-- this only disables the user from editing it.
             //In other words, the text boxes are only for display purposes.
             jButton1.setEnabled(false);
+            newEmployeeFirstName.setEnabled(false);
+            newEmployeeLastName.setEnabled(false);
             newEmployeeAddress.setEnabled(false);
             newEmployeeCity.setEnabled(false);
             newEmployeeState.setEnabled(false);
@@ -211,8 +213,18 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         newEmployeeZip.setText(String.valueOf(e.getZip()));
         newEmployeePhone.setText(e.getPhone());
         newEmployeeEmail.setText(e.getEmail());
-        newEmployeeType.setSelectedIndex(e.getEmpType());
-        //newEmployeeNum.setSelectedIndex(list2.get(newEmployeeNum.getSelectedIndex()).getFranchiseID());
+        newEmployeeType.setSelectedIndex(e.getEmpType()-1);
+        
+        int searchInt = e.getEmployeeID();
+        int i = 0;
+        for(i = 0; i < list2.size(); i++)
+        {
+            if(list2.get(i).getFranchiseID() == searchInt)
+                break;
+        }
+        
+        if(i < list2.size())
+            newEmployeeNum.setSelectedIndex(i);
     }
 
     /**
