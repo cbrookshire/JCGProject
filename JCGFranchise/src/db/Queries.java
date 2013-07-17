@@ -696,7 +696,7 @@ public class Queries extends JCGDatabase
                     temp.setTablet(results.getString("Tablet"));
                     temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setVin(results.getString("VIN"));
-                    temp.setYear(results.getInt("MakeYear"));
+                    temp.setYear(results.getInt("Year"));
                     
                     BPList.add(temp);
                 }
@@ -857,7 +857,7 @@ public class Queries extends JCGDatabase
                     temp.setTablet(results.getString("Tablet"));
                     temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setVin(results.getString("VIN"));
-                    temp.setYear(results.getInt("MakeYear"));
+                    temp.setYear(results.getInt("Year"));
                     temp.setvIndex(results.getString("VIndex"));
                     
                     BPList.add(temp);
@@ -1096,7 +1096,7 @@ public class Queries extends JCGDatabase
                     temp.setTablet(results.getString("Tablet"));
                     temp.setVehicleID(results.getInt("VehicleID"));
                     temp.setVin(results.getString("VIN"));
-                    temp.setYear(results.getInt("MakeYear"));
+                    temp.setYear(results.getInt("Year"));
                     
                     BPArrayList.add(temp);
                 }
