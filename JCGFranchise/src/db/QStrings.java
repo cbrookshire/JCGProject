@@ -115,8 +115,8 @@ final class QStrings {
                "WHERE m.MemberID = c.MemberID && c.CustomerID = ?";
     
     public String insert_res = "insert into Reservation(FranchiseNumber, VehicleID, CustomerID, "
-            + "Price, FlightNumber, Airline, FlightTime, PickUpTime, DropOffTime,  Date, "
-            + "AltAddress, AltCity, AltState, AltZip) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "Price, drop_pick, FlightNumber, Airline, FlightTime, PickUpTime, DropOffTime,  Date, "
+            + "AltAddress, AltCity, AltState, AltZip) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     public String update_res_m = "UPDATE Reservation SET FlightTime = ?, PickupTime = ?, DropOffTime = ? "
             + "AltAddress = ?, AltCity = ?, AltState = ?, AltZip = ? WHERE ReservationNumber = ?";
