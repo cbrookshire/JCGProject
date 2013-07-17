@@ -33,7 +33,9 @@ public class JCGDatabase {
     private PreparedStatement custType = null;
     private PreparedStatement update_cust_status = null;
     private int code;
+    private int fran;
     private String status;
+    private JCGlIO Lio;
     
     // Constructor test for connection and user/password
     public JCGDatabase(JCGlIO jcgLio) 
@@ -53,7 +55,7 @@ public class JCGDatabase {
                     "SELECT FirstLog from Customer where Username = ?");
         
             empType = connection.prepareStatement(
-                "SELECT EmpType from Employee where Username = ?");
+                "SELECT FranchiseNumber, EmpType from Employee where Username = ?");
             
             custType = connection.prepareStatement(
                     "SELECT CType from Customer where Username = ?");
@@ -91,6 +93,7 @@ public class JCGDatabase {
     public int login(JCGlIO jcgLio) 
             throws NewUserException, BadConnectionException
     {
+        Lio = JCGlIO.getInstance();
         code = 999;
         // check to see if the login is an employee
         try {
@@ -111,7 +114,8 @@ public class JCGDatabase {
                 resultSet = empType.executeQuery();
                 while(resultSet.next())
                 {
-                    jcgLio.setfN(resultSet.getInt("FranchiseNumber"));
+                    fran = resultSet.getInt("FranchiseNumber");
+                    
                     code = resultSet.getInt("EmpType");
                 }                
             }
@@ -150,6 +154,7 @@ public class JCGDatabase {
                 
             }
         }
+        Lio.setfN(fran);
         return code;
     }
      
