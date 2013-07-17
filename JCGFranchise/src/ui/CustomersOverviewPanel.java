@@ -26,7 +26,7 @@ public class CustomersOverviewPanel extends javax.swing.JPanel  {
     {
         
         ArrayList<Customer> list = new ArrayList<Customer>();
-        list = UIController.getInstance().UIcustomerRouter(new String("CUSTOMER"), "VIEWALL");
+        list = UIController.getInstance().UIcustomerRouter(new String("MANAGER"), "VIEWALL");
         
         if(list.size() > 0)
         {
