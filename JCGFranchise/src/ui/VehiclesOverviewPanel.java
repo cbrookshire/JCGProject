@@ -31,7 +31,7 @@ public class VehiclesOverviewPanel extends javax.swing.JPanel  {
         if(list.size() > 0)
         {
             for(int i = 0; i < list.size(); i++) {
-                jTextArea1.append(list.get(i).toString());
+                jTextArea1.append(list.get(i).toString() + "\n");
             }
         }
     }
