@@ -2375,6 +2375,7 @@ public class Queries extends JCGDatabase
             ResultSet results = null;
             String statString = "SELECT * FROM `reservation` WHERE 'FranchiseNumber' = ?";
             Set<Integer> CustomerIDHolder = null;
+            ArrayList<Integer> list = new ArrayList<Integer>();
             boolean holder;
             
             System.out.println("Made Variables.");
@@ -2410,46 +2411,64 @@ public class Queries extends JCGDatabase
                 if(results != null && !results.next())
                 {
                     System.out.println("If it's not Null...");
-                    while (results.next())
+                    while (results != null && results.next())
                     {
-                        System.out.println("Results not Null...");
-                        int temp;
+                        System.out.println("In the While Loop");
+                        
 
                         //results.getBigDecimal("AMOUNT")
+                        
+                        System.out.println("Trying to add a CustID...");
+                        System.out.println("AddingID: " + results.getInt("CustomerID"));
 
                         holder = CustomerIDHolder.add(results.getInt("CustomerID"));
+                        System.out.println("Holder is: " + holder);
 
                         //BPArrayList.add(temp);
                     }
-
-                    int[] CustIDs = new int[CustomerIDHolder.size()];
-
-                    int index = 0;
-
-                    for( Integer a : CustomerIDHolder )
+                    
+                    if(CustomerIDHolder.size() != 0)
                     {
-                        System.out.println("Adding Customer IDs");
-                        CustIDs[index++] = a;
+                        System.out.println("Got into CustomerIDHolder.size() != 0");
+                        int[] CustIDs = new int[CustomerIDHolder.size()];
+
+                        int index = 0;
+
+                        for( Integer a : CustomerIDHolder )
+                        {
+                            System.out.println("Adding Customer IDs");
+                            CustIDs[index++] = a;
+                        }
+
+
+                        
+                        for (int s : CustIDs)
+                        {
+                            list.add(s);
+                        }
+                        
+                        return list;
                     }
-
-
-                    ArrayList<Integer> list = new ArrayList<Integer>(CustIDs.length);
-                    for (int s : CustIDs)
+                    
+                    if(CustomerIDHolder.size() != 0)
                     {
-                        list.add(s);
-                    } 
-
-                    return list;
+                         System.out.println("If it is Null");
+                            //ArrayList<Integer> list = new ArrayList<Integer>();
+                            list.add(-1);
+                            return list;
+                    }
                 }
                 else 
                 {
                     System.out.println("If it is Null");
-                    ArrayList<Integer> list = new ArrayList<Integer>();
+                    //ArrayList<Integer> list = new ArrayList<Integer>();
                     list.add(-1);
                     return list;
                 }
                 
             /* ArrayList Prepare Section Stop */
+                
+                return list;
             }
             catch(SQLException sqlE)
             {
