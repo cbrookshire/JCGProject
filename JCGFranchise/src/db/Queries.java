@@ -2427,7 +2427,7 @@ public class Queries extends JCGDatabase
                         //BPArrayList.add(temp);
                     }
                     
-                    if(CustomerIDHolder.size() != 0)
+                    if(!CustomerIDHolder.isEmpty() && results != null)
                     {
                         System.out.println("Got into CustomerIDHolder.size() != 0");
                         int[] CustIDs = new int[CustomerIDHolder.size()];
@@ -2450,7 +2450,7 @@ public class Queries extends JCGDatabase
                         return list;
                     }
                     
-                    if(CustomerIDHolder.size() != 0)
+                    if(!CustomerIDHolder.isEmpty() || !results.next() || results == null)
                     {
                          System.out.println("If it is Null");
                             //ArrayList<Integer> list = new ArrayList<Integer>();
