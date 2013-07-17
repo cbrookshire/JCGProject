@@ -111,6 +111,7 @@ public class JCGDatabase {
                 resultSet = empType.executeQuery();
                 while(resultSet.next())
                 {
+                    jcgLio.setfN(resultSet.getInt("FranchiseNumber"));
                     code = resultSet.getInt("EmpType");
                 }                
             }
