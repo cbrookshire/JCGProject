@@ -22,6 +22,7 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
     private ArrayList<Vehicle> list;
     
     public CreateVehicleJPanel(int m) {
+        list = new ArrayList<Vehicle>();
         initComponents();
         
         mode = m;
@@ -207,7 +208,7 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
     {
         //Gets a list of all the Employees (should display name)
         //list = LOLGETLIST();
-        list = UIController.getInstance().UIvehicleRouter(new String("VEHICLE"), "VIEWALL");
+        list = UIController.getInstance().UIvehicleRouter(new String("MANAGER"), "VIEWALL");
         for(int i = 0; i < list.size(); i++)
         {
             String t = list.get(i).toString();
