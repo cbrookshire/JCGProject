@@ -2373,7 +2373,7 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `reservations` WHERE 'FranchiseNumber' = ?";
+            String statString = "SELECT * FROM `reservation` WHERE 'FranchiseNumber' = ?";
             Set<Integer> CustomerIDHolder = null;
             boolean holder;
             
@@ -2648,7 +2648,7 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `reservations` WHERE 'CustomerID' = ?";
+            String statString = "SELECT * FROM `reservation` WHERE 'CustomerID' = ?";
 
             /* Return Parameter */
             ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
@@ -2744,7 +2744,7 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `reservations` WHERE 'FranchiseNumber' = ? AND 'CustomerID' = ?";
+            String statString = "SELECT * FROM `reservation` WHERE 'FranchiseNumber' = ? AND 'CustomerID' = ?";
 
             /* Return Parameter */
             ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
@@ -2840,7 +2840,7 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `reservations` WHERE 'FranchiseNumber' = ?";
+            String statString = "SELECT * FROM `reservation` WHERE 'FranchiseNumber' = ?";
 
             /* Return Parameter */
             ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
@@ -2936,7 +2936,7 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `reservations` WHERE 'Date' = ?";
+            String statString = "SELECT * FROM `reservation` WHERE 'Date' = ?";
 
             /* Return Parameter */
             ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
@@ -3037,7 +3037,7 @@ public class Queries extends JCGDatabase
         /* Variable Section Stop */
         
         /* Preparing Statment Section Start */
-        String MyQuery = "DELETE * FROM `reservations` WHERE 'ReservationNumber' = ?";
+        String MyQuery = "DELETE * FROM `reservation` WHERE 'ReservationNumber' = ?";
         
             /* TRY BLOCK START */
 
