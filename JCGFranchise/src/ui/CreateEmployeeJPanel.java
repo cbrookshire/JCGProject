@@ -37,6 +37,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                 jLabel1.setText("Add a driver");
             else
                 jLabel1.setText("Add an Employee");
+            
+            setList2();
         }
         if(mode == 1)  //Edit mode
         {
@@ -190,13 +192,45 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             listSelection.addItem(t);
         }
         
-        list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISOR"), "VIEWALL");
+        /*
+        //list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISOR"), "VIEWALL");
+        
         for(int i = 0; i < list2.size(); i++)
         {
             String t = list2.get(i).toString();
             newEmployeeNum.addItem(t);
         }
+        */
+        
+        
+        
+        
+        setList2();
+        
+        
+        
+        
+        
+        
             
+    }
+    
+    private void setList2()
+    {
+        list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISOR"), "VIEWALL");
+        
+        int myID = JCGlIO.getInstance().getfN();
+        
+        while(list2.size() > 1)
+        {
+            System.out.println("Running loop: " + list2.get(0).getFranchiseID() + ", " + list2.get(1).getFranchiseID());
+            if(list2.get(0).getFranchiseID() != myID)
+                list2.remove(0);
+            else if(list2.get(1).getFranchiseID() != myID)
+                list2.remove(1);
+        }
+        
+        newEmployeeNum.addItem(list2.get(0).toString());
     }
     
     private void loadInfoFromList()
@@ -459,6 +493,8 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         emp.setZip(newEmployeeZip.getText());
         emp.setPhone(newEmployeePhone.getText());
         emp.setEmail(newEmployeeEmail.getText());
+        emp.setFranchiseNumber(list2.get(0).getFranchiseID());
+        emp.setEmployeeID(0);
         
         if(mode == 0)  //Create one
         {
