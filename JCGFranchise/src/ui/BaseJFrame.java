@@ -161,15 +161,15 @@ public class BaseJFrame extends JFrame {
                 break;
            case "231": //Vehicles add
                 setContent(pane2, "Franchisee Main");
-                //pane2.setContent(new CreateVehiclesJPanel(0));
+                pane2.setContent(new CreateVehicleJPanel(0));
                 break;
            case "232": //Vehicles edit
                 setContent(pane2, "Franchisee Main");
-                //pane2.setContent(new CreateVehiclesJPanel(1));
+                pane2.setContent(new CreateVehicleJPanel(1));
                 break;
            case "233": //Vehicles delete
                 setContent(pane2, "Franchisee Main");
-                //pane2.setContent(new CreateVehiclesJPanel(2));
+                pane2.setContent(new CreateVehicleJPanel(2));
                 break;
            
            case "240":  //Other main
