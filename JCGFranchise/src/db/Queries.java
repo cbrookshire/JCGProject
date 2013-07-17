@@ -2477,6 +2477,12 @@ public class Queries extends JCGDatabase
                     throw(new UnauthorizedUserException("AccessDenied"));
                 else if(sqlE.getErrorCode() == 1062)
                     throw(new DoubleEntryException("DoubleEntry"));
+                else if(sqlE.getErrorCode() == 0)
+                {
+                    //ArrayList<Integer> list = new ArrayList<Integer>();
+                    list.add(-1);
+                    return list;
+                }
                 else 
                     throw(new BadConnectionException("BadConnection"));
             }
