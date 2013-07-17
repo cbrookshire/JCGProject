@@ -3098,6 +3098,7 @@ public class Queries extends JCGDatabase
             pStmnt.setInt(2, res.getVehicleID());
             pStmnt.setInt(3, res.getCustomerID());
             pStmnt.setDouble(4, rPrice);
+            pStmnt.setString(5, res.getDropPick());
             pStmnt.setInt(5, res.getFlightNumber());
             pStmnt.setString(6, res.getAirline());
             pStmnt.setDouble(7, res.getFlightTime());
@@ -3107,7 +3108,7 @@ public class Queries extends JCGDatabase
             pStmnt.setString(11, res.getAltAddress());
             pStmnt.setString(12, res.getAltCity());
             pStmnt.setString(13, res.getAltState());
-           // pStmnt.setInt(14, res.getAltZip());                       
+            pStmnt.setInt(14, res.getAltZip());                       
             pStmnt.executeQuery();
             
             
