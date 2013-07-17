@@ -30,6 +30,9 @@ public class Reservation {
     private String altCity;
     private String altState;
     private String altZip;
+    private String dropPick;
+
+    
 
     //CONSTRUCTORS
     //default
@@ -278,6 +281,15 @@ public class Reservation {
         return Integer.parseInt(altZip);
     }
 
+    //attrib 18
+    public String getDropPick() {
+        return dropPick;
+    }
+
+    public void setDropPick(String dropPick) {
+        this.dropPick = dropPick;
+    }
+    
     
     
     //UTILITIES

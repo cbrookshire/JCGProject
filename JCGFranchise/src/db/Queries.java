@@ -2229,50 +2229,78 @@ public class Queries extends JCGDatabase
             try
             {
                 
-                
-                for(int c = 0; c < CustomerIDs.size(); c++)
+                if(CustomerIDs.size() > 0)
                 {
-                    /* Preparing Statment Section Start */                
-                        statment = con.prepareStatement(statString);
-                        statment.setInt(1, CustomerIDs.get(c));
-                    /* Preparing Statment Section Stop */
-                    /* Query Section Start */
-                        results = statment.executeQuery();
+                    for(int c = 0; c < CustomerIDs.size(); c++)
+                    {
+                        /* Preparing Statment Section Start */                
+                            statment = con.prepareStatement(statString);
+                            statment.setInt(1, CustomerIDs.get(c));
+                        /* Preparing Statment Section Stop */
+                        /* Query Section Start */
+                            results = statment.executeQuery();
 
-                    /* Query Section Stop */
+                        /* Query Section Stop */
 
-                    /* Metadata Section Start*/
-                       // ResultSetMetaData metaData = results.getMetaData();
-                       // int columns = metaData.getColumnCount();
-                       // int rows = results.getRow(); 
-                    /* Metadata Section Start*/
+                        /* Metadata Section Start*/
+                           // ResultSetMetaData metaData = results.getMetaData();
+                           // int columns = metaData.getColumnCount();
+                           // int rows = results.getRow(); 
+                        /* Metadata Section Start*/
 
-                    /* ArrayList Prepare Section Start */
+                        /* ArrayList Prepare Section Start */
 
 
-                        
-                        while (results.next())
-                        {
-                            Customer temp = new Customer();
 
-                            //rs.getBigDecimal("AMOUNT")
+                            while (results.next())
+                            {
+                                System.out.println("Start of loop");
+                                Customer temp = new Customer();
 
-                            temp.setAddress(results.getString("Address"));
-                            temp.setCity(results.getString("City"));
-                            temp.setCustomerID(results.getInt("CustomerID"));
-                            temp.setEmail(results.getString("Email"));
-                            temp.setFirstName(results.getString("Fname"));
-                            temp.setLastName(results.getString("Surname"));
-                            temp.setMemberID(results.getString("MemberID"));
-                            //temp.setPassword(statString);
-                            temp.setPhone(results.getString("Phone"));
-                            temp.setReservationCount(results.getInt("ReservationCount"));
-                            temp.setState(results.getString("State"));
-                            //temp.setUserID(results.getString("Address"));
-                            temp.setZip(results.getInt("Zip"));
+                                //rs.getBigDecimal("AMOUNT")
 
-                            BPArrayList.add(temp);
-                        }
+                                temp.setAddress(results.getString("Address"));
+                                temp.setCity(results.getString("City"));
+                                temp.setCustomerID(results.getInt("CustomerID"));
+                                temp.setEmail(results.getString("Email"));
+                                temp.setFirstName(results.getString("Fname"));
+                                temp.setLastName(results.getString("Surname"));
+                                temp.setMemberID(results.getString("MemberID"));
+                                //temp.setPassword(statString);
+                                temp.setPhone(results.getString("Phone"));
+                                temp.setReservationCount(results.getInt("ReservationCount"));
+                                temp.setState(results.getString("State"));
+                                //temp.setUserID(results.getString("Address"));
+                                temp.setZip(results.getInt("Zip"));
+
+                                BPArrayList.add(temp);
+                                System.out.println("End of loop");
+                            }
+                    }
+                }
+                else //If there's no IDs being returned...
+                {
+                    System.out.println("Start of loop");
+                    
+                    Customer temp = new Customer();
+
+                                //rs.getBigDecimal("AMOUNT")
+
+                                temp.setAddress(null);
+                                temp.setCity(null);
+                                temp.setCustomerID(null);
+                                temp.setEmail(null);
+                                temp.setFirstName("No Customers ");
+                                temp.setLastName("Booked at Your Franchise.");
+                                temp.setMemberID(null);
+                                //temp.setPassword(statString);
+                                temp.setPhone(null);
+                                temp.setReservationCount(null);
+                                temp.setState(null);
+                                //temp.setUserID(results.getString("Address"));
+                                temp.setZip(null);
+
+                                BPArrayList.add(temp);
                 }
             /* ArrayList Prepare Section Stop */
             }
@@ -2350,35 +2378,42 @@ public class Queries extends JCGDatabase
             /* ArrayList Prepare Section Start */
                 
                 
-                
-                while (results.next())
+                if(results != null)
                 {
-                    int temp;
-                    
-                    //results.getBigDecimal("AMOUNT")
+                    while (results.next())
+                    {
+                        int temp;
 
-                    holder = CustomerIDHolder.add(results.getInt("CustomerID"));
+                        //results.getBigDecimal("AMOUNT")
 
-                    //BPArrayList.add(temp);
+                        holder = CustomerIDHolder.add(results.getInt("CustomerID"));
+
+                        //BPArrayList.add(temp);
+                    }
+
+                    int[] CustIDs = new int[CustomerIDHolder.size()];
+
+                    int index = 0;
+
+                    for( Integer a : CustomerIDHolder )
+                    {
+                        CustIDs[index++] = a;
+                    }
+
+
+                    ArrayList<Integer> list = new ArrayList<Integer>(CustIDs.length);
+                    for (int s : CustIDs)
+                    {
+                        list.add(s);
+                    } 
+
+                    return list;
                 }
-                
-                int[] CustIDs = new int[CustomerIDHolder.size()];
-
-                int index = 0;
-
-                for( Integer a : CustomerIDHolder )
+                else
                 {
-                    CustIDs[index++] = a;
+                    ArrayList<Integer> list = new ArrayList<Integer>();
+                    return list;
                 }
-                
-                
-                ArrayList<Integer> list = new ArrayList<Integer>(CustIDs.length);
-                for (int s : CustIDs)
-                {
-                    list.add(s);
-                } 
-                
-                return list;
                 
             /* ArrayList Prepare Section Stop */
             }
