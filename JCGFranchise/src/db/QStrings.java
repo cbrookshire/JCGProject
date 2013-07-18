@@ -22,11 +22,11 @@ final class QStrings {
     
 // Vehicle
     public String insert_vehicle = "INSERT INTO Vehicle (VehicleID, VIN, Make "
-             + "Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice"
+             + "Model, Year, Mileage, Capacity, VCondition, Tablet, RentalPrice"
              + " FranchiceNumber VALUES(?,?,?,?,?,?,?,?,?,?,?)";
      
     public String update_vehicle = "UPDATE Vehicle SET VehicleID = ?, VIN = ?,"
-            + " Make = ?, Model = ?, Year = ?, Millage = ?, Capacity = ?, "
+            + " Make = ?, Model = ?, Year = ?, Mileage = ?, Capacity = ?, "
             + "VCondition = ?, Tablet = ?, RentalPrice = ?, FranchiseNumber = ? WHERE "
              + "VIndex = ?";
     

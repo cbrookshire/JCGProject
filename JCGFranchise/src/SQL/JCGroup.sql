@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS Vehicle
   Make varchar(16) Not Null,
   Model varchar(30) Not Null,
   Year int Not Null,
-  Millage int(6) Not Null,
+  Mileage int(6) Not Null,
   Capacity int Not Null,
   VCondition varchar(15) Not NUll,
   Tablet varchar(20) Not Null,
@@ -538,7 +538,7 @@ GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Customer TO 'JeanB'@'localhost';
 GRANT SELECT ON JCGroup.Vehicle TO 'JeanB'@'localhost';
 FLUSH PRIVILEGES;
  
-INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Mileage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
  VALUES (2001, '1GNGS18Z4D0212001', 'Lincoln', 'Town Car', 2013, 13203, 3, 'Exellent', 'CDQE34PDZDWET', 040.00, 2),
         (7301, '1MWAW18Z3D4117301', 'Mercedes Benz', 'S550', 2013, 12003, 3, 'Exellent', 'FETL3PF3PSJEO', 055.00, 2),
         (4321, '1FEDS12F5C6344321', 'Chevy', 'Suburban', 2012, 34023, 6, 'Great', 'HSOEN3PE0PFJ7', 075.00, 2),
@@ -546,7 +546,7 @@ INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCond
         (3203, '1GNGT34E4A0013203', 'Lincoln', 'Stretch Limousine', 2010, 53002, 10, 'Great', 'JDOWJ349IEWOS', 115.00, 2),
         (5203, '1MWAW58S6C0005203', 'Mercedes', 'Sprinter Executive Van', 2012, 8302, 13, 'Exellent', 'SLKEOS03LDJW9', 130.00, 2);
         
-INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Mileage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
  VALUES (2341, '1GNGS18Z4D0212341', 'Lincoln', 'Town Car', 2013, 17203, 3, 'Exellent', 'CDSLEO30SLW9S', 040.00, 3),
         (7341, '1MWAW18Z3D4117341', 'Mercedes Benz', 'S550', 2013, 22003, 3, 'Exellent', 'FETL40SJ30ND3', 055.00, 3),
         (4781, '1FEDS12F5C6344781', 'Chevy', 'Suburban', 2012, 36023, 6, 'Great', 'HSOENK302KSIS', 075.00, 3),
@@ -554,7 +554,7 @@ INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCond
         (3003, '1GNGT34E4A0013003', 'Lincoln', 'Stretch Limousine', 2010, 57002, 10, 'Great', 'JDOWKSOW03SJW', 115.00, 3),
         (5213, '1MWAW58S6C0005213', 'Mercedes', 'Sprinter Executive Van', 2012, 8532, 13, 'Exellent', 'SLLLSOWNFSW93', 130.00, 3);
 
-INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Mileage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
  VALUES (2022, '1GNGS18Z4D0212022', 'Lincoln', 'Town Car', 2013, 13203, 3, 'Exellent', 'PEGI94SOE2ISW', 040.00, 4),
         (7001, '1MWAW18Z3D4117001', 'Mercedes Benz', 'S550', 2013, 12003, 3, 'Exellent', 'QPSLXI40SOE3R', 055.00, 4),
         (4902, '1FEDS12F5C6344902', 'Chevy', 'Suburban', 2012, 34023, 6, 'Great', 'LSOEND3IS08AW4', 075.00, 4),
@@ -562,7 +562,7 @@ INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCond
         (3703, '1GNGT34E4A0013703', 'Lincoln', 'Stretch Limousine', 2010, 53002, 10, 'Great', 'FHREE04IID0D9', 115.00, 4),
         (5273, '1MWAW58S6C0005273', 'Mercedes', 'Sprinter Executive Van', 2012, 8302, 13, 'Exellent', 'LSKWE30LSJEO0', 130.00, 4);
 
-INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Mileage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
  VALUES (2932, '1GNGS18Z4D0212932', 'Lincoln', 'Town Car', 2013, 13203, 3, 'Exellent', 'OPWD30PSIWEWO', 40.00, 5),
         (7022, '1MWAW18Z3D4117022', 'Mercedes Benz', 'S550', 2013, 12003, 3, 'Exellent', 'MSN2IQWAGTUE9', 55.00, 5),
         (4823, '1FEDS12F5C6344823', 'Chevy', 'Suburban', 2012, 34023, 6, 'Great', 'JSKWIF839JSHW', 75.00, 5),
@@ -570,7 +570,7 @@ INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCond
         (3590, '1GNGT34E4A0013590', 'Lincoln', 'Stretch Limousine', 2010, 53002, 10, 'Great', 'SDKJWISJDHEND', 115.00, 5),
         (5310, '1MWAW58S6C0005310', 'Mercedes', 'Sprinter Executive Van', 2012, 8302, 13, 'Exellent', 'LSSIOWID09SIO', 130.00, 5);
         
-INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Millage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
+INSERT INTO Vehicle (VehicleID, VIN, Make, Model, Year, Mileage, Capacity, VCondition, Tablet, RentalPrice, FranchiseNumber)
  VALUES (2734, '1GNGS18Z4D0212734', 'Lincoln', 'Town Car', 2013, 13203, 3, 'Exellent', 'TRIU39UIWJSOP', 40.00, 6),
         (7596, '1MWAW18Z3D4117596', 'Mercedes Benz', 'S550', 2013, 12003, 3, 'Exellent', 'HUE93OW0WOQUW', 55.00, 6),
         (4814, '1FEDS12F5C6344814', 'Chevy', 'Suburban', 2012, 34023, 6, 'Great', 'IO09IOSJOXZQQ', 75.00, 6),

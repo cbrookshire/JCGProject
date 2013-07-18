@@ -690,7 +690,7 @@ public class Queries extends JCGDatabase
                     temp.setCondition(results.getString("VCondition"));
                     temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setMake(results.getString("Make"));
-                    temp.setMileage(results.getInt("Millage"));
+                    temp.setMileage(results.getInt("Mileage"));
                     temp.setModel(results.getString("Model"));
                     temp.setRate(results.getDouble("RentalPrice"));
                     temp.setTablet(results.getString("Tablet"));
@@ -851,7 +851,7 @@ public class Queries extends JCGDatabase
                     temp.setCondition(results.getString("VCondition")); 
                     temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setMake(results.getString("Make")); 
-                    temp.setMileage(results.getString("Millage")); 
+                    temp.setMileage(results.getString("Mileage")); 
                     temp.setModel(results.getString("Model")); 
                     temp.setRate(results.getDouble("RentalPrice")); 
                     temp.setTablet(results.getString("Tablet"));
@@ -1090,7 +1090,7 @@ public class Queries extends JCGDatabase
                     temp.setCondition(results.getString("VCondition"));
                     temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
                     temp.setMake(results.getString("Make"));
-                    temp.setMileage(results.getInt("Millage"));
+                    temp.setMileage(results.getInt("Mileage"));
                     temp.setModel(results.getString("Model"));
                     temp.setRate(results.getDouble("RentalPrice"));
                     temp.setTablet(results.getString("Tablet"));
