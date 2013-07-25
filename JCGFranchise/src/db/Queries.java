@@ -1530,71 +1530,10 @@ public class Queries extends JCGDatabase
     public ArrayList<Employee> AllEmployeesInFranchise(int FranID)
             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
-        /*
-         * /* Variable Section Start */
-            /* Database and Query Preperation * /
-            //PreparedStatement statment = null;
-            Statement statment = null;
-            ResultSet results = null;
-            String statString = "SELECT * FROM Franchise";
-
-            /* Return Parameter * /
-            ArrayList<Franchise> BPList = new ArrayList<Franchise>();
-        /* Variable Section Stop * /
-        
-        
-        /* TRY BLOCK START * /
-            
-            try
-            {
-            /* Preparing Statment Section Start * / 
-                
-                if(con.isValid(120));
-                {
-                    System.out.println("Connection is Good!");
-                }
-                
-                if(!con.isValid(120));
-                {
-                    System.out.println("Connection is Bad!");
-                }
-                
-                
-                statment = con.createStatement();
-                
-                //statment = con.prepareStatement(statString);
-                //statment.setString();
-            /* Preparing Statment Section Stop * /
-            /* Query Section Start * /
-                results = statment.executeQuery(statString);
-                
-               
-                while (results.next())
-                {
-                    System.out.println("in the loop");
-                    Franchise temp = new Franchise();
-                    
-                    //rs.getBigDecimal("AMOUNT")
-                    
-                    temp.setAddress(results.getString("Address"));
-                    temp.setAirportID(results.getInt("AirportID"));
-                    //temp.setAirport(getFranchiseAirportName(results.getInt("AirportID")));
-                    temp.setCity(results.getString("City"));
-                    temp.setEmail(results.getString("Email"));
-                    temp.setFranchiseID(results.getInt("FranchiseNumber"));
-                    temp.setPhone(results.getString("Phone"));
-                    temp.setState(results.getString("State"));
-                    temp.setZip(results.getInt("Zip"));
-                    
-                    System.out.print(temp.toString());
-                    BPList.add(temp);
-                }
-         */
-            /* Variable Section Start */
-            /* Database and Query Preperation */
-            PreparedStatement statment = null;
-            ResultSet results = null;
-            String statString = "SELECT * FROM `employee` WHERE `FranchiseNumber` = ?";
+        /* Database and Query Preperation */
+        PreparedStatement statment = null;
+        ResultSet results = null;
+        String statString = "SELECT * FROM `employee` WHERE `FranchiseNumber` = ?";
 
             /* Return Parameter */
             ArrayList<Employee> BPList = new ArrayList<Employee>();
@@ -1641,11 +1580,7 @@ public class Queries extends JCGDatabase
                     
                     BPList.add(temp);
                 }
-                
-                
-                /* Metadata Section Start*/
-                //ResultSetMetaData metaData = results.getMetaData();
-            /* Metadata Section Start*/
+                                
             /* List Prepare Section Stop */
             }
             catch(SQLException sqlE)
