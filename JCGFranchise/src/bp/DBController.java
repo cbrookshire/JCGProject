@@ -29,9 +29,8 @@ public class DBController {
     
     
     //UTILITIES
-    //HACK#1 the following is Maurice's hack until he figures out how to 
-    //convert an array of Franchise, Vehicle, Employee, Customer into an  
-    //an array of generic objects safely
+    //HACK#1 Consider employing abstract factory or generic method to reduce 
+    //code redundancy
     public ArrayList <Franchise> DBfranchisorRouter (Object sysObject, 
              String action){
     
@@ -72,8 +71,44 @@ public class DBController {
         return null;
     }//end DBfranchisorRouter method
     
+    
+    //HACK#2 
+    public ArrayList <Membership> DBmembershipRouter (Object sysObject, 
+             String action){
+    
+        //local container 
+        ArrayList <Membership> temp;
+         
+        try{            
+                if (sysObject instanceof String && "VIEWALL".equals(action)){   
+                    temp = queryDB.GetPromotionsData();
+                    return temp;
+                }
+                      
+        }
+        catch(UnauthorizedUserException e){
+                Membership error = new Membership(e.getMessage(), "","");
+                temp = new ArrayList();
+                temp.add(error);
+                return temp; 
+        }
+        catch(DoubleEntryException e){
+                Membership error = new Membership(e.getMessage(), "", "");
+                temp = new ArrayList();
+                temp.add(error);
+                return temp;             
+        }
+        catch(BadConnectionException e){
+                Membership error = new Membership(e.getMessage(), "", "");
+                temp = new ArrayList();
+                temp.add(error);
+                return temp;
+        }        
         
-    //HACK #2 
+        return null;
+    }//end DBmembershipRouter method    
+    
+    //HACK #3 
     public ArrayList <Vehicle> DBvehicleRouter (Object sysObject, 
              String action){
         
@@ -116,7 +151,7 @@ public class DBController {
         return null;
      }//end DBvehicleRouter method   
                
-    //HACK #3
+    //HACK #4
     public ArrayList <Employee> DBemployeeRouter (Object sysObject, 
              String action){
     
@@ -164,7 +199,7 @@ public class DBController {
      }//end DBemployeeRouter method    
         
     
-    //HACK #4 routes customer views
+    //HACK #5 routes customer views
     public ArrayList <Customer> DBcustomerRouter (Object sysObject, 
              String action){
         
@@ -208,7 +243,7 @@ public class DBController {
     }//end DBcustomerRouter method   
     
     
-    //HACK #4 routes reservation views      
+    //HACK #6 routes reservation views      
     public ArrayList <Reservation> DBreservationRouter (Object sysObject, 
              String action){
     
@@ -427,6 +462,10 @@ public class DBController {
                     dbReturnCode = queryDB.updateFranchise((Franchise)sysObject);
                     return String.valueOf(dbReturnCode);
                 }
+                if (sysObject instanceof Membership) {
+                    dbReturnCode = queryDB.updateMemberShip((Membership)sysObject);
+                    return String.valueOf(dbReturnCode);
+                }  
                 if (sysObject instanceof Vehicle) {
                     dbReturnCode = queryDB.updateVehicle((Vehicle)sysObject);
                     return String.valueOf(dbReturnCode);
@@ -435,10 +474,10 @@ public class DBController {
                     dbReturnCode = queryDB.updateEmployee((Employee)sysObject);
                     return String.valueOf(dbReturnCode);
                 }
-                /*if (sysObject instanceof Reservation) {
+                if (sysObject instanceof Reservation) {
                     dbReturnCode = queryDB.manUpdateReservation((Reservation)sysObject);
                     return String.valueOf(dbReturnCode);
-                }*/
+                }
                 if (sysObject instanceof Customer) {
                     dbReturnCode = queryDB.updateCustomer((Customer)sysObject);
                     return String.valueOf(dbReturnCode);

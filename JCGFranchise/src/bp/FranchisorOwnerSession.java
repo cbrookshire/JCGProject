@@ -21,9 +21,8 @@ public class FranchisorOwnerSession {
     
     //UTILITIES
     //VIEW ALL - VIEW ITEM METHODS
-    //HACK#1 the following is Maurice's hack until he figures out how to 
-    //convert an array of Franchise, Vehicle, Employee, Customer into an  
-    //an array of generic objects safely
+    //HACK#1 Consider employing abstract factory or generic method to reduce 
+    //code redundancy
     public ArrayList <Franchise> getFranchise(Object uiObject, String action){
         
         //local container
@@ -34,7 +33,19 @@ public class FranchisorOwnerSession {
         return result;       
     }//end getFranchise method
     
-    //HACK#2
+    
+    //HACK#2 
+    public ArrayList <Membership> getMembership(Object uiObject, String action){
+        
+        //local container
+        ArrayList <Membership> result;
+        
+        //send to dbSessionRouter      
+        result = dControl.DBmembershipRouter(uiObject, action);
+        return result;       
+    }//end getmembership method
+    
+    //HACK#3
     public ArrayList <Vehicle> getVehicle(Object uiObject, String action){
         
         //local container
@@ -45,7 +56,7 @@ public class FranchisorOwnerSession {
         return result;       
     }//end getVehicle method
     
-    //HACK#3
+    //HACK#4
     public ArrayList <Employee> getEmployee(Object uiObject, String action){
         
         //local container
@@ -56,7 +67,7 @@ public class FranchisorOwnerSession {
         return result;       
     }//end getVehicle method
    
-    //HACK#4
+    //HACK#5
     public ArrayList <Reservation> getReservation(Object uiObject, String action){
         
         //local container
@@ -67,7 +78,7 @@ public class FranchisorOwnerSession {
         return result;       
     }//end getVehicle method
     
-    //HACK#5
+    //HACK#6
     public ArrayList <Customer> getCustomer(Object uiObject, String action){
         
         //local container
@@ -76,8 +87,9 @@ public class FranchisorOwnerSession {
         //send to dbSessionRouter      
         result = dControl.DBcustomerRouter(uiObject, action);
         return result;       
-    }//end getVehicle method
+    }//end getCustomer method
     //END VIEW ALL - VIEW ITEM METHODS
+    
     
     //ADD, DELETE, EDIT METHODS
     public String AddItem(Object uiObject, String action){

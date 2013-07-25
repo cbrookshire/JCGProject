@@ -55,8 +55,22 @@ public class UIController {
         return temp;
     }//end UIfranchisorRouter
    
-   
+    
+    
     //HACK#2: consider throwing an UnauthorizedUserException
+    public ArrayList <Membership> UImembershipRouter (Object uiObject, 
+            String action){
+    
+        //local container
+        ArrayList<Membership> temp;
+        
+        //only franchisor allowed to see franchises
+        temp = foSession.getMembership(uiObject, action);
+        return temp;
+    }//end UImembershipRouter
+    
+       
+    //HACK#3: consider throwing an UnauthorizedUserException
     public ArrayList <Vehicle> UIvehicleRouter (Object uiObject, 
             String action){
        //local container
@@ -77,7 +91,7 @@ public class UIController {
    }//end UIvehicleRouter
     
    
-   //HACK#3: consider throwing an UnauthorizedUserException
+   //HACK#4: consider throwing an UnauthorizedUserException
    public ArrayList <Employee> UIemployeeRouter (Object object, 
             String action){
     
@@ -99,7 +113,7 @@ public class UIController {
    }//end UIemployeeRouter
     
    
-   //HACK#4: consider throwing an UnauthorizedUserException
+   //HACK#5: consider throwing an UnauthorizedUserException
    public ArrayList <Customer> UIcustomerRouter (Object object, 
             String action){
        
@@ -121,7 +135,7 @@ public class UIController {
    }//end UIcustomerRouter 
     
    
-   //HACK#5: consider throwing an UnauthorizedUserException
+   //HACK#6: consider throwing an UnauthorizedUserException
    public ArrayList <Reservation> UIreservationRouter (Object object, 
             String action){
        
