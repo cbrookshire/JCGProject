@@ -126,6 +126,22 @@ public class FranchiseeJPanel extends javax.swing.JPanel {
                     setContent(new CustomersOverviewPanel());
                 }
           }
+          
+          if(jComboBox1.getSelectedIndex() == 4)  //Promos
+            {
+                if (list.getSelectedIndex() == 0){
+                    setContent(new CreatePromotionJPanel(0));  
+                }
+                if (list.getSelectedIndex() == 1){
+                    setContent(new CreatePromotionJPanel(1));  
+                }
+                if (list.getSelectedIndex() == 2){
+                    setContent(new CreatePromotionJPanel(2));  
+                }
+                if (list.getSelectedIndex() == 3){
+                    setContent(new PromotionOverviewJPanel());
+                }
+          }
     }
 
     /**
