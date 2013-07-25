@@ -1880,8 +1880,8 @@ public class Queries extends JCGDatabase
         /* Variable Section Stop */
         
         /* Preparing Statment Section Start */
-        String MyQuery = "DELETE * FROM `employee` WHERE 'EmployeeID' = ?";
-        String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = ?";
+        String MyQuery = "DELETE FROM `employee` WHERE EmployeeID = ?";
+        String statString = "SELECT * FROM `employee` WHERE EmployeeID = ?";
         String DropUser = "DROP USER ?@'localhost'";
 
         /* Preparing Statment  Section Stop */
@@ -1906,7 +1906,9 @@ public class Queries extends JCGDatabase
             /* Metadata Section Start*/
                 
             /* Drop Use Preperation Section Start*/
-                Username = results.getString("Username");
+                while(results.next()) {
+                    Username = results.getString("Username");
+                }
                 
                 statement2 = con.prepareStatement(DropUser);
                 statement2.setString(1, Username);
@@ -1914,10 +1916,10 @@ public class Queries extends JCGDatabase
                 
         
             /* MySQL User Drop Section Start*/
-                success = statement.executeUpdate(); //This is where we attempt to drop the user.
+                statement2.executeUpdate(); //This is where we attempt to drop the user.
                 
-                if(success == 1)
-                {
+                //if(success == 1)
+                //{
                     /* Delete Employee Preperation Section Start*/
                     
                     statement3 = con.prepareStatement(MyQuery);
@@ -1940,10 +1942,10 @@ public class Queries extends JCGDatabase
                         return false; 
                     /* Return to Buisness Section Start */
                     //return true;
-                }
+                //}
                 
-                if(success == 0 || success == -1)
-                    return false;     
+                //if(success == 0 || success == -1)
+                //    return false;     
             /* MySQL User Drop Section Stop*/    
             }
             catch(SQLException sqlE)
