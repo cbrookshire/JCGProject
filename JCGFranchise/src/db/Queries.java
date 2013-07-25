@@ -2376,7 +2376,7 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `reservation` WHERE 'FranchiseNumber' = ?";
+            String statString = "SELECT DISTINCT 'CustomerID' FROM `reservation` WHERE 'FranchiseNumber' = ?";
             Set<Integer> CustomerIDHolder = null;
             
             boolean holder;
@@ -2410,9 +2410,12 @@ public class Queries extends JCGDatabase
                 
             /* ArrayList Prepare Section Start */
                 
+                ArrayList<Integer> list = new ArrayList<Integer>();
+                
                 System.out.println("Checking for Null.");
                 if(results != null && !results.next() && results.getRow() > 0)
                 {
+                    
                     System.out.println("If it's not Null...");
                     while (results != null && results.next())
                     {
@@ -2424,12 +2427,13 @@ public class Queries extends JCGDatabase
                         System.out.println("Trying to add a CustID...");
                         System.out.println("AddingID: " + results.getInt("CustomerID"));
 
-                        holder = CustomerIDHolder.add(results.getInt("CustomerID"));
-                        System.out.println("Holder is: " + holder);
+                        list.add(results.getInt("CustomerID"));
+                        //System.out.println("Holder is: " + holder);
 
                         //BPArrayList.add(temp);
                     }
                     
+                    /*
                     if(!CustomerIDHolder.isEmpty() && !CustomerIDHolder.contains(0) && !CustomerIDHolder.contains(null))
                     {
                         System.out.println("Got into CustomerIDHolder.size() != 0");
@@ -2453,6 +2457,7 @@ public class Queries extends JCGDatabase
                         return list;
                     }
                     
+                    
                     if(!CustomerIDHolder.isEmpty() || !results.next() || results == null)
                     {
                          System.out.println("If it is Null");
@@ -2460,11 +2465,12 @@ public class Queries extends JCGDatabase
                             list.add(0, -1);
                             return list;
                     }
+                    */
                 }
                 else 
                 {
                     System.out.println("If it is Null");
-                    ArrayList<Integer> list2 = new ArrayList<Integer>(1);
+                    ArrayList<Integer> list2 = new ArrayList<Integer>();
                     list2.add(-1);
                     return list2;
                 }
