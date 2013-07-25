@@ -70,9 +70,9 @@ public class Membership {
    @Override
    public String toString(){
         
-       return String.format("%s%s  %s%s\n %s%s\n",
+       return String.format("%s%s\n%s%.2f\n%s%s\n\n\n",
         "MemberID: ", getMemberID(), 
-        "Discount: ", getDiscount(),
+        "Discount: ", (1.0-(getDiscount())),
 	"Min Amount: ", getMinAmount());
 	
    }//end UTILS  
