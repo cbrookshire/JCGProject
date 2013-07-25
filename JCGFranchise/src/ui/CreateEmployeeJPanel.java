@@ -246,7 +246,12 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         newEmployeeZip.setText(String.valueOf(e.getZip()));
         newEmployeePhone.setText(e.getPhone());
         newEmployeeEmail.setText(e.getEmail());
-        newEmployeeType.setSelectedIndex(e.getEmpType()-1);
+        System.out.println(e.getEmpType());
+        int type = e.getEmpType();
+        if(type == 98)
+            newEmployeeType.setSelectedIndex(3);
+        else
+            newEmployeeType.setSelectedIndex(type-1);
         
         int searchInt = e.getEmployeeID();
         int i = 0;
@@ -335,7 +340,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
             }
         });
 
-        newEmployeeType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franchisor", "Franchisee", "Driver" }));
+        newEmployeeType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Franchisor", "Franchisee", "Employee", "Administrator" }));
 
         jLabel9.setText("Employee Type:");
 
