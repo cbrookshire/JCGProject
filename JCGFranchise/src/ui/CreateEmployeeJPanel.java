@@ -223,7 +223,6 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         
         while(list2.size() > 1)
         {
-            System.out.println("Running loop: " + list2.get(0).getFranchiseID() + ", " + list2.get(1).getFranchiseID());
             if(list2.get(0).getFranchiseID() != myID)
                 list2.remove(0);
             else if(list2.get(1).getFranchiseID() != myID)
