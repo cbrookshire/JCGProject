@@ -41,6 +41,7 @@ public class Queries extends JCGDatabase
     private ResultSet resultSet = null;
     private QStrings qs;
     private int code;
+    private JCGlIO lio;
     
     public Queries(JCGlIO lio) throws InvalidUserException, BadConnectionException
     {
@@ -1528,28 +1529,43 @@ public class Queries extends JCGDatabase
     
              //GET: Get All Employees in a Franchise
     public ArrayList<Employee> AllEmployeesInFranchise(int FranID)
-            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+            throws UnauthorizedUserException, BadConnectionException
     {
-        /* Database and Query Preperation */
+        PreparedStatement pStmnt = null;
+        ArrayList<Employee> BPList = new ArrayList<Employee>();
+    
+        // Get the employee type through JClIO instance
+        lio = JCGlIO.getInstance();
+        try {
+            if( "1".equals(lio.geteT())) {
+                System.out.println("owner view");
+                pStmnt = con.prepareStatement(qs.owner_view_emp);
+            }else if("2".equals(lio.geteT())) {
+                System.out.println("manager view");
+                pStmnt = con.prepareStatement(qs.man_view_emp);
+            }else
+                throw (new UnauthorizedUserException("AccessDenied"));
+           
+            pStmnt.setInt(1, FranID);
+        /* Database and Query Preperation 
         PreparedStatement statment = null;
         ResultSet results = null;
         String statString = "SELECT * FROM `employee` WHERE `FranchiseNumber` = ?";
 
-            /* Return Parameter */
-            ArrayList<Employee> BPList = new ArrayList<Employee>();
+             Return Parameter */
+            
             /* Variable Section Stop */
         
         
         /* TRY BLOCK START */
             
-            try
-            {
-            /* Preparing Statment Section Start */                
-                statment = con.prepareStatement(statString);
-                statment.setInt(1, FranID);
-            /* Preparing Statment Section Stop */
+            
+            /* Preparing Statment Section Start                 
+            statment = con.prepareStatement(statString);
+             statment.setInt(1, FranID);
+             Preparing Statment Section Stop */
             /* Query Section Start */
-                results = statment.executeQuery();
+            resultSet = pStmnt.executeQuery();
                 
             /* Query Section Stop */
             
@@ -1559,52 +1575,41 @@ public class Queries extends JCGDatabase
                 
                 
                 
-                while (results.next())
-                {
-                    Employee temp = new Employee();
+            while (resultSet.next())
+            {
+                Employee temp = new Employee();
                     
                     //rs.getBigDecimal("AMOUNT")
                     
-                    temp.setAddress(results.getString("Address"));
-                    temp.setCity(results.getString("City"));
-                    temp.setEmail(results.getString("Email"));
-                    temp.setEmpType(results.getInt("EmpType"));
-                    temp.setFirstName(results.getString("Fname"));
-                    temp.setFranchiseNumber(results.getInt("FranchiseNumber"));
-                    temp.setLastName(results.getString("Surname"));
-                    //temp.setPassword(results.getString("Address"));
-                    temp.setPhone(results.getString("Phone"));
-                    temp.setState(results.getString("State"));
-                    temp.setEmployeeID(results.getInt("EmployeeID"));
-                    temp.setZip(results.getInt("Zip"));
+                temp.setAddress(resultSet.getString("Address"));
+                temp.setCity(resultSet.getString("City"));
+                temp.setEmail(resultSet.getString("Email"));
+                temp.setEmpType(resultSet.getInt("EmpType"));
+                temp.setFirstName(resultSet.getString("Fname"));
+                temp.setFranchiseNumber(resultSet.getInt("FranchiseNumber"));
+                temp.setLastName(resultSet.getString("Surname"));
+                temp.setPhone(resultSet.getString("Phone"));
+                temp.setState(resultSet.getString("State"));
+                temp.setEmployeeID(resultSet.getInt("EmployeeID"));
+                temp.setZip(resultSet.getInt("Zip"));
                     
-                    BPList.add(temp);
-                }
+                BPList.add(temp);
+            }
                                 
             /* List Prepare Section Stop */
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+        finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (pStmnt != null) pStmnt.close();
             }
-            catch(SQLException sqlE)
-            {
-                if(sqlE.getErrorCode() == 1142)
-                    throw(new UnauthorizedUserException("AccessDenied"));
-                else if(sqlE.getErrorCode() == 1062)
-                    throw(new DoubleEntryException("DoubleEntry"));
-                else 
-                    throw(new BadConnectionException("BadConnection"));
-            }
-            finally
-            {
-                try
-                {
-                    if (results != null) results.close();
-                }
                 catch (Exception e) {};
-                try
-                {
-                    if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-            }
+        }
         /* TRY BLOCK STOP*/
         
             

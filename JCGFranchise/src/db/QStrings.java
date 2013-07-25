@@ -83,7 +83,12 @@ final class QStrings {
                               + "FLUSH PRIVILEGES";   
     
     public String get_username = "SELECT Username FROM Employee "
-                    + "WHERE Employee.EmpType = ?";    
+                    + "WHERE Employee.EmpType = ?";
+    
+    public String owner_view_emp = "SELECT * FROM `employee` WHERE `FranchiseNumber` = ? "
+            + "OR EmpType = 2";
+    
+    public String man_view_emp = "SELECT * FROM `employee` WHERE `FranchiseNumber` = ?";
     
 // Customer
     public String insert_customer = "INSERT INTO Customer(Fname, Surname,"
