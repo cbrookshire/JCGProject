@@ -25,7 +25,7 @@ public class PromotionOverviewJPanel extends javax.swing.JPanel {
     {
         
         ArrayList<Membership> list = new ArrayList<Membership>();
-        //list = UIController.getInstance().UImembershipRouter(new String("FRANCHISOR"), "VIEWALL");
+        list = UIController.getInstance().UImembershipRouter(new String("FRANCHISOR"), "VIEWALL");
         
         //obtain list list lol
         

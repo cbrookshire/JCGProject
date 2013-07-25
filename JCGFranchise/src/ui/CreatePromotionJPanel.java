@@ -35,6 +35,10 @@ public class CreatePromotionJPanel extends javax.swing.JPanel {
                     "Cannot create any promotions (can only edit and delete)",
                     "Error!",
                     JOptionPane.ERROR_MESSAGE);
+            
+            txtMemberID.setEnabled(false);
+            txtDiscount.setEnabled(false);
+            txtMinAmount.setEnabled(false);
         }
         
         if(mode == 1)  //Edit
@@ -114,7 +118,7 @@ public class CreatePromotionJPanel extends javax.swing.JPanel {
     private void getListSelection()
     {
         //Gets a list of all the Employees (should display name)
-        //list = UIController.getInstance().UImembershipRouter(new String("FRANCHISOR"), "VIEWALL");
+        list = UIController.getInstance().UImembershipRouter(new String("FRANCHISOR"), "VIEWALL");
         for(int i = 0; i < list.size(); i++)
         {
             String t = list.get(i).toString();
