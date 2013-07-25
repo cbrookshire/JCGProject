@@ -515,7 +515,6 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         
         if(mode == 2)  //Delete one
         {
-            emp.setEmployeeID(list.get(listSelection.getSelectedIndex()).getEmployeeID());
             UIController.getInstance().UIRouter(emp, "DELETE");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
