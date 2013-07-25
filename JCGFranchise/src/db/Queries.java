@@ -29,7 +29,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import bp.JCGlIO;
-import java.sql.DriverManager;
 
 /**
  *
@@ -45,11 +44,9 @@ public class Queries extends JCGDatabase
     
     public Queries(JCGlIO lio) throws InvalidUserException, BadConnectionException
     {
-
         super(lio);
         setConnection(super.connection);
         qs = new QStrings();
-
     }
         
     private void setConnection(Connection con)
@@ -1867,12 +1864,11 @@ public class Queries extends JCGDatabase
     
      //DELETE: Employee
     public boolean RemoveEmployee(int ID)
-            throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
+            throws UnauthorizedUserException, BadConnectionException
     {
         /* Variable Section Start */
         Statement query = null;
         PreparedStatement statement = null;
-        PreparedStatement statement2 = null;
         PreparedStatement statement3 = null;
         ResultSet results = null;
         int success = -1;
@@ -1882,97 +1878,60 @@ public class Queries extends JCGDatabase
         /* Preparing Statment Section Start */
         String MyQuery = "DELETE FROM `employee` WHERE EmployeeID = ?";
         String statString = "SELECT * FROM `employee` WHERE EmployeeID = ?";
-        String DropUser = "DROP USER ?@'localhost'";
-
-        /* Preparing Statment  Section Stop */
         
-        
-        /* TRY BLOCK START */
+        try
+        {
+            /* Get the Employee's Username */
+            statement = con.prepareStatement(statString);
+            statement.setInt(1, ID);
+            results = statement.executeQuery();
             
-            try
-            {
-            /* Preparing Statment Section Start */                
-                statement = con.prepareStatement(statString);
-                statement.setInt(1, ID);
-            /* Preparing Statment Section Stop */
-            /* Query Section Start */
-                results = statement.executeQuery();
-                
-                
-            /* Query Section Stop */
+            while(results.next()) {
+                Username = results.getString("Username");
+            }
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }finally {
+            try {
+                if (results != null) results.close();
+                if (statement != null) statement.close();
+            }catch (Exception e) {};
+        }// end getting the employee username
             
-            /* Metadata Section Start*/
-                //ResultSetMetaData metaData = results.getMetaData();
-            /* Metadata Section Start*/
-                
-            /* Drop Use Preperation Section Start*/
-                while(results.next()) {
-                    Username = results.getString("Username");
-                }
-                
-                statement2 = con.prepareStatement(DropUser);
-                statement2.setString(1, Username);
-            /* Drop Use Preperation Section Start*/
-                
-        
+        try {
             /* MySQL User Drop Section Start*/
-                statement2.executeUpdate(); //This is where we attempt to drop the user.
+            statement = con.prepareStatement(qs.drop_user);
+            statement.setString(1, Username);
+            statement.executeUpdate();
                 
-                //if(success == 1)
-                //{
-                    /* Delete Employee Preperation Section Start*/
+            /* Delete the Employee From the Employee Table*/
+            statement3 = con.prepareStatement(MyQuery);
+            statement3.setInt(1, ID);
                     
-                    statement3 = con.prepareStatement(MyQuery);
-                    
-                    statement3.setInt(1, ID);
-                    
-                    
-                    /* Query Section Start */
-                    success = statement3.executeUpdate();
-                    /* Query Section Stop* /
-
-                    
-                    /* Delete Employee Preperation Section Stop*/
-                    
-                    /* Return to Buisness Section Start */
-                    if(success == 1)
-                        return true;
-                    
-                    if(success == 0 || success == -1)
-                        return false; 
-                    /* Return to Buisness Section Start */
-                    //return true;
-                //}
-                
-                //if(success == 0 || success == -1)
-                //    return false;     
-            /* MySQL User Drop Section Stop*/    
-            }
-            catch(SQLException sqlE)
-            {
-                if(sqlE.getErrorCode() == 1142)
-                    throw(new UnauthorizedUserException("AccessDenied"));
-                else if(sqlE.getErrorCode() == 1062)
-                    throw(new DoubleEntryException("DoubleEntry"));
-                else 
-                    throw(new BadConnectionException("BadConnection"));
-            }
-            finally
-            {
-                try
-                {
-                    if (results != null) results.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (query != null) query.close();
-                }
-                catch (Exception e) {};
-            }
-           /* TRY BLOCK STOP */
+            success = statement3.executeUpdate();
             
-            return false;
+            if(success == 1)
+                return true;
+            if(success == 0 || success == -1)
+                return false; 
+            
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }finally {
+            try {
+                if(statement != null) statement.close();
+                if(statement3 != null) statement3.close();
+            }catch(Exception e) {
+                
+            }
+        }
+        return false;
     } 
     
 /******************************************************************************
