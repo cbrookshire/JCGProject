@@ -42,7 +42,7 @@ final class QStrings {
             + " Address, City, State, Zip, Phone, Email, EmpType, FranchiseNumber, "
             + "Username) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     
-    public String update_employee = "UPDATE Employee SET Fname = ?, Surname = ? "
+    public String update_employee = "UPDATE Employee SET Fname = ?, Surname = ?, "
             + "Address = ?, City = ?, State = ?, Zip = ?, Phone = ?, Email = ? "
             + "WHERE EmployeeID = ?";
             
