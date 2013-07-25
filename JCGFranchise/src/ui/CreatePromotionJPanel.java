@@ -36,6 +36,7 @@ public class CreatePromotionJPanel extends javax.swing.JPanel {
                     "Error!",
                     JOptionPane.ERROR_MESSAGE);
             
+            listSelection.setEnabled(false);
             txtMemberID.setEnabled(false);
             txtDiscount.setEnabled(false);
             txtMinAmount.setEnabled(false);
