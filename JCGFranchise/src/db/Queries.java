@@ -319,7 +319,7 @@ public class Queries extends JCGDatabase
         /* Variable Section Stop */
         
         /* Preparing Statment Section Start */
-        String MyQuery = "DELETE FROM `franchise` WHERE 'FranchiseNumber' = ?";
+        String MyQuery = "DELETE FROM `franchise` WHERE FranchiseNumber = ?";
         //String to get All EmpIDs
         
         
@@ -354,7 +354,7 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 System.out.println("Running Statement");
                 success = statement.executeUpdate();
-                System.out.println("Statement run " + success);
+                //System.out.println("Statement run " + success);
             /* Query Section Stop* /
 
             /* Return to Buisness Section Start */
@@ -1880,8 +1880,8 @@ public class Queries extends JCGDatabase
         /* Variable Section Stop */
         
         /* Preparing Statment Section Start */
-        String MyQuery = "DELETE * FROM `employee` WHERE 'EmployeeID' = ?";
-        String statString = "SELECT * FROM `employee` WHERE 'EmployeeID' = ?";
+        String MyQuery = "DELETE FROM `employee` WHERE EmployeeID = ?";
+        String statString = "SELECT * FROM `employee` WHERE EmployeeID = ?";
         String DropUser = "DROP USER ?@'localhost'";
 
         /* Preparing Statment  Section Stop */
@@ -1905,8 +1905,10 @@ public class Queries extends JCGDatabase
                 //ResultSetMetaData metaData = results.getMetaData();
             /* Metadata Section Start*/
                 
-            /* Drop Use Preperation Section Start*/
-                Username = results.getString("Username");
+            /* Get the username */
+                while(results.next()) {
+                    Username = results.getString("Username");
+                }
                 
                 statement2 = con.prepareStatement(DropUser);
                 statement2.setString(1, Username);
@@ -1914,10 +1916,10 @@ public class Queries extends JCGDatabase
                 
         
             /* MySQL User Drop Section Start*/
-                success = statement.executeUpdate(); //This is where we attempt to drop the user.
-                
-                if(success == 1)
-                {
+                statement2.execute(); //This is where we attempt to drop the user.
+                System.out.println("success = " + success);
+                //if(success == 1)
+                //{
                     /* Delete Employee Preperation Section Start*/
                     
                     statement3 = con.prepareStatement(MyQuery);
@@ -1940,14 +1942,15 @@ public class Queries extends JCGDatabase
                         return false; 
                     /* Return to Buisness Section Start */
                     //return true;
-                }
+                //}
                 
-                if(success == 0 || success == -1)
-                    return false;     
+                //if(success == 0 || success == -1)
+                //    return false;     
             /* MySQL User Drop Section Stop*/    
             }
             catch(SQLException sqlE)
             {
+                System.out.println(sqlE.getErrorCode() + "\t" + sqlE.getMessage());
                 if(sqlE.getErrorCode() == 1142)
                     throw(new UnauthorizedUserException("AccessDenied"));
                 else if(sqlE.getErrorCode() == 1062)
