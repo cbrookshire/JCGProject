@@ -494,7 +494,6 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         emp.setEmail(newEmployeeEmail.getText());
         emp.setFranchiseNumber(list2.get(0).getFranchiseID());
         emp.setEmpType(newEmployeeType.getSelectedIndex() + 1);
-        emp.setEmployeeID(0);
         
         if(mode == 0)  //Create one
         {
@@ -505,6 +504,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         if(mode == 1)  //Update one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            emp.setEmployeeID(list.get(listSelection.getSelectedIndex()).getEmployeeID());
             UIController.getInstance().UIRouter(emp, "EDIT");
         }
         

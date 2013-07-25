@@ -163,6 +163,11 @@ public class CreatePromotionJPanel extends javax.swing.JPanel {
         txtMinAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
 
         jButton1.setText("Submit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Select");
 
@@ -221,6 +226,50 @@ public class CreatePromotionJPanel extends javax.swing.JPanel {
                 .addGap(152, 152, 152))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!checkFields())
+            return;
+        
+        Membership mr = new Membership();
+        mr.setMemberID(txtMemberID.getText());
+        mr.setDiscount(txtDiscount.getText());
+        mr.setMinAmount(txtMinAmount.getText());
+        
+        String sc = "1";
+        if(mode == 0)  //Create one
+        {
+            sc = UIController.getInstance().UIRouter(mr, "ADD");
+        }
+        
+        if(mode == 1)  //Update one
+        {
+            sc = UIController.getInstance().UIRouter(mr, "EDIT");
+        }
+        
+        if(mode == 2)  //Delete one
+        {
+            sc = UIController.getInstance().UIRouter(mr, "DELETE");
+        }
+            if(sc == "1")
+            {
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Success!",
+                    "Success",
+                    JOptionPane.PLAIN_MESSAGE);
+                BaseJFrame.getInstance().setScreen("100");
+            }
+            else if(sc == "DoubleEntry")
+            {
+                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
+                    "Data already exists",
+                    "Success",
+                    JOptionPane.PLAIN_MESSAGE);
+            }
+            else
+                BaseJFrame.getInstance().setScreen(sc);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
