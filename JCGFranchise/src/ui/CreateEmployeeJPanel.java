@@ -493,6 +493,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         emp.setPhone(newEmployeePhone.getText());
         emp.setEmail(newEmployeeEmail.getText());
         emp.setFranchiseNumber(list2.get(0).getFranchiseID());
+        emp.setEmpType(newEmployeeType.getSelectedIndex() + 1);
         emp.setEmployeeID(0);
         
         if(mode == 0)  //Create one
