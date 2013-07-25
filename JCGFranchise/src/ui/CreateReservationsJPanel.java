@@ -506,12 +506,14 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
         if(mode == 1)  //Update one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            res.setReservationNumber(list.get(listSelection.getSelectedIndex()).getReservationNumber());
             UIController.getInstance().UIRouter(res, "EDIT");
         }
         
         if(mode == 2)  //Delete one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
+            res.setReservationNumber(list.get(listSelection.getSelectedIndex()).getReservationNumber());
             UIController.getInstance().UIRouter(res, "DELETE");
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
