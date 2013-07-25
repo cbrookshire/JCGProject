@@ -480,7 +480,7 @@ public class Queries extends JCGDatabase
  ******************************************************************************/
     
     
-    public int updateMemeberShip(Membership mem) throws UnauthorizedUserException,
+    public int updateMemberShip(Membership mem) throws UnauthorizedUserException,
             BadConnectionException, DoubleEntryException {
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.update_membership);
