@@ -2105,7 +2105,8 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `customer` WHERE 'CustomerID' = ?";
+            //String statString = "SELECT * FROM `customer` WHERE 'CustomerID' = ?";
+            String statString = "SELECT DISTINCT 'CustomerID' FROM `reservation` WHERE 'FranchiseNumber' = ?";
             //Set<Integer> CustomerIDHolder;
             ArrayList<Integer> CustomerIDs = new ArrayList<Integer>();
             boolean holder;
@@ -2125,12 +2126,78 @@ public class Queries extends JCGDatabase
             //Get all Customers for those IDs.
             
             /* Customer IDs Acquisition Start */
-            System.out.println("Calling CustomerIDsFromReservationsForFranchise");
-                holder = CustomerIDs.addAll(CustomerIDsFromReservationsForFranchise(FranID));
+            //System.out.println("Calling CustomerIDsFromReservationsForFranchise");
+                //holder = CustomerIDs.addAll(CustomerIDsFromReservationsForFranchise(FranID));
             /* Customer IDs Acquisition Start */
             
             try
             {
+                /* Preparing Statment Section Start */                
+                            statment = con.prepareStatement(statString);
+                            statment.setInt(1, FranID);
+                        /* Preparing Statment Section Stop */
+                        /* Query Section Start */
+                            results = statment.executeQuery();
+
+                        /* Query Section Stop */
+
+                        /* Metadata Section Start*/
+                           // ResultSetMetaData metaData = results.getMetaData();
+                           // int columns = metaData.getColumnCount();
+                           // int rows = results.getRow(); 
+                        /* Metadata Section Start*/
+
+                        /* ArrayList Prepare Section Start */
+                    
+                    if(results.next())
+                    {
+                        while (results.next())
+                        {
+                            Customer temp = new Customer();
+
+                            //rs.getBigDecimal("AMOUNT")
+
+                            temp.setAddress(results.getString("Address"));
+                            temp.setCity(results.getString("City"));
+                            temp.setCustomerID(results.getInt("CustomerID"));
+                            temp.setEmail(results.getString("Email"));
+                            temp.setFirstName(results.getString("Fname"));
+                            temp.setLastName(results.getString("Surname"));
+                            temp.setMemberID(results.getString("MemberID"));
+                            //temp.setPassword(statString);
+                            temp.setPhone(results.getString("Phone"));
+                            temp.setReservationCount(results.getInt("ReservationCount"));
+                            temp.setState(results.getString("State"));
+                            //temp.setUserID(results.getString("Address"));
+                            temp.setZip(results.getInt("Zip"));
+
+                            BPArrayList.add(temp);
+                        }
+                    }
+                    else
+                    {
+                        Customer temp = new Customer();
+
+                                //rs.getBigDecimal("AMOUNT")
+
+                                temp.setAddress(null);
+                                temp.setCity(null);
+                                temp.setCustomerID(null);
+                                temp.setEmail(null);
+                                temp.setFirstName("No Customers ");
+                                temp.setLastName("Booked at Your Franchise.");
+                                temp.setMemberID(null);
+                                //temp.setPassword(statString);
+                                temp.setPhone(null);
+                                temp.setReservationCount(null);
+                                temp.setState(null);
+                                //temp.setUserID(results.getString("Address"));
+                                temp.setZip(null);
+
+                                BPArrayList.add(temp);
+                    }
+                    
+                  /*          
                 if(CustomerIDs.size() < 1)
                 {
                     System.out.println("Start of loop");
@@ -2159,22 +2226,22 @@ public class Queries extends JCGDatabase
                 {
                     for(int c = 0; c < CustomerIDs.size(); c++)
                     {
-                        /* Preparing Statment Section Start */                
+                        /* Preparing Statment Section Start * /                
                             statment = con.prepareStatement(statString);
                             statment.setInt(1, CustomerIDs.get(c));
-                        /* Preparing Statment Section Stop */
-                        /* Query Section Start */
+                        /* Preparing Statment Section Stop * /
+                        /* Query Section Start * /
                             results = statment.executeQuery();
 
-                        /* Query Section Stop */
+                        /* Query Section Stop * / 
 
-                        /* Metadata Section Start*/
+                        /* Metadata Section Start* /
                            // ResultSetMetaData metaData = results.getMetaData();
                            // int columns = metaData.getColumnCount();
                            // int rows = results.getRow(); 
-                        /* Metadata Section Start*/
+                        /* Metadata Section Start* /
 
-                        /* ArrayList Prepare Section Start */
+                        /* ArrayList Prepare Section Start * /
 
 
 
@@ -2228,6 +2295,7 @@ public class Queries extends JCGDatabase
 
                                 BPArrayList.add(temp);
                 }
+                */
             /* ArrayList Prepare Section Stop */
             }
             catch(SQLException sqlE)
