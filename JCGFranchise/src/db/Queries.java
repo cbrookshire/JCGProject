@@ -483,7 +483,7 @@ public class Queries extends JCGDatabase
         try {
             PreparedStatement pStmnt = con.prepareStatement(qs.update_membership);
             pStmnt.setDouble(1, mem.getDiscount());
-            pStmnt.setString(1, mem.getMemberID());
+            pStmnt.setString(2, mem.getMemberID());
             pStmnt.executeUpdate();
         } catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1142)
