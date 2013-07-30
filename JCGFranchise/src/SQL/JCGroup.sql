@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS Franchise
  Phone varchar(12) Unique,
  Email varchar(40) Unique,
  AirportID int(2),
+ Active ENUM('N', 'Y') DEFAULT 'Y',
   PRIMARY KEY (FranchiseNumber),
   FOREIGN KEY (AirportID)
    REFERENCES Airport (AirportID));

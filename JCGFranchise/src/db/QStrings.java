@@ -20,6 +20,8 @@ final class QStrings {
                     + " State, Zip, Phone, Email, AirportID) values "
                     + "(?, ?, ?, ?, ?, ?, ?)";
     
+    public String delete_fran = "UPDATE Franchise SET Active = 'N' WHERE FranchiseNumber = ?";
+    
 // Vehicle
     public String insert_vehicle = "INSERT INTO Vehicle (VehicleID, VIN, Make "
              + "Model, Year, Mileage, Capacity, VCondition, Tablet, RentalPrice"
@@ -90,6 +92,8 @@ final class QStrings {
     
     public String man_view_emp = "SELECT * FROM `employee` WHERE `FranchiseNumber` = ?";
     
+    public String remove_fran_emp = "DELETE FROM Employee WHERE Username = ?";
+    
 // Customer
     public String insert_customer = "INSERT INTO Customer(Fname, Surname,"
             + " Address, City, State, Zip, Phone, Email, Username "
@@ -134,6 +138,10 @@ final class QStrings {
     
 // Admin
     public String get_emp_username = "SELECT Username FROM Employee WHERE EmpType != 98";
+    
+    public String get_fran_username = "SELECT Username FROM Employee WHERE FranchiseNumber = ? AND "
+            + "EmpType != 98";
+    
     public String get_cust_username = "SELECT Username FROM Customer";
     public String drop_user = "DROP USER ?@'localhost'";
     

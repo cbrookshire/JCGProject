@@ -120,7 +120,7 @@ public class Queries extends JCGDatabase
             //PreparedStatement statment = null;
             Statement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM Franchise";
+            String statString = "SELECT * FROM Franchise WHERE Active = 'Y'";
 
             /* Return Parameter */
             ArrayList<Franchise> BPList = new ArrayList<Franchise>();
@@ -307,89 +307,93 @@ public class Queries extends JCGDatabase
     public boolean RemoveFranchise(int ID)
             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
-        // get all employees from a franchise.
+        PreparedStatement pStmnt = null;
+        
+        // cannot delete Franchise Number 1
+        if(ID == 1)
+            throw(new UnauthorizedUserException("AccessDenied"));
+        
+        try {
+            // drop all Employees from the franchise
+            code = dropEmployees(ID);
+        
+        // delete the Franchise from the Franchise table
         /* Variable Section Start */
-        Statement query = null;
-        ResultSet results = null;
+        //Statement query = null;
+        //ResultSet results = null;
         int success = -1;
         
-        ArrayList<Integer> EmployeeIDs = new ArrayList<Integer>();
+        //ArrayList<Integer> EmployeeIDs = new ArrayList<Integer>();
         
         /* Variable Section Stop */
         
         /* Preparing Statment Section Start */
-        String MyQuery = "DELETE FROM `franchise` WHERE 'FranchiseNumber' = ?";
+        //String MyQuery = "DELETE FROM `franchise` WHERE 'FranchiseNumber' = ?";
         //String to get All EmpIDs
         
         
         
         /* Delete Employee Section Start */
         
-        System.out.println("Calling AllEmpIDInFranchise");
-        EmployeeIDs = AllEmpIDInFranchise(ID);
+        //System.out.println("Calling AllEmpIDInFranchise");
+        //EmployeeIDs = AllEmpIDInFranchise(ID);
         
-        System.out.println("Entering For Loop");
-        for(int c = 0; c < EmployeeIDs.size(); c++)
-        {
-            System.out.println("Running RemoveEmployee on " + c);
-            RemoveEmployee(EmployeeIDs.get(c));
-        }
-        System.out.println("Exited For Loop");
+        //System.out.println("Entering For Loop");
+        //for(int c = 0; c < EmployeeIDs.size(); c++)
+        //{
+        //    System.out.println("Running RemoveEmployee on " + c);
+        //    RemoveEmployee(EmployeeIDs.get(c));
+        //}
+        //System.out.println("Exited For Loop");
         
         /* Delete Employee Section Stop */
         
             /* TRY BLOCK START */
 
-            try
-            {
-
-                PreparedStatement statement = con.prepareStatement(MyQuery);
-
-                statement.setInt(1, ID);
+            //try
+            //{
+                if(code == 1) {
+                    pStmnt = con.prepareStatement(qs.delete_fran);
+                    pStmnt.setInt(1, ID);
             
             
             /* Preparing Statment Section Stop */
   
             /* Query Section Start */
-                System.out.println("Running Statement");
-                success = statement.executeUpdate();
-                System.out.println("Statement run " + success);
+                //System.out.println("Running Statement");
+                    success = pStmnt.executeUpdate();
+                //System.out.println("Statement run " + success);
             /* Query Section Stop* /
 
             /* Return to Buisness Section Start */
-                if(success == 1)
-                    return true;     
+                    if(success == 1)
+                        return true;     
                 
-                if(success == 0 || success == -1)
-                    return false;     
+                    if(success == 0 || success == -1)
+                        return false;     
             /* Return to Buisness Section Start */
-                    
-                   
-                     
-                    
+                }    
+                else
+                    throw(new BadConnectionException("BadConnection"));                   
             }
             catch(SQLException sqlE)
             {
-                if(sqlE.getErrorCode() == 1142)
+                if(sqlE.getErrorCode() == 1142) {
+                    System.out.println(sqlE.getErrorCode() + "\t" + sqlE.getMessage());
                     throw(new UnauthorizedUserException("AccessDenied"));
-                else if(sqlE.getErrorCode() == 1062)
-                    throw(new DoubleEntryException("DoubleEntry"));
-                else 
-                    System.out.println(sqlE);
+                }else { 
+                    System.out.println(sqlE.getErrorCode() + "\t" + sqlE.getMessage());
                     throw(new BadConnectionException("BadConnection"));
+                }
             }
             finally
             {
                 try
                 {
-                    if (results != null) results.close();
+                    if (pStmnt != null) pStmnt.close();
                 }
                 catch (Exception e) {};
-                try
-                {
-                    if (query != null) query.close();
-                }
-                catch (Exception e) {};
+                
             }
            /* TRY BLOCK STOP */
             
@@ -1837,7 +1841,47 @@ public class Queries extends JCGDatabase
             }
         }
         return false;
-    } 
+    }
+    
+    private int dropEmployees(int franID) {
+        List<String> results = null;
+        PreparedStatement pStmnt = null;
+        
+        try {
+            pStmnt = con.prepareStatement(qs.get_fran_username);
+            pStmnt.setInt(1, franID);
+            resultSet = pStmnt.executeQuery();
+            results = new ArrayList< String >();
+            
+            while(resultSet.next()) {
+                results.add(resultSet.getString("Username"));
+            }
+            
+            for(int i = 0; i < results.size(); i++) {
+                pStmnt = con.prepareStatement(qs.drop_user);
+                pStmnt.setString(1, results.get(i));
+                pStmnt.execute();
+            }
+            
+            for(int i = 0; i < results.size(); i++) {
+                pStmnt = con.prepareStatement(qs.remove_fran_emp);
+                pStmnt.setString(1, results.get(i));
+                pStmnt.execute();
+            }
+        }catch(SQLException sqlE) {
+            throw(new SQLException());
+        } finally {
+            try {
+                if(!results.isEmpty()) {
+                    results.clear();
+                }
+                resultSet.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+           return 1;        
+        }
+    }
     
 /******************************************************************************
  *          All Queries for the Maintenance table                             *
