@@ -307,6 +307,7 @@ public class Queries extends JCGDatabase
     public boolean RemoveFranchise(int ID)
             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
+        // get all employees from a franchise.
         /* Variable Section Start */
         Statement query = null;
         ResultSet results = null;
@@ -1527,7 +1528,6 @@ public class Queries extends JCGDatabase
         
     }
     
-             //GET: Get All Employees in a Franchise
     public ArrayList<Employee> AllEmployeesInFranchise(int FranID)
             throws UnauthorizedUserException, BadConnectionException
     {
@@ -1538,48 +1538,18 @@ public class Queries extends JCGDatabase
         lio = JCGlIO.getInstance();
         try {
             if( "1".equals(lio.geteT())) {
-                System.out.println("owner view");
                 pStmnt = con.prepareStatement(qs.owner_view_emp);
             }else if("2".equals(lio.geteT())) {
-                System.out.println("manager view");
                 pStmnt = con.prepareStatement(qs.man_view_emp);
             }else
                 throw (new UnauthorizedUserException("AccessDenied"));
            
             pStmnt.setInt(1, FranID);
-        /* Database and Query Preperation 
-        PreparedStatement statment = null;
-        ResultSet results = null;
-        String statString = "SELECT * FROM `employee` WHERE `FranchiseNumber` = ?";
-
-             Return Parameter */
-            
-            /* Variable Section Stop */
         
-        
-        /* TRY BLOCK START */
-            
-            
-            /* Preparing Statment Section Start                 
-            statment = con.prepareStatement(statString);
-             statment.setInt(1, FranID);
-             Preparing Statment Section Stop */
-            /* Query Section Start */
             resultSet = pStmnt.executeQuery();
-                
-            /* Query Section Stop */
-            
-            
-                
-            /* List Prepare Section Start */
-                
-                
-                
             while (resultSet.next())
             {
                 Employee temp = new Employee();
-                    
-                    //rs.getBigDecimal("AMOUNT")
                     
                 temp.setAddress(resultSet.getString("Address"));
                 temp.setCity(resultSet.getString("City"));
@@ -1595,8 +1565,6 @@ public class Queries extends JCGDatabase
                     
                 BPList.add(temp);
             }
-                                
-            /* List Prepare Section Stop */
         }catch(SQLException sqlE) {
             if(sqlE.getErrorCode() == 1142)
                 throw(new UnauthorizedUserException("AccessDenied"));
@@ -1610,12 +1578,9 @@ public class Queries extends JCGDatabase
             }
                 catch (Exception e) {};
         }
-        /* TRY BLOCK STOP*/
+         
+        return BPList;
         
-            
-        /* Return to Buisness Section Start */ 
-            return BPList;
-        /* Return to Buisness Section Start */
  
     }
     
