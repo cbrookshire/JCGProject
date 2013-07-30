@@ -115,107 +115,51 @@ public class Queries extends JCGDatabase
     public ArrayList<Franchise> GetAllFranchises()
             throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
-        /* Variable Section Start */
-            /* Database and Query Preperation */
-            //PreparedStatement statment = null;
-            Statement statment = null;
-            ResultSet results = null;
-            String statString = "SELECT * FROM Franchise WHERE Active = 'Y'";
+        Statement statment = null;
+        ResultSet results = null;
+        String statString = "SELECT * FROM Franchise WHERE Active = 'Y'";
 
-            /* Return Parameter */
-            ArrayList<Franchise> BPList = new ArrayList<Franchise>();
-        /* Variable Section Stop */
+        ArrayList<Franchise> BPList = new ArrayList<Franchise>();
         
-        
-        /* TRY BLOCK START */
-            
-            try
+        try {
+            statment = con.createStatement();
+            results = statment.executeQuery(statString);
+                        
+            while (results.next())
             {
-            /* Preparing Statment Section Start */
-                
-                if(con.isValid(120));
-                {
-                    System.out.println("Connection is Good!");
-                }
-                
-                if(!con.isValid(120));
-                {
-                    System.out.println("Connection is Bad!");
-                }
-                
-                
-                statment = con.createStatement();
-                
-                //statment = con.prepareStatement(statString);
-                //statment.setString();
-            /* Preparing Statment Section Stop */
-            /* Query Section Start */
-                results = statment.executeQuery(statString);
-                
-               
-                while (results.next())
-                {
-                    System.out.println("in the loop");
-                    Franchise temp = new Franchise();
+                Franchise temp = new Franchise();
                     
-                    //rs.getBigDecimal("AMOUNT")
+                temp.setAddress(results.getString("Address"));
+                temp.setAirportID(results.getInt("AirportID"));
+                temp.setCity(results.getString("City"));
+                temp.setEmail(results.getString("Email"));
+                temp.setFranchiseID(results.getInt("FranchiseNumber"));
+                temp.setPhone(results.getString("Phone"));
+                temp.setState(results.getString("State"));
+                temp.setZip(results.getInt("Zip"));
                     
-                    temp.setAddress(results.getString("Address"));
-                    temp.setAirportID(results.getInt("AirportID"));
-                    //temp.setAirport(getFranchiseAirportName(results.getInt("AirportID")));
-                    temp.setCity(results.getString("City"));
-                    temp.setEmail(results.getString("Email"));
-                    temp.setFranchiseID(results.getInt("FranchiseNumber"));
-                    temp.setPhone(results.getString("Phone"));
-                    temp.setState(results.getString("State"));
-                    temp.setZip(results.getInt("Zip"));
-                    
-                    //System.out.print(temp.toString());
-                    BPList.add(temp);
-                }
-                
-            /* Query Section Stop */
-            
-            /* Metadata Section Start */
-                //ResultSetMetaData metaData = results.getMetaData();
-                //int columns = metaData.getColumnCount();
-                //int rows = results.getRow(); 
-            /* Metadata Section Start*/
-                
-            /* List Prepare Section Start */
-                
-            /* List Prepare Section Stop */
-            }
-            catch(SQLException sqlE)
-            {
-                if(sqlE.getErrorCode() == 1142)
-                    throw(new UnauthorizedUserException("AccessDenied"));
-                else if(sqlE.getErrorCode() == 1062)
-                    throw(new DoubleEntryException("DoubleEntry"));
-                else 
-                    throw(new BadConnectionException("BadConnection"));
-            }
-            finally
-            {
-                try
-                {
-                    if (results != null) results.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-            }
-        /* TRY BLOCK STOP*/
-        
-            
-        /* Return to Buisness Section Start */ 
-            return BPList;
-        /* Return to Buisness Section Start */
-
-    }
+                BPList.add(temp);
+           }
+           
+        }catch(SQLException sqlE) {
+            if(sqlE.getErrorCode() == 1142)
+                throw(new UnauthorizedUserException("AccessDenied"));
+            else if(sqlE.getErrorCode() == 1062)
+                throw(new DoubleEntryException("DoubleEntry"));
+            else 
+                throw(new BadConnectionException("BadConnection"));
+        }
+        finally {
+            try {
+                if (results != null) results.close();
+            }catch (Exception e) {};
+            try {
+                if (statment != null) statment.close();
+            }catch (Exception e) {};
+        }
+                  
+        return BPList;
+ }// end GetAllFranchises
     
     //GET: List One Franchise
     public ArrayList<Franchise> GetOneFranchise(int FranID)
@@ -316,88 +260,36 @@ public class Queries extends JCGDatabase
         try {
             // drop all Employees from the franchise
             code = dropEmployees(ID);
-        
-        // delete the Franchise from the Franchise table
-        /* Variable Section Start */
-        //Statement query = null;
-        //ResultSet results = null;
-        int success = -1;
-        
-        //ArrayList<Integer> EmployeeIDs = new ArrayList<Integer>();
-        
-        /* Variable Section Stop */
-        
-        /* Preparing Statment Section Start */
-        //String MyQuery = "DELETE FROM `franchise` WHERE 'FranchiseNumber' = ?";
-        //String to get All EmpIDs
-        
-        
-        
-        /* Delete Employee Section Start */
-        
-        //System.out.println("Calling AllEmpIDInFranchise");
-        //EmployeeIDs = AllEmpIDInFranchise(ID);
-        
-        //System.out.println("Entering For Loop");
-        //for(int c = 0; c < EmployeeIDs.size(); c++)
-        //{
-        //    System.out.println("Running RemoveEmployee on " + c);
-        //    RemoveEmployee(EmployeeIDs.get(c));
-        //}
-        //System.out.println("Exited For Loop");
-        
-        /* Delete Employee Section Stop */
-        
-            /* TRY BLOCK START */
-
-            //try
-            //{
-                if(code == 1) {
-                    pStmnt = con.prepareStatement(qs.delete_fran);
-                    pStmnt.setInt(1, ID);
-            
-            
-            /* Preparing Statment Section Stop */
-  
-            /* Query Section Start */
-                //System.out.println("Running Statement");
-                    success = pStmnt.executeUpdate();
-                //System.out.println("Statement run " + success);
-            /* Query Section Stop* /
-
-            /* Return to Buisness Section Start */
-                    if(success == 1)
+       
+            int success = -1;
+       
+            if(code == 1) {
+                pStmnt = con.prepareStatement(qs.delete_fran);
+                pStmnt.setInt(1, ID);
+                success = pStmnt.executeUpdate();
+                if(success == 1)
                         return true;     
-                
-                    if(success == 0 || success == -1)
-                        return false;     
-            /* Return to Buisness Section Start */
-                }    
+                if(success == 0 || success == -1)
+                    return false;     
+            }    
                 else
                     throw(new BadConnectionException("BadConnection"));                   
+        }
+        catch(SQLException sqlE)
+        {
+            if(sqlE.getErrorCode() == 1142) {
+                throw(new UnauthorizedUserException("AccessDenied"));
+            }else { 
+                throw(new BadConnectionException("BadConnection"));
             }
-            catch(SQLException sqlE)
-            {
-                if(sqlE.getErrorCode() == 1142) {
-                    System.out.println(sqlE.getErrorCode() + "\t" + sqlE.getMessage());
-                    throw(new UnauthorizedUserException("AccessDenied"));
-                }else { 
-                    System.out.println(sqlE.getErrorCode() + "\t" + sqlE.getMessage());
-                    throw(new BadConnectionException("BadConnection"));
-                }
-            }
-            finally
-            {
-                try
-                {
-                    if (pStmnt != null) pStmnt.close();
-                }
-                catch (Exception e) {};
-                
-            }
-           /* TRY BLOCK STOP */
-            
-            return false;
+        }
+        finally {
+            try {
+                if (pStmnt != null) pStmnt.close();
+            }catch (Exception e) {};
+        }
+          
+        return false;
     }
     
     public String getFranchiseAirportName(int ID)
