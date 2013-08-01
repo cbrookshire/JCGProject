@@ -2002,237 +2002,49 @@ public class Queries extends JCGDatabase
     public  ArrayList<Customer> AllCustomersInFranchise( int FranID)
              throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
-        /* Variable Section Start */
-            /* Database and Query Preperation */
-            PreparedStatement statment = null;
-            ResultSet results = null;
-            //String statString = "SELECT * FROM `customer` WHERE 'CustomerID' = ?";
-            String statString = "SELECT DISTINCT CustomerID FROM reservation WHERE FranchiseNumber = ?";
-            //Set<Integer> CustomerIDHolder;
-            ArrayList<Integer> CustomerIDs = new ArrayList<Integer>();
-            boolean holder;
-            
-
-            /* Return Parameter */
-            ArrayList<Customer> BPArrayList = new ArrayList<Customer>();
-        /* Variable Section Stop */
+        PreparedStatement statment = null;
+        ResultSet results = null;
         
+        ArrayList<Customer> BPArrayList = new ArrayList<Customer>();
         
-        /* TRY BLOCK START */
+        try {
+            statment = con.prepareStatement(qs.get_fran_customer);
+            statment.setInt(1, FranID);
+            results = statment.executeQuery();
             
-            //So we need to...
-            
-            //Call up Reservations for a Franchise
-            //Get all UNIQUE Customer IDs out of all of those reservations.
-            //Get all Customers for those IDs.
-            
-            /* Customer IDs Acquisition Start */
-            //System.out.println("Calling CustomerIDsFromReservationsForFranchise");
-                //holder = CustomerIDs.addAll(CustomerIDsFromReservationsForFranchise(FranID));
-            /* Customer IDs Acquisition Start */
-            
-            try
-            {
-                /* Preparing Statment Section Start */                
-                            statment = con.prepareStatement(statString);
-                            statment.setInt(1, FranID);
-                        /* Preparing Statment Section Stop */
-                        /* Query Section Start */
-                            results = statment.executeQuery();
+            while (results.next()) {
+                Customer temp = new Customer();
+                
+                temp.setAddress(results.getString("Address"));
+                temp.setCity(results.getString("City"));
+                temp.setCustomerID(results.getInt("CustomerID"));
+                temp.setEmail(results.getString("Email"));
+                temp.setFirstName(results.getString("Fname"));
+                temp.setLastName(results.getString("Surname"));
+                temp.setMemberID(results.getString("MemberID"));
+                temp.setPhone(results.getString("Phone"));
+                temp.setReservationCount(results.getInt("ReservationCount"));
+                temp.setState(results.getString("State"));
+                temp.setZip(results.getInt("Zip"));
 
-                        /* Query Section Stop */
-
-                        /* Metadata Section Start*/
-                           // ResultSetMetaData metaData = results.getMetaData();
-                           // int columns = metaData.getColumnCount();
-                           // int rows = results.getRow(); 
-                        /* Metadata Section Start*/
-
-                        /* ArrayList Prepare Section Start */
-                    
-                    if(results.next())
-                    {
-                        while (results.next())
-                        {
-                            Customer temp = new Customer();
-
-                            //rs.getBigDecimal("AMOUNT")
-
-                            temp.setAddress(results.getString("Address"));
-                            temp.setCity(results.getString("City"));
-                            temp.setCustomerID(results.getInt("CustomerID"));
-                            temp.setEmail(results.getString("Email"));
-                            temp.setFirstName(results.getString("Fname"));
-                            temp.setLastName(results.getString("Surname"));
-                            temp.setMemberID(results.getString("MemberID"));
-                            //temp.setPassword(statString);
-                            temp.setPhone(results.getString("Phone"));
-                            temp.setReservationCount(results.getInt("ReservationCount"));
-                            temp.setState(results.getString("State"));
-                            //temp.setUserID(results.getString("Address"));
-                            temp.setZip(results.getInt("Zip"));
-
-                            BPArrayList.add(temp);
-                        }
-                    }
-                    else
-                    {
-                        Customer temp = new Customer();
-
-                                //rs.getBigDecimal("AMOUNT")
-
-                                temp.setAddress(null);
-                                temp.setCity(null);
-                                temp.setCustomerID(null);
-                                temp.setEmail(null);
-                                temp.setFirstName("No Customers ");
-                                temp.setLastName("Booked at Your Franchise.");
-                                temp.setMemberID(null);
-                                //temp.setPassword(statString);
-                                temp.setPhone(null);
-                                temp.setReservationCount(null);
-                                temp.setState(null);
-                                //temp.setUserID(results.getString("Address"));
-                                temp.setZip(null);
-
-                                BPArrayList.add(temp);
-                    }
-                    
-                  /*          
-                if(CustomerIDs.size() < 1)
-                {
-                    System.out.println("Start of loop");
-                    
-                    Customer temp = new Customer();
-
-                                //rs.getBigDecimal("AMOUNT")
-
-                                temp.setAddress(null);
-                                temp.setCity(null);
-                                temp.setCustomerID(null);
-                                temp.setEmail(null);
-                                temp.setFirstName("No Customers ");
-                                temp.setLastName("Booked at Your Franchise.");
-                                temp.setMemberID(null);
-                                //temp.setPassword(statString);
-                                temp.setPhone(null);
-                                temp.setReservationCount(null);
-                                temp.setState(null);
-                                //temp.setUserID(results.getString("Address"));
-                                temp.setZip(null);
-
-                                BPArrayList.add(temp);
-                }
-                else if(CustomerIDs.size() > 0 && CustomerIDs.get(0) > 0)
-                {
-                    for(int c = 0; c < CustomerIDs.size(); c++)
-                    {
-                        /* Preparing Statment Section Start * /                
-                            statment = con.prepareStatement(statString);
-                            statment.setInt(1, CustomerIDs.get(c));
-                        /* Preparing Statment Section Stop * /
-                        /* Query Section Start * /
-                            results = statment.executeQuery();
-
-                        /* Query Section Stop * / 
-
-                        /* Metadata Section Start* /
-                           // ResultSetMetaData metaData = results.getMetaData();
-                           // int columns = metaData.getColumnCount();
-                           // int rows = results.getRow(); 
-                        /* Metadata Section Start* /
-
-                        /* ArrayList Prepare Section Start * /
-
-
-
-                            while (results.next())
-                            {
-                                System.out.println("Start of loop");
-                                Customer temp = new Customer();
-
-                                //rs.getBigDecimal("AMOUNT")
-
-                                temp.setAddress(results.getString("Address"));
-                                temp.setCity(results.getString("City"));
-                                temp.setCustomerID(results.getInt("CustomerID"));
-                                temp.setEmail(results.getString("Email"));
-                                temp.setFirstName(results.getString("Fname"));
-                                temp.setLastName(results.getString("Surname"));
-                                temp.setMemberID(results.getString("MemberID"));
-                                //temp.setPassword(statString);
-                                temp.setPhone(results.getString("Phone"));
-                                temp.setReservationCount(results.getInt("ReservationCount"));
-                                temp.setState(results.getString("State"));
-                                //temp.setUserID(results.getString("Address"));
-                                temp.setZip(results.getInt("Zip"));
-
-                                BPArrayList.add(temp);
-                                System.out.println("End of loop");
-                            }
-                    }
-                }
-                else //If there's no IDs being returned...
-                {
-                    System.out.println("Start of loop");
-                    
-                    Customer temp = new Customer();
-
-                                //rs.getBigDecimal("AMOUNT")
-
-                                temp.setAddress(null);
-                                temp.setCity(null);
-                                temp.setCustomerID(null);
-                                temp.setEmail(null);
-                                temp.setFirstName("No Customers ");
-                                temp.setLastName("Booked at Your Franchise.");
-                                temp.setMemberID(null);
-                                //temp.setPassword(statString);
-                                temp.setPhone(null);
-                                temp.setReservationCount(null);
-                                temp.setState(null);
-                                //temp.setUserID(results.getString("Address"));
-                                temp.setZip(null);
-
-                                BPArrayList.add(temp);
-                }
-                */
-            /* ArrayList Prepare Section Stop */
-            }
-            catch(SQLException sqlE)
-            {
+                BPArrayList.add(temp);
+           }
+        }catch(SQLException sqlE) {
                 if(sqlE.getErrorCode() == 1142)
                     throw(new UnauthorizedUserException("AccessDenied"));
-                else if(sqlE.getErrorCode() == 1062)
-                    throw(new DoubleEntryException("DoubleEntry"));
                 else 
                     throw(new BadConnectionException("BadConnection"));
-            }
-            finally
-            {
-                try
-                {
-                    if (results != null) results.close();
-                }
-                catch (Exception e) {};
-                try
-                {
-                    if (statment != null) statment.close();
-                }
-                catch (Exception e) {};
-            }
-        /* TRY BLOCK STOP*/
+        }finally {
+            try {
+                if (results != null) results.close();
+            }catch (Exception e) {};
+            try {
+                if (statment != null) statment.close();
+            }catch (Exception e) {};
+        }
         
-            
-        /* Return to Buisness Section Start */ 
-           
-            
-            
-            return BPArrayList;
-        /* Return to Buisness Section Start */
-        
-        
-        
+        return BPArrayList;
+              
     }
     
      //GET: List CustomerIDs For Franchise
