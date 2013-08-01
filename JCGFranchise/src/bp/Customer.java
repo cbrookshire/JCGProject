@@ -170,19 +170,18 @@ public class Customer {
        return memberID;
     } 
     
-    //UTILITIES
+  //UTILITIES
   @Override
    public String toString(){
     
-    return String.format("%s%s  %s%s/n%s%s %s, %s\n %s %s%s %s %s\n%s%s\n%s%s\n",
+    return String.format("%s%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s%s\n\n",
         "CustomerID: ", getCustomerID(), 
-        "First Name: ", getFirstName(),
-	"Last Name: ", getLastName(),
-        "Address: ", getAddress(), getCity(), 
-        "         ", getState(), getZip(),
-        "Phone: ", getPhone(), 
-        "Email: ", getEmail(),
-	"Reservation Count: ", getReservationCount(),
+        getFirstName(), getLastName(),
+        getAddress(), 
+        getCity(), getState(), getZip(),
+        getPhone(), 
+        getEmail(),
+	getReservationCount(),
 	"MemberID: ", getMemberID());
 	
     }//end UTILS  
