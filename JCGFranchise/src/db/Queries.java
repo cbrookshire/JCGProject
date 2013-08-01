@@ -2007,7 +2007,7 @@ public class Queries extends JCGDatabase
             PreparedStatement statment = null;
             ResultSet results = null;
             //String statString = "SELECT * FROM `customer` WHERE 'CustomerID' = ?";
-            String statString = "SELECT DISTINCT 'CustomerID' FROM `reservation` WHERE 'FranchiseNumber' = ?";
+            String statString = "SELECT DISTINCT CustomerID FROM reservation WHERE FranchiseNumber = ?";
             //Set<Integer> CustomerIDHolder;
             ArrayList<Integer> CustomerIDs = new ArrayList<Integer>();
             boolean holder;
