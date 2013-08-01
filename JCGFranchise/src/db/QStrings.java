@@ -105,6 +105,10 @@ final class QStrings {
     
      public String grant_customer = "GRANT INSERT, UPDATE, DELETE, SELECT ON JCGroup.Customer TO ?@'localhost' "
                                  + "GRANT SELECT ON JCGroup.Vehicle TO ?@'localhost'";
+     
+     public String get_fran_customer = "Select DISTINCT r.CustomerID, Fname, Surname, Address, City, State, Zip, "
+             + "Phone, Email, ReservationCount, MemberID FROM Reservation r, Customer c "
+             + "WHERE r.CustomerID = c.CustomerID AND FranchiseNumber = ?";
     
 // Membership
     public String update_membership = "UPDATE Membership SET Discount = ? "
