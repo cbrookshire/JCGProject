@@ -401,7 +401,7 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `membership`";
+            String statString = "SELECT * FROM `membership` ORDER BY MinAmount desc";
 
             /* Return Parameter */
             ArrayList<Membership> BPList = new ArrayList<Membership>();
@@ -2553,9 +2553,10 @@ public class Queries extends JCGDatabase
     {
         /* Variable Section Start */
             /* Database and Query Preperation */
+        System.out.println("franID = " + FranID);
             PreparedStatement statment = null;
             ResultSet results = null;
-            String statString = "SELECT * FROM `reservation` WHERE 'FranchiseNumber' = ?";
+            String statString = "SELECT * FROM reservation WHERE FranchiseNumber = ?";
 
             /* Return Parameter */
             ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
