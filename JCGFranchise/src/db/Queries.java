@@ -2591,6 +2591,7 @@ public class Queries extends JCGDatabase
                 while (results.next())
                 {
                     Reservation temp = new Reservation();
+                    Customer tempCustomer = new Customer();
                     
                     //results.getBigDecimal("AMOUNT")
                     
@@ -2625,23 +2626,23 @@ public class Queries extends JCGDatabase
                         
                          while (results.next())
                         {
-                            Customer tempCustomer = new Customer();
+                            
 
                             //rs.getBigDecimal("AMOUNT")
 
-                            temp.customer.setAddress(results.getString("Address"));
-                            temp.customer.setCity(results.getString("City"));
-                            temp.customer.setCustomerID(results.getInt("CustomerID"));
-                            temp.customer.setEmail(results.getString("Email"));
-                            temp.customer.setFirstName(results.getString("Fname"));
-                            temp.customer.setLastName(results.getString("Surname"));
-                            temp.customer.setMemberID(results.getString("MemberID"));
+                            tempCustomer.setAddress(results.getString("Address"));
+                            tempCustomer.setCity(results.getString("City"));
+                            tempCustomer.setCustomerID(results.getInt("CustomerID"));
+                            tempCustomer.setEmail(results.getString("Email"));
+                            tempCustomer.setFirstName(results.getString("Fname"));
+                            tempCustomer.setLastName(results.getString("Surname"));
+                            tempCustomer.setMemberID(results.getString("MemberID"));
                             //temp.setPassword(statString);
-                            temp.customer.setPhone(results.getString("Phone"));
-                            temp.customer.setReservationCount(results.getInt("ReservationCount"));
-                            temp.customer.setState(results.getString("State"));
+                            tempCustomer.setPhone(results.getString("Phone"));
+                            tempCustomer.setReservationCount(results.getInt("ReservationCount"));
+                            tempCustomer.setState(results.getString("State"));
                             //temp.setUserID(results.getString("Address"));
-                            temp.customer.setZip(results.getInt("Zip"));
+                            tempCustomer.setZip(results.getInt("Zip"));
                         }
                          
                     }
@@ -2655,6 +2656,7 @@ public class Queries extends JCGDatabase
                             throw(new BadConnectionException("BadConnection"));
                     }
                     
+                    temp.setCustomer(tempCustomer);
                     
                     
                     BPArrayList.add(temp);
