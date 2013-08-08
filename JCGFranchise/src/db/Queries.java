@@ -2563,6 +2563,7 @@ public class Queries extends JCGDatabase
 
             /* Return Parameter */
             ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
+            ArrayList<Customer> TempCustomer = new ArrayList<Customer>();
         /* Variable Section Stop */
         
         
@@ -2614,49 +2615,9 @@ public class Queries extends JCGDatabase
                     temp.setAltState(results.getString("AltState"));
                     temp.setAltZip(results.getInt("AltZip"));
                     
-                    try
-                    {
-                    /* Preparing Statment Section Start */                
-                        statment2 = con.prepareStatement(statString);
-                        statment2.setInt(1, temp.getCustomerID());
-                        //statment.setInt(2, CustID);
-                    /* Preparing Statment Section Stop */
-                    /* Query Section Start */
-                        results2 = statment2.executeQuery();
-                        
-                         while (results2.next())
-                        {
-                            
-
-                            //rs.getBigDecimal("AMOUNT")
-
-                            tempCustomer.setAddress(results.getString("Address"));
-                            tempCustomer.setCity(results.getString("City"));
-                            tempCustomer.setCustomerID(results.getInt("CustomerID"));
-                            tempCustomer.setEmail(results.getString("Email"));
-                            tempCustomer.setFirstName(results.getString("Fname"));
-                            tempCustomer.setLastName(results.getString("Surname"));
-                            tempCustomer.setMemberID(results.getString("MemberID"));
-                            //temp.setPassword(statString);
-                            tempCustomer.setPhone(results.getString("Phone"));
-                            tempCustomer.setReservationCount(results.getInt("ReservationCount"));
-                            tempCustomer.setState(results.getString("State"));
-                            //temp.setUserID(results.getString("Address"));
-                            tempCustomer.setZip(results.getInt("Zip"));
-                        }
-                         
-                    }
-                    catch(SQLException sqlE)
-                    {
-                        if(sqlE.getErrorCode() == 1142)
-                            throw(new UnauthorizedUserException("AccessDenied"));
-                        else if(sqlE.getErrorCode() == 1062)
-                            throw(new DoubleEntryException("DoubleEntry"));
-                        else 
-                            throw(new BadConnectionException("BadConnection"));
-                    }
+                   TempCustomer = SingleCustomerData(temp.getCustomerID());
                     
-                    temp.setCustomer(tempCustomer);
+                    temp.setCustomer(TempCustomer.get(0));
                     
                     
                     BPArrayList.add(temp);
