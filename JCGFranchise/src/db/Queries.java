@@ -1903,7 +1903,7 @@ public class Queries extends JCGDatabase
     
     
     //GET: Show One Customer's Data
-    public  ArrayList<Customer> SingleCustomerData(int CustID)
+    public  Customer SingleCustomerData(int CustID)
              throws UnauthorizedUserException, BadConnectionException, DoubleEntryException
     {
         /* Variable Section Start */
@@ -1914,6 +1914,7 @@ public class Queries extends JCGDatabase
 
             /* Return Parameter */
             ArrayList<Customer> BPArrayList = new ArrayList<Customer>();
+            Customer temp = new Customer();
         /* Variable Section Stop */
         
         
@@ -1928,19 +1929,11 @@ public class Queries extends JCGDatabase
             /* Query Section Start */
                 results = statment.executeQuery();
                 
-            /* Query Section Stop */
-            
-            /* Metadata Section Start*/
-                //ResultSetMetaData metaData = results.getMetaData();
-            /* Metadata Section Start*/
-                
-            /* ArrayList Prepare Section Start */
-                
                 
                 
                 while (results.next())
                 {
-                    Customer temp = new Customer();
+                    
                     
                     //rs.getBigDecimal("AMOUNT")
                     
@@ -1991,7 +1984,7 @@ public class Queries extends JCGDatabase
            
             
             
-            return BPArrayList;
+            return temp;
         /* Return to Buisness Section Start */
         
         
@@ -2615,9 +2608,9 @@ public class Queries extends JCGDatabase
                     temp.setAltState(results.getString("AltState"));
                     temp.setAltZip(results.getInt("AltZip"));
                     
-                   TempCustomer = SingleCustomerData(temp.getCustomerID());
+                   tempCustomer = SingleCustomerData(temp.getCustomerID());
                     
-                    temp.setCustomer(TempCustomer.get(0));
+                    temp.setCustomer(tempCustomer);
                     
                     
                     BPArrayList.add(temp);
