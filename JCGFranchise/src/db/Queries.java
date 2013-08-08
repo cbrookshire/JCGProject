@@ -2624,7 +2624,7 @@ public class Queries extends JCGDatabase
                     /* Query Section Start */
                         results2 = statment2.executeQuery();
                         
-                         while (results.next())
+                         while (results2.next())
                         {
                             
 
