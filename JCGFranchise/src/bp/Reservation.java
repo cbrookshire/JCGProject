@@ -54,7 +54,9 @@ public class Reservation {
         altAddress = "";
         altCity = "";
         altState = "";
-        altZip = "";         
+        altZip = "";
+        customer = new Customer();
+        
         
     }
     
@@ -298,8 +300,8 @@ public class Reservation {
         return customer;
     }
 
-    public void setCustomer(Customer tempCustomer) {
-        this.customer = tempCustomer;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }    
     
     
@@ -308,21 +310,19 @@ public class Reservation {
     @Override
     public String toString(){
     
-        return String.format("%s%s  %s%s\n%s%s  %s  %s\n%s%s  %s%s  %s%s  %s%s\n"
-                + "%s%s  %s%s\n%s%s, %s\n%s%s\n%s, %s %s\n%s%s\n%s, %s %s\n%s\n%s%s",
-        name, getFranchiseNumber(), "Date: ", getDate(), 
-        "Reservation ID: ", getReservationNumber(), "Customer ID: ", 
-        getCustomerID(), "Vehicle ID: ", getVehicleID(), "Airline: ", 
-        getAirline(), "Flight Time: ", getFlightTime(), "Pickup Time: ", 
-        getPickUpTime(), "Drop Off Time: ", getDropOffTime(), "Price: ",
-        getPrice(), "Status: ", getStatus(), "Customer Name", 
-        customer.getFirstName(), customer.getLastName(), 
-        "Address: ", customer.getAddress(), customer.getCity(),
-        customer.getState(), customer.getZip(), "Alt Address: ", 
-        getAltAddress(), getAltCity(), getAltState(), getAltZip(),
-        getComment()); 
-        
-        
-        
+        return String.format("%s %s %s\n%s\n%s  %s\n%s  %s\n%s   %s\n"
+                + "%s  %s\n%s\n%s, %s %s\n%s\n\n\n%s %s\n%s\n%s, %s %s",
+        name, getFranchiseNumber(), getDate(), 
+        getReservationNumber(), 
+        getCustomerID(), getVehicleID(), 
+        getAirline(), getFlightTime(),  
+        getPickUpTime(), getDropOffTime(), 
+        getPrice(), getStatus(), 
+        getCustomer().getFirstName(), getCustomer().getLastName(), 
+        getCustomer().getAddress(), 
+        getCustomer().getCity(), getCustomer().getState(), getCustomer().getZip(), 
+        getAltAddress(), 
+        getAltCity(), getAltState(), getAltZip(),
+        getComment());        
     }   
 }//end Reservation class

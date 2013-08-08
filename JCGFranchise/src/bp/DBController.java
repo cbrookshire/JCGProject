@@ -212,11 +212,11 @@ public class DBController {
                 temp = queryDB.AllCustomersInFranchise(lIO.getfN());
                 return temp;
             }
-            if (sysObject instanceof Customer && "VIEWITEM".equals(action)){    
+            /*if (sysObject instanceof Customer && "VIEWITEM".equals(action)){    
                 temp = queryDB.SingleCustomerData
                         (((Customer)sysObject).getCustomerID());
                 return temp;
-            }               
+            }*/               
         }
         catch(UnauthorizedUserException e){
             Customer error = new Customer(e.getMessage(), 
