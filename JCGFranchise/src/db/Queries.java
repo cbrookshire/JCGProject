@@ -2556,7 +2556,6 @@ public class Queries extends JCGDatabase
 
             /* Return Parameter */
             ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
-            ArrayList<Customer> TempCustomer = new ArrayList<Customer>();
         /* Variable Section Stop */
         
         
@@ -2593,6 +2592,7 @@ public class Queries extends JCGDatabase
                     temp.setAirline(results.getString("Airline"));
                     temp.setComment(results.getString("Comment"));
                     temp.setCustomerID(results.getInt("CustomerID"));
+                    int temp22 = results.getInt("CustomerID");
                     temp.setDate(results.getString("Date"));
                     temp.setDropOffTime(results.getDouble("DropOffTime"));
                     temp.setFlightNumber(results.getString("FlightNumber"));
@@ -2608,8 +2608,51 @@ public class Queries extends JCGDatabase
                     temp.setAltState(results.getString("AltState"));
                     temp.setAltZip(results.getInt("AltZip"));
                     
-                   tempCustomer = SingleCustomerData(temp.getCustomerID());
-                    
+                    try
+                    {
+                        System.out.println(temp22);
+                        System.out.println("in res try # 2");
+                    /* Preparing Statment Section Start */                
+                        statment2 = con.prepareStatement(statString2);
+                        statment2.setInt(1, temp22);
+                        //statment.setInt(2, CustID);
+                    /* Preparing Statment Section Stop */
+                    /* Query Section Start */
+                        results2 = statment2.executeQuery();
+                        
+                         while (results2.next())
+                        {
+                            System.out.print("in result2 while loop");
+
+                            //rs.getBigDecimal("AMOUNT")
+
+                            tempCustomer.setAddress(results2.getString("Address"));
+                            String myTemp = results2.getString("Address");
+                            tempCustomer.setCity(results2.getString("City"));
+                            tempCustomer.setCustomerID(results2.getInt("CustomerID"));
+                            tempCustomer.setEmail(results2.getString("Email"));
+                            tempCustomer.setFirstName(results2.getString("Fname"));
+                            tempCustomer.setLastName(results2.getString("Surname"));
+                            tempCustomer.setMemberID(results2.getString("MemberID"));
+                            //temp.setPassword(statString);
+                            tempCustomer.setPhone(results2.getString("Phone"));
+                            tempCustomer.setReservationCount(results2.getInt("ReservationCount"));
+                            tempCustomer.setState(results2.getString("State"));
+                            //temp.setUserID(results.getString("Address"));
+                            tempCustomer.setZip(results2.getInt("Zip"));
+                        }
+                         
+                    }
+                    catch(SQLException sqlE)
+                    {
+                        if(sqlE.getErrorCode() == 1142)
+                            throw(new UnauthorizedUserException("AccessDenied"));
+                        else if(sqlE.getErrorCode() == 1062)
+                            throw(new DoubleEntryException("DoubleEntry"));
+                        else 
+                            throw(new BadConnectionException("BadConnection"));
+                    }
+                    System.out.println();
                     temp.setCustomer(tempCustomer);
                     
                     
