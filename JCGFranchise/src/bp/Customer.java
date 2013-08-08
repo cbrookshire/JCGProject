@@ -38,9 +38,9 @@ public class Customer {
 	memberID = "";   }
    
    //11 args
-   public Customer (String customerID, String firstName, String lastName, String address, String city, 
-           String state, String zip, String phone, String email, 
-           String reservationCount, String memberID){
+   public Customer (String customerID, String firstName, String lastName, 
+           String address, String city, String state, String zip, String phone, 
+           String email, String reservationCount, String memberID){
        
 	setCustomerID(customerID);
 	setFirstName(firstName);

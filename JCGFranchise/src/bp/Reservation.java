@@ -9,7 +9,7 @@ package bp;
 public class Reservation {
     
     
-    public Customer customer;
+    private Customer customer;
     
     //attributes - DB        
     private final String name = "JCG Franchise #";
@@ -54,7 +54,8 @@ public class Reservation {
         altAddress = "";
         altCity = "";
         altState = "";
-        altZip = "";     
+        altZip = "";         
+        
     }
     
     //17 args 
@@ -63,7 +64,7 @@ public class Reservation {
             String status, String comment, String flightNumber, 
             String airline, String flightTime, String pickUpTime, 
             String dropOffTime, String date, String altAddress, 
-            String altCity, String altState, String altZip) {
+            String altCity, String altZip, String altState) {
         
         setReservationNumber(reservationNumber);
         setFranchiseNumber(franchiseNumber);
@@ -80,8 +81,10 @@ public class Reservation {
         setDate(date);
         setAltAddress(altAddress);
         setAltCity(altCity);
+        setAltZip(altZip);
         setAltState(altState);
-        setAltZip(altZip);       
+                  
+       
     }
         
     //SETS AND GETS
@@ -290,6 +293,14 @@ public class Reservation {
         this.dropPick = dropPick;
     }
     
+    //attrib 19
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer tempCustomer) {
+        this.customer = tempCustomer;
+    }    
     
     
     //UTILITIES
