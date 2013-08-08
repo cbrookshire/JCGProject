@@ -2599,6 +2599,7 @@ public class Queries extends JCGDatabase
                     temp.setAirline(results.getString("Airline"));
                     temp.setComment(results.getString("Comment"));
                     temp.setCustomerID(results.getInt("CustomerID"));
+                    int temp22 = results.getInt("CustomerID");
                     temp.setDate(results.getString("Date"));
                     temp.setDropOffTime(results.getDouble("DropOffTime"));
                     temp.setFlightNumber(results.getString("FlightNumber"));
@@ -2616,9 +2617,11 @@ public class Queries extends JCGDatabase
                     
                     try
                     {
+                        System.out.println(temp22);
+                        System.out.println("in res try # 2");
                     /* Preparing Statment Section Start */                
-                        statment2 = con.prepareStatement(statString);
-                        statment2.setInt(1, temp.getCustomerID());
+                        statment2 = con.prepareStatement(statString2);
+                        statment2.setInt(1, temp22);
                         //statment.setInt(2, CustID);
                     /* Preparing Statment Section Stop */
                     /* Query Section Start */
@@ -2626,23 +2629,24 @@ public class Queries extends JCGDatabase
                         
                          while (results2.next())
                         {
-                            
+                            System.out.print("in result2 while loop");
 
                             //rs.getBigDecimal("AMOUNT")
 
-                            tempCustomer.setAddress(results.getString("Address"));
-                            tempCustomer.setCity(results.getString("City"));
-                            tempCustomer.setCustomerID(results.getInt("CustomerID"));
-                            tempCustomer.setEmail(results.getString("Email"));
-                            tempCustomer.setFirstName(results.getString("Fname"));
-                            tempCustomer.setLastName(results.getString("Surname"));
-                            tempCustomer.setMemberID(results.getString("MemberID"));
+                            tempCustomer.setAddress(results2.getString("Address"));
+                            String myTemp = results2.getString("Address");
+                            tempCustomer.setCity(results2.getString("City"));
+                            tempCustomer.setCustomerID(results2.getInt("CustomerID"));
+                            tempCustomer.setEmail(results2.getString("Email"));
+                            tempCustomer.setFirstName(results2.getString("Fname"));
+                            tempCustomer.setLastName(results2.getString("Surname"));
+                            tempCustomer.setMemberID(results2.getString("MemberID"));
                             //temp.setPassword(statString);
-                            tempCustomer.setPhone(results.getString("Phone"));
-                            tempCustomer.setReservationCount(results.getInt("ReservationCount"));
-                            tempCustomer.setState(results.getString("State"));
+                            tempCustomer.setPhone(results2.getString("Phone"));
+                            tempCustomer.setReservationCount(results2.getInt("ReservationCount"));
+                            tempCustomer.setState(results2.getString("State"));
                             //temp.setUserID(results.getString("Address"));
-                            tempCustomer.setZip(results.getInt("Zip"));
+                            tempCustomer.setZip(results2.getInt("Zip"));
                         }
                          
                     }
@@ -2655,7 +2659,7 @@ public class Queries extends JCGDatabase
                         else 
                             throw(new BadConnectionException("BadConnection"));
                     }
-                    
+                    System.out.println();
                     temp.setCustomer(tempCustomer);
                     
                     
