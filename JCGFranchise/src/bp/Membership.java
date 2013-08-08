@@ -71,7 +71,7 @@ public class Membership {
    public String toString(){
         
        return String.format("%s%s\n%s%.2f\n%s%s\n\n\n",
-        "MemberID: ", getMemberID(), 
+        "ID: ", getMemberID(), 
         "Discount: ", (1.0-(getDiscount())),
 	"Min Amount: ", getMinAmount());
 	

@@ -9,7 +9,7 @@ package bp;
 public class Reservation {
     
     
-    private Customer customer;
+    public Customer customer;
     
     //attributes - DB        
     private final String name = "JCG Franchise #";
@@ -297,8 +297,8 @@ public class Reservation {
     @Override
     public String toString(){
     
-        return String.format("%s%s  %s%s\n%s%s  %s  %s/n%s%s  %s%s  %s%s  %s%s\n"
-                + "%s%s  %s%s\n%s%s, %s\n%s%s\n%s, %s %s\n%s%s\n%s, %s %s\n%s\n",
+        return String.format("%s%s  %s%s\n%s%s  %s  %s\n%s%s  %s%s  %s%s  %s%s\n"
+                + "%s%s  %s%s\n%s%s, %s\n%s%s\n%s, %s %s\n%s%s\n%s, %s %s\n%s\n%s%s",
         name, getFranchiseNumber(), "Date: ", getDate(), 
         "Reservation ID: ", getReservationNumber(), "Customer ID: ", 
         getCustomerID(), "Vehicle ID: ", getVehicleID(), "Airline: ", 
@@ -309,6 +309,9 @@ public class Reservation {
         "Address: ", customer.getAddress(), customer.getCity(),
         customer.getState(), customer.getZip(), "Alt Address: ", 
         getAltAddress(), getAltCity(), getAltState(), getAltZip(),
-        getComment());    
+        getComment()); 
+        
+        
+        
     }   
 }//end Reservation class
