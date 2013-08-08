@@ -2555,8 +2555,11 @@ public class Queries extends JCGDatabase
             /* Database and Query Preperation */
         System.out.println("franID = " + FranID);
             PreparedStatement statment = null;
+            PreparedStatement statment2 = null;
             ResultSet results = null;
+            ResultSet results2 = null;
             String statString = "SELECT * FROM reservation WHERE FranchiseNumber = ?";
+            String statString2 = "SELECT * FROM customer WHERE CustomerID = ?";
 
             /* Return Parameter */
             ArrayList<Reservation> BPArrayList = new ArrayList<Reservation>();
@@ -2610,6 +2613,50 @@ public class Queries extends JCGDatabase
                     temp.setAltState(results.getString("AltState"));
                     temp.setAltZip(results.getInt("AltZip"));
                     
+                    try
+                    {
+                    /* Preparing Statment Section Start */                
+                        statment2 = con.prepareStatement(statString);
+                        statment2.setInt(1, temp.getCustomerID());
+                        //statment.setInt(2, CustID);
+                    /* Preparing Statment Section Stop */
+                    /* Query Section Start */
+                        results2 = statment2.executeQuery();
+                        
+                         while (results.next())
+                        {
+                            Customer tempCustomer = new Customer();
+
+                            //rs.getBigDecimal("AMOUNT")
+
+                            temp.customer.setAddress(results.getString("Address"));
+                            temp.customer.setCity(results.getString("City"));
+                            temp.customer.setCustomerID(results.getInt("CustomerID"));
+                            temp.customer.setEmail(results.getString("Email"));
+                            temp.customer.setFirstName(results.getString("Fname"));
+                            temp.customer.setLastName(results.getString("Surname"));
+                            temp.customer.setMemberID(results.getString("MemberID"));
+                            //temp.setPassword(statString);
+                            temp.customer.setPhone(results.getString("Phone"));
+                            temp.customer.setReservationCount(results.getInt("ReservationCount"));
+                            temp.customer.setState(results.getString("State"));
+                            //temp.setUserID(results.getString("Address"));
+                            temp.customer.setZip(results.getInt("Zip"));
+                        }
+                         
+                    }
+                    catch(SQLException sqlE)
+                    {
+                        if(sqlE.getErrorCode() == 1142)
+                            throw(new UnauthorizedUserException("AccessDenied"));
+                        else if(sqlE.getErrorCode() == 1062)
+                            throw(new DoubleEntryException("DoubleEntry"));
+                        else 
+                            throw(new BadConnectionException("BadConnection"));
+                    }
+                    
+                    
+                    
                     BPArrayList.add(temp);
                 }
             /* ArrayList Prepare Section Stop */
@@ -2628,11 +2675,13 @@ public class Queries extends JCGDatabase
                 try
                 {
                     if (results != null) results.close();
+                    if (results2 != null) results2.close();
                 }
                 catch (Exception e) {};
                 try
                 {
                     if (statment != null) statment.close();
+                    if (statment2 != null) statment2.close();
                 }
                 catch (Exception e) {};
             }
