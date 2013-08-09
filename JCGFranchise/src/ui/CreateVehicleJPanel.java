@@ -58,7 +58,7 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
             txtYear.setEnabled(false);
             txtMileage.setEnabled(false);
             txtCapacity.setEnabled(false);
-            txtCondition.setEnabled(false);
+            comboCondition.setEnabled(false);
             txtRentalPrice.setEnabled(false);
             
         }
@@ -167,17 +167,6 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
             }
         }
         
-        if(txtCondition.isEnabled())
-        {
-            if(txtCondition.getText().isEmpty())
-            {
-                success = false;
-                JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
-                    "Condition is invalid.  Type something in there",
-                    "Error!",
-                    JOptionPane.ERROR_MESSAGE);
-            }
-        }
         
         if(txtRentalPrice.isEnabled())
         {
@@ -190,7 +179,7 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
                     JOptionPane.ERROR_MESSAGE);
             }
             
-            if(Integer.parseInt(txtRentalPrice.getText()) <= 0)
+            if(Double.parseDouble(txtRentalPrice.getText().substring(1)) <= 0.00)
             {
                 success = false;
                 JOptionPane.showMessageDialog(BaseJFrame.getInstance(), 
@@ -226,7 +215,11 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
         txtYear.setText(v.getYear());
         txtMileage.setText(String.valueOf(v.getMileage()));
         txtCapacity.setText(String.valueOf(v.getCapacity()));
-        txtCondition.setText(v.getCondition());
+        comboCondition.setSelectedIndex(0);
+        if(v.getCondition() == "Good")
+            comboCondition.setSelectedIndex(1);
+        if(v.getCondition() == "Poor")
+            comboCondition.setSelectedIndex(2);
         txtRentalPrice.setText(String.valueOf(v.getRate()));
         
     }
@@ -256,11 +249,11 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
         txtCapacity = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtCondition = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtRentalPrice = new javax.swing.JFormattedTextField();
         btnClear = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
+        comboCondition = new javax.swing.JComboBox();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -316,6 +309,8 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
             }
         });
 
+        comboCondition.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Excellent", "Good", "Poor" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -358,7 +353,7 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtCondition)))
+                                    .addComponent(comboCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -406,8 +401,8 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(comboCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtRentalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -415,7 +410,7 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClear)
                     .addComponent(btnSubmit))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -427,7 +422,7 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
         txtYear.setText("1999"); //first car in the 1800s
         txtMileage.setText("0");
         txtCapacity.setText("0");
-        txtCondition.setText("");
+        comboCondition.setSelectedIndex(0);
         txtRentalPrice.setText("$0.00");
     }//GEN-LAST:event_btnClearActionPerformed
 
@@ -445,27 +440,36 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
         v.setYear(txtYear.getText());
         v.setMileage(txtMileage.getText());
         v.setCapacity(txtCapacity.getText());
-        v.setCondition(txtCondition.getText());
-        v.setRate(txtRentalPrice.getText());
+        if(comboCondition.getSelectedIndex() == 0)
+            v.setCondition("Excellent");
+        if(comboCondition.getSelectedIndex() == 1)
+            v.setCondition("Good");
+        if(comboCondition.getSelectedIndex() == 2)
+            v.setCondition("Poor");
+        v.setRate(txtRentalPrice.getText().substring(1));  //Ignore the first character ($)
+        v.setFranchiseNumber(JCGlIO.getInstance().getfN());
         
-        
+        String code = "200";
         if(mode == 0)  //Create one
         {
             //send new Franchise to DB
-            UIController.getInstance().UIRouter(v, "ADD");
+            v.setVehicleID("00");  //Temporary.  CHANGE THIS LATER
+            code = UIController.getInstance().UIRouter(v, "ADD");
         }
         
         if(mode == 1)  //Update one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
-            UIController.getInstance().UIRouter(v, "EDIT");
+            v.setVehicleID(list.get(listSelection.getSelectedIndex()).getVehicleID());
+            code = UIController.getInstance().UIRouter(v, "EDIT");
         }
         
         if(mode == 2)  //Delete one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
-            UIController.getInstance().UIRouter(v, "DELETE");
+            code = UIController.getInstance().UIRouter(v, "DELETE");
         }
+        BaseJFrame.getInstance().setScreen(code);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed
@@ -476,6 +480,7 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox comboCondition;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -488,7 +493,6 @@ public class CreateVehicleJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox listSelection;
     private javax.swing.JFormattedTextField txtCapacity;
-    private javax.swing.JTextField txtCondition;
     private javax.swing.JTextField txtMake;
     private javax.swing.JFormattedTextField txtMileage;
     private javax.swing.JTextField txtModel;
