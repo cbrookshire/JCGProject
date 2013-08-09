@@ -499,25 +499,27 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
         emp.setEmail(newEmployeeEmail.getText());
         emp.setFranchiseNumber(list2.get(0).getFranchiseID());
         emp.setEmpType(newEmployeeType.getSelectedIndex() + 1);
-        
+        String code = "200";
         if(mode == 0)  //Create one
         {
             //send new Employee to DB
-            UIController.getInstance().UIRouter(emp, "ADD");
+            code = UIController.getInstance().UIRouter(emp, "ADD");
         }
         
         if(mode == 1)  //Update one
         {
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
             emp.setEmployeeID(list.get(listSelection.getSelectedIndex()).getEmployeeID());
-            UIController.getInstance().UIRouter(emp, "EDIT");
+            code = UIController.getInstance().UIRouter(emp, "EDIT");
         }
         
         if(mode == 2)  //Delete one
         {
             emp.setEmployeeID(list.get(listSelection.getSelectedIndex()).getEmployeeID());
-            UIController.getInstance().UIRouter(emp, "DELETE");
+            code = UIController.getInstance().UIRouter(emp, "DELETE");
         }
+        
+        BaseJFrame.getInstance().setScreen(code);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void listSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSelectionActionPerformed

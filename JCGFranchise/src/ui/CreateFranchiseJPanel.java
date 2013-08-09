@@ -409,7 +409,7 @@ public class CreateFranchiseJPanel extends javax.swing.JPanel {
         fr.setEmail(newFranchiseEmail.getText());
         
         fr.setAirportID(String.valueOf(AirportjComboBox.getSelectedIndex()+1));
-        String sc = "1";
+        String sc = "100";
         if(mode == 0)  //Create one
         {
             sc = UIController.getInstance().UIRouter(fr, "ADD");

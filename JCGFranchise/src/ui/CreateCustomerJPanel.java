@@ -253,14 +253,14 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnClear.setText("Clear");
+        btnClear.setText("Clear Form");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
             }
         });
 
-        btnSave.setText("Create");
+        btnSave.setText("Submit");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -405,9 +405,11 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         if(checkFields() == false)
             return;
         Customer cust = new Customer();
+        
         String[] t = newCustomerName.getText().split(" ");
         cust.setFirstName(t[0]);
-        cust.setLastName(t[1]);
+        if(t.length > 1)
+            cust.setLastName(t[1]);
         cust.setAddress(newCustomerAddress.getText());
         cust.setCity(newCustomerCity.getText());
         cust.setState(newCustomerState.getText());
@@ -415,22 +417,25 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         cust.setPhone(newCustomerPhone.getText());
         cust.setEmail(newCustomerEmail.getText());
         
+        String code = "200";
         if(mode == 0)  //Create one
         {
-            UIController.getInstance().UIRouter(cust, "ADD");
+            code = UIController.getInstance().UIRouter(cust, "ADD");
             //send new Customer to DB
         }
         
         if(mode == 1)  //Update one
         {
-            UIController.getInstance().UIRouter(cust, "EDIT");
+            code = UIController.getInstance().UIRouter(cust, "EDIT");
             //Send list.get(listSelection.getSelectedIndex()) to DB for update
         }
         
         if(mode == 2)  //Delete one
         {
-            UIController.getInstance().UIRouter(cust, "DELETE");
+            code = UIController.getInstance().UIRouter(cust, "DELETE");
         }
+        
+        BaseJFrame.getInstance().setScreen(code);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void newCustomerEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerEmailActionPerformed
