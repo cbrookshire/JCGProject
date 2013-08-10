@@ -15,9 +15,6 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
 
     private int mode;
     private ArrayList<Reservation> list;
-    private ArrayList<Franchise> list2;
-    private ArrayList<Vehicle> list3;
-    private ArrayList<Customer> list4;
     
     /**
      * Creates new form CreateReservationsJPanel
@@ -25,8 +22,6 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
     public CreateReservationsJPanel(int m) {
         initComponents();
         list = new ArrayList<Reservation>();
-        
-        loadSecondaryLists();
         
         mode = m;
         if(mode == 0)  //Create mode
@@ -162,11 +157,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
             listSelection.addItem(t);
         }
         
-    }
-    
-    private void loadSecondaryLists()
-    {
-        list2 = new ArrayList<Franchise>();
+        ArrayList<Franchise> list2 = new ArrayList<Franchise>();
         list2 = UIController.getInstance().UIfranchisorRouter(new String("FRANCHISE"), "VIEWALL");
         
         for(int i = 0; i < list2.size(); i++)
@@ -175,7 +166,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
             franchiseNumList.addItem(t);
         }
         
-        list3 = new ArrayList<Vehicle>();
+        ArrayList<Vehicle> list3 = new ArrayList<Vehicle>();
         list3 = UIController.getInstance().UIvehicleRouter(new String("VEHICLE"), "VIEWALL");
         
         for(int i = 0; i < list3.size(); i++)
@@ -184,7 +175,7 @@ public class CreateReservationsJPanel extends javax.swing.JPanel {
             vehicleIDList.addItem(t);
         }
         
-        list4 = new ArrayList<Customer>();
+        ArrayList<Customer> list4 = new ArrayList<Customer>();
         list4 = UIController.getInstance().UIcustomerRouter(new String("CUSTOMER"), "VIEWALL");
         
         for(int i = 0; i < list4.size(); i++)
